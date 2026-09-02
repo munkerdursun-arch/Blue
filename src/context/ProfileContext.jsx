@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { loadState, saveState, todayISO } from '../utils/storage'
 import { reviewWord } from '../utils/srs'
 import { checkNewBadges, BADGES } from '../data/badges'
+import { normalizeDaily, missionStatus, chestReward } from '../utils/missions'
 
 const ProfileContext = createContext(null)
 
@@ -11,6 +12,7 @@ function defaultProgress() {
     completedDays: {},
     streak: { count: 0, lastDate: null },
     starsTotal: 0,
+    coins: 0,
     badges: [],
     srs: {},
     conversationsDone: [],
@@ -18,6 +20,13 @@ function defaultProgress() {
     songsHeard: [],
     activityLog: [],
     minutesSpent: 0,
+    avatar: { frame: 'sky', accessory: 'none', title: 'debutant' },
+    avatarOwned: { frame: ['sky'], accessory: ['none'], title: ['debutant'] },
+    companion: { kind: null, name: '', accessory: 'none', ownedAccessories: ['none'] },
+    dailyMissions: null,
+    chestsOpened: 0,
+    missionsCompletedTotal: 0,
+    pronunciation: { close: 0, total: 0 },
   }
 }
 
@@ -67,16 +76,54 @@ export function ProfileProvider({ children }) {
         }))
       },
       recordWordResult(wordId, correct) {
-        updateProgress((p) => ({
-          ...p,
-          srs: { ...p.srs, [wordId]: reviewWord(p.srs[wordId], correct) },
-        }))
+        updateProgress((p) => {
+          const dm = normalizeDaily(p.dailyMissions)
+          return {
+            ...p,
+            srs: { ...p.srs, [wordId]: reviewWord(p.srs[wordId], correct) },
+            dailyMissions: dm.wordIds.includes(wordId) ? dm : { ...dm, wordIds: [...dm.wordIds, wordId] },
+          }
+        })
       },
       addStars(n) {
         updateProgress((p) => ({ ...p, starsTotal: (p.starsTotal || 0) + n }))
       },
+      addCoins(n) {
+        updateProgress((p) => ({ ...p, coins: Math.max(0, (p.coins || 0) + n) }))
+      },
+      recordPronunciation(close) {
+        updateProgress((p) => {
+          const cur = p.pronunciation || { close: 0, total: 0 }
+          return { ...p, pronunciation: { close: cur.close + (close ? 1 : 0), total: cur.total + 1 } }
+        })
+      },
       addMinutes(n) {
         updateProgress((p) => ({ ...p, minutesSpent: (p.minutesSpent || 0) + n }))
+      },
+      bumpDailyGame() {
+        updateProgress((p) => {
+          const dm = normalizeDaily(p.dailyMissions)
+          return { ...p, dailyMissions: { ...dm, games: dm.games + 1 } }
+        })
+      },
+      markDailyTalk() {
+        updateProgress((p) => ({ ...p, dailyMissions: { ...normalizeDaily(p.dailyMissions), talked: true } }))
+      },
+      openDailyChest() {
+        updateProgress((p) => {
+          const dm = normalizeDaily(p.dailyMissions)
+          const status = missionStatus(dm)
+          if (!status.allDone || status.chestOpened) return p
+          const reward = chestReward(p.streak?.count)
+          return {
+            ...p,
+            coins: (p.coins || 0) + reward.coins,
+            starsTotal: (p.starsTotal || 0) + reward.stars,
+            dailyMissions: { ...dm, chestOpened: true },
+            chestsOpened: (p.chestsOpened || 0) + 1,
+            missionsCompletedTotal: (p.missionsCompletedTotal || 0) + 1,
+          }
+        })
       },
       completeDay(day, stars) {
         updateProgress((p) => {
@@ -90,6 +137,7 @@ export function ProfileProvider({ children }) {
           return {
             ...p,
             starsTotal: (p.starsTotal || 0) + stars,
+            coins: (p.coins || 0) + 10,
             completedDays: { ...p.completedDays, [day]: { stars, date: today } },
             currentDay: Math.max(p.currentDay, Math.min(90, day + 1)),
             streak,
@@ -100,6 +148,7 @@ export function ProfileProvider({ children }) {
         updateProgress((p) => ({
           ...p,
           conversationsDone: p.conversationsDone.includes(id) ? p.conversationsDone : [...p.conversationsDone, id],
+          dailyMissions: { ...normalizeDaily(p.dailyMissions), talked: true },
         }))
       },
       markStoryRead(id) {
@@ -113,6 +162,46 @@ export function ProfileProvider({ children }) {
           ...p,
           songsHeard: (p.songsHeard || []).includes(id) ? p.songsHeard : [...(p.songsHeard || []), id],
         }))
+      },
+      buyShopItem(category, id, cost) {
+        updateProgress((p) => {
+          const owned = p.avatarOwned?.[category] || []
+          if (owned.includes(id) || (p.coins || 0) < cost) return p
+          return {
+            ...p,
+            coins: p.coins - cost,
+            avatarOwned: { ...p.avatarOwned, [category]: [...owned, id] },
+            avatar: { ...p.avatar, [category]: id },
+          }
+        })
+      },
+      selectShopItem(category, id) {
+        updateProgress((p) => {
+          const owned = p.avatarOwned?.[category] || []
+          if (!owned.includes(id)) return p
+          return { ...p, avatar: { ...p.avatar, [category]: id } }
+        })
+      },
+      setCompanion(kind, name) {
+        updateProgress((p) => ({ ...p, companion: { ...p.companion, kind, name } }))
+      },
+      buyCompanionAccessory(id, cost) {
+        updateProgress((p) => {
+          const owned = p.companion?.ownedAccessories || ['none']
+          if (owned.includes(id) || (p.coins || 0) < cost) return p
+          return {
+            ...p,
+            coins: p.coins - cost,
+            companion: { ...p.companion, accessory: id, ownedAccessories: [...owned, id] },
+          }
+        })
+      },
+      selectCompanionAccessory(id) {
+        updateProgress((p) => {
+          const owned = p.companion?.ownedAccessories || ['none']
+          if (!owned.includes(id)) return p
+          return { ...p, companion: { ...p.companion, accessory: id } }
+        })
       },
       dismissBadgePopup() {
         setBadgePopups((q) => q.slice(1))

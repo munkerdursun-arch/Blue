@@ -7,12 +7,15 @@ import { CONVERSATIONS } from '../data/conversations'
 import { TOTAL_DAYS } from '../data/curriculum'
 import { wordsKnownCount } from '../utils/srs'
 import { todayISO } from '../utils/storage'
+import { computeCompetencies, COMPETENCY_LABELS } from '../utils/competency'
 
 export default function Parent() {
   const [unlocked, setUnlocked] = useState(false)
   const { profile, progress, resetAll } = useProfile()
 
   const stats = useMemo(() => computeStats(progress), [progress])
+  const competencies = useMemo(() => computeCompetencies(progress), [progress])
+  const recommendation = useMemo(() => buildRecommendation(profile?.name, stats, competencies), [profile?.name, stats, competencies])
 
   if (!unlocked) {
     return (
@@ -51,6 +54,22 @@ export default function Parent() {
           <SynthesisRow label="Niveau de compréhension" level={stats.comprehensionLevel} />
           <SynthesisRow label="Progression sur 90 jours" level={stats.progressLevel} />
           <SynthesisRow label="Régularité (série de jours)" level={stats.streakLevel} />
+        </div>
+      </div>
+
+      <div className="px-5 pt-5">
+        <h2 className="mb-2 font-display font-extrabold text-slate-700">Profil de compétences</h2>
+        <div className="flex flex-col gap-2.5 rounded-3xl bg-white p-4 shadow">
+          {Object.entries(COMPETENCY_LABELS).map(([key, meta]) => (
+            <CompetencyRow key={key} icon={meta.icon} label={meta.label} stars={competencies[key]} />
+          ))}
+        </div>
+      </div>
+
+      <div className="px-5 pt-5">
+        <div className="rounded-3xl bg-violet-50 p-4">
+          <p className="mb-1 text-sm font-extrabold text-violet-700">💡 Recommandation de la semaine</p>
+          <p className="text-sm text-slate-600">{recommendation}</p>
         </div>
       </div>
 
@@ -119,6 +138,48 @@ function Metric({ label, value, icon }) {
       <p className="text-[11px] font-semibold text-slate-400">{label}</p>
     </div>
   )
+}
+
+function CompetencyRow({ icon, label, stars }) {
+  return (
+    <div className="flex items-center justify-between">
+      <span className="text-sm font-semibold text-slate-600">
+        {icon} {label}
+      </span>
+      {stars === null ? (
+        <span className="text-xs font-semibold text-slate-300">Pas encore de données</span>
+      ) : (
+        <span className="text-sm">
+          {'⭐'.repeat(stars)}
+          {'☆'.repeat(5 - stars)}
+        </span>
+      )}
+    </div>
+  )
+}
+
+function buildRecommendation(name, stats, competencies) {
+  const n = name || "L'enfant"
+  if (stats.wordsSeen === 0) {
+    return `${n} n'a pas encore commencé sa première leçon. Lancez ensemble le Jour 1 pour découvrir les premiers mots !`
+  }
+  const weakCat = stats.toImprove[0]
+  const catLabel = weakCat ? CATEGORIES[weakCat]?.label : null
+  const entries = Object.entries(competencies).filter(([, v]) => v !== null)
+  const weakest = entries.sort((a, b) => a[1] - b[1])[0]
+  const weakestLabel = weakest ? COMPETENCY_LABELS[weakest[0]]?.label : null
+  const weakestIsLow = weakest && weakest[1] <= 2
+
+  if (catLabel && weakestIsLow) {
+    return `Cette semaine, ${n} pourrait revoir le vocabulaire « ${catLabel} » et s'entraîner un peu plus sur : ${weakestLabel.toLowerCase()}.`
+  }
+  if (weakestIsLow) {
+    return `Cette semaine, ${n} pourrait s'entraîner un peu plus sur : ${weakestLabel.toLowerCase()}.`
+  }
+  if (catLabel) {
+    return `Cette semaine, ${n} semble avoir besoin de revoir le vocabulaire « ${catLabel} ». Rien d'inquiétant, une petite révision suffit !`
+  }
+  return `${n} progresse bien sur tous les fronts. Continuez la routine quotidienne, c'est le secret des bons progrès !`
 }
 
 function SynthesisRow({ label, level }) {

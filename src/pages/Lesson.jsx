@@ -21,14 +21,27 @@ import GuessGame from '../games/GuessGame'
 import MemoryGame from '../games/MemoryGame'
 import RepeatGame from '../games/RepeatGame'
 import BuildSentence from '../games/BuildSentence'
+import CatchWord from '../games/CatchWord'
 
-const GAME_CYCLE = [FindImage, ListenChoose, GuessGame, MemoryGame]
+const GAME_CYCLE = [FindImage, ListenChoose, GuessGame, MemoryGame, CatchWord]
 
 export default function Lesson() {
   const { day: dayParam } = useParams()
   const day = Number(dayParam)
   const nav = useNavigate()
-  const { profile, progress, recordWordResult, completeDay, markConversationDone, markStoryRead, markSongHeard, logActivity } = useProfile()
+  const {
+    profile,
+    progress,
+    recordWordResult,
+    completeDay,
+    markConversationDone,
+    markStoryRead,
+    markSongHeard,
+    logActivity,
+    addCoins,
+    bumpDailyGame,
+    recordPronunciation,
+  } = useProfile()
   const dayConfig = getDay(day)
   const { speakTr } = useSpeech()
 
@@ -154,7 +167,12 @@ export default function Lesson() {
           <RepeatGame
             words={words}
             onExit={exitLesson}
-            onComplete={() => advance(1)}
+            onPronunciation={recordPronunciation}
+            onComplete={() => {
+              bumpDailyGame()
+              addCoins(4)
+              advance(1)
+            }}
           />
         )}
 
@@ -166,6 +184,8 @@ export default function Lesson() {
               onExit={exitLesson}
               onComplete={() => {
                 words.forEach((w) => recordWordResult(w.id, true))
+                bumpDailyGame()
+                addCoins(6)
                 advance(1)
               }}
             />
@@ -173,7 +193,13 @@ export default function Lesson() {
         })()}
 
         {step === 'conversation' && conversation && (
-          <ConversationPlayer conversation={conversation} onFinish={() => advance(2)} />
+          <ConversationPlayer
+            conversation={conversation}
+            onFinish={() => {
+              addCoins(6)
+              advance(2)
+            }}
+          />
         )}
 
         {step === 'phrase' && phrase && (

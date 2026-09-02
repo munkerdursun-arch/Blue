@@ -10,6 +10,7 @@ import GuessGame from '../games/GuessGame'
 import MemoryGame from '../games/MemoryGame'
 import RepeatGame from '../games/RepeatGame'
 import BuildSentence from '../games/BuildSentence'
+import CatchWord from '../games/CatchWord'
 
 const GAMES = [
   { id: 'find', label: 'Trouve l\'image', icon: '🔎', color: 'from-sky-400 to-cyan-300' },
@@ -18,35 +19,45 @@ const GAMES = [
   { id: 'repeat', label: 'Répète', icon: '🗣️', color: 'from-amber-400 to-orange-300' },
   { id: 'build', label: 'Construis la phrase', icon: '🧩', color: 'from-indigo-400 to-violet-400' },
   { id: 'guess', label: 'Devine (Bu nedir?)', icon: '❓', color: 'from-rose-400 to-red-300' },
+  { id: 'catch', label: 'Attrape le bon mot', icon: '🧺', color: 'from-teal-400 to-emerald-300' },
 ]
 
 export default function Play() {
-  const { progress, addStars, logActivity } = useProfile()
+  const { progress, addStars, addCoins, recordWordResult, bumpDailyGame, recordPronunciation, logActivity } = useProfile()
   const [active, setActive] = useState(null)
   const [toast, setToast] = useState(null)
 
   const pool = useMemo(() => {
     const known = Object.keys(progress.srs || {})
     const due = getWordsToReview(progress.srs, known, 8)
-    const words = getWords(due.length ? due : known)
+    const words = getWords(due.length ? due : known).sort(() => Math.random() - 0.5)
     if (words.length >= 6) return words.slice(0, 8)
     return [...words, ...randomWords(8 - words.length, words.map((w) => w.id))]
-  }, [progress.srs])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [progress.srs, active])
 
   const phrasePool = useMemo(() => {
-    return PHRASES.filter((p) => !p.name).slice(0, 6).map((p) => {
-      const w = VOCAB[Math.floor(Math.random() * VOCAB.length)]
-      return fillPhrase(p, { word: w })
-    })
-  }, [])
+    return PHRASES.filter((p) => !p.name)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 6)
+      .map((p) => {
+        const w = VOCAB[Math.floor(Math.random() * VOCAB.length)]
+        return fillPhrase(p, { word: w })
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active])
 
   function complete(score, total) {
     const stars = Math.max(1, Math.round((score / Math.max(1, total)) * 3))
+    const coins = Math.max(2, Math.round((score / Math.max(1, total)) * 6))
     addStars(stars)
+    addCoins(coins)
+    bumpDailyGame()
+    if (active !== 'build') pool.forEach((w) => recordWordResult(w.id, true))
     const game = GAMES.find((g) => g.id === active)
     logActivity(`Jeu terminé : ${game?.label}`)
     setActive(null)
-    setToast(`+${stars} ⭐`)
+    setToast(`+${stars} ⭐ +${coins} 🪙`)
     setTimeout(() => setToast(null), 1800)
   }
 
@@ -57,8 +68,9 @@ export default function Play() {
         {active === 'find' && <FindImage words={pool} {...props} />}
         {active === 'memory' && <MemoryGame words={pool} {...props} />}
         {active === 'listen' && <ListenChoose words={pool} {...props} />}
-        {active === 'repeat' && <RepeatGame words={pool} {...props} />}
+        {active === 'repeat' && <RepeatGame words={pool} onPronunciation={recordPronunciation} {...props} />}
         {active === 'guess' && <GuessGame words={pool} {...props} />}
+        {active === 'catch' && <CatchWord words={pool} {...props} />}
         {active === 'build' && <BuildSentence phrases={phrasePool} {...props} />}
       </div>
     )

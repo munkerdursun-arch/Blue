@@ -21,12 +21,15 @@ export default function TopBar({ title, back }) {
         )}
         <h1 className="truncate font-display text-lg font-bold drop-shadow-sm">{title}</h1>
       </div>
-      <div className="flex shrink-0 items-center gap-2">
-        <Link to="/progres" className="flex items-center gap-1 rounded-full bg-white/25 px-2.5 py-1 text-sm font-bold active:scale-90">
+      <div className="flex shrink-0 items-center gap-1.5">
+        <Link to="/progres" className="flex items-center gap-1 rounded-full bg-white/25 px-2 py-1 text-xs font-bold active:scale-90 sm:px-2.5 sm:text-sm">
           🔥 {progress.streak?.count || 0}
         </Link>
-        <Link to="/progres" className="flex items-center gap-1 rounded-full bg-white/25 px-2.5 py-1 text-sm font-bold active:scale-90">
+        <Link to="/progres" className="flex items-center gap-1 rounded-full bg-white/25 px-2 py-1 text-xs font-bold active:scale-90 sm:px-2.5 sm:text-sm">
           ⭐ {progress.starsTotal || 0}
+        </Link>
+        <Link to="/boutique" className="flex items-center gap-1 rounded-full bg-white/25 px-2 py-1 text-xs font-bold active:scale-90 sm:px-2.5 sm:text-sm">
+          🪙 {progress.coins || 0}
         </Link>
       </div>
     </header>

@@ -60,6 +60,20 @@ button {
   animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
+@keyframes fall-loop {
+  0% {
+    top: -12%;
+  }
+  100% {
+    top: 104%;
+  }
+}
+.animate-fall-loop {
+  animation-name: fall-loop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 @keyframes pulse-soft {
   0%,
   100% {

@@ -4,14 +4,15 @@ import { useSpeech } from '../hooks/useSpeech'
 import { useSpeechRecognition } from '../hooks/useSpeechRecognition'
 import { looksClose } from '../utils/normalize'
 
-export default function RepeatGame({ words, onExit, onComplete }) {
+export default function RepeatGame({ words, onExit, onComplete, onPronunciation }) {
   const list = useMemo(() => words.slice(0, 6), [words])
   const [i, setI] = useState(0)
   const [result, setResult] = useState(null)
+  const [heardNothing, setHeardNothing] = useState(false)
   const { speakTr } = useSpeech()
-  const { supported, listening, transcript, error, start } = useSpeechRecognition('tr-TR')
+  const { supported, listening, transcript, error, permanentlyUnavailable, start } = useSpeechRecognition('tr-TR')
   const word = list[i]
-  const micUsable = supported && !error
+  const micUsable = supported && !permanentlyUnavailable
 
   function tryAgainOrNext() {
     setResult(null)
@@ -21,6 +22,7 @@ export default function RepeatGame({ words, onExit, onComplete }) {
 
   function handleListen() {
     setResult(null)
+    setHeardNothing(false)
     start()
   }
 
@@ -31,10 +33,28 @@ export default function RepeatGame({ words, onExit, onComplete }) {
   // dès qu'une transcription arrive, on affiche un retour toujours positif
   useEffect(() => {
     if (transcript && result === null) {
-      setResult(looksClose(transcript, word.tr) ? 'close' : 'tried')
+      const close = looksClose(transcript, word.tr)
+      setResult(close ? 'close' : 'tried')
+      onPronunciation?.(close)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transcript])
+
+  // erreur passagère (silence, coupure...) : le micro reste utilisable,
+  // on invite juste l'enfant à réessayer sans jamais le pénaliser.
+  useEffect(() => {
+    if (error && !permanentlyUnavailable && result === null) {
+      setHeardNothing(true)
+      const t = setTimeout(() => setHeardNothing(false), 2500)
+      return () => clearTimeout(t)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error])
+
+  useEffect(() => {
+    setHeardNothing(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i])
 
   return (
     <GameShell title="Répète après moi" icon="🗣️" round={i} total={list.length} onExit={onExit}>
@@ -69,7 +89,11 @@ export default function RepeatGame({ words, onExit, onComplete }) {
               </button>
             )}
             <p className="max-w-xs text-xs text-slate-400">
-              {micUsable ? 'Appuie et dis le mot à voix haute !' : "Le micro n'est pas disponible ici, mais tu peux dire le mot à voix haute !"}
+              {heardNothing
+                ? "Je n'ai pas bien entendu, essaie encore ! 😊"
+                : micUsable
+                  ? 'Appuie et dis le mot à voix haute !'
+                  : "Le micro n'est pas disponible ici, mais tu peux dire le mot à voix haute !"}
             </p>
           </>
         )}

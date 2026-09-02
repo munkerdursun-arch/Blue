@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+// Erreurs qui signifient que le micro ne sera JAMAIS utilisable dans cette
+// session (permission refusée, pas de matériel). Tout le reste (silence,
+// coupure réseau, arrêt manuel...) est transitoire : l'enfant doit pouvoir
+// réessayer immédiatement sans perdre l'accès au micro pour les mots suivants.
+const PERMANENT_ERRORS = ['not-allowed', 'service-not-allowed', 'audio-capture']
+
 // Reconnaissance vocale (Web Speech API) : utilisée UNIQUEMENT pour aider
 // l'enfant à s'entraîner à prononcer, jamais pour donner une note sévère.
 // Si l'API n'est pas disponible (navigateur, permissions...), `supported`
@@ -9,6 +15,7 @@ export function useSpeechRecognition(lang = 'tr-TR') {
   const [listening, setListening] = useState(false)
   const [transcript, setTranscript] = useState('')
   const [error, setError] = useState(null)
+  const [permanentlyUnavailable, setPermanentlyUnavailable] = useState(false)
   const recognitionRef = useRef(null)
 
   useEffect(() => {
@@ -28,6 +35,7 @@ export function useSpeechRecognition(lang = 'tr-TR') {
     }
     recognition.onerror = (e) => {
       setError(e.error)
+      if (PERMANENT_ERRORS.includes(e.error)) setPermanentlyUnavailable(true)
       setListening(false)
     }
     recognition.onend = () => setListening(false)
@@ -63,5 +71,5 @@ export function useSpeechRecognition(lang = 'tr-TR') {
     setListening(false)
   }, [])
 
-  return { supported, listening, transcript, error, start, stop }
+  return { supported, listening, transcript, error, permanentlyUnavailable, start, stop }
 }

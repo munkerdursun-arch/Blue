@@ -10,6 +10,7 @@ import Play from './pages/Play'
 import Talk from './pages/Talk'
 import ProgressPage from './pages/ProgressPage'
 import Parent from './pages/Parent'
+import Boutique from './pages/Boutique'
 import NotFound from './pages/NotFound'
 
 function RequireProfile({ children }) {
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/parler" element={<RequireProfile><Talk /></RequireProfile>} />
           <Route path="/progres" element={<RequireProfile><ProgressPage /></RequireProfile>} />
           <Route path="/parent" element={<RequireProfile><Parent /></RequireProfile>} />
+          <Route path="/boutique" element={<RequireProfile><Boutique /></RequireProfile>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

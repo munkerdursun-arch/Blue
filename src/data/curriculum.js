@@ -7,13 +7,63 @@ import { wordsByCategory } from './vocabulary'
 // et varié chaque jour (mots, phrases, révisions, histoires, chansons,
 // conversations et missions finales), avec une immersion turque croissante.
 
+// Chaque phase est aussi une "zone" du monde de Türkçe Maceram, affichée
+// comme un lieu à explorer sur la carte (voir pages/Learn.jsx).
 const PHASES = [
-  { from: 1, to: 15, name: 'Découverte du turc', color: 'from-sky-400 to-cyan-300' },
-  { from: 16, to: 30, name: 'Mes premières phrases', color: 'from-emerald-400 to-lime-300' },
-  { from: 31, to: 45, name: 'La vie de tous les jours', color: 'from-amber-400 to-orange-300' },
-  { from: 46, to: 60, name: 'On discute !', color: 'from-fuchsia-400 to-pink-300' },
-  { from: 61, to: 75, name: 'Immersion en turc', color: 'from-red-500 to-rose-400' },
-  { from: 76, to: 90, name: 'Je parle tout seul !', color: 'from-indigo-500 to-violet-400' },
+  {
+    from: 1,
+    to: 15,
+    name: 'Découverte du turc',
+    color: 'from-sky-400 to-cyan-300',
+    zoneIcon: '🏠',
+    zoneName: 'Ma Maison',
+    zoneDesc: 'Les premiers mots : bonjour, ma famille, les nombres, les couleurs...',
+  },
+  {
+    from: 16,
+    to: 30,
+    name: 'Mes premières phrases',
+    color: 'from-emerald-400 to-lime-300',
+    zoneIcon: '🏫',
+    zoneName: "L'École",
+    zoneDesc: 'Je construis mes premières phrases avec mes amis de classe.',
+  },
+  {
+    from: 31,
+    to: 45,
+    name: 'La vie de tous les jours',
+    color: 'from-amber-400 to-orange-300',
+    zoneIcon: '🌳',
+    zoneName: 'Le Parc',
+    zoneDesc: 'La météo, les émotions, les vêtements... en jouant dehors.',
+  },
+  {
+    from: 46,
+    to: 60,
+    name: 'On discute !',
+    color: 'from-fuchsia-400 to-pink-300',
+    zoneIcon: '🛒',
+    zoneName: 'Le Marché',
+    zoneDesc: 'Je discute avec les marchands et mes nouveaux amis turcs.',
+  },
+  {
+    from: 61,
+    to: 75,
+    name: 'Immersion en turc',
+    color: 'from-red-500 to-rose-400',
+    zoneIcon: '🐾',
+    zoneName: 'Le Zoo',
+    zoneDesc: 'Les consignes passent en turc : dinle, göster, seç, söyle !',
+  },
+  {
+    from: 76,
+    to: 90,
+    name: 'Je parle tout seul !',
+    color: 'from-indigo-500 to-violet-400',
+    zoneIcon: '🇹🇷',
+    zoneName: 'La Turquie',
+    zoneDesc: 'Missions finales : je me présente et je discute en turc !',
+  },
 ]
 
 export function phaseForDay(day) {

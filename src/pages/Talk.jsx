@@ -6,7 +6,7 @@ import { useProfile } from '../context/ProfileContext'
 import { CONVERSATIONS, fillConversation } from '../data/conversations'
 
 export default function Talk() {
-  const { profile, progress, markConversationDone, addStars, logActivity } = useProfile()
+  const { profile, progress, markConversationDone, addStars, addCoins, logActivity } = useProfile()
   const [activeId, setActiveId] = useState(null)
   const [done, setDone] = useState(false)
 
@@ -15,6 +15,7 @@ export default function Talk() {
   function finish() {
     markConversationDone(activeId)
     addStars(2)
+    addCoins(8)
     logActivity(`Conversation terminée : ${active?.title}`)
     setDone(true)
   }
