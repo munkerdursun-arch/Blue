@@ -17,6 +17,8 @@ export function useSpeechRecognition(lang = 'tr-TR') {
   const [error, setError] = useState(null)
   const [permanentlyUnavailable, setPermanentlyUnavailable] = useState(false)
   const recognitionRef = useRef(null)
+  const settledRef = useRef(false)
+  const debounceRef = useRef(null)
 
   useEffect(() => {
     const SR = typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition)
@@ -27,11 +29,36 @@ export function useSpeechRecognition(lang = 'tr-TR') {
     setSupported(true)
     const recognition = new SR()
     recognition.lang = lang
-    recognition.interimResults = false
+    // Les résultats intermédiaires arrivent en quelques centaines de ms,
+    // bien avant la détection de silence du navigateur (souvent 1,5-2s).
+    // On "fige" nous-mêmes la réponse dès qu'elle ne bouge plus quelques
+    // centaines de ms, au lieu d'attendre le résultat final du navigateur :
+    // la validation devient quasi instantanée pour l'enfant.
+    recognition.interimResults = true
     recognition.maxAlternatives = 1
-    recognition.onresult = (e) => {
-      const text = e.results?.[0]?.[0]?.transcript || ''
+
+    function finalize(text) {
+      if (settledRef.current) return
+      settledRef.current = true
+      clearTimeout(debounceRef.current)
       setTranscript(text)
+      try {
+        recognition.stop()
+      } catch {
+        // ignore
+      }
+    }
+
+    recognition.onresult = (e) => {
+      const last = e.results?.[e.results.length - 1]
+      const text = last?.[0]?.transcript || ''
+      if (!text) return
+      if (last.isFinal) {
+        finalize(text)
+      } else {
+        clearTimeout(debounceRef.current)
+        debounceRef.current = setTimeout(() => finalize(text), 350)
+      }
     }
     recognition.onerror = (e) => {
       setError(e.error)
@@ -41,6 +68,7 @@ export function useSpeechRecognition(lang = 'tr-TR') {
     recognition.onend = () => setListening(false)
     recognitionRef.current = recognition
     return () => {
+      clearTimeout(debounceRef.current)
       try {
         recognition.stop()
       } catch {
@@ -52,6 +80,8 @@ export function useSpeechRecognition(lang = 'tr-TR') {
   const start = useCallback(() => {
     if (!recognitionRef.current) return false
     try {
+      clearTimeout(debounceRef.current)
+      settledRef.current = false
       setTranscript('')
       setError(null)
       recognitionRef.current.start()
