@@ -19,14 +19,17 @@ export function useSpeech() {
   }, [])
 
   const speak = useCallback(
-    (text, lang = 'tr-TR', rate = 0.9) => {
+    (text, lang = 'tr-TR', rate = 1.08) => {
       if (!supported || !text) return false
       try {
         window.speechSynthesis.cancel()
         const utter = new SpeechSynthesisUtterance(text)
         utter.lang = lang
-        utter.rate = rate
-        utter.pitch = 1.05
+        // Petite variation naturelle de vitesse et de hauteur de voix à
+        // chaque phrase : une voix parfaitement identique à chaque fois
+        // sonne mécanique. Une vraie personne varie légèrement son débit.
+        utter.rate = rate + (Math.random() * 0.08 - 0.04)
+        utter.pitch = 1.08 + (Math.random() * 0.1 - 0.05)
         const voice = voices.find((v) => v.lang === lang) || voices.find((v) => v.lang?.startsWith(lang.slice(0, 2)))
         if (voice) utter.voice = voice
         utter.onstart = () => setSpeaking(true)
