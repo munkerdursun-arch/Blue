@@ -14,10 +14,14 @@ export default function RepeatGame({ words, onExit, onComplete, onPronunciation 
   const word = list[i]
   const micUsable = supported && !permanentlyUnavailable
 
-  function tryAgainOrNext() {
+  function nextWord() {
     setResult(null)
     if (i + 1 >= list.length) onComplete(list.length, list.length)
     else setI((n) => n + 1)
+  }
+
+  function retrySameWord() {
+    setResult(null)
   }
 
   function handleListen() {
@@ -27,7 +31,7 @@ export default function RepeatGame({ words, onExit, onComplete, onPronunciation 
   }
 
   function handleFallback() {
-    setResult('tried')
+    setResult('selfreport')
   }
 
   // dès qu'une transcription arrive, on affiche un retour toujours positif
@@ -98,12 +102,35 @@ export default function RepeatGame({ words, onExit, onComplete, onPronunciation 
           </>
         )}
 
-        {result && (
+        {result === 'close' && (
           <div className="flex flex-col items-center gap-3">
-            <p className="font-display text-xl font-bold text-emerald-600">
-              {result === 'close' ? 'Harika! Bien prononcé ! 🎉' : 'Super effort ! Continue comme ça ! 👏'}
+            <p className="font-display text-xl font-bold text-emerald-600">Harika ! Bien prononcé ! 🎉</p>
+            <button onClick={nextWord} className="rounded-full bg-violet-600 px-6 py-2.5 font-bold text-white shadow-md active:scale-95">
+              Suivant ➡️
+            </button>
+          </div>
+        )}
+
+        {result === 'tried' && (
+          <div className="flex flex-col items-center gap-3">
+            <p className="font-display text-xl font-bold text-amber-600">
+              Je n'ai pas reconnu « {word.tr} ». On réessaie ? 💛
             </p>
-            <button onClick={tryAgainOrNext} className="rounded-full bg-violet-600 px-6 py-2.5 font-bold text-white shadow-md active:scale-95">
+            <div className="flex gap-3">
+              <button onClick={retrySameWord} className="rounded-full bg-emerald-500 px-6 py-2.5 font-bold text-white shadow-md active:scale-95">
+                🎤 Réessayer
+              </button>
+              <button onClick={nextWord} className="rounded-full bg-slate-200 px-6 py-2.5 font-bold text-slate-600 shadow-md active:scale-95">
+                Passer ➡️
+              </button>
+            </div>
+          </div>
+        )}
+
+        {result === 'selfreport' && (
+          <div className="flex flex-col items-center gap-3">
+            <p className="font-display text-xl font-bold text-emerald-600">Super effort ! Continue comme ça ! 👏</p>
+            <button onClick={nextWord} className="rounded-full bg-violet-600 px-6 py-2.5 font-bold text-white shadow-md active:scale-95">
               Suivant ➡️
             </button>
           </div>
