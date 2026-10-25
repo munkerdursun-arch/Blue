@@ -78,9 +78,9 @@ W[1] = dict(
           "Repasser, puis dessiner."],
          row(trace("E E E e e e"), draw("elma")), False),
         ("1·5", "Ven 6", "La marchande", "10 min", "5 fruits ou objets",
-         "« Pour acheter, dis lütfen. Quand tu reçois, dis teşekkür ederim. »",
+         "« Demande avec lütfen, remercie avec teşekkür ederim. »",
          ["Neyla : « Elma, " + tr("lütfen", "lut-fènn", "s'il te plaît") + ". »",
-          "Papa donne. Neyla : « " + tr("Teşekkür ederim !", "tè-chèk-kur è-dè-rimm", "merci") + " »",
+          "Papa donne. Neyla : « " + tr("Teşekkür ederim !", "tè-chèk-kur è-dè-rim", "merci") + " »",
           "On inverse : Neyla est la marchande."], "", True),
         ("1·6", "Sam 7", "Lettre M et premières syllabes", "15 min", "crayon",
          "« M + a = ma. Lis avec moi ! »",
@@ -96,7 +96,7 @@ W[1] = dict(
         ("1·8", "Dim 8", "Ma carte d'identité turque", "15 min", "crayons, photo (option)",
          "« Réponds à la peluche : Adın ne ? »",
          ["Papa : " + tr("Adın ne ?", "a-deunn nè", "comment tu t'appelles ?"),
-          "Neyla : " + tr("Benim adım Neyla.", "bè-nimm a-deumm Neyla", "je m'appelle Neyla"),
+          "Neyla : " + tr("Benim adım Neyla.", "bè-nim a-deum Neyla", "je m'appelle Neyla"),
           "Neyla pose la question à papa, puis remplit sa carte."],
          '<div class="idcard"><div class="idphoto">photo<br>ou dessin</div><div class="idtxt">'
          '<div>Adım <span class="ph">(mon nom)</span> : <span class="fill"></span></div>'
@@ -125,8 +125,8 @@ W[2] = dict(
          [tr("bayrak", "baï-rak", "drapeau") + " · " + tr("kırmızı", "keur-meu-zeu", "rouge") + " · "
           + tr("beyaz", "bè-yaz", "blanc"),
           tr("ay", "aï", "lune / croissant") + " · " + tr("yıldız", "yeul-deuz", "étoile"),
-          "À savoir : chaque 10 novembre, la Turquie fait une minute de silence à 9 h 05 "
-          "en souvenir d'Atatürk, fondateur de la République."],
+          "Chaque 10 novembre, la Turquie observe une minute de silence en souvenir d'Atatürk. "
+          "Vérifie l'heure exacte sur une source officielle."],
          "FLAG", False),
         ("2·3", "Mer 11", "Lettre İ comme inek", "15 min", "crayon",
          "« Le i turc garde toujours son point, même en majuscule : İ. »",
@@ -189,10 +189,8 @@ W[3] = dict(
          row(readlist(["mu", "nu", "un", "on", "mo"]), trace("U U U u u u")), False),
         ("3·3", "Mer 18", "Les problèmes de ballons", "15 min", "petits objets",
          "« Écoute l'histoire en turc et trouve combien. »",
-         ["Papa lit lentement : <i>« Neyla'nın üç balonu var. Babası ona iki balon daha veriyor. "
-          "Neyla'nın kaç balonu var ? »</i>",
-          "(Neyla a 3 ballons. Papa lui en donne 2 de plus. Combien en a-t-elle ?) — répondre en turc.",
-          "Puis : <i>« Dört elma artı iki elma kaç eder ? »</i> (4 pommes + 2 pommes, ça fait combien ?)"],
+         ["<span class=\"oneline\">Papa lit : <i>« Neyla'nın üç balonu var. Babası ona iki balon daha veriyor. Neyla'nın kaç balonu var ? »</i></span>",
+          "(Neyla a 3 ballons. Papa lui en donne 2 de plus. Combien en a-t-elle ?) Neyla répond en turc, puis fait la grille."],
          calc([("3 + 2 = ___", "üç artı iki"), ("4 + 2 = ___", "dört artı iki"),
                ("6 + 3 = ___", "altı artı üç"), ("1 + 7 = ___", "bir artı yedi")]), False),
         ("3·4", "Jeu 19", "Lettre L comme lale", "15 min", "crayon",
@@ -202,7 +200,7 @@ W[3] = dict(
           + tr("al", "al", "rouge") + " : c'est un mot de l'hymne !"],
          row(readlist(["lale", "elma", "limon", "al"]), trace("L L L l l l")), False),
         ("3·5", "Ven 20", "Le sac mystère", "10 min", "sac opaque, 5 objets (pomme, citron, voiture, balle…)",
-         "« Touche sans regarder. Je demande Bu ne ? Tu réponds en turc. »",
+         "« Touche sans regarder et dis en turc ce que c'est. »",
          [tr("Bu ne ?", "bou nè", "qu'est-ce que c'est ?") + " → « Bu limon. » "
           + tr("limon", "li-monn", "citron"),
           "On sort l'objet pour vérifier. Puis Neyla prépare le sac pour papa."], "", True),
@@ -227,7 +225,7 @@ W[3] = dict(
                  (16, "on altı"), (17, "on yedi"), (18, "on sekiz"), (19, "on dokuz"), (20, "yirmi")]) + "</div>", False),
         ("3·9", "Dim 22", "Korkma ! L'hymne, vers 1", "15 min", "page de l'hymne",
          "« Écoute, puis répète par petits morceaux. »",
-         ["Expliquer : c'est l'hymne national ; on l'écoute debout, bien droite.",
+         ["Expliquer : c'est l'hymne national ; on se tient debout, en silence.",
           "Papa lit le vers 1 en 4 morceaux, Neyla répète chaque morceau.",
           tr("Korkma !", "kork-ma", "n'aie pas peur") + " : c'est un mot de courage."], "", False),
     ])
@@ -285,11 +283,11 @@ W[4] = dict(
          "« Présente-toi en turc, comme une présentatrice télé ! »",
          ["Répéter le texte 2 fois, puis filmer (ou jouer devant la famille) :",
           "<b>Merhaba ! Benim adım Neyla. Altı yaşındayım. Bu babam. Hoşça kal !</b>",
-          tr("Altı yaşındayım", "al-teu ya-cheunn-da-yeumm", "j'ai six ans") + ". Envoyer à un proche turcophone si possible."],
+          tr("Altı yaşındayım", "al-teu ya-cheun-da-yeum", "j'ai six ans") + ". Envoyer à un proche turcophone si possible."],
          "", True),
         ("4·9", "Dim 29", "Mon bilan du mois", "15 min", "livret, page des jetons",
          "« Montre-moi tout ce que tu sais faire en turc ! »",
-         ["Neyla coche ce qu'elle réussit. Papa entoure le niveau sur la page des jetons.",
+         ["Neyla coche ce qu'elle réussit. Papa compte avec elle les jetons du mois.",
           "Neyla choisit son seuil pour décembre : le garder ou le changer."],
          '<div class="bilan">' + "".join(f'<div><i class="cb"></i>{t}</div>' for t in [
              "Je dis bonjour et au revoir", "Je dis merci et s'il te plaît", "Je me présente",
@@ -353,7 +351,7 @@ pages.append(f'''
     <li>Saluer, remercier et me présenter en turc.</li>
     <li>Lire 11 lettres turques, des syllabes, des mots et une petite phrase.</li>
     <li>Compter jusqu'à 20 en turc et calculer jusqu'à 10.</li></ol></div>
-  <div class="cv-foot">Ce livret appartient à : <b>Neyla</b> &nbsp;·&nbsp; 4 semaines · 36 séquences · environ 2 h par semaine</div>
+  <div class="cv-foot">Ce livret appartient à : <b>Neyla</b> &nbsp;·&nbsp; 4 semaines · 36 séquences · environ 2 h par semaine (5 soirs de 10–15 min + 4 séquences de 15 min le week-end)</div>
 </section>''')
 PAGE_NO[0] += 1
 
@@ -417,12 +415,12 @@ VOC = [
                              ("İyi akşamlar", "i-yi ak-chamm-lar", "bonsoir"), ("İyi geceler", "i-yi guè-djè-lèr", "bonne nuit"),
                              ("Hoşça kal", "hoch-tcha kal", "au revoir (dit par celui qui part)"),
                              ("Güle güle", "gu-lè gu-lè", "au revoir (dit par celui qui reste)"),
-                             ("Lütfen", "lut-fènn", "s'il te plaît"), ("Teşekkür ederim", "tè-chèk-kur è-dè-rimm", "merci"),
+                             ("Lütfen", "lut-fènn", "s'il te plaît"), ("Teşekkür ederim", "tè-chèk-kur è-dè-rim", "merci"),
                              ("Evet / Hayır", "è-vèt / ha-yeur", "oui / non"), ("Tamam", "ta-mamm", "d'accord"),
                              ("Aferin !", "a-fè-rinn", "bravo !")]),
-    ("Me présenter", [("Adın ne ?", "a-deunn nè", "comment tu t'appelles ?"), ("Benim adım Neyla.", "bè-nimm a-deumm…", "je m'appelle Neyla"),
+    ("Me présenter", [("Adın ne ?", "a-deunn nè", "comment tu t'appelles ?"), ("Benim adım Neyla.", "bè-nim a-deum Neyla", "je m'appelle Neyla"),
                       ("Nasılsın ?", "na-seul-seunn", "comment vas-tu ?"), ("İyiyim.", "i-yi-yimm", "je vais bien"),
-                      ("Altı yaşındayım.", "al-teu ya-cheunn-da-yeumm", "j'ai six ans"), ("Bu ne ?", "bou nè", "qu'est-ce que c'est ?")]),
+                      ("Altı yaşındayım.", "al-teu ya-cheun-da-yeum", "j'ai six ans"), ("Bu ne ?", "bou nè", "qu'est-ce que c'est ?")]),
     ("Ma famille", [("anne / annem", "ann-nè / ann-nèmm", "maman / ma maman"), ("baba / babam", "ba-ba / ba-bamm", "papa / mon papa"),
                     ("abla", "a-bla", "grande sœur"), ("kardeşim", "kar-dè-chimm", "mon petit frère / ma petite sœur")]),
     ("Le drapeau", [("bayrak", "baï-rak", "drapeau"), ("kırmızı", "keur-meu-zeu", "rouge"), ("beyaz", "bè-yaz", "blanc"),
@@ -470,42 +468,41 @@ for i, (t, p, words) in enumerate(VERS, 1):
 <div class="vtxt">{t}</div><div class="vph">« {p} »</div><div class="vchunks">{chunks}</div></div>'''
 pages.append(page(f'''<h1>L'hymne du mois · <span class="tk">İstiklal Marşı</span></h1>
 <p class="lead">« La Marche de l'Indépendance », hymne national de la Turquie, écrit par le poète Mehmet Akif Ersoy
-et adopté par la Grande Assemblée nationale de Turquie le 12 mars 1921. Ce mois-ci : <b>les 2 premiers vers</b>.</p>
+et adopté par la Grande Assemblée nationale de Turquie le 12 mars 1921 (date généralement citée, à confirmer sur une source officielle). Ce mois-ci : <b>les 2 premiers vers</b>.</p>
 {v_html}
 <div class="sens"><h3>Ce que ça veut dire (version simplifiée pour Neyla)</h3>
 <p>« N'aie pas peur ! Notre drapeau rouge flotte dans le ciel du matin. Il ne s'éteindra jamais,
-tant qu'une maison de mon pays aura encore un feu allumé. »</p>
+tant que le dernier foyer de notre pays restera allumé. » <span class="mini">(traduction libre, non officielle)</span></p>
 <p class="mini">Mot à mot : <b>korkma</b> n'aie pas peur · <b>sönmez</b> ne s'éteint pas · <b>şafak</b> aube ·
 <b>yüzen</b> qui flotte (litt. « qui nage ») · <b>al sancak</b> le drapeau rouge · <b>yurt</b> le pays, la patrie ·
 <b>tüten</b> qui fume · <b>en son ocak</b> le tout dernier foyer.
 Traduction libre et non officielle.</p></div>
-<div class="warn"><b>À vérifier par le papa :</b> ce texte est reproduit de mémoire ; comparez-le avec le texte officiel
+<div class="warn"><b>À vérifier par le papa :</b> texte et traduction à faire vérifier par un locuteur natif ; comparez aussi le texte avec le texte officiel
 publié par une institution de l'État turc (par exemple la Grande Assemblée nationale, TBMM) avant de le faire apprendre.
 Pour la mélodie, cherchez vous-même un enregistrement issu d'une source officielle : aucun lien n'est fourni ici.
 La phonétique est une approximation.</div>
 <div class="tip2"><b>Comment l'apprendre :</b> debout, par morceaux de 2 ou 3 mots, papa dit, Neyla répète.
-Une seule fois par séance, puis on passe à autre chose. Pas d'exigence de perfection.</div>''', "Hymne"))
+Une seule fois par séance, puis on passe à autre chose. Pas d'exigence de perfection.</div>
+<p class="verif">Texte à vérifier avant apprentissage : comparer avec le texte officiel publié par la Grande Assemblée nationale de Turquie (TBMM).</p>''', "Hymne"))
 
 # 15. Tableau de jetons
-DAYS = ["L", "M", "M", "J", "V", "S", "D"]
+DAYS = ["L", "M", "M", "J", "V", "S1", "S2", "D1", "D2"]
 grid = "".join(
     f'<tr><th>Semaine {n}</th>' + "".join(f'<td><div class="tok"><small>{d}</small></div></td>' for d in DAYS)
     + '<td><div class="tok bonus"><small>+1</small></div></td></tr>' for n in range(1, 5))
 counter = "".join(f'<div class="cnt"><small>{i}</small></div>' for i in range(1, 16))
 pages.append(page(f'''<h1>Mon tableau de jetons · <span class="tk">jetonlarım</span></h1>
-<p class="lead"><b>1 jeton</b> par séance réalisée (un soir ou un jour de week-end) · <b>+1 jeton bonus</b> si les 7 séances de la
-semaine sont faites. Maximum : 8 jetons par semaine, 32 ce mois-ci. On colorie une case par jeton gagné.</p>
+<p class="lead"><b>1 jeton</b> par séance réalisée : 9 séances par semaine (5 soirs + 2 le samedi + 2 le dimanche) · <b>+1 jeton bonus</b>
+si les 9 séances de la semaine sont faites. Maximum : 9 + 1 = 10 jetons par semaine, 40 ce mois-ci. On colorie une case par jeton gagné.</p>
 <table class="tokens"><thead><tr><th></th>{"".join(f"<th>{d}</th>" for d in DAYS)}<th>Bonus</th></tr></thead><tbody>{grid}</tbody></table>
 <div class="tokrow">
-  <div class="box"><h3>Mon seuil d'échange</h3><p>Je l'ai choisi moi-même :</p>
-    <div class="big-fill"><span class="fill short"></span> jetons</div>
-    <p class="mini">Quand j'atteins mon seuil, je choisis une récompense et mon compteur repart à zéro.
+  <div class="box"><h3>Mon seuil d'échange : comment ça marche</h3>
+    <p class="mini">C'est moi qui choisis mon seuil (je l'écris dans la case « Mon seuil du mois »).
+    Quand j'atteins mon seuil, je choisis une récompense et mon compteur repart à zéro.
     Je peux changer mon seuil le mois prochain, avec papa.</p></div>
   <div class="box"><h3>Récompense en cours</h3><p>Je vise :</p><div class="wl"></div><div class="wl"></div>
-    <h3 style="margin-top:4mm">Niveau atteint ce mois</h3>
-    <div class="levels"><span><i class="cb"></i> <b>Bronz</b> 14 jetons et +</span>
-    <span><i class="cb"></i> <b>Gümüş</b> 22 jetons et +</span><span><i class="cb"></i> <b>Altın</b> 28 jetons et +</span></div>
-    <p class="mini">bronz « bronnz » = bronze · gümüş « gu-much » = argent · altın « al-teunn » = or</p></div>
+    <h3 style="margin-top:4mm">Mon seuil du mois</h3>
+    <div class="big-fill"><span class="fill short"></span> jetons</div></div>
 </div>
 <h2>Mon compteur vers le seuil</h2>
 <p class="mini">Cocher un rond par jeton. Au seuil : on échange, on efface (ou on recommence sur la ligne suivante).</p>
@@ -528,8 +525,8 @@ pages.append(page(f'''<h1>Mon catalogue de récompenses</h1>
 <div class="pcols">
 <div>
 <h3>Durée conseillée</h3>
-<p>Soir : 10 à 15 min, minuteur visible. Week-end : 2 × 15 min avec 2 min de mouvement entre les deux.
-Soit environ 2 h par semaine. <b>Mieux vaut s'arrêter tôt sur une réussite</b> que finir dans la lassitude.</p>
+<p>Soir : 1 séquence de 10 à 15 min, minuteur visible. Week-end : 2 séquences de 15 min le samedi et 2 le dimanche
+(2 × 15 min = 30 min par jour), avec 2 min de mouvement entre les deux. Soit environ 2 h par semaine. <b>Mieux vaut s'arrêter tôt sur une réussite</b> que finir dans la lassitude.</p>
 <h3>Matériel du mois</h3>
 <p>Crayons (dont un rouge), 2 peluches, 20 petits objets, un sac opaque, une balle, une petite voiture, une pomme,
 un citron, 12 petits cartons, 6 feuilles A4, un bocal pour les jetons, un minuteur ou sablier, un téléphone (option).</p>
@@ -710,16 +707,17 @@ table {{ border-collapse: collapse; width: 100%; }}
 
 /* jetons */
 .tokens th {{ font-size: 8.5pt; color: #666; padding: 1mm; }}
-.tokens tbody th {{ text-align: left; color: #222; width: 22mm; }}
+.tokens tbody th {{ text-align: left; color: #222; width: 20mm; font-size: 8.5pt; }}
 .tokens td {{ padding: 1mm; text-align: center; }}
-.tok {{ width: 11.5mm; height: 11.5mm; border: 0.5mm solid {ACCENT}; border-radius: 50%; margin: auto; position: relative; }}
+.tok {{ width: 11mm; height: 11mm; border: 0.5mm solid {ACCENT}; border-radius: 50%; margin: auto; position: relative; }}
 .tok small {{ position: absolute; top: 0.6mm; left: 0; right: 0; font-size: 6.5pt; color: #aaa; }}
 .tok.bonus {{ border-style: dashed; background: {TINT}; }}
 .tokrow {{ display: flex; gap: 5mm; margin-top: 4mm; }}
 .box {{ flex: 1; border: 0.3mm solid #bbb; border-radius: 2mm; padding: 3mm 4mm; }}
 .box h3 {{ margin-top: 0; }}
 .big-fill {{ font-size: 14pt; font-weight: 700; margin: 2mm 0 3mm; }}
-.levels {{ display: flex; flex-direction: column; gap: 0.8mm; font-size: 9pt; }}
+.oneline {{ white-space: nowrap; font-size: 8.3pt; }}
+.verif {{ margin-top: 3mm; font-size: 8.8pt; font-weight: 600; border-top: 0.3mm solid #ccc; padding-top: 2mm; }}
 .counter {{ display: flex; gap: 1.8mm; margin-bottom: 2mm; }}
 .cnt {{ width: 9mm; height: 9mm; border: 0.4mm solid {ACCENT}; border-radius: 50%; position: relative; }}
 .cnt small {{ position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 7pt; color: #bbb; }}
