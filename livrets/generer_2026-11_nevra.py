@@ -105,11 +105,11 @@ W[1] = dict(
           "Redescendre en recomptant. Papa dit " + tr("Aferin !", "a-fè-rinn", "bravo") + "."],
          "", "Monter 3 marches en comptant jusqu'à üç.", True, True),
         ("1·9", "Dim 8", "Mes jetons, mon seuil", "10 min", "jetons, bocal, page « Tableau de jetons »",
-         "« Choisis : une surprise à 4 jetons ou à 6 jetons ? »",
+         "« Choisis ton seuil : combien de jetons veux-tu pour une surprise ? »",
          ["Montrer le bocal : chaque séquence faite = 1 jeton dedans.",
-          "Nevra choisit entre les 2 seuils ; papa l'écrit dans « Mon seuil du mois ».",
+          "Nevra choisit librement son seuil ; papa l'écrit dans « Mon seuil du mois ».",
           "Compter ensemble les jetons de la semaine : bir, iki, üç…"],
-         "", "Nevra choisit seulement son seuil (4 ou 6).", False, False),
+         "", "Nevra dit combien de jetons elle veut ; papa l'écrit.", False, False),
     ])
 
 W[2] = dict(
@@ -256,7 +256,7 @@ W[4] = dict(
          "« Tu choisis : une petite surprise maintenant, ou une plus grande demain ? »",
          ["Compter les jetons du bocal ensemble : bir, iki, üç…",
           "Nevra choisit entre les 2 propositions. Papa respecte son choix, sans commentaire.",
-          "Si elle attend, papa tient sa promesse le lendemain."],
+          "Si elle attend, papa tient sa promesse."],
          '<div class="choice"><div><i class="cb"></i> Maintenant</div><div><i class="cb"></i> Demain, plus grand</div></div>',
          "Seulement compter les jetons du bocal.", False, False),
         ("4·7", "Sam 28", "Saute sur la lettre", "10 min", "4 feuilles, gros feutre",
@@ -264,11 +264,11 @@ W[4] = dict(
          ["Écrire A, E, M, O sur 4 feuilles au sol ; n'en utiliser que 2 à la fois.",
           "Papa dit le son ([a], [è], [mmm], [o]) : Nevra saute sur la bonne lettre."],
          "", "2 lettres seulement : A et O.", True, False),
-        ("4·8", "Dim 29", "La tour jusqu'à yirmi", "10 min", "20 cubes ou Lego",
+        ("4·8", "Dim 29", "La grande tour", "10 min", "20 cubes ou Lego",
          "« Ajoute un cube et dis le nombre avec moi. »",
          ["Monter une tour de 10 cubes en comptant jusqu'à " + tr("on", "onn", "10") + ".",
           "Ajouter un cube : " + tr("on bir", "onn bir", "11") + ", " + tr("on iki", "onn i-ki", "12")
-          + "… jusqu'à " + tr("yirmi", "yir-mi", "20") + " si elle en a envie."],
+          + "… jusqu'à " + tr("yirmi", "yir-mi", "20") + " (optionnel, si elle est à l'aise)."],
          "", "Une tour jusqu'à on, puis on la fait tomber.", False, False),
         ("4·9", "Dim 29", "Mon spectacle", "10 min", "aucun (téléphone en option)",
          "« Montre-nous ce que tu sais faire en turc ! »",
@@ -484,8 +484,7 @@ Idées de types : cartes à collectionner, petits cadeaux, sorties.</p>
   <div><h3>Moyennes</h3><p class="mini">= 2 × mon seuil</p>{slot * 2}</div>
   <div><h3>Grande</h3><p class="mini">réserve de fin d'année</p>{slot * 2}</div>
 </div>
-<div class="tipbox"><b>Pour papa — l'argent à 4 ans :</b> une seule idée par mois. Ce mois-ci : « je choisis » (séquence 1·9, choisir son seuil
-entre 2 propositions) et « attendre pour avoir plus » (séquence 4·6). Toujours <b>2 choix maximum</b>, jamais de reproche sur le choix fait,
+<div class="tipbox"><b>Pour papa — l'argent à 4 ans :</b> une seule idée par mois. Ce mois-ci : « je choisis » (séquence 1·9, choisir librement son seuil) et « attendre pour avoir plus » (séquence 4·6). Toujours <b>2 choix maximum</b>, jamais de reproche sur le choix fait,
 et la promesse est tenue.</div>''', "Récompenses"))
 
 # 17. Page du papa
