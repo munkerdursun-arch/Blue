@@ -56,53 +56,57 @@ HOURGLASS = ('<svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0
 W = {}
 
 W[1] = dict(
-    titre="Merhaba !", sous="Dire bonjour", dates="lundi 2 → dimanche 8 novembre",
-    lettre="A", nombres="1 à 5", mdp="Merhaba",
+    titre="Merhaba !", sous="Dire bonjour, me présenter", dates="lundi 2 → dimanche 8 novembre",
+    lettre="A · E", nombres="1 à 5, et à l'envers", mdp="Merhaba",
     seq=[
-        ("1·1", "Lun 2", "Coucou, la peluche !", "5 min", "1 peluche",
-         "« Dis Merhaba à la peluche ! »",
-         ["La peluche sort de derrière le dos de papa : " + tr("Merhaba !", "mèr-ha-ba", "bonjour") + ".",
-          "Nevra répond « Merhaba ! » en faisant coucou de la main.",
-          "La peluche repart : " + tr("Hoşça kal !", "hoch-tcha kal", "au revoir") + "."],
-         "", "3 coucous-Merhaba avec la peluche, c'est tout.", True, True),
-        ("1·2", "Mar 3", "A comme araba", "10 min", "petite voiture, crayon",
-         "« Fais rouler la voiture sur le grand A. »",
-         ["Papa ouvre grand la bouche : [a]. Nevra imite.",
-          "Elle fait rouler la voiture sur le A en disant " + tr("araba", "a-ra-ba", "voiture") + ".",
-          "Puis elle suit le A avec le doigt, et avec un crayon si elle en a envie."],
-         bigletter("A"), "Rouler 3 fois sur le A en disant « a-ra-ba ».", False, False),
-        ("1·3", "Mer 4", "Bir, iki, üç… saute !", "5 min", "aucun",
-         "« Saute quand je dis üç ! »",
-         ["Papa compte " + tr("bir", "bir", "1") + ", " + tr("iki", "i-ki", "2") + ", "
-          + tr("üç", "utch", "3") + " : à üç, Nevra saute.",
-          "On inverse : Nevra compte, papa saute."],
-         "", "3 sauts en comptant bir, iki, üç.", True, True),
-        ("1·4", "Jeu 5", "Je m'appelle Nevra", "5 min", "1 peluche",
-         "« Réponds à la peluche : Benim adım Nevra. »",
-         ["La peluche demande " + tr("Adın ne ?", "a-deunn nè", "comment tu t'appelles ?"),
-          "Nevra répond " + tr("Benim adım Nevra.", "bè-nim a-deum Nevra", "je m'appelle Nevra")
-          + ". Papa souffle le début si besoin."],
-         "", "Nevra répond seulement « Nevra ! » : ça compte.", False, False),
-        ("1·5", "Ven 6", "Zıpla ! Dur !", "5 min", "aucun",
-         "« Quand je dis zıpla, tu sautes ; quand je dis dur, tu t'arrêtes. »",
-         [tr("zıpla", "zeup-la", "saute") + " · " + tr("dur", "dour", "stop"),
+        ("1·1", "Lun 2", "Bonjour, au revoir", "5 min", "1 peluche",
+         "« Quand la peluche s'en va, réponds Güle güle ! »",
+         ["La peluche arrive : " + tr("Merhaba !", "mèr-ha-ba", "bonjour") + ". Nevra répond « Merhaba ! ».",
+          "La peluche s'en va : " + tr("Hoşça kal !", "hoch-tcha kal", "au revoir") + ". Nevra répond "
+          + tr("Güle güle !", "gu-lè gu-lè") + ".",
+          "On inverse : c'est Nevra qui part en disant « Hoşça kal ! »."],
+         "", "Seulement Merhaba et Hoşça kal.", True, True),
+        ("1·2", "Mar 3", "A comme araba, E comme elma", "10 min", "petite voiture, une pomme, crayon",
+         "« Montre-moi la lettre du mot que je dis. »",
+         ["A se dit [a] : " + tr("araba", "a-ra-ba", "voiture") + ". E se dit [è], comme le mouton : "
+          + tr("elma", "èl-ma", "pomme") + ".",
+          "Papa dit araba ou elma : Nevra montre le A ou le E, puis le suit avec le doigt."],
+         bigletter("A E"), "Montrer le A en disant « araba ».", False, False),
+        ("1·3", "Mer 4", "La fusée", "5 min", "aucun",
+         "« Accroupie, compte à l'envers avec moi, puis décolle ! »",
+         ["Compter de bir à " + tr("beş", "bèch", "5") + " en se relevant doucement.",
+          "S'accroupir et compter à l'envers : beş, " + tr("dört", "deurt", "4") + ", " + tr("üç", "utch", "3")
+          + ", " + tr("iki", "i-ki", "2") + ", " + tr("bir", "bir", "1") + "… et grand saut de fusée !"],
+         "", "bir, iki, üç, et saut.", True, True),
+        ("1·4", "Jeu 5", "Je me présente", "5 min", "1 peluche",
+         "« Réponds à la peluche en turc. »",
+         [tr("Adın ne ?", "a-deunn nè", "comment tu t'appelles ?") + " → "
+          + tr("Benim adım Nevra.", "bè-nim a-deum Nevra", "je m'appelle Nevra"),
+          tr("Kaç yaşındasın ?", "katch ya-cheun-da-seun", "quel âge as-tu ?") + " → "
+          + tr("Dört yaşındayım.", "deurt ya-cheun-da-yeum", "j'ai quatre ans") + " en montrant 4 doigts."],
+         "", "Seulement « Benim adım Nevra ».", False, False),
+        ("1·5", "Ven 6", "Zıpla, dur, otur !", "5 min", "aucun",
+         "« Fais ce que je dis : zıpla, dur ou otur. »",
+         [tr("zıpla", "zeup-la", "saute") + " · " + tr("dur", "dour", "stop") + " · "
+          + tr("otur", "o-tour", "assieds-toi"),
           "Papa alterne lentement, puis plus vite. Nevra devient ensuite la cheffe."],
-         "", "3 « zıpla », 1 « dur », et on s'arrête.", True, True),
-        ("1·6", "Sam 7", "Merci, papa !", "10 min", "3 fruits ou jouets",
-         "« Quand je te donne un fruit, dis teşekkür ederim. »",
-         ["Papa donne un fruit. Nevra dit " + tr("Teşekkür ederim !", "tè-chèk-kur è-dè-rim", "merci")
-          + ". Papa souffle le début si besoin.",
-          "On inverse : Nevra donne, papa remercie."],
-         "", "Un seul échange, un seul « teşekkür ederim ».", False, False),
-        ("1·7", "Sam 7", "Je marche sur le A", "10 min", "3 rubans ou cordes",
-         "« Marche sur le grand A en disant [a]. »",
-         ["Papa forme un grand A au sol avec 3 rubans.",
-          "Nevra marche dessus en disant [aaa], puis saute à pieds joints au milieu."],
+         "", "zıpla et dur seulement.", True, True),
+        ("1·6", "Sam 7", "La marchande", "10 min", "5 fruits ou jouets",
+         "« Demande le bon nombre : iki elma ! »",
+         ["Papa est le marchand. Nevra demande « iki elma » (2 pommes), papa en donne 2.",
+          "Nevra dit " + tr("Teşekkür ederim !", "tè-chèk-kur è-dè-rim", "merci")
+          + ". Puis papa demande « üç elma » et c'est Nevra qui donne.",
+          "À savoir : après un nombre, le mot ne change pas (iki elma, üç elma)."],
+         "", "Un seul échange avec « teşekkür ederim ».", False, False),
+        ("1·7", "Sam 7", "Je marche sur A ou E", "10 min", "7 rubans ou cordes",
+         "« Marche sur la lettre du mot que je dis. »",
+         ["Papa forme un grand A et un grand E au sol avec les rubans.",
+          "Papa dit araba ou elma : Nevra court marcher sur la bonne lettre en disant [a] ou [è]."],
          "", "Une seule traversée du A.", True, False),
-        ("1·8", "Dim 8", "Jusqu'à beş", "10 min", "un escalier ou 5 coussins",
-         "« Monte une marche à chaque nombre. »",
-         ["Monter en comptant : bir, iki, üç, " + tr("dört", "deurt", "4") + ", " + tr("beş", "bèch", "5") + ".",
-          "Redescendre en recomptant. Papa dit " + tr("Aferin !", "a-fè-rinn", "bravo") + "."],
+        ("1·8", "Dim 8", "L'escalier", "10 min", "un escalier ou 5 coussins",
+         "« Monte en comptant, redescends en comptant à l'envers. »",
+         ["Monter : bir, iki, üç, dört, beş.",
+          "Redescendre : beş, dört, üç, iki, bir. Papa dit " + tr("Aferin !", "a-fè-rinn", "bravo") + "."],
          "", "Monter 3 marches en comptant jusqu'à üç.", True, True),
         ("1·9", "Dim 8", "Mes jetons, mon seuil", "10 min", "jetons, bocal, page « Tableau de jetons »",
          "« Choisis ton seuil : combien de jetons veux-tu pour une surprise ? »",
@@ -114,169 +118,179 @@ W[1] = dict(
 
 W[2] = dict(
     titre="Ailem", sous="Ma famille", dates="lundi 9 → dimanche 15 novembre",
-    lettre="E", nombres="1 à 5", mdp="İyiyim",
+    lettre="M · O", nombres="6 à 10", mdp="İyiyim",
     seq=[
-        ("2·1", "Lun 9", "Cours vers la photo !", "5 min", "3 photos (maman, papa, la famille), scotch",
-         "« Cours toucher la photo de anne ! »",
-         ["Scotcher les photos au mur, un peu loin l'une de l'autre.",
-          "Papa dit " + tr("anne", "ann-nè", "maman") + " ou " + tr("baba", "ba-ba", "papa")
-          + " : Nevra court toucher la bonne photo."],
-         "", "2 photos, 2 courses.", True, True),
+        ("2·1", "Lun 9", "Bu annem !", "5 min", "3 photos (maman, papa, Neyla), scotch",
+         "« Cours toucher la photo et dis qui c'est. »",
+         ["Papa dit anne, baba ou " + tr("abla", "a-bla", "grande sœur") + ".",
+          "Nevra court toucher la photo et dit " + tr("Bu annem !", "bou ann-nèmm", "c'est ma maman")
+          + " ou " + tr("Bu babam !", "bou ba-bamm", "c'est mon papa") + ". Pour Neyla : « abla ! »."],
+         "", "2 photos : « anne », « baba ».", True, True),
         ("2·2", "Mar 10", "Le drapeau rouge", "10 min", "crayon rouge",
-         "« Colorie le drapeau en rouge. »",
+         "« Colorie le drapeau en rouge, puis compte les pointes de l'étoile. »",
          [tr("kırmızı", "keur-meu-zeu", "rouge") + " · " + tr("beyaz", "bè-yaz", "blanc") + " · "
           + tr("bayrak", "baï-rak", "drapeau"),
+          "L'étoile a combien de pointes ? " + tr("Kaç ?", "katch", "combien ?") + " → beş.",
           "Pour papa : chaque 10 novembre, la Turquie observe une minute de silence en souvenir d'Atatürk. "
           "Vérifie l'heure exacte sur une source officielle."],
          FLAG, "Montrer 3 choses rouges en disant « kırmızı ».", False, False),
-        ("2·3", "Mer 11", "E comme elma", "10 min", "une pomme, crayon",
-         "« Fais le mouton : èèè ! »",
-         ["Papa fait le mouton [èèè], Nevra imite.",
-          "Dire " + tr("elma", "èl-ma", "pomme") + ", puis croquer la pomme.",
-          "Suivre le grand E avec le doigt."],
-         bigletter("E"), "Dire « elma » et croquer la pomme.", False, False),
-        ("2·4", "Jeu 12", "Tape et compte", "5 min", "aucun",
-         "« Tape dans tes mains autant de fois que je dis. »",
-         ["Papa dit un nombre de 1 à 5 (bir… beş) ; Nevra tape dans ses mains.",
-          "On inverse : Nevra dit le nombre, papa tape."],
-         "", "Taper jusqu'à üç, une seule fois.", True, True),
+        ("2·3", "Mer 11", "M comme masa, O comme okul", "10 min", "crayon",
+         "« Dis le son de la lettre que je montre. »",
+         ["M se dit [mmm] : " + tr("masa", "ma-ssa", "table") + " (taper sur la table). O se dit [o], bouche ronde : "
+          + tr("okul", "o-koul", "école") + ".",
+          "Première syllabe : M + A = « ma », M + O = « mo ». Nevra les dit en tapant dans ses mains.",
+          "Suivre le M et le O avec le doigt."],
+         bigletter("M O"), "Taper sur la table en disant « masa ».", False, False),
+        ("2·4", "Jeu 12", "Montre-moi altı !", "5 min", "aucun",
+         "« Montre-moi autant de doigts que je dis, puis saute autant de fois. »",
+         [tr("altı", "al-teu", "6") + " · " + tr("yedi", "yè-di", "7") + " · " + tr("sekiz", "sè-kiz", "8")
+          + " · " + tr("dokuz", "do-kouz", "9") + " · " + tr("on", "onn", "10"),
+          "Papa dit un nombre de 6 à 10 ; Nevra montre les doigts, puis saute."],
+         "", "Montrer « on » (10 doigts) et sauter une fois.", True, True),
         ("2·5", "Ven 13", "Nasılsın ?", "5 min", "1 peluche",
-         "« Quand la peluche demande Nasılsın, lève le pouce et dis İyiyim ! »",
-         ["La peluche : " + tr("Nasılsın ?", "na-seul-seunn", "comment vas-tu ?"),
-          "Nevra lève le pouce et saute : " + tr("İyiyim !", "i-yi-yimm", "je vais bien") + "."],
+         "« Réponds à la peluche, puis pose-lui la question. »",
+         ["La peluche : " + tr("Nasılsın ?", "na-seul-seunn", "comment vas-tu ?") + " Nevra lève le pouce et saute : "
+          + tr("İyiyim !", "i-yi-yimm", "je vais bien"),
+          "Puis Nevra demande « Nasılsın ? » à la peluche, qui répond (voix de papa)."],
          "", "Un seul « İyiyim ! » avec le pouce levé.", True, True),
         ("2·6", "Sam 14", "Ma famille", "10 min", "crayons",
-         "« Dessine anne et baba. »",
-         ["Nevra dessine dans le cadre, papa écrit « anne » et « baba » à côté.",
-          "Nevra montre chaque dessin et dit le mot."],
-         draw("anne et baba", 30), "Montrer 2 photos en disant « anne », « baba ».", False, False),
-        ("2·7", "Sam 14", "Saute sur A ou E", "10 min", "2 feuilles, gros feutre",
+         "« Dessine ta famille, puis présente-la en turc. »",
+         ["Nevra dessine anne, baba, abla et elle-même dans le cadre.",
+          "Elle montre chaque personne : « Bu annem », « Bu babam », « abla ».",
+          "Compter les personnes : Kaç ?"],
+         draw("ma famille", 26), "Montrer 2 dessins en disant « anne », « baba ».", False, False),
+        ("2·7", "Sam 14", "Saute sur la lettre", "10 min", "4 feuilles, gros feutre",
          "« Saute sur la lettre que je dis. »",
-         ["Écrire A et E en grand sur 2 feuilles posées au sol.",
-          "Papa dit [a] ou [è] : Nevra saute sur la bonne feuille. Puis elle donne le son, papa saute."],
-         "", "3 sauts, puis on range.", True, False),
-        ("2·8", "Dim 15", "Kaç ?", "10 min", "5 petits objets",
+         ["Écrire A, E, M, O sur 4 feuilles au sol ; en utiliser 2 à la fois au début, puis les 4.",
+          "Papa dit un son ([a], [è], [mmm], [o]). Défi : papa dit « ma » et Nevra saute sur M puis sur A."],
+         "", "2 lettres seulement : A et O.", True, False),
+        ("2·8", "Dim 15", "Kaç ? jusqu'à on", "10 min", "10 petits objets",
          "« Compte les objets en turc. »",
-         ["Papa pose 1 à 5 objets et demande " + tr("Kaç ?", "katch", "combien ?"),
-          "Nevra touche chaque objet en comptant : bir, iki, üç…"],
-         "", "Compter 3 objets.", False, False),
-        ("2·9", "Dim 15", "Zıpla, dur, otur !", "10 min", "aucun",
-         "« Fais ce que je dis : zıpla, dur ou otur. »",
-         ["Revoir " + tr("zıpla", "zeup-la", "saute") + " et " + tr("dur", "dour", "stop") + ".",
-          "Nouveau : " + tr("otur", "o-tour", "assieds-toi") + ". Nevra devient la cheffe à la fin."],
-         "", "zıpla, otur, puis fin.", True, True),
+         ["Papa pose 6 à 10 objets et demande " + tr("Kaç ?", "katch", "combien ?"),
+          "Nevra touche chaque objet en comptant. Puis papa en cache un : Kaç ?"],
+         "", "Compter 5 objets.", False, False),
+        ("2·9", "Dim 15", "Zıpla, dur, otur, kalk !", "10 min", "aucun",
+         "« Fais ce que je dis : zıpla, dur, otur ou kalk. »",
+         ["Revoir zıpla, dur, otur. Nouveau : " + tr("kalk", "kalk", "lève-toi") + ".",
+          "Enchaîner « otur » puis « kalk » de plus en plus vite. Nevra devient la cheffe à la fin."],
+         "", "otur, kalk, puis fin.", True, True),
     ])
 
 W[3] = dict(
-    titre="Renkler", sous="Les couleurs", dates="lundi 16 → dimanche 22 novembre",
-    lettre="M", nombres="6 à 10", mdp="Kırmızı",
+    titre="Renkler", sous="Les couleurs et les animaux", dates="lundi 16 → dimanche 22 novembre",
+    lettre="İ · N", nombres="11 à 15", mdp="Kırmızı",
     seq=[
-        ("3·1", "Lun 16", "La chasse au rouge", "5 min", "aucun",
-         "« Trouve quelque chose de kırmızı ! »",
-         ["Nevra court chercher un objet " + tr("kırmızı", "keur-meu-zeu", "rouge") + " et le rapporte.",
-          "Même jeu avec " + tr("mavi", "ma-vi", "bleu") + "."],
+        ("3·1", "Lun 16", "La chasse aux couleurs", "5 min", "aucun",
+         "« Trouve quelque chose de la couleur que je dis ! »",
+         [tr("kırmızı", "keur-meu-zeu", "rouge") + " · " + tr("mavi", "ma-vi", "bleu") + " · "
+          + tr("sarı", "sa-reu", "jaune"),
+          "Nevra court chercher un objet de la bonne couleur et le rapporte en disant la couleur."],
          "", "Un seul objet rouge.", True, True),
-        ("3·2", "Mar 17", "M comme masa", "10 min", "crayon",
-         "« Tape sur la table et dis mmm… masa ! »",
-         ["Papa fait [mmm] comme « miam ». Nevra tape sur la table : " + tr("masa", "ma-ssa", "table") + ".",
-          "Dire la syllabe « ma », puis suivre le grand M avec le doigt."],
-         bigletter("M"), "Taper 3 fois sur la table en disant « masa ».", False, False),
-        ("3·3", "Mer 18", "Montre-moi altı !", "5 min", "aucun",
-         "« Montre-moi autant de doigts que je dis. »",
-         [tr("altı", "al-teu", "6") + " · " + tr("yedi", "yè-di", "7") + " · " + tr("sekiz", "sè-kiz", "8")
-          + " · " + tr("dokuz", "do-kouz", "9") + " · " + tr("on", "onn", "10"),
-          "Compter les doigts ensemble jusqu'à on, puis faire autant de sauts."],
-         "", "Montrer « on » (10 doigts) et sauter une fois.", True, False),
-        ("3·4", "Jeu 19", "Bleu ou jaune ?", "10 min", "6 objets bleus et jaunes (cubes, Lego…)",
-         "« Mets les mavi ici et les sarı là. »",
-         [tr("mavi", "ma-vi", "bleu") + " · " + tr("sarı", "sa-reu", "jaune"),
-          "Nevra trie les objets en 2 tas en disant la couleur."],
-         "", "Trier 4 objets seulement.", False, False),
+        ("3·2", "Mar 17", "İ comme inek, N comme nar", "10 min", "crayon",
+         "« Dis le son de la lettre que je montre. »",
+         ["İ se dit [i] et garde toujours son point : " + tr("inek", "i-nèk", "vache") + " (meuh !). N se dit [n] : "
+          + tr("nar", "nar", "grenade") + ".",
+          "Syllabes : N + A = « na », N + İ = « ni ». Nevra les dit en tapant dans ses mains.",
+          "Suivre le İ et le N avec le doigt (sans oublier le point)."],
+         bigletter("İ N"), "Faire « meuh » et dire « inek ».", False, False),
+        ("3·3", "Mer 18", "Après on : on bir !", "5 min", "aucun",
+         "« Après on, on continue : on bir, on iki ! »",
+         ["Compter les 10 doigts jusqu'à on, puis taper du pied : " + tr("on bir", "onn bir", "11") + ", "
+          + tr("on iki", "onn i-ki", "12") + ", on üç, on dört, on beş.",
+          "En turc, 11 = « dix-un » : on + bir. Puis faire 15 petits sauts en comptant."],
+         "", "Compter jusqu'à on bir et sauter.", True, False),
+        ("3·4", "Jeu 19", "Trois couleurs", "10 min", "9 objets rouges, bleus et jaunes",
+         "« Range chaque objet avec sa couleur. »",
+         ["Nevra trie les objets en 3 tas : kırmızı, mavi, sarı, en disant la couleur.",
+          "Puis compter chaque tas : Kaç ? Lequel en a le plus ?"],
+         "", "Trier 4 objets en 2 couleurs.", False, False),
         ("3·5", "Ven 20", "Les animaux", "5 min", "aucun",
-         "« Quand je dis kedi, fais le chat ! »",
-         [tr("kedi", "kè-di", "chat") + " (miaou) · " + tr("köpek", "keu-pèk", "chien") + " (ouaf) · "
-          + tr("kuş", "kouch", "oiseau") + " (bras qui volent)",
-          "Papa dit un animal, Nevra l'imite. Puis elle donne l'animal, papa l'imite."],
+         "« Quand je dis un animal, imite-le ! »",
+         [tr("kedi", "kè-di", "chat") + " · " + tr("köpek", "keu-pèk", "chien") + " · "
+          + tr("kuş", "kouch", "oiseau") + " · " + tr("inek", "i-nèk", "vache") + " · " + tr("at", "at", "cheval"),
+          "Papa dit un animal, Nevra l'imite (le cheval galope !). Puis elle donne l'animal, papa l'imite."],
          "", "2 animaux : kedi et kuş.", True, True),
         ("3·6", "Sam 21", "Rond ou carré ?", "10 min", "crayon",
          "« Dessine un grand rond dans l'air avec ton bras. »",
          [tr("daire", "da-i-rè", "rond") + " : grand cercle avec le bras. " + tr("kare", "ka-rè", "carré")
           + " : carré avec le doigt.",
-          "Puis suivre les deux formes au crayon dans le livret."],
+          "Compter les coins du carré : Kaç ? → dört. Puis suivre les formes au crayon."],
          SHAPES, "Un rond dans l'air en disant « daire ».", True, False),
-        ("3·7", "Sam 21", "Feu rouge, feu vert", "10 min", "1 feuille rouge, 1 feuille verte",
-         "« Kırmızı, tu t'arrêtes ; yeşil, tu marches. »",
-         ["Papa lève la feuille rouge (" + tr("kırmızı", "keur-meu-zeu") + ") ou verte ("
-          + tr("yeşil", "yè-chil", "vert") + ").",
-          "Nevra marche ou s'arrête. Puis c'est elle qui tient les feuilles."],
-         "", "3 changements de couleur, puis fin.", True, True),
-        ("3·8", "Dim 22", "Jusqu'à on", "10 min", "10 petits objets, un bol",
+        ("3·7", "Sam 21", "Les trois feux", "10 min", "1 feuille rouge, 1 verte, 1 jaune",
+         "« Regarde la couleur et fais le bon geste. »",
+         ["Papa lève une feuille : " + tr("kırmızı", "keur-meu-zeu") + " = dur (stop), "
+          + tr("yeşil", "yè-chil", "vert") + " = on marche, sarı = otur (assise).",
+          "Commencer avec 2 feuilles, puis ajouter la jaune. Ensuite c'est Nevra qui tient les feuilles."],
+         "", "Rouge et vert seulement.", True, True),
+        ("3·8", "Dim 22", "Jusqu'à on beş", "10 min", "15 petits objets, un bol",
          "« Mets les objets dans le bol en comptant. »",
-         ["Nevra met un objet à la fois dans le bol ; papa et elle comptent de bir à on.",
-          "On vide le bol et on recommence si elle en a envie."],
-         "", "Compter jusqu'à beş seulement.", False, False),
+         ["Nevra met un objet à la fois dans le bol ; papa et elle comptent de bir à " + tr("on beş", "onn bèch", "15") + ".",
+          "Puis papa en retire un : Kaç ?"],
+         "", "Compter jusqu'à on seulement.", False, False),
         ("3·9", "Dim 22", "Korkma ! L'hymne", "10 min", "page de l'hymne",
          "« Debout, répète deux mots après moi. »",
          ["Expliquer : c'est l'hymne national ; on se tient debout, en silence.",
           "Papa dit le vers en 4 petits morceaux (page de l'hymne) ; Nevra répète chaque morceau.",
-          "Version très courte : " + tr("Korkma !", "kork-ma", "n'aie pas peur") + "."],
+          "Défi : dire 2 morceaux d'affilée. Version très courte : " + tr("Korkma !", "kork-ma", "n'aie pas peur") + "."],
          "", "Dire seulement « Korkma ! », debout.", False, False),
     ])
 
 W[4] = dict(
     titre="Evde", sous="À la maison", dates="lundi 23 → dimanche 29 novembre",
-    lettre="O", nombres="1 à 10, puis 11 à 20", mdp="Zıpla",
+    lettre="U · L", nombres="1 à 15, puis 20", mdp="Zıpla",
     seq=[
         ("4·1", "Lun 23", "Top !", "5 min", "une balle",
-         "« Lance la balle et dis top ! »",
-         ["À chaque lancer, Nevra dit " + tr("top", "top", "balle") + ".",
-          "Compter les passes en turc jusqu'à on."],
+         "« Lance la balle et compte les passes en turc. »",
+         ["À chaque lancer, Nevra dit " + tr("top", "top", "balle") + ", puis le nombre de la passe.",
+          "Objectif : aller jusqu'à on beş sans faire tomber la balle."],
          "", "3 passes, 3 « top ».", True, True),
-        ("4·2", "Mar 24", "O comme okul", "10 min", "crayon",
-         "« Fais une bouche toute ronde : ooo ! »",
-         ["Papa fait [o] avec une bouche ronde. Nevra imite, puis dit " + tr("okul", "o-koul", "école") + ".",
-          "Suivre le grand O avec le doigt : il est rond comme une daire !"],
-         bigletter("O"), "Faire la bouche ronde [o] 3 fois.", False, False),
-        ("4·3", "Mer 25", "Va chercher !", "5 min", "une balle, une petite voiture",
-         "« Va chercher le top ! »",
-         ["Poser la balle et la voiture dans une autre pièce.",
-          "Papa dit " + tr("top", "top") + " ou " + tr("araba", "a-ra-ba") + " : Nevra court chercher le bon objet."],
+        ("4·2", "Mar 24", "U comme uçak, L comme lale", "10 min", "crayon",
+         "« Attention au piège : en turc, U se dit [ou]. »",
+         ["U se dit [ou] : " + tr("uçak", "ou-tchak", "avion") + " (bras en avion). L se dit [l] : "
+          + tr("lale", "la-lè", "tulipe") + ".",
+          "Syllabes : L + A = « la », L + U = « lu » (pas « lu » français : « lou » !).",
+          "Suivre le U et le L avec le doigt."],
+         bigletter("U L"), "Faire l'avion en disant « ou-tchak ».", False, False),
+        ("4·3", "Mer 25", "Va chercher !", "5 min", "une balle, une petite voiture, une pomme, un crayon",
+         "« Va chercher l'objet que je dis ! »",
+         ["Poser les 4 objets dans une autre pièce : top, araba, elma, " + tr("kalem", "ka-lèmm", "crayon") + ".",
+          "Papa dit un mot : Nevra court chercher le bon objet et le rapporte en disant « Bu top ! »."],
          "", "Un seul aller-retour.", True, False),
-        ("4·4", "Jeu 26", "Le sac mystère", "10 min", "sac opaque, une pomme, une balle, une petite voiture",
-         "« Touche sans regarder et dis ce que c'est. »",
+        ("4·4", "Jeu 26", "Le sac mystère", "10 min", "sac opaque, une pomme, une balle, une petite voiture, un crayon",
+         "« Touche sans regarder et réponds avec une petite phrase. »",
          ["Papa demande " + tr("Bu ne ?", "bou nè", "qu'est-ce que c'est ?"),
-          "Nevra touche et répond elma, top ou araba. On sort l'objet pour vérifier."],
-         "", "Un seul objet dans le sac.", False, False),
-        ("4·5", "Ven 27", "Zıpla, dur, otur, kalk !", "5 min", "aucun",
-         "« Fais ce que je dis : zıpla, dur, otur ou kalk. »",
-         ["Revoir zıpla, dur, otur. Nouveau : " + tr("kalk", "kalk", "lève-toi") + ".",
-          "Enchaîner « otur » puis « kalk » en riant. Nevra devient la cheffe."],
-         "", "otur, kalk, et fin.", True, True),
+          "Nevra répond avec « Bu » : « Bu elma. », « Bu top. », « Bu kalem. ». On sort l'objet pour vérifier."],
+         "", "Un seul objet ; répondre juste « elma ».", False, False),
+        ("4·5", "Ven 27", "Écoute et saute", "5 min", "aucun",
+         "« Écoute le nombre, puis saute autant de fois. »",
+         ["Papa dit un nombre de 1 à 10, puis « zıpla ! » : Nevra saute ce nombre de fois en comptant.",
+          "Puis enchaîner dur, otur, kalk. Nevra devient la cheffe."],
+         "", "Dire « üç », puis 3 sauts.", True, True),
         ("4·6", "Sam 28", "Maintenant ou demain ?", "10 min", "jetons, bocal",
          "« Tu choisis : une petite surprise maintenant, ou une plus grande demain ? »",
-         ["Compter les jetons du bocal ensemble : bir, iki, üç…",
+         ["Compter les jetons du bocal ensemble : bir, iki, üç… jusqu'à on beş si possible.",
           "Nevra choisit entre les 2 propositions. Papa respecte son choix, sans commentaire.",
           "Si elle attend, papa tient sa promesse."],
          '<div class="choice"><div><i class="cb"></i> Maintenant</div><div><i class="cb"></i> Demain, plus grand</div></div>',
          "Seulement compter les jetons du bocal.", False, False),
-        ("4·7", "Sam 28", "Saute sur la lettre", "10 min", "4 feuilles, gros feutre",
+        ("4·7", "Sam 28", "Saute sur la lettre", "10 min", "8 feuilles, gros feutre",
          "« Saute sur la lettre que je dis. »",
-         ["Écrire A, E, M, O sur 4 feuilles au sol ; n'en utiliser que 2 à la fois.",
-          "Papa dit le son ([a], [è], [mmm], [o]) : Nevra saute sur la bonne lettre."],
+         ["Écrire A, E, M, O, İ, N, U, L sur 8 feuilles au sol ; en utiliser 4 à la fois.",
+          "Papa dit un son ; piège : [ou] = U. Défi : papa dit « na » ou « la », Nevra saute sur les 2 lettres."],
          "", "2 lettres seulement : A et O.", True, False),
         ("4·8", "Dim 29", "La grande tour", "10 min", "20 cubes ou Lego",
          "« Ajoute un cube et dis le nombre avec moi. »",
-         ["Monter une tour de 10 cubes en comptant jusqu'à " + tr("on", "onn", "10") + ".",
-          "Ajouter un cube : " + tr("on bir", "onn bir", "11") + ", " + tr("on iki", "onn i-ki", "12")
-          + "… jusqu'à " + tr("yirmi", "yir-mi", "20") + " (optionnel, si elle est à l'aise)."],
+         ["Monter une tour de 15 cubes en comptant jusqu'à " + tr("on beş", "onn bèch", "15") + ".",
+          "Continuer : on altı, on yedi, on sekiz, on dokuz, " + tr("yirmi", "yir-mi", "20")
+          + " (optionnel, si elle est à l'aise)."],
          "", "Une tour jusqu'à on, puis on la fait tomber.", False, False),
         ("4·9", "Dim 29", "Mon spectacle", "10 min", "aucun (téléphone en option)",
          "« Montre-nous ce que tu sais faire en turc ! »",
-         ["Nevra dit Merhaba, son prénom, compte jusqu'à on et joue à zıpla / dur.",
+         ["Nevra dit bonjour, se présente (prénom, âge), présente sa famille, compte et joue à zıpla / dur.",
           "Tout le monde applaudit. Papa coche ce qu'elle a fait, sans note ni comparaison."],
          '<div class="bilan">' + "".join(f'<div><i class="cb"></i>{t}</div>' for t in [
-             "Je dis Merhaba", "Je dis mon prénom en turc", "Je compte jusqu'à on",
-             "Je reconnais A, E, M, O"]) + "</div>",
+             "Je dis Merhaba et Güle güle", "Je dis mon prénom et mon âge", "Je dis « Bu annem », « Bu babam »",
+             "Je compte jusqu'à on beş", "Je reconnais mes 8 lettres", "Je dis ma, mo, na, la"]) + "</div>",
          "Seulement « Merhaba ! » et un « zıpla ».", True, True),
     ])
 
@@ -284,53 +298,53 @@ W[4] = dict(
 # ---------------------------------------------------------------- tours suivants
 # Un tour de jeu dure environ 2 min : ces variantes remplissent le sablier (tour 2, puis tour 3).
 MORE = {
-    "1·1": ("la peluche se cache ailleurs (sous la table, derrière le canapé) ; Nevra la trouve et dit Merhaba",
-            "Nevra cache la peluche, papa la cherche et dit Merhaba en la trouvant"),
-    "1·2": ("rouler sur le A en disant [a] très fort, puis en chuchotant",
-            "chercher des A dans un livre ou sur une boîte et les montrer du doigt"),
-    "1·3": ("papa piège : il saute à iki au lieu de üç, Nevra dit « non ! »",
-            "sauts de grenouille, puis de lapin, toujours sur bir, iki, üç"),
-    "1·4": ("3 peluches demandent chacune Adın ne ? avec une voix différente",
-            "Nevra pose la question Adın ne ? à une peluche, papa répond avec une voix drôle"),
-    "1·5": ("zıpla tout doucement, puis très vite",
-            "papa chuchote ou crie « zıpla » : petit saut ou grand saut"),
-    "1·6": ("papa « oublie » de dire merci : Nevra le lui rappelle",
-            "dînette : Nevra sert les peluches, qui disent teşekkür ederim"),
-    "1·7": ("traverser le A à quatre pattes, puis en sautant",
-            "Nevra forme le A avec les rubans, papa marche dessus en disant [a]"),
+    "1·1": ("la peluche se cache ailleurs ; quand Nevra la trouve, elle dit Merhaba, quand elle repart, Güle güle",
+            "Nevra fait arriver et partir 2 peluches avec les bonnes formules"),
+    "1·2": ("papa montre une lettre, Nevra dit le son puis le mot (araba ou elma)",
+            "chercher des A et des E dans un livre et les montrer du doigt"),
+    "1·3": ("compte à rebours en chuchotant, décollage en criant « bir ! »",
+            "c'est Nevra qui compte à l'envers, papa fait la fusée"),
+    "1·4": ("3 peluches posent les 2 questions avec une voix différente",
+            "Nevra pose les questions à une peluche, papa répond avec une voix drôle"),
+    "1·5": ("papa piège : il dit « zıpla » sans bouger, Nevra doit écouter et non regarder",
+            "très lentement, puis très vite"),
+    "1·6": ("papa demande « dört top » ou « beş elma » : Nevra compte et donne",
+            "papa « oublie » de dire merci : Nevra le lui rappelle"),
+    "1·7": ("traverser à quatre pattes, puis en sautant",
+            "Nevra dit le mot, papa marche sur la lettre (et se trompe exprès)"),
     "1·8": ("monter en chuchotant les nombres, redescendre en les disant fort",
-            "sauter de coussin en coussin en comptant jusqu'à beş"),
+            "sauter de coussin en coussin, à l'endroit puis à l'envers"),
     "1·9": ("mettre les jetons de la semaine dans le bocal, un par un, en comptant",
             "dessiner une première récompense dans le catalogue (page 16)"),
     "2·1": ("papa chuchote le mot au lieu de le dire",
             "Nevra dit le mot, papa court (et se trompe exprès)"),
     "2·2": ("chercher 3 choses kırmızı dans la pièce",
             "chercher 2 choses beyaz"),
-    "2·3": ("papa dit elma ou araba : Nevra fait le mouton seulement quand elle entend [è]",
-            "tracer un grand E dans l'air avec le bras"),
-    "2·4": ("taper sur les genoux, puis sur la table",
-            "Nevra tape, papa compte et devine combien"),
+    "2·3": ("papa dit « ma » ou « mo » : Nevra montre le M, puis la bonne voyelle",
+            "tracer M et O dans l'air, puis sur le dos de papa"),
+    "2·4": ("papa montre des doigts, Nevra dit le nombre",
+            "Nevra donne un nombre, papa saute (et se trompe exprès)"),
     "2·5": ("la peluche est triste : Nevra lui demande Nasılsın ?",
             "Nevra demande Nasılsın ? à chaque personne de la maison"),
     "2·6": ("colorier les dessins",
-            "montrer les photos de famille en disant anne ou baba"),
+            "papa montre un dessin et se trompe (« Bu babam ? »), Nevra corrige"),
     "2·7": ("sauter à cloche-pied, puis comme une grenouille",
             "éloigner les feuilles : Nevra court jusqu'à la bonne lettre"),
-    "2·8": ("papa cache un objet sous sa main : Kaç ? à nouveau",
-            "Nevra pose les objets, papa compte (et se trompe exprès)"),
-    "2·9": ("avec de la musique : quand elle s'arrête, papa dit otur",
+    "2·8": ("Nevra pose les objets, papa compte (et se trompe exprès)",
+            "2 tas : Kaç ? dans chaque tas, puis lequel a le plus"),
+    "2·9": ("avec de la musique : quand elle s'arrête, papa dit otur ; quand elle reprend, kalk",
             "Nevra est la cheffe et donne les ordres"),
-    "3·1": ("rapporter 2 objets rouges",
-            "trouver un objet mavi caché par papa"),
-    "3·2": ("taper sur la table en rythme : ma-ma-ma",
-            "tracer un M dans l'air, puis sur le dos de papa"),
-    "3·3": ("papa montre des doigts, Nevra dit le nombre",
-            "Nevra saute autant de fois que papa montre de doigts"),
-    "3·4": ("trier dans 2 boîtes, en courant de l'une à l'autre",
-            "papa met un objet dans le mauvais tas, Nevra le corrige"),
-    "3·5": ("marcher comme l'animal (chat à quatre pattes, oiseau qui vole)",
-            "papa fait le bruit, Nevra dit le nom de l'animal"),
-    "3·6": ("chercher dans la maison un objet rond (une assiette, une horloge)",
+    "3·1": ("rapporter 2 objets de la même couleur",
+            "papa cache un objet mavi, Nevra le cherche"),
+    "3·2": ("papa dit « na » ou « ni » : Nevra montre la bonne voyelle",
+            "papa dit inek ou nar : Nevra montre İ ou N"),
+    "3·3": ("compter de on à on beş en tapant dans les mains",
+            "Nevra compte, papa saute (et s'arrête au mauvais nombre)"),
+    "3·4": ("papa met un objet dans le mauvais tas, Nevra le corrige",
+            "ajouter 2 objets à un tas et recompter : Kaç ?"),
+    "3·5": ("marcher comme l'animal (chat à quatre pattes, cheval au galop)",
+            "papa fait le bruit, Nevra dit le nom de l'animal en turc"),
+    "3·6": ("chercher dans la maison un objet rond et un objet carré",
             "faire un rond et un carré au sol avec une ficelle, et marcher dessus"),
     "3·7": ("même jeu en courant, puis en sautant",
             "papa change de feuille très vite : Nevra reste attentive"),
@@ -338,26 +352,25 @@ MORE = {
             "2 bols : papa met 3 objets dans l'un, Nevra en met autant dans l'autre"),
     "3·9": ("redire les morceaux en chuchotant, puis à voix normale",
             "papa dit un morceau, Nevra dit le suivant si elle s'en souvient (sinon elle répète)"),
-    "4·1": ("rouler la balle au sol, puis la lancer en l'air",
-            "compter les passes réussies sans faire tomber la balle"),
-    "4·2": ("chercher dans la maison des objets ronds comme le O",
-            "faire un O avec les bras en disant [o] fort, puis doucement"),
+    "4·1": ("rouler la balle au sol en comptant à l'envers depuis beş",
+            "battre son record de passes"),
+    "4·2": ("papa dit « la » ou « lu » : Nevra montre la bonne voyelle (piège : lu = « lou »)",
+            "papa dit uçak ou lale : Nevra montre U ou L"),
     "4·3": ("cacher les objets à des endroits différents",
-            "Nevra cache les objets, papa les cherche et dit le mot"),
+            "Nevra cache les objets, papa les cherche et dit « Bu ne ? »"),
     "4·4": ("mettre 2 objets dans le sac",
-            "Nevra remplit le sac pour papa et lui demande Bu ne ?"),
-    "4·5": ("avec de la musique : quand elle s'arrête, papa dit otur ; quand elle reprend, kalk",
-            "Nevra est la cheffe et donne les ordres"),
+            "Nevra remplit le sac pour papa et lui demande « Bu ne ? »"),
+    "4·5": ("Nevra dit le nombre, papa saute (et se trompe exprès)",
+            "sauter autant de fois que papa montre de doigts"),
     "4·6": ("dessiner la surprise choisie",
             "ranger les jetons dans le bocal en comptant"),
-    "4·7": ("utiliser E et M à la place de A et O",
+    "4·7": ("sauter à cloche-pied sur les voyelles, à pieds joints sur les autres",
             "Nevra dit le son, papa saute"),
     "4·8": ("faire tomber la tour et recompter les cubes en les ramassant",
             "construire 2 tours de 5 cubes et compter les deux ensemble jusqu'à on"),
     "4·9": ("refaire le spectacle pour quelqu'un d'autre (maman, les peluches)",
             "Nevra choisit son jeu préféré du mois et on y joue"),
 }
-
 
 # ---------------------------------------------------------------- rendu des cartes
 def dot(t):
@@ -407,12 +420,12 @@ pages.append(f'''
   <div class="cv-top">Livret mensuel de turc · Mois 1</div>
   <div class="cv-month"><span>Kasım</span><small>Novembre 2026</small></div>
   <div class="cv-name">Nevra Sevim</div>
-  <div class="cv-letters"><span>A</span><span>E</span><span>M</span><span>O</span></div>
+  <div class="cv-letters"><span>A</span><span>E</span><span>M</span><span>O</span><span>İ</span><span>N</span><span>U</span><span>L</span></div>
   <div class="cv-theme"><small>Thème du mois</small>Merhaba !<br><span>Ma famille, les couleurs et la maison</span></div>
   <div class="cv-goals"><h3>Mes 3 objectifs</h3><ol>
-    <li>Dire bonjour, merci et mon prénom en turc.</li>
-    <li>Reconnaître 4 lettres (A, E, M, O) et leur son.</li>
-    <li>Compter jusqu'à 10 en turc.</li></ol></div>
+    <li>Dire bonjour et au revoir, me présenter et présenter ma famille en turc.</li>
+    <li>Reconnaître 8 lettres (A, E, M, O, İ, N, U, L) et dire mes premières syllabes.</li>
+    <li>Compter jusqu'à 15 en turc, et de 5 à 1 à l'envers.</li></ol></div>
   <div class="cv-time"><b>Durée :</b> 5 soirs de 5 à 10 min + 4 séquences de 10 min le week-end (2 le samedi, 2 le dimanche),
   soit <b>environ 1 h 15 à 1 h 30 par semaine</b>.</div>
   <div class="cv-foot">Ce livret appartient à : <b>Nevra</b> &nbsp;·&nbsp; 4 semaines · 36 séquences courtes</div>
@@ -431,7 +444,7 @@ def week_table(n):
     return f'''
 <div class="week">
   <div class="whead"><span class="wnum">Semaine {n}</span><span class="wtitle">{w["titre"]}</span><span class="wsub">{w["sous"]}</span></div>
-  <div class="winfo"><span>{w["dates"]}</span><span>Lettre : <b>{w["lettre"]}</b></span><span>Nombres : <b>{w["nombres"]}</b></span>
+  <div class="winfo"><span>{w["dates"]}</span><span>Lettres : <b>{w["lettre"]}</b></span><span>Nombres : <b>{w["nombres"]}</b></span>
     <span>Mot de passe : <b class="acc">{w["mdp"]}</b></span></div>
   <table class="prog"><thead><tr><th>Jour</th><th>N°</th><th>Séquence</th><th>Type</th><th>Durée</th><th>Fait</th></tr></thead>
   <tbody>{rows}</tbody></table>
@@ -450,17 +463,21 @@ pages.append(page(week_table(3) + week_table(4), "Programme hebdomadaire"))
 
 # 4. Imagier
 LET = [("A a", "araba", "a-ra-ba", "voiture", "[a] comme « ami »", "semaine 1"),
-       ("E e", "elma", "èl-ma", "pomme", "[è] comme « mère »", "semaine 2"),
-       ("M m", "masa", "ma-ssa", "table", "comme en français", "semaine 3"),
-       ("O o", "okul", "o-koul", "école", "[o] comme « moto »", "semaine 4")]
+       ("E e", "elma", "èl-ma", "pomme", "[è] comme « mère »", "semaine 1"),
+       ("M m", "masa", "ma-ssa", "table", "comme en français", "semaine 2"),
+       ("O o", "okul", "o-koul", "école", "[o] comme « moto »", "semaine 2"),
+       ("İ i", "inek", "i-nèk", "vache", "[i], toujours avec un point", "semaine 3"),
+       ("N n", "nar", "nar", "grenade", "[n], jamais nasal", "semaine 3"),
+       ("U u", "uçak", "ou-tchak", "avion", "[ou] comme « loup »", "semaine 4"),
+       ("L l", "lale", "la-lè", "tulipe", "comme en français", "semaine 4")]
 cells = "".join(f'''<div class="lcell"><div class="lbig">{l}</div><div class="lword"><small>{wk}</small><b>{w}</b>
 <span class="ph">« {p} »</span><span>{f}</span><span class="lsound">{s}</span></div><div class="ldraw"></div></div>''' for l, w, p, f, s, wk in LET)
 ALPHA = "A B C Ç D E F G Ğ H I İ J K L M N O Ö P R S Ş T U Ü V Y Z".split()
-M1 = set("A E M O".split())
+M1 = set("A E M O İ N U L".split())
 SPEC = set("Ç Ğ I Ö Ş Ü".split())
 strip = "".join(f'<span class="{"on" if a in M1 else ""} {"sp" if a in SPEC else ""}">{a}</span>' for a in ALPHA)
-pages.append(page(f'''<h1>Mon imagier : mes 4 lettres de novembre</h1>
-<p class="lead">Une lettre par semaine. Nevra dessine le mot-image dans la case. On dit le son avant d'écrire.</p>
+pages.append(page(f'''<h1>Mon imagier : mes 8 lettres de novembre</h1>
+<p class="lead">Deux lettres par semaine. Nevra dessine le mot-image dans la case. On dit le son avant d'écrire.</p>
 <div class="lgrid">{cells}</div>
 <div class="tipbox"><b>Astuce :</b> en turc, une lettre = un son. Le turc se lit comme il s'écrit… sauf le <b>ğ</b>, qui est muet.</div>
 <h2>L'alphabet turc complet (29 lettres)</h2>
@@ -474,13 +491,19 @@ VOC = [
     ("Dire bonjour", [("Merhaba", "mèr-ha-ba", "bonjour, salut"), ("Hoşça kal", "hoch-tcha kal", "au revoir"),
                       ("Teşekkür ederim", "tè-chèk-kur è-dè-rim", "merci"), ("Nasılsın ?", "na-seul-seunn", "comment vas-tu ?"),
                       ("İyiyim", "i-yi-yimm", "je vais bien"), ("Adın ne ?", "a-deunn nè", "comment tu t'appelles ?"),
-                      ("Benim adım Nevra.", "bè-nim a-deum Nevra", "je m'appelle Nevra"), ("Aferin !", "a-fè-rinn", "bravo !")]),
-    ("Ma famille", [("anne", "ann-nè", "maman"), ("baba", "ba-ba", "papa")]),
+                      ("Benim adım Nevra.", "bè-nim a-deum Nevra", "je m'appelle Nevra"), ("Aferin !", "a-fè-rinn", "bravo !"),
+                      ("Güle güle", "gu-lè gu-lè", "au revoir (dit par celui qui reste)"),
+                      ("Kaç yaşındasın ?", "katch ya-cheun-da-seun", "quel âge as-tu ?"),
+                      ("Dört yaşındayım.", "deurt ya-cheun-da-yeum", "j'ai quatre ans")]),
+    ("Ma famille", [("anne", "ann-nè", "maman"), ("baba", "ba-ba", "papa"), ("abla", "a-bla", "grande sœur"),
+                    ("Bu annem.", "bou ann-nèmm", "c'est ma maman"), ("Bu babam.", "bou ba-bamm", "c'est mon papa")]),
     ("Les couleurs", [("kırmızı", "keur-meu-zeu", "rouge"), ("beyaz", "bè-yaz", "blanc"), ("mavi", "ma-vi", "bleu"),
                       ("sarı", "sa-reu", "jaune"), ("yeşil", "yè-chil", "vert")]),
-    ("Les animaux", [("kedi", "kè-di", "chat"), ("köpek", "keu-pèk", "chien"), ("kuş", "kouch", "oiseau")]),
+    ("Les animaux", [("kedi", "kè-di", "chat"), ("köpek", "keu-pèk", "chien"), ("kuş", "kouch", "oiseau"),
+                     ("inek", "i-nèk", "vache"), ("at", "at", "cheval")]),
     ("À la maison", [("masa", "ma-ssa", "table"), ("top", "top", "balle"), ("araba", "a-ra-ba", "voiture"),
-                     ("elma", "èl-ma", "pomme"), ("Bu ne ?", "bou nè", "qu'est-ce que c'est ?")]),
+                     ("elma", "èl-ma", "pomme"), ("kalem", "ka-lèmm", "crayon"), ("Bu ne ?", "bou nè", "qu'est-ce que c'est ?"),
+                     ("Bu elma.", "bou èl-ma", "c'est une pomme")]),
     ("Les formes", [("daire", "da-i-rè", "rond, cercle"), ("kare", "ka-rè", "carré")]),
     ("Bouger", [("zıpla", "zeup-la", "saute"), ("dur", "dour", "stop"), ("otur", "o-tour", "assieds-toi"),
                 ("kalk", "kalk", "lève-toi")]),
@@ -490,15 +513,16 @@ voc_html = "".join(f'<div class="vblock"><h3>{t}</h3><table class="voc">' +
                    "</table></div>" for t, items in VOC)
 nums = [("1", "bir", "bir"), ("2", "iki", "i-ki"), ("3", "üç", "utch"), ("4", "dört", "deurt"), ("5", "beş", "bèch"),
         ("6", "altı", "al-teu"), ("7", "yedi", "yè-di"), ("8", "sekiz", "sè-kiz"), ("9", "dokuz", "do-kouz"),
-        ("10", "on", "onn")]
+        ("10", "on", "onn"), ("11", "on bir", "onn bir"), ("12", "on iki", "onn i-ki"), ("13", "on üç", "onn utch"),
+        ("14", "on dört", "onn deurt"), ("15", "on beş", "onn bèch")]
 num_html = '<div class="nums">' + "".join(f'<div><b>{a}</b><span class="tk">{b}</span><span class="ph">« {c} »</span></div>' for a, b, c in nums) + "</div>"
 pages.append(page(f'''<h1>Mes mots de novembre</h1>
 <p class="lead">La prononciation entre « » est une aide en sons français (règles page « Pour le papa »). Pas besoin de tout savoir :
 un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
 <div class="vcols">{voc_html}</div>
-<h2>Les nombres de 1 à 10</h2>{num_html}
-<p class="mini">En fin de mois, par manipulation seulement : 11 à 19 = <b>on</b> + unité (on bir « onn bir » = 11, on iki « onn i-ki » = 12…),
-20 = <b>yirmi</b> « yir-mi ». <b>Kaç ?</b> « katch » = combien ?</p>''', "Lexique"))
+<h2>Les nombres de 1 à 15</h2>{num_html}
+<p class="mini">11 à 19 = <b>on</b> + unité (« dix-un », « dix-deux »…). 16 à 20 en option, par manipulation : on altı… on dokuz,
+20 = <b>yirmi</b> « yir-mi ». <b>Kaç ?</b> « katch » = combien ? Après un nombre, le mot ne change pas : <i>iki elma</i>.</p>''', "Lexique"))
 
 # 6–13. Séquences
 for n in range(1, 5):
@@ -600,8 +624,8 @@ un bol, un sac opaque, 4 feuilles A4 + 1 rouge + 1 verte, 3 rubans, scotch, 3 ph
 <b>ğ</b> muet · <b>an, en, on, in</b> jamais nasaux (d'où « onn », « ann »). Ces transcriptions sont approximatives et identiques
 à celles du livret de Neyla.</p>
 <h3>Lettres : l'oral avant l'écrit</h3>
-<p class="mini">Une seule lettre par semaine (A, E, M, O). On joue d'abord avec le son (imiter, sauter sur la lettre), puis on suit la
-lettre avec le doigt. Le crayon est facultatif. Nevra ne lit pas encore : on ne lui demande pas de lire des mots.</p>
+<p class="mini">Deux lettres par semaine (A-E, M-O, İ-N, U-L), car Nevra connaît déjà les lettres latines. Piège principal : le U turc se dit [ou]. On joue d'abord avec le son (imiter, sauter sur la lettre), puis on suit la
+lettre avec le doigt. Le crayon est facultatif. Les syllabes (ma, mo, na, ni, la, lu) se disent à l'oral : on ne lui demande pas de lire des mots.</p>
 </div>
 <div>
 <h3>Conseils</h3>
@@ -723,10 +747,10 @@ table {{ border-collapse: collapse; width: 100%; }}
 .star {{ color: {ACCENT}; }}
 
 /* imagier */
-.lgrid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }}
-.lcell {{ border: 0.3mm solid #bbb; border-radius: 2mm; padding: 3mm 4mm; display: grid;
-  grid-template-columns: 30mm 1fr; grid-template-rows: auto 1fr; column-gap: 3mm; min-height: 62mm; }}
-.lbig {{ font-size: 34pt; white-space: nowrap; font-weight: 800; color: {ACCENT}; line-height: 1; }}
+.lgrid {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }}
+.lcell {{ border: 0.3mm solid #bbb; border-radius: 2mm; padding: 2.5mm 3mm; display: flex; flex-direction: column; min-height: 66mm; }}
+.lcell .ldraw {{ flex: 1; min-height: 16mm; }}
+.lbig {{ font-size: 28pt; white-space: nowrap; font-weight: 800; color: {ACCENT}; line-height: 1; }}
 .lword small {{ display: block; font-size: 7.5pt; color: #888; text-transform: uppercase; letter-spacing: 0.8pt; }}
 .lword b {{ font-size: 15pt; display: block; }} .lword span {{ display: block; font-size: 9pt; }}
 .lword .lsound {{ font-size: 8pt; color: #666; margin-top: 1mm; }}
@@ -743,17 +767,17 @@ table {{ border-collapse: collapse; width: 100%; }}
 .vcols {{ column-count: 2; column-gap: 7mm; }}
 .vblock {{ break-inside: avoid; margin-bottom: 2mm; }}
 .vblock h3 {{ margin-top: 0; }}
-.voc td {{ padding: 0.9mm 1mm; border-bottom: 0.2mm solid #e2e2e2; vertical-align: top; font-size: 8.8pt; }}
+.voc td {{ padding: 0.6mm 1mm; border-bottom: 0.2mm solid #e2e2e2; vertical-align: top; font-size: 8.5pt; }}
 .voc td.tk {{ white-space: nowrap; }} .voc td.ph {{ font-size: 8.2pt; }}
-.nums {{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5mm; margin-bottom: 2mm; }}
+.nums {{ display: grid; grid-template-columns: repeat(8, 1fr); gap: 1.5mm; margin-bottom: 2mm; }}
 .nums div {{ border: 0.3mm solid #ccc; border-radius: 1.5mm; padding: 1.5mm; text-align: center; }}
-.nums b {{ display: block; font-size: 14pt; color: {ACCENT}; }} .nums span {{ display: block; font-size: 8.4pt; }}
+.nums b {{ display: block; font-size: 12pt; color: {ACCENT}; }} .nums span {{ display: block; font-size: 8.4pt; }}
 
 /* séquences */
 .shead {{ font-size: 11pt; margin-bottom: 1mm; }}
 .tag {{ font-size: 8pt; color: #777; text-transform: uppercase; letter-spacing: 0.8pt; margin-bottom: 2.5mm; }}
-.card {{ border: 0.3mm solid #bdbdbd; border-left: 1.2mm solid {ACCENT}; border-radius: 2mm; padding: 2.2mm 3.5mm 2mm;
-  margin-bottom: 2mm; break-inside: avoid; }}
+.card {{ border: 0.3mm solid #bdbdbd; border-left: 1.2mm solid {ACCENT}; border-radius: 2mm; padding: 1.8mm 3.5mm 1.6mm;
+  margin-bottom: 1.8mm; break-inside: avoid; }}
 .chead {{ display: flex; align-items: center; gap: 2.2mm; margin-bottom: 0.8mm; }}
 .code {{ font-weight: 800; color: {ACCENT}; font-size: 10pt; }}
 .ctitle {{ font-weight: 800; font-size: 11pt; flex: 1; }}
@@ -766,8 +790,8 @@ table {{ border-collapse: collapse; width: 100%; }}
 .lbl {{ font-size: 7.4pt; text-transform: uppercase; letter-spacing: 0.6pt; color: #888; font-weight: 700; margin-right: 1mm; }}
 .cline {{ font-size: 8.8pt; color: #444; }}
 .duo {{ float: right; font-size: 8pt; color: {ACCENT}; font-weight: 600; }}
-.cons {{ font-weight: 600; margin: 0.6mm 0; font-size: 10pt; }}
-.steps {{ margin: 0.5mm 0 0; padding-left: 4.5mm; font-size: 9pt; }}
+.cons {{ font-weight: 600; margin: 0.4mm 0; font-size: 9.6pt; }}
+.steps {{ margin: 0.5mm 0 0; padding-left: 4.5mm; font-size: 8.8pt; }}
 .steps li {{ margin-bottom: 0.3mm; }}
 .ws {{ margin-top: 1mm; }}
 .wsrow {{ display: flex; gap: 3mm; align-items: stretch; }}

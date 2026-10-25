@@ -66,10 +66,10 @@ table { border-collapse: collapse; width: 100%; }
 .star { color: #A8502E; }
 
 /* imagier */
-.lgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
-.lcell { border: 0.3mm solid #bbb; border-radius: 2mm; padding: 3mm 4mm; display: grid;
-  grid-template-columns: 30mm 1fr; grid-template-rows: auto 1fr; column-gap: 3mm; min-height: 62mm; }
-.lbig { font-size: 34pt; white-space: nowrap; font-weight: 800; color: #A8502E; line-height: 1; }
+.lgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+.lcell { border: 0.3mm solid #bbb; border-radius: 2mm; padding: 2.5mm 3mm; display: flex; flex-direction: column; min-height: 66mm; }
+.lcell .ldraw { flex: 1; min-height: 16mm; }
+.lbig { font-size: 28pt; white-space: nowrap; font-weight: 800; color: #A8502E; line-height: 1; }
 .lword small { display: block; font-size: 7.5pt; color: #888; text-transform: uppercase; letter-spacing: 0.8pt; }
 .lword b { font-size: 15pt; display: block; } .lword span { display: block; font-size: 9pt; }
 .lword .lsound { font-size: 8pt; color: #666; margin-top: 1mm; }
@@ -86,17 +86,17 @@ table { border-collapse: collapse; width: 100%; }
 .vcols { column-count: 2; column-gap: 7mm; }
 .vblock { break-inside: avoid; margin-bottom: 2mm; }
 .vblock h3 { margin-top: 0; }
-.voc td { padding: 0.9mm 1mm; border-bottom: 0.2mm solid #e2e2e2; vertical-align: top; font-size: 8.8pt; }
+.voc td { padding: 0.6mm 1mm; border-bottom: 0.2mm solid #e2e2e2; vertical-align: top; font-size: 8.5pt; }
 .voc td.tk { white-space: nowrap; } .voc td.ph { font-size: 8.2pt; }
-.nums { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5mm; margin-bottom: 2mm; }
+.nums { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1.5mm; margin-bottom: 2mm; }
 .nums div { border: 0.3mm solid #ccc; border-radius: 1.5mm; padding: 1.5mm; text-align: center; }
-.nums b { display: block; font-size: 14pt; color: #A8502E; } .nums span { display: block; font-size: 8.4pt; }
+.nums b { display: block; font-size: 12pt; color: #A8502E; } .nums span { display: block; font-size: 8.4pt; }
 
 /* séquences */
 .shead { font-size: 11pt; margin-bottom: 1mm; }
 .tag { font-size: 8pt; color: #777; text-transform: uppercase; letter-spacing: 0.8pt; margin-bottom: 2.5mm; }
-.card { border: 0.3mm solid #bdbdbd; border-left: 1.2mm solid #A8502E; border-radius: 2mm; padding: 2.2mm 3.5mm 2mm;
-  margin-bottom: 2mm; break-inside: avoid; }
+.card { border: 0.3mm solid #bdbdbd; border-left: 1.2mm solid #A8502E; border-radius: 2mm; padding: 1.8mm 3.5mm 1.6mm;
+  margin-bottom: 1.8mm; break-inside: avoid; }
 .chead { display: flex; align-items: center; gap: 2.2mm; margin-bottom: 0.8mm; }
 .code { font-weight: 800; color: #A8502E; font-size: 10pt; }
 .ctitle { font-weight: 800; font-size: 11pt; flex: 1; }
@@ -109,8 +109,8 @@ table { border-collapse: collapse; width: 100%; }
 .lbl { font-size: 7.4pt; text-transform: uppercase; letter-spacing: 0.6pt; color: #888; font-weight: 700; margin-right: 1mm; }
 .cline { font-size: 8.8pt; color: #444; }
 .duo { float: right; font-size: 8pt; color: #A8502E; font-weight: 600; }
-.cons { font-weight: 600; margin: 0.6mm 0; font-size: 10pt; }
-.steps { margin: 0.5mm 0 0; padding-left: 4.5mm; font-size: 9pt; }
+.cons { font-weight: 600; margin: 0.4mm 0; font-size: 9.6pt; }
+.steps { margin: 0.5mm 0 0; padding-left: 4.5mm; font-size: 8.8pt; }
 .steps li { margin-bottom: 0.3mm; }
 .ws { margin-top: 1mm; }
 .wsrow { display: flex; gap: 3mm; align-items: stretch; }
@@ -193,12 +193,12 @@ table { border-collapse: collapse; width: 100%; }
   <div class="cv-top">Livret mensuel de turc · Mois 1</div>
   <div class="cv-month"><span>Kasım</span><small>Novembre 2026</small></div>
   <div class="cv-name">Nevra Sevim</div>
-  <div class="cv-letters"><span>A</span><span>E</span><span>M</span><span>O</span></div>
+  <div class="cv-letters"><span>A</span><span>E</span><span>M</span><span>O</span><span>İ</span><span>N</span><span>U</span><span>L</span></div>
   <div class="cv-theme"><small>Thème du mois</small>Merhaba !<br><span>Ma famille, les couleurs et la maison</span></div>
   <div class="cv-goals"><h3>Mes 3 objectifs</h3><ol>
-    <li>Dire bonjour, merci et mon prénom en turc.</li>
-    <li>Reconnaître 4 lettres (A, E, M, O) et leur son.</li>
-    <li>Compter jusqu'à 10 en turc.</li></ol></div>
+    <li>Dire bonjour et au revoir, me présenter et présenter ma famille en turc.</li>
+    <li>Reconnaître 8 lettres (A, E, M, O, İ, N, U, L) et dire mes premières syllabes.</li>
+    <li>Compter jusqu'à 15 en turc, et de 5 à 1 à l'envers.</li></ol></div>
   <div class="cv-time"><b>Durée :</b> 5 soirs de 5 à 10 min + 4 séquences de 10 min le <span class="nw">week-end</span> (2 le samedi, 2 le dimanche),
   soit <b>environ 1 h 15 à 1 h 30 par semaine</b>.</div>
   <div class="cv-foot">Ce livret appartient à : <b>Nevra</b> &nbsp;·&nbsp; 4 semaines · 36 séquences courtes</div>
@@ -213,18 +213,18 @@ jusqu'à la fin du sablier.
 <b>Mot de passe :</b> pendant la semaine, papa demande le mot de passe avant le dessert ou une histoire.
 Jours libres : dim. 1<sup>er</sup> et lun. 30 novembre. ★ = séquence possible avec Neyla.</div>
 <div class="week">
-  <div class="whead"><span class="wnum">Semaine 1</span><span class="wtitle">Merhaba !</span><span class="wsub">Dire bonjour</span></div>
-  <div class="winfo"><span>lundi 2 → dimanche 8 novembre</span><span>Lettre : <b>A</b></span><span>Nombres : <b>1 à 5</b></span>
+  <div class="whead"><span class="wnum">Semaine 1</span><span class="wtitle">Merhaba !</span><span class="wsub">Dire bonjour, me présenter</span></div>
+  <div class="winfo"><span>lundi 2 → dimanche 8 novembre</span><span>Lettres : <b>A · E</b></span><span>Nombres : <b>1 à 5, et à l'envers</b></span>
     <span>Mot de passe : <b class="acc">Merhaba</b></span></div>
   <table class="prog"><thead><tr><th>Jour</th><th>N°</th><th>Séquence</th><th>Type</th><th>Durée</th><th>Fait</th></tr></thead>
-  <tbody><tr><td class="d">Lun 2</td><td class="c">1·1</td><td>Coucou, la peluche ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mar 3</td><td class="c">1·2</td><td>A comme araba</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mer 4</td><td class="c">1·3</td><td>Bir, iki, üç… saute ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Jeu 5</td><td class="c">1·4</td><td>Je m'appelle Nevra</td><td class="m">Calme</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Ven 6</td><td class="c">1·5</td><td>Zıpla ! Dur ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 7</td><td class="c">1·6</td><td>Merci, papa !</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 7</td><td class="c">1·7</td><td>Je marche sur le A</td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 8</td><td class="c">1·8</td><td>Jusqu'à beş <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 8</td><td class="c">1·9</td><td>Mes jetons, mon seuil</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr></tbody></table>
+  <tbody><tr><td class="d">Lun 2</td><td class="c">1·1</td><td>Bonjour, au revoir <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mar 3</td><td class="c">1·2</td><td>A comme araba, E comme elma</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mer 4</td><td class="c">1·3</td><td>La fusée <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Jeu 5</td><td class="c">1·4</td><td>Je me présente</td><td class="m">Calme</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Ven 6</td><td class="c">1·5</td><td>Zıpla, dur, otur ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 7</td><td class="c">1·6</td><td>La marchande</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 7</td><td class="c">1·7</td><td>Je marche sur A ou E</td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 8</td><td class="c">1·8</td><td>L'escalier <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 8</td><td class="c">1·9</td><td>Mes jetons, mon seuil</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr></tbody></table>
 </div>
 <div class="week">
   <div class="whead"><span class="wnum">Semaine 2</span><span class="wtitle">Ailem</span><span class="wsub">Ma famille</span></div>
-  <div class="winfo"><span>lundi 9 → dimanche 15 novembre</span><span>Lettre : <b>E</b></span><span>Nombres : <b>1 à 5</b></span>
+  <div class="winfo"><span>lundi 9 → dimanche 15 novembre</span><span>Lettres : <b>M · O</b></span><span>Nombres : <b>6 à 10</b></span>
     <span>Mot de passe : <b class="acc">İyiyim</b></span></div>
   <table class="prog"><thead><tr><th>Jour</th><th>N°</th><th>Séquence</th><th>Type</th><th>Durée</th><th>Fait</th></tr></thead>
-  <tbody><tr><td class="d">Lun 9</td><td class="c">2·1</td><td>Cours vers la photo ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mar 10</td><td class="c">2·2</td><td>Le drapeau rouge</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mer 11</td><td class="c">2·3</td><td>E comme elma</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Jeu 12</td><td class="c">2·4</td><td>Tape et compte <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Ven 13</td><td class="c">2·5</td><td>Nasılsın ? <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 14</td><td class="c">2·6</td><td>Ma famille</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 14</td><td class="c">2·7</td><td>Saute sur A ou E</td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 15</td><td class="c">2·8</td><td>Kaç ?</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 15</td><td class="c">2·9</td><td>Zıpla, dur, otur ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr></tbody></table>
+  <tbody><tr><td class="d">Lun 9</td><td class="c">2·1</td><td>Bu annem ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mar 10</td><td class="c">2·2</td><td>Le drapeau rouge</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mer 11</td><td class="c">2·3</td><td>M comme masa, O comme okul</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Jeu 12</td><td class="c">2·4</td><td>Montre-moi altı ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Ven 13</td><td class="c">2·5</td><td>Nasılsın ? <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 14</td><td class="c">2·6</td><td>Ma famille</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 14</td><td class="c">2·7</td><td>Saute sur la lettre</td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 15</td><td class="c">2·8</td><td>Kaç ? jusqu'à on</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 15</td><td class="c">2·9</td><td>Zıpla, dur, otur, kalk ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr></tbody></table>
 </div></div>
   <footer class="ph-foot">2</footer>
 </section>
@@ -232,33 +232,37 @@ Jours libres : dim. 1<sup>er</sup> et lun. 30 novembre. ★ = séquence possible
   <header class="ph-head"><span><b>Nevra</b> · Mois 1 · Kasım / Novembre 2026</span><span>Programme hebdomadaire</span></header>
   <div class="body">
 <div class="week">
-  <div class="whead"><span class="wnum">Semaine 3</span><span class="wtitle">Renkler</span><span class="wsub">Les couleurs</span></div>
-  <div class="winfo"><span>lundi 16 → dimanche 22 novembre</span><span>Lettre : <b>M</b></span><span>Nombres : <b>6 à 10</b></span>
+  <div class="whead"><span class="wnum">Semaine 3</span><span class="wtitle">Renkler</span><span class="wsub">Les couleurs et les animaux</span></div>
+  <div class="winfo"><span>lundi 16 → dimanche 22 novembre</span><span>Lettres : <b>İ · N</b></span><span>Nombres : <b>11 à 15</b></span>
     <span>Mot de passe : <b class="acc">Kırmızı</b></span></div>
   <table class="prog"><thead><tr><th>Jour</th><th>N°</th><th>Séquence</th><th>Type</th><th>Durée</th><th>Fait</th></tr></thead>
-  <tbody><tr><td class="d">Lun 16</td><td class="c">3·1</td><td>La chasse au rouge <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mar 17</td><td class="c">3·2</td><td>M comme masa</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mer 18</td><td class="c">3·3</td><td>Montre-moi altı !</td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Jeu 19</td><td class="c">3·4</td><td>Bleu ou jaune ?</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Ven 20</td><td class="c">3·5</td><td>Les animaux <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 21</td><td class="c">3·6</td><td>Rond ou carré ?</td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 21</td><td class="c">3·7</td><td>Feu rouge, feu vert <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 22</td><td class="c">3·8</td><td>Jusqu'à on</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 22</td><td class="c">3·9</td><td>Korkma ! L'hymne</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr></tbody></table>
+  <tbody><tr><td class="d">Lun 16</td><td class="c">3·1</td><td>La chasse aux couleurs <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mar 17</td><td class="c">3·2</td><td>İ comme inek, N comme nar</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mer 18</td><td class="c">3·3</td><td>Après on : on bir !</td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Jeu 19</td><td class="c">3·4</td><td>Trois couleurs</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Ven 20</td><td class="c">3·5</td><td>Les animaux <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 21</td><td class="c">3·6</td><td>Rond ou carré ?</td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 21</td><td class="c">3·7</td><td>Les trois feux <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 22</td><td class="c">3·8</td><td>Jusqu'à on beş</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 22</td><td class="c">3·9</td><td>Korkma ! L'hymne</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr></tbody></table>
 </div>
 <div class="week">
   <div class="whead"><span class="wnum">Semaine 4</span><span class="wtitle">Evde</span><span class="wsub">À la maison</span></div>
-  <div class="winfo"><span>lundi 23 → dimanche 29 novembre</span><span>Lettre : <b>O</b></span><span>Nombres : <b>1 à 10, puis 11 à 20</b></span>
+  <div class="winfo"><span>lundi 23 → dimanche 29 novembre</span><span>Lettres : <b>U · L</b></span><span>Nombres : <b>1 à 15, puis 20</b></span>
     <span>Mot de passe : <b class="acc">Zıpla</b></span></div>
   <table class="prog"><thead><tr><th>Jour</th><th>N°</th><th>Séquence</th><th>Type</th><th>Durée</th><th>Fait</th></tr></thead>
-  <tbody><tr><td class="d">Lun 23</td><td class="c">4·1</td><td>Top ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mar 24</td><td class="c">4·2</td><td>O comme okul</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mer 25</td><td class="c">4·3</td><td>Va chercher !</td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Jeu 26</td><td class="c">4·4</td><td>Le sac mystère</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Ven 27</td><td class="c">4·5</td><td>Zıpla, dur, otur, kalk ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 28</td><td class="c">4·6</td><td>Maintenant ou demain ?</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 28</td><td class="c">4·7</td><td>Saute sur la lettre</td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 29</td><td class="c">4·8</td><td>La grande tour</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 29</td><td class="c">4·9</td><td>Mon spectacle <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr></tbody></table>
+  <tbody><tr><td class="d">Lun 23</td><td class="c">4·1</td><td>Top ! <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mar 24</td><td class="c">4·2</td><td>U comme uçak, L comme lale</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Mer 25</td><td class="c">4·3</td><td>Va chercher !</td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Jeu 26</td><td class="c">4·4</td><td>Le sac mystère</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Ven 27</td><td class="c">4·5</td><td>Écoute et saute <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">5 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 28</td><td class="c">4·6</td><td>Maintenant ou demain ?</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Sam 28</td><td class="c">4·7</td><td>Saute sur la lettre</td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 29</td><td class="c">4·8</td><td>La grande tour</td><td class="m">Calme</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr><tr><td class="d">Dim 29</td><td class="c">4·9</td><td>Mon spectacle <span class=star>★</span></td><td class="m">Mouvement</td><td class="t">10 min</td><td class="k"><i class="cb"></i></td></tr></tbody></table>
 </div></div>
   <footer class="ph-foot">3</footer>
 </section>
 <section class="page ">
   <header class="ph-head"><span><b>Nevra</b> · Mois 1 · Kasım / Novembre 2026</span><span>Imagier</span></header>
-  <div class="body"><h1>Mon imagier : mes 4 lettres de novembre</h1>
-<p class="lead">Une lettre par semaine. Nevra dessine le mot-image dans la case. On dit le son avant d'écrire.</p>
+  <div class="body"><h1>Mon imagier : mes 8 lettres de novembre</h1>
+<p class="lead">Deux lettres par semaine. Nevra dessine le mot-image dans la case. On dit le son avant d'écrire.</p>
 <div class="lgrid"><div class="lcell"><div class="lbig">A a</div><div class="lword"><small>semaine 1</small><b>araba</b>
-<span class="ph">« a-ra-ba »</span><span>voiture</span><span class="lsound">[a] comme « ami »</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">E e</div><div class="lword"><small>semaine 2</small><b>elma</b>
-<span class="ph">« èl-ma »</span><span>pomme</span><span class="lsound">[è] comme « mère »</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">M m</div><div class="lword"><small>semaine 3</small><b>masa</b>
-<span class="ph">« ma-ssa »</span><span>table</span><span class="lsound">comme en français</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">O o</div><div class="lword"><small>semaine 4</small><b>okul</b>
-<span class="ph">« o-koul »</span><span>école</span><span class="lsound">[o] comme « moto »</span></div><div class="ldraw"></div></div></div>
+<span class="ph">« a-ra-ba »</span><span>voiture</span><span class="lsound">[a] comme « ami »</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">E e</div><div class="lword"><small>semaine 1</small><b>elma</b>
+<span class="ph">« èl-ma »</span><span>pomme</span><span class="lsound">[è] comme « mère »</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">M m</div><div class="lword"><small>semaine 2</small><b>masa</b>
+<span class="ph">« ma-ssa »</span><span>table</span><span class="lsound">comme en français</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">O o</div><div class="lword"><small>semaine 2</small><b>okul</b>
+<span class="ph">« o-koul »</span><span>école</span><span class="lsound">[o] comme « moto »</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">İ i</div><div class="lword"><small>semaine 3</small><b>inek</b>
+<span class="ph">« i-nèk »</span><span>vache</span><span class="lsound">[i], toujours avec un point</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">N n</div><div class="lword"><small>semaine 3</small><b>nar</b>
+<span class="ph">« nar »</span><span>grenade</span><span class="lsound">[n], jamais nasal</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">U u</div><div class="lword"><small>semaine 4</small><b>uçak</b>
+<span class="ph">« ou-tchak »</span><span>avion</span><span class="lsound">[ou] comme « loup »</span></div><div class="ldraw"></div></div><div class="lcell"><div class="lbig">L l</div><div class="lword"><small>semaine 4</small><b>lale</b>
+<span class="ph">« la-lè »</span><span>tulipe</span><span class="lsound">comme en français</span></div><div class="ldraw"></div></div></div>
 <div class="tipbox"><b>Astuce :</b> en turc, une lettre = un son. Le turc se lit comme il s'écrit… sauf le <b>ğ</b>, qui est muet.</div>
 <h2>L'alphabet turc complet (29 lettres)</h2>
-<div class="alpha"><span class="on ">A</span><span class=" ">B</span><span class=" ">C</span><span class=" sp">Ç</span><span class=" ">D</span><span class="on ">E</span><span class=" ">F</span><span class=" ">G</span><span class=" sp">Ğ</span><span class=" ">H</span><span class=" sp">I</span><span class=" ">İ</span><span class=" ">J</span><span class=" ">K</span><span class=" ">L</span><span class="on ">M</span><span class=" ">N</span><span class="on ">O</span><span class=" sp">Ö</span><span class=" ">P</span><span class=" ">R</span><span class=" ">S</span><span class=" sp">Ş</span><span class=" ">T</span><span class=" ">U</span><span class=" sp">Ü</span><span class=" ">V</span><span class=" ">Y</span><span class=" ">Z</span></div>
+<div class="alpha"><span class="on ">A</span><span class=" ">B</span><span class=" ">C</span><span class=" sp">Ç</span><span class=" ">D</span><span class="on ">E</span><span class=" ">F</span><span class=" ">G</span><span class=" sp">Ğ</span><span class=" ">H</span><span class=" sp">I</span><span class="on ">İ</span><span class=" ">J</span><span class=" ">K</span><span class="on ">L</span><span class="on ">M</span><span class="on ">N</span><span class="on ">O</span><span class=" sp">Ö</span><span class=" ">P</span><span class=" ">R</span><span class=" ">S</span><span class=" sp">Ş</span><span class=" ">T</span><span class="on ">U</span><span class=" sp">Ü</span><span class=" ">V</span><span class=" ">Y</span><span class=" ">Z</span></div>
 <p class="mini"><span class="key on">A</span> lettres de ce mois &nbsp; <span class="key sp">Ç</span> lettres propres au turc, vues plus tard :
 <b>Ç</b> « tch » · <b>Ğ</b> muet (allonge la voyelle d'avant) · <b>I ı</b> sans point, son proche de « eu » · <b>Ö</b> « eu » ·
 <b>Ş</b> « ch » · <b>Ü</b> « u » français. Pas de Q, W ni X en turc.</p></div>
@@ -269,98 +273,98 @@ Jours libres : dim. 1<sup>er</sup> et lun. 30 novembre. ★ = séquence possible
   <div class="body"><h1>Mes mots de novembre</h1>
 <p class="lead">La prononciation entre « » est une aide en sons français (règles page « Pour le papa »). Pas besoin de tout savoir :
 un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
-<div class="vcols"><div class="vblock"><h3>Dire bonjour</h3><table class="voc"><tr><td class="tk">Merhaba</td><td class="ph">« mèr-ha-ba »</td><td>bonjour, salut</td></tr><tr><td class="tk">Hoşça kal</td><td class="ph">« hoch-tcha kal »</td><td>au revoir</td></tr><tr><td class="tk">Teşekkür ederim</td><td class="ph">« tè-chèk-kur è-dè-rim »</td><td>merci</td></tr><tr><td class="tk">Nasılsın ?</td><td class="ph">« na-seul-seunn »</td><td>comment vas-tu ?</td></tr><tr><td class="tk">İyiyim</td><td class="ph">« i-yi-yimm »</td><td>je vais bien</td></tr><tr><td class="tk">Adın ne ?</td><td class="ph">« a-deunn nè »</td><td>comment tu t'appelles ?</td></tr><tr><td class="tk">Benim adım Nevra.</td><td class="ph">« bè-nim a-deum Nevra »</td><td>je m'appelle Nevra</td></tr><tr><td class="tk">Aferin !</td><td class="ph">« a-fè-rinn »</td><td>bravo !</td></tr></table></div><div class="vblock"><h3>Ma famille</h3><table class="voc"><tr><td class="tk">anne</td><td class="ph">« ann-nè »</td><td>maman</td></tr><tr><td class="tk">baba</td><td class="ph">« ba-ba »</td><td>papa</td></tr></table></div><div class="vblock"><h3>Les couleurs</h3><table class="voc"><tr><td class="tk">kırmızı</td><td class="ph">« keur-meu-zeu »</td><td>rouge</td></tr><tr><td class="tk">beyaz</td><td class="ph">« bè-yaz »</td><td>blanc</td></tr><tr><td class="tk">mavi</td><td class="ph">« ma-vi »</td><td>bleu</td></tr><tr><td class="tk">sarı</td><td class="ph">« sa-reu »</td><td>jaune</td></tr><tr><td class="tk">yeşil</td><td class="ph">« yè-chil »</td><td>vert</td></tr></table></div><div class="vblock"><h3>Les animaux</h3><table class="voc"><tr><td class="tk">kedi</td><td class="ph">« kè-di »</td><td>chat</td></tr><tr><td class="tk">köpek</td><td class="ph">« keu-pèk »</td><td>chien</td></tr><tr><td class="tk">kuş</td><td class="ph">« kouch »</td><td>oiseau</td></tr></table></div><div class="vblock"><h3>À la maison</h3><table class="voc"><tr><td class="tk">masa</td><td class="ph">« ma-ssa »</td><td>table</td></tr><tr><td class="tk">top</td><td class="ph">« top »</td><td>balle</td></tr><tr><td class="tk">araba</td><td class="ph">« a-ra-ba »</td><td>voiture</td></tr><tr><td class="tk">elma</td><td class="ph">« èl-ma »</td><td>pomme</td></tr><tr><td class="tk">Bu ne ?</td><td class="ph">« bou nè »</td><td>qu'est-ce que c'est ?</td></tr></table></div><div class="vblock"><h3>Les formes</h3><table class="voc"><tr><td class="tk">daire</td><td class="ph">« da-i-rè »</td><td>rond, cercle</td></tr><tr><td class="tk">kare</td><td class="ph">« ka-rè »</td><td>carré</td></tr></table></div><div class="vblock"><h3>Bouger</h3><table class="voc"><tr><td class="tk">zıpla</td><td class="ph">« zeup-la »</td><td>saute</td></tr><tr><td class="tk">dur</td><td class="ph">« dour »</td><td>stop</td></tr><tr><td class="tk">otur</td><td class="ph">« o-tour »</td><td>assieds-toi</td></tr><tr><td class="tk">kalk</td><td class="ph">« kalk »</td><td>lève-toi</td></tr></table></div></div>
-<h2>Les nombres de 1 à 10</h2><div class="nums"><div><b>1</b><span class="tk">bir</span><span class="ph">« bir »</span></div><div><b>2</b><span class="tk">iki</span><span class="ph">« i-ki »</span></div><div><b>3</b><span class="tk">üç</span><span class="ph">« utch »</span></div><div><b>4</b><span class="tk">dört</span><span class="ph">« deurt »</span></div><div><b>5</b><span class="tk">beş</span><span class="ph">« bèch »</span></div><div><b>6</b><span class="tk">altı</span><span class="ph">« al-teu »</span></div><div><b>7</b><span class="tk">yedi</span><span class="ph">« yè-di »</span></div><div><b>8</b><span class="tk">sekiz</span><span class="ph">« sè-kiz »</span></div><div><b>9</b><span class="tk">dokuz</span><span class="ph">« do-kouz »</span></div><div><b>10</b><span class="tk">on</span><span class="ph">« onn »</span></div></div>
-<p class="mini">En fin de mois, par manipulation seulement : 11 à 19 = <b>on</b> + unité (on bir « onn bir » = 11, on iki « onn i-ki » = 12…),
-20 = <b>yirmi</b> « yir-mi ». <b>Kaç ?</b> « katch » = combien ?</p></div>
+<div class="vcols"><div class="vblock"><h3>Dire bonjour</h3><table class="voc"><tr><td class="tk">Merhaba</td><td class="ph">« mèr-ha-ba »</td><td>bonjour, salut</td></tr><tr><td class="tk">Hoşça kal</td><td class="ph">« hoch-tcha kal »</td><td>au revoir</td></tr><tr><td class="tk">Teşekkür ederim</td><td class="ph">« tè-chèk-kur è-dè-rim »</td><td>merci</td></tr><tr><td class="tk">Nasılsın ?</td><td class="ph">« na-seul-seunn »</td><td>comment vas-tu ?</td></tr><tr><td class="tk">İyiyim</td><td class="ph">« i-yi-yimm »</td><td>je vais bien</td></tr><tr><td class="tk">Adın ne ?</td><td class="ph">« a-deunn nè »</td><td>comment tu t'appelles ?</td></tr><tr><td class="tk">Benim adım Nevra.</td><td class="ph">« bè-nim a-deum Nevra »</td><td>je m'appelle Nevra</td></tr><tr><td class="tk">Aferin !</td><td class="ph">« a-fè-rinn »</td><td>bravo !</td></tr><tr><td class="tk">Güle güle</td><td class="ph">« gu-lè gu-lè »</td><td>au revoir (dit par celui qui reste)</td></tr><tr><td class="tk">Kaç yaşındasın ?</td><td class="ph">« katch ya-cheun-da-seun »</td><td>quel âge as-tu ?</td></tr><tr><td class="tk">Dört yaşındayım.</td><td class="ph">« deurt ya-cheun-da-yeum »</td><td>j'ai quatre ans</td></tr></table></div><div class="vblock"><h3>Ma famille</h3><table class="voc"><tr><td class="tk">anne</td><td class="ph">« ann-nè »</td><td>maman</td></tr><tr><td class="tk">baba</td><td class="ph">« ba-ba »</td><td>papa</td></tr><tr><td class="tk">abla</td><td class="ph">« a-bla »</td><td>grande sœur</td></tr><tr><td class="tk">Bu annem.</td><td class="ph">« bou ann-nèmm »</td><td>c'est ma maman</td></tr><tr><td class="tk">Bu babam.</td><td class="ph">« bou ba-bamm »</td><td>c'est mon papa</td></tr></table></div><div class="vblock"><h3>Les couleurs</h3><table class="voc"><tr><td class="tk">kırmızı</td><td class="ph">« keur-meu-zeu »</td><td>rouge</td></tr><tr><td class="tk">beyaz</td><td class="ph">« bè-yaz »</td><td>blanc</td></tr><tr><td class="tk">mavi</td><td class="ph">« ma-vi »</td><td>bleu</td></tr><tr><td class="tk">sarı</td><td class="ph">« sa-reu »</td><td>jaune</td></tr><tr><td class="tk">yeşil</td><td class="ph">« yè-chil »</td><td>vert</td></tr></table></div><div class="vblock"><h3>Les animaux</h3><table class="voc"><tr><td class="tk">kedi</td><td class="ph">« kè-di »</td><td>chat</td></tr><tr><td class="tk">köpek</td><td class="ph">« keu-pèk »</td><td>chien</td></tr><tr><td class="tk">kuş</td><td class="ph">« kouch »</td><td>oiseau</td></tr><tr><td class="tk">inek</td><td class="ph">« i-nèk »</td><td>vache</td></tr><tr><td class="tk">at</td><td class="ph">« at »</td><td>cheval</td></tr></table></div><div class="vblock"><h3>À la maison</h3><table class="voc"><tr><td class="tk">masa</td><td class="ph">« ma-ssa »</td><td>table</td></tr><tr><td class="tk">top</td><td class="ph">« top »</td><td>balle</td></tr><tr><td class="tk">araba</td><td class="ph">« a-ra-ba »</td><td>voiture</td></tr><tr><td class="tk">elma</td><td class="ph">« èl-ma »</td><td>pomme</td></tr><tr><td class="tk">kalem</td><td class="ph">« ka-lèmm »</td><td>crayon</td></tr><tr><td class="tk">Bu ne ?</td><td class="ph">« bou nè »</td><td>qu'est-ce que c'est ?</td></tr><tr><td class="tk">Bu elma.</td><td class="ph">« bou èl-ma »</td><td>c'est une pomme</td></tr></table></div><div class="vblock"><h3>Les formes</h3><table class="voc"><tr><td class="tk">daire</td><td class="ph">« da-i-rè »</td><td>rond, cercle</td></tr><tr><td class="tk">kare</td><td class="ph">« ka-rè »</td><td>carré</td></tr></table></div><div class="vblock"><h3>Bouger</h3><table class="voc"><tr><td class="tk">zıpla</td><td class="ph">« zeup-la »</td><td>saute</td></tr><tr><td class="tk">dur</td><td class="ph">« dour »</td><td>stop</td></tr><tr><td class="tk">otur</td><td class="ph">« o-tour »</td><td>assieds-toi</td></tr><tr><td class="tk">kalk</td><td class="ph">« kalk »</td><td>lève-toi</td></tr></table></div></div>
+<h2>Les nombres de 1 à 15</h2><div class="nums"><div><b>1</b><span class="tk">bir</span><span class="ph">« bir »</span></div><div><b>2</b><span class="tk">iki</span><span class="ph">« i-ki »</span></div><div><b>3</b><span class="tk">üç</span><span class="ph">« utch »</span></div><div><b>4</b><span class="tk">dört</span><span class="ph">« deurt »</span></div><div><b>5</b><span class="tk">beş</span><span class="ph">« bèch »</span></div><div><b>6</b><span class="tk">altı</span><span class="ph">« al-teu »</span></div><div><b>7</b><span class="tk">yedi</span><span class="ph">« yè-di »</span></div><div><b>8</b><span class="tk">sekiz</span><span class="ph">« sè-kiz »</span></div><div><b>9</b><span class="tk">dokuz</span><span class="ph">« do-kouz »</span></div><div><b>10</b><span class="tk">on</span><span class="ph">« onn »</span></div><div><b>11</b><span class="tk">on bir</span><span class="ph">« onn bir »</span></div><div><b>12</b><span class="tk">on iki</span><span class="ph">« onn i-ki »</span></div><div><b>13</b><span class="tk">on üç</span><span class="ph">« onn utch »</span></div><div><b>14</b><span class="tk">on dört</span><span class="ph">« onn deurt »</span></div><div><b>15</b><span class="tk">on beş</span><span class="ph">« onn bèch »</span></div></div>
+<p class="mini">11 à 19 = <b>on</b> + unité (« dix-un », « dix-deux »…). 16 à 20 en option, par manipulation : on altı… on dokuz,
+20 = <b>yirmi</b> « yir-mi ». <b>Kaç ?</b> « katch » = combien ? Après un nombre, le mot ne change pas : <i>iki elma</i>.</p></div>
   <footer class="ph-foot">5</footer>
 </section>
 <section class="page seqpage">
   <header class="ph-head"><span><b>Nevra</b> · Mois 1 · Kasım / Novembre 2026</span><span>Séquences · semaine 1</span></header>
-  <div class="body"><div class="shead"><span class="wnum">Semaine 1</span> <b>Merhaba !</b> · Dire bonjour</div><div class="tag">Les soirs · 5 à 10 min</div>
+  <div class="body"><div class="shead"><span class="wnum">Semaine 1</span> <b>Merhaba !</b> · Dire bonjour, me présenter</div><div class="tag">Les soirs · 5 à 10 min</div>
 <div class="card">
-  <div class="chead"><span class="code">1·1</span><span class="ctitle">Coucou, la peluche !</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">1·1</span><span class="ctitle">Bonjour, au revoir</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Lun 2 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> 1 peluche <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Dis Merhaba à la peluche ! »</div>
-  <ol class="steps"><li>La peluche sort de derrière le dos de papa : <b class="tk">Merhaba !</b> <span class="ph">« mèr-ha-ba »</span> = bonjour.</li><li>Nevra répond « Merhaba ! » en faisant coucou de la main.</li><li>La peluche repart : <b class="tk">Hoşça kal !</b> <span class="ph">« hoch-tcha kal »</span> = au revoir.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Quand la peluche s'en va, réponds Güle güle ! »</div>
+  <ol class="steps"><li>La peluche arrive : <b class="tk">Merhaba !</b> <span class="ph">« mèr-ha-ba »</span> = bonjour. Nevra répond « Merhaba ! ».</li><li>La peluche s'en va : <b class="tk">Hoşça kal !</b> <span class="ph">« hoch-tcha kal »</span> = au revoir. Nevra répond <b class="tk">Güle güle !</b> <span class="ph">« gu-lè gu-lè »</span>.</li><li>On inverse : c'est Nevra qui part en disant « Hoşça kal ! ».</li></ol>
   
-  <div class="more"><b>Tour 2</b> la peluche se cache ailleurs (sous la table, derrière le canapé) ; Nevra la trouve et dit Merhaba. &nbsp;<b>Tour 3</b> Nevra cache la peluche, papa la cherche et dit Merhaba en la trouvant.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 coucous-Merhaba avec la peluche, c'est tout.</div>
+  <div class="more"><b>Tour 2</b> la peluche se cache ailleurs ; quand Nevra la trouve, elle dit Merhaba, quand elle repart, Güle güle. &nbsp;<b>Tour 3</b> Nevra fait arriver et partir 2 peluches avec les bonnes formules.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Seulement Merhaba et Hoşça kal.</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">1·2</span><span class="ctitle">A comme araba</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">1·2</span><span class="ctitle">A comme araba, E comme elma</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mar 3 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> petite voiture, crayon </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Fais rouler la voiture sur le grand A. »</div>
-  <div class="side"><div class="bigl"><span>A</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>Papa ouvre grand la bouche : [a]. Nevra imite.</li><li>Elle fait rouler la voiture sur le A en disant <b class="tk">araba</b> <span class="ph">« a-ra-ba »</span> = voiture.</li><li>Puis elle suit le A avec le doigt, et avec un crayon si elle en a envie.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> petite voiture, une pomme, crayon </div>
+  <div class="cons"><span class="lbl">Consigne</span> « Montre-moi la lettre du mot que je dis. »</div>
+  <div class="side"><div class="bigl"><span>A E</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>A se dit [a] : <b class="tk">araba</b> <span class="ph">« a-ra-ba »</span> = voiture. E se dit [è], comme le mouton : <b class="tk">elma</b> <span class="ph">« èl-ma »</span> = pomme.</li><li>Papa dit araba ou elma : Nevra montre le A ou le E, puis le suit avec le doigt.</li></ol>
   
-  <div class="more"><b>Tour 2</b> rouler sur le A en disant [a] très fort, puis en chuchotant. &nbsp;<b>Tour 3</b> chercher des A dans un livre ou sur une boîte et les montrer du doigt.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Rouler 3 fois sur le A en disant « a-ra-ba ».</div>
+  <div class="more"><b>Tour 2</b> papa montre une lettre, Nevra dit le son puis le mot (araba ou elma). &nbsp;<b>Tour 3</b> chercher des A et des E dans un livre et les montrer du doigt.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer le A en disant « araba ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">1·3</span><span class="ctitle">Bir, iki, üç… saute !</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">1·3</span><span class="ctitle">La fusée</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mer 4 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Saute quand je dis üç ! »</div>
-  <ol class="steps"><li>Papa compte <b class="tk">bir</b> <span class="ph">« bir »</span> = 1, <b class="tk">iki</b> <span class="ph">« i-ki »</span> = 2, <b class="tk">üç</b> <span class="ph">« utch »</span> = 3 : à üç, Nevra saute.</li><li>On inverse : Nevra compte, papa saute.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Accroupie, compte à l'envers avec moi, puis décolle ! »</div>
+  <ol class="steps"><li>Compter de bir à <b class="tk">beş</b> <span class="ph">« bèch »</span> = 5 en se relevant doucement.</li><li>S'accroupir et compter à l'envers : beş, <b class="tk">dört</b> <span class="ph">« deurt »</span> = 4, <b class="tk">üç</b> <span class="ph">« utch »</span> = 3, <b class="tk">iki</b> <span class="ph">« i-ki »</span> = 2, <b class="tk">bir</b> <span class="ph">« bir »</span> = 1… et grand saut de fusée !</li></ol>
   
-  <div class="more"><b>Tour 2</b> papa piège : il saute à iki au lieu de üç, Nevra dit « non ! ». &nbsp;<b>Tour 3</b> sauts de grenouille, puis de lapin, toujours sur bir, iki, üç.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 sauts en comptant bir, iki, üç.</div>
+  <div class="more"><b>Tour 2</b> compte à rebours en chuchotant, décollage en criant « bir ! ». &nbsp;<b>Tour 3</b> c'est Nevra qui compte à l'envers, papa fait la fusée.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : bir, iki, üç, et saut.</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">1·4</span><span class="ctitle">Je m'appelle Nevra</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">1·4</span><span class="ctitle">Je me présente</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Jeu 5 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> 1 peluche </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Réponds à la peluche : Benim adım Nevra. »</div>
-  <ol class="steps"><li>La peluche demande <b class="tk">Adın ne ?</b> <span class="ph">« a-deunn nè »</span> = comment tu t'appelles ?</li><li>Nevra répond <b class="tk">Benim adım Nevra.</b> <span class="ph">« bè-nim a-deum Nevra »</span> = je m'appelle Nevra. Papa souffle le début si besoin.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Réponds à la peluche en turc. »</div>
+  <ol class="steps"><li><b class="tk">Adın ne ?</b> <span class="ph">« a-deunn nè »</span> = comment tu t'appelles ? → <b class="tk">Benim adım Nevra.</b> <span class="ph">« bè-nim a-deum Nevra »</span> = je m'appelle Nevra</li><li><b class="tk">Kaç yaşındasın ?</b> <span class="ph">« katch ya-cheun-da-seun »</span> = quel âge as-tu ? → <b class="tk">Dört yaşındayım.</b> <span class="ph">« deurt ya-cheun-da-yeum »</span> = j'ai quatre ans en montrant 4 doigts.</li></ol>
   
-  <div class="more"><b>Tour 2</b> 3 peluches demandent chacune Adın ne ? avec une voix différente. &nbsp;<b>Tour 3</b> Nevra pose la question Adın ne ? à une peluche, papa répond avec une voix drôle.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Nevra répond seulement « Nevra ! » : ça compte.</div>
+  <div class="more"><b>Tour 2</b> 3 peluches posent les 2 questions avec une voix différente. &nbsp;<b>Tour 3</b> Nevra pose les questions à une peluche, papa répond avec une voix drôle.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Seulement « Benim adım Nevra ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">1·5</span><span class="ctitle">Zıpla ! Dur !</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">1·5</span><span class="ctitle">Zıpla, dur, otur !</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Ven 6 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Quand je dis zıpla, tu sautes ; quand je dis dur, tu t'arrêtes. »</div>
-  <ol class="steps"><li><b class="tk">zıpla</b> <span class="ph">« zeup-la »</span> = saute · <b class="tk">dur</b> <span class="ph">« dour »</span> = stop</li><li>Papa alterne lentement, puis plus vite. Nevra devient ensuite la cheffe.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Fais ce que je dis : zıpla, dur ou otur. »</div>
+  <ol class="steps"><li><b class="tk">zıpla</b> <span class="ph">« zeup-la »</span> = saute · <b class="tk">dur</b> <span class="ph">« dour »</span> = stop · <b class="tk">otur</b> <span class="ph">« o-tour »</span> = assieds-toi</li><li>Papa alterne lentement, puis plus vite. Nevra devient ensuite la cheffe.</li></ol>
   
-  <div class="more"><b>Tour 2</b> zıpla tout doucement, puis très vite. &nbsp;<b>Tour 3</b> papa chuchote ou crie « zıpla » : petit saut ou grand saut.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 « zıpla », 1 « dur », et on s'arrête.</div>
+  <div class="more"><b>Tour 2</b> papa piège : il dit « zıpla » sans bouger, Nevra doit écouter et non regarder. &nbsp;<b>Tour 3</b> très lentement, puis très vite.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : zıpla et dur seulement.</div>
 </div></div>
   <footer class="ph-foot">6</footer>
 </section>
 <section class="page seqpage">
   <header class="ph-head"><span><b>Nevra</b> · Mois 1 · Kasım / Novembre 2026</span><span>Séquences · semaine 1</span></header>
-  <div class="body"><div class="shead"><span class="wnum">Semaine 1</span> <b>Merhaba !</b> · Dire bonjour</div><div class="tag">Le <span class="nw">week-end</span> · 2 séquences de 10 min le samedi et 2 séquences de 10 min le dimanche (2 min de mouvement entre les deux)</div>
+  <div class="body"><div class="shead"><span class="wnum">Semaine 1</span> <b>Merhaba !</b> · Dire bonjour, me présenter</div><div class="tag">Le <span class="nw">week-end</span> · 2 séquences de 10 min le samedi et 2 séquences de 10 min le dimanche (2 min de mouvement entre les deux)</div>
 <div class="card">
-  <div class="chead"><span class="code">1·6</span><span class="ctitle">Merci, papa !</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">1·6</span><span class="ctitle">La marchande</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Sam 7 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 3 fruits ou jouets </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Quand je te donne un fruit, dis teşekkür ederim. »</div>
-  <ol class="steps"><li>Papa donne un fruit. Nevra dit <b class="tk">Teşekkür ederim !</b> <span class="ph">« tè-chèk-kur è-dè-rim »</span> = merci. Papa souffle le début si besoin.</li><li>On inverse : Nevra donne, papa remercie.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> 5 fruits ou jouets </div>
+  <div class="cons"><span class="lbl">Consigne</span> « Demande le bon nombre : iki elma ! »</div>
+  <ol class="steps"><li>Papa est le marchand. Nevra demande « iki elma » (2 pommes), papa en donne 2.</li><li>Nevra dit <b class="tk">Teşekkür ederim !</b> <span class="ph">« tè-chèk-kur è-dè-rim »</span> = merci. Puis papa demande « üç elma » et c'est Nevra qui donne.</li><li>À savoir : après un nombre, le mot ne change pas (iki elma, üç elma).</li></ol>
   
-  <div class="more"><b>Tour 2</b> papa « oublie » de dire merci : Nevra le lui rappelle. &nbsp;<b>Tour 3</b> dînette : Nevra sert les peluches, qui disent teşekkür ederim.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul échange, un seul « teşekkür ederim ».</div>
+  <div class="more"><b>Tour 2</b> papa demande « dört top » ou « beş elma » : Nevra compte et donne. &nbsp;<b>Tour 3</b> papa « oublie » de dire merci : Nevra le lui rappelle.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul échange avec « teşekkür ederim ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">1·7</span><span class="ctitle">Je marche sur le A</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">1·7</span><span class="ctitle">Je marche sur A ou E</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Sam 7 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 3 rubans ou cordes </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Marche sur le grand A en disant [a]. »</div>
-  <ol class="steps"><li>Papa forme un grand A au sol avec 3 rubans.</li><li>Nevra marche dessus en disant [aaa], puis saute à pieds joints au milieu.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> 7 rubans ou cordes </div>
+  <div class="cons"><span class="lbl">Consigne</span> « Marche sur la lettre du mot que je dis. »</div>
+  <ol class="steps"><li>Papa forme un grand A et un grand E au sol avec les rubans.</li><li>Papa dit araba ou elma : Nevra court marcher sur la bonne lettre en disant [a] ou [è].</li></ol>
   
-  <div class="more"><b>Tour 2</b> traverser le A à quatre pattes, puis en sautant. &nbsp;<b>Tour 3</b> Nevra forme le A avec les rubans, papa marche dessus en disant [a].</div>
+  <div class="more"><b>Tour 2</b> traverser à quatre pattes, puis en sautant. &nbsp;<b>Tour 3</b> Nevra dit le mot, papa marche sur la lettre (et se trompe exprès).</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Une seule traversée du A.</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">1·8</span><span class="ctitle">Jusqu'à beş</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">1·8</span><span class="ctitle">L'escalier</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Dim 8 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> un escalier ou 5 coussins <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Monte une marche à chaque nombre. »</div>
-  <ol class="steps"><li>Monter en comptant : bir, iki, üç, <b class="tk">dört</b> <span class="ph">« deurt »</span> = 4, <b class="tk">beş</b> <span class="ph">« bèch »</span> = 5.</li><li>Redescendre en recomptant. Papa dit <b class="tk">Aferin !</b> <span class="ph">« a-fè-rinn »</span> = bravo.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Monte en comptant, redescends en comptant à l'envers. »</div>
+  <ol class="steps"><li>Monter : bir, iki, üç, dört, beş.</li><li>Redescendre : beş, dört, üç, iki, bir. Papa dit <b class="tk">Aferin !</b> <span class="ph">« a-fè-rinn »</span> = bravo.</li></ol>
   
-  <div class="more"><b>Tour 2</b> monter en chuchotant les nombres, redescendre en les disant fort. &nbsp;<b>Tour 3</b> sauter de coussin en coussin en comptant jusqu'à beş.</div>
+  <div class="more"><b>Tour 2</b> monter en chuchotant les nombres, redescendre en les disant fort. &nbsp;<b>Tour 3</b> sauter de coussin en coussin, à l'endroit puis à l'envers.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Monter 3 marches en comptant jusqu'à üç.</div>
 </div>
 <div class="card">
@@ -379,51 +383,51 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <header class="ph-head"><span><b>Nevra</b> · Mois 1 · Kasım / Novembre 2026</span><span>Séquences · semaine 2</span></header>
   <div class="body"><div class="shead"><span class="wnum">Semaine 2</span> <b>Ailem</b> · Ma famille</div><div class="tag">Les soirs · 5 à 10 min</div>
 <div class="card">
-  <div class="chead"><span class="code">2·1</span><span class="ctitle">Cours vers la photo !</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">2·1</span><span class="ctitle">Bu annem !</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Lun 9 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 3 photos (maman, papa, la famille), scotch <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Cours toucher la photo de anne ! »</div>
-  <ol class="steps"><li>Scotcher les photos au mur, un peu loin l'une de l'autre.</li><li>Papa dit <b class="tk">anne</b> <span class="ph">« ann-nè »</span> = maman ou <b class="tk">baba</b> <span class="ph">« ba-ba »</span> = papa : Nevra court toucher la bonne photo.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> 3 photos (maman, papa, Neyla), scotch <span class="duo">★ possible avec Neyla</span></div>
+  <div class="cons"><span class="lbl">Consigne</span> « Cours toucher la photo et dis qui c'est. »</div>
+  <ol class="steps"><li>Papa dit anne, baba ou <b class="tk">abla</b> <span class="ph">« a-bla »</span> = grande sœur.</li><li>Nevra court toucher la photo et dit <b class="tk">Bu annem !</b> <span class="ph">« bou ann-nèmm »</span> = c'est ma maman ou <b class="tk">Bu babam !</b> <span class="ph">« bou ba-bamm »</span> = c'est mon papa. Pour Neyla : « abla ! ».</li></ol>
   
   <div class="more"><b>Tour 2</b> papa chuchote le mot au lieu de le dire. &nbsp;<b>Tour 3</b> Nevra dit le mot, papa court (et se trompe exprès).</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : 2 photos, 2 courses.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : 2 photos : « anne », « baba ».</div>
 </div>
 <div class="card">
   <div class="chead"><span class="code">2·2</span><span class="ctitle">Le drapeau rouge</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mar 10 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> crayon rouge </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Colorie le drapeau en rouge. »</div>
-  <div class="side"><div class="wsrow"><svg class="flag" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="78" fill="none" stroke="#333" stroke-width="1"/><path d="M56.9,29.3 A20,20 0 1,0 56.9,50.7 A16,16 0 1,1 56.9,29.3 Z" fill="none" stroke="#333" stroke-width="1"/><polygon points="57.5,40.0 63.9,37.8 64.1,31.0 68.2,36.4 74.7,34.4 70.8,40.0 74.7,45.6 68.2,43.6 64.1,49.0 63.9,42.2" fill="none" stroke="#333" stroke-width="1"/></svg><div></div></div></div><ol class="steps"><li><b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span> = rouge · <b class="tk">beyaz</b> <span class="ph">« bè-yaz »</span> = blanc · <b class="tk">bayrak</b> <span class="ph">« baï-rak »</span> = drapeau</li><li>Pour papa : chaque 10 novembre, la Turquie observe une minute de silence en souvenir d'Atatürk. Vérifie l'heure exacte sur une source officielle.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Colorie le drapeau en rouge, puis compte les pointes de l'étoile. »</div>
+  <div class="side"><div class="wsrow"><svg class="flag" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="78" fill="none" stroke="#333" stroke-width="1"/><path d="M56.9,29.3 A20,20 0 1,0 56.9,50.7 A16,16 0 1,1 56.9,29.3 Z" fill="none" stroke="#333" stroke-width="1"/><polygon points="57.5,40.0 63.9,37.8 64.1,31.0 68.2,36.4 74.7,34.4 70.8,40.0 74.7,45.6 68.2,43.6 64.1,49.0 63.9,42.2" fill="none" stroke="#333" stroke-width="1"/></svg><div></div></div></div><ol class="steps"><li><b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span> = rouge · <b class="tk">beyaz</b> <span class="ph">« bè-yaz »</span> = blanc · <b class="tk">bayrak</b> <span class="ph">« baï-rak »</span> = drapeau</li><li>L'étoile a combien de pointes ? <b class="tk">Kaç ?</b> <span class="ph">« katch »</span> = combien ? → beş.</li><li>Pour papa : chaque 10 novembre, la Turquie observe une minute de silence en souvenir d'Atatürk. Vérifie l'heure exacte sur une source officielle.</li></ol>
   
   <div class="more"><b>Tour 2</b> chercher 3 choses kırmızı dans la pièce. &nbsp;<b>Tour 3</b> chercher 2 choses beyaz.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer 3 choses rouges en disant « kırmızı ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">2·3</span><span class="ctitle">E comme elma</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">2·3</span><span class="ctitle">M comme masa, O comme okul</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mer 11 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> une pomme, crayon </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Fais le mouton : èèè ! »</div>
-  <div class="side"><div class="bigl"><span>E</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>Papa fait le mouton [èèè], Nevra imite.</li><li>Dire <b class="tk">elma</b> <span class="ph">« èl-ma »</span> = pomme, puis croquer la pomme.</li><li>Suivre le grand E avec le doigt.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> crayon </div>
+  <div class="cons"><span class="lbl">Consigne</span> « Dis le son de la lettre que je montre. »</div>
+  <div class="side"><div class="bigl"><span>M O</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>M se dit [mmm] : <b class="tk">masa</b> <span class="ph">« ma-ssa »</span> = table (taper sur la table). O se dit [o], bouche ronde : <b class="tk">okul</b> <span class="ph">« o-koul »</span> = école.</li><li>Première syllabe : M + A = « ma », M + O = « mo ». Nevra les dit en tapant dans ses mains.</li><li>Suivre le M et le O avec le doigt.</li></ol>
   
-  <div class="more"><b>Tour 2</b> papa dit elma ou araba : Nevra fait le mouton seulement quand elle entend [è]. &nbsp;<b>Tour 3</b> tracer un grand E dans l'air avec le bras.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Dire « elma » et croquer la pomme.</div>
+  <div class="more"><b>Tour 2</b> papa dit « ma » ou « mo » : Nevra montre le M, puis la bonne voyelle. &nbsp;<b>Tour 3</b> tracer M et O dans l'air, puis sur le dos de papa.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Taper sur la table en disant « masa ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">2·4</span><span class="ctitle">Tape et compte</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">2·4</span><span class="ctitle">Montre-moi altı !</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Jeu 12 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Tape dans tes mains autant de fois que je dis. »</div>
-  <ol class="steps"><li>Papa dit un nombre de 1 à 5 (bir… beş) ; Nevra tape dans ses mains.</li><li>On inverse : Nevra dit le nombre, papa tape.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Montre-moi autant de doigts que je dis, puis saute autant de fois. »</div>
+  <ol class="steps"><li><b class="tk">altı</b> <span class="ph">« al-teu »</span> = 6 · <b class="tk">yedi</b> <span class="ph">« yè-di »</span> = 7 · <b class="tk">sekiz</b> <span class="ph">« sè-kiz »</span> = 8 · <b class="tk">dokuz</b> <span class="ph">« do-kouz »</span> = 9 · <b class="tk">on</b> <span class="ph">« onn »</span> = 10</li><li>Papa dit un nombre de 6 à 10 ; Nevra montre les doigts, puis saute.</li></ol>
   
-  <div class="more"><b>Tour 2</b> taper sur les genoux, puis sur la table. &nbsp;<b>Tour 3</b> Nevra tape, papa compte et devine combien.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Taper jusqu'à üç, une seule fois.</div>
+  <div class="more"><b>Tour 2</b> papa montre des doigts, Nevra dit le nombre. &nbsp;<b>Tour 3</b> Nevra donne un nombre, papa saute (et se trompe exprès).</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer « on » (10 doigts) et sauter une fois.</div>
 </div>
 <div class="card">
   <div class="chead"><span class="code">2·5</span><span class="ctitle">Nasılsın ?</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Ven 13 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> 1 peluche <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Quand la peluche demande Nasılsın, lève le pouce et dis İyiyim ! »</div>
-  <ol class="steps"><li>La peluche : <b class="tk">Nasılsın ?</b> <span class="ph">« na-seul-seunn »</span> = comment vas-tu ?</li><li>Nevra lève le pouce et saute : <b class="tk">İyiyim !</b> <span class="ph">« i-yi-yimm »</span> = je vais bien.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Réponds à la peluche, puis pose-lui la question. »</div>
+  <ol class="steps"><li>La peluche : <b class="tk">Nasılsın ?</b> <span class="ph">« na-seul-seunn »</span> = comment vas-tu ? Nevra lève le pouce et saute : <b class="tk">İyiyim !</b> <span class="ph">« i-yi-yimm »</span> = je vais bien</li><li>Puis Nevra demande « Nasılsın ? » à la peluche, qui répond (voix de papa).</li></ol>
   
   <div class="more"><b>Tour 2</b> la peluche est triste : Nevra lui demande Nasılsın ? &nbsp;<b>Tour 3</b> Nevra demande Nasılsın ? à chaque personne de la maison.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul « İyiyim ! » avec le pouce levé.</div>
@@ -437,138 +441,138 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="chead"><span class="code">2·6</span><span class="ctitle">Ma famille</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Sam 14 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> crayons </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Dessine anne et baba. »</div>
-  <ol class="steps"><li>Nevra dessine dans le cadre, papa écrit « anne » et « baba » à côté.</li><li>Nevra montre chaque dessin et dit le mot.</li></ol>
-  <div class="ws"><div class="drawbox" style="height:30mm"><span>Dessine : <b>anne et baba</b></span></div></div>
-  <div class="more"><b>Tour 2</b> colorier les dessins. &nbsp;<b>Tour 3</b> montrer les photos de famille en disant anne ou baba.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer 2 photos en disant « anne », « baba ».</div>
+  <div class="cons"><span class="lbl">Consigne</span> « Dessine ta famille, puis présente-la en turc. »</div>
+  <ol class="steps"><li>Nevra dessine anne, baba, abla et elle-même dans le cadre.</li><li>Elle montre chaque personne : « Bu annem », « Bu babam », « abla ».</li><li>Compter les personnes : Kaç ?</li></ol>
+  <div class="ws"><div class="drawbox" style="height:26mm"><span>Dessine : <b>ma famille</b></span></div></div>
+  <div class="more"><b>Tour 2</b> colorier les dessins. &nbsp;<b>Tour 3</b> papa montre un dessin et se trompe (« Bu babam ? »), Nevra corrige.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer 2 dessins en disant « anne », « baba ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">2·7</span><span class="ctitle">Saute sur A ou E</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">2·7</span><span class="ctitle">Saute sur la lettre</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Sam 14 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 2 feuilles, gros feutre </div>
+  <div class="cline"><span class="lbl">Matériel</span> 4 feuilles, gros feutre </div>
   <div class="cons"><span class="lbl">Consigne</span> « Saute sur la lettre que je dis. »</div>
-  <ol class="steps"><li>Écrire A et E en grand sur 2 feuilles posées au sol.</li><li>Papa dit [a] ou [è] : Nevra saute sur la bonne feuille. Puis elle donne le son, papa saute.</li></ol>
+  <ol class="steps"><li>Écrire A, E, M, O sur 4 feuilles au sol ; en utiliser 2 à la fois au début, puis les 4.</li><li>Papa dit un son ([a], [è], [mmm], [o]). Défi : papa dit « ma » et Nevra saute sur M puis sur A.</li></ol>
   
   <div class="more"><b>Tour 2</b> sauter à cloche-pied, puis comme une grenouille. &nbsp;<b>Tour 3</b> éloigner les feuilles : Nevra court jusqu'à la bonne lettre.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 sauts, puis on range.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : 2 lettres seulement : A et O.</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">2·8</span><span class="ctitle">Kaç ?</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">2·8</span><span class="ctitle">Kaç ? jusqu'à on</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Dim 15 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 5 petits objets </div>
+  <div class="cline"><span class="lbl">Matériel</span> 10 petits objets </div>
   <div class="cons"><span class="lbl">Consigne</span> « Compte les objets en turc. »</div>
-  <ol class="steps"><li>Papa pose 1 à 5 objets et demande <b class="tk">Kaç ?</b> <span class="ph">« katch »</span> = combien ?</li><li>Nevra touche chaque objet en comptant : bir, iki, üç…</li></ol>
+  <ol class="steps"><li>Papa pose 6 à 10 objets et demande <b class="tk">Kaç ?</b> <span class="ph">« katch »</span> = combien ?</li><li>Nevra touche chaque objet en comptant. Puis papa en cache un : Kaç ?</li></ol>
   
-  <div class="more"><b>Tour 2</b> papa cache un objet sous sa main : Kaç ? à nouveau. &nbsp;<b>Tour 3</b> Nevra pose les objets, papa compte (et se trompe exprès).</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Compter 3 objets.</div>
+  <div class="more"><b>Tour 2</b> Nevra pose les objets, papa compte (et se trompe exprès). &nbsp;<b>Tour 3</b> 2 tas : Kaç ? dans chaque tas, puis lequel a le plus.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Compter 5 objets.</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">2·9</span><span class="ctitle">Zıpla, dur, otur !</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">2·9</span><span class="ctitle">Zıpla, dur, otur, kalk !</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Dim 15 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Fais ce que je dis : zıpla, dur ou otur. »</div>
-  <ol class="steps"><li>Revoir <b class="tk">zıpla</b> <span class="ph">« zeup-la »</span> = saute et <b class="tk">dur</b> <span class="ph">« dour »</span> = stop.</li><li>Nouveau : <b class="tk">otur</b> <span class="ph">« o-tour »</span> = assieds-toi. Nevra devient la cheffe à la fin.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Fais ce que je dis : zıpla, dur, otur ou kalk. »</div>
+  <ol class="steps"><li>Revoir zıpla, dur, otur. Nouveau : <b class="tk">kalk</b> <span class="ph">« kalk »</span> = lève-toi.</li><li>Enchaîner « otur » puis « kalk » de plus en plus vite. Nevra devient la cheffe à la fin.</li></ol>
   
-  <div class="more"><b>Tour 2</b> avec de la musique : quand elle s'arrête, papa dit otur. &nbsp;<b>Tour 3</b> Nevra est la cheffe et donne les ordres.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : zıpla, otur, puis fin.</div>
+  <div class="more"><b>Tour 2</b> avec de la musique : quand elle s'arrête, papa dit otur ; quand elle reprend, kalk. &nbsp;<b>Tour 3</b> Nevra est la cheffe et donne les ordres.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : otur, kalk, puis fin.</div>
 </div></div>
   <footer class="ph-foot">9</footer>
 </section>
 <section class="page seqpage">
   <header class="ph-head"><span><b>Nevra</b> · Mois 1 · Kasım / Novembre 2026</span><span>Séquences · semaine 3</span></header>
-  <div class="body"><div class="shead"><span class="wnum">Semaine 3</span> <b>Renkler</b> · Les couleurs</div><div class="tag">Les soirs · 5 à 10 min</div>
+  <div class="body"><div class="shead"><span class="wnum">Semaine 3</span> <b>Renkler</b> · Les couleurs et les animaux</div><div class="tag">Les soirs · 5 à 10 min</div>
 <div class="card">
-  <div class="chead"><span class="code">3·1</span><span class="ctitle">La chasse au rouge</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">3·1</span><span class="ctitle">La chasse aux couleurs</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Lun 16 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Trouve quelque chose de kırmızı ! »</div>
-  <ol class="steps"><li>Nevra court chercher un objet <b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span> = rouge et le rapporte.</li><li>Même jeu avec <b class="tk">mavi</b> <span class="ph">« ma-vi »</span> = bleu.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Trouve quelque chose de la couleur que je dis ! »</div>
+  <ol class="steps"><li><b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span> = rouge · <b class="tk">mavi</b> <span class="ph">« ma-vi »</span> = bleu · <b class="tk">sarı</b> <span class="ph">« sa-reu »</span> = jaune</li><li>Nevra court chercher un objet de la bonne couleur et le rapporte en disant la couleur.</li></ol>
   
-  <div class="more"><b>Tour 2</b> rapporter 2 objets rouges. &nbsp;<b>Tour 3</b> trouver un objet mavi caché par papa.</div>
+  <div class="more"><b>Tour 2</b> rapporter 2 objets de la même couleur. &nbsp;<b>Tour 3</b> papa cache un objet mavi, Nevra le cherche.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul objet rouge.</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">3·2</span><span class="ctitle">M comme masa</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">3·2</span><span class="ctitle">İ comme inek, N comme nar</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mar 17 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> crayon </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Tape sur la table et dis mmm… masa ! »</div>
-  <div class="side"><div class="bigl"><span>M</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>Papa fait [mmm] comme « miam ». Nevra tape sur la table : <b class="tk">masa</b> <span class="ph">« ma-ssa »</span> = table.</li><li>Dire la syllabe « ma », puis suivre le grand M avec le doigt.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Dis le son de la lettre que je montre. »</div>
+  <div class="side"><div class="bigl"><span>İ N</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>İ se dit [i] et garde toujours son point : <b class="tk">inek</b> <span class="ph">« i-nèk »</span> = vache (meuh !). N se dit [n] : <b class="tk">nar</b> <span class="ph">« nar »</span> = grenade.</li><li>Syllabes : N + A = « na », N + İ = « ni ». Nevra les dit en tapant dans ses mains.</li><li>Suivre le İ et le N avec le doigt (sans oublier le point).</li></ol>
   
-  <div class="more"><b>Tour 2</b> taper sur la table en rythme : ma-ma-ma. &nbsp;<b>Tour 3</b> tracer un M dans l'air, puis sur le dos de papa.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Taper 3 fois sur la table en disant « masa ».</div>
+  <div class="more"><b>Tour 2</b> papa dit « na » ou « ni » : Nevra montre la bonne voyelle. &nbsp;<b>Tour 3</b> papa dit inek ou nar : Nevra montre İ ou N.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Faire « meuh » et dire « inek ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">3·3</span><span class="ctitle">Montre-moi altı !</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">3·3</span><span class="ctitle">Après on : on bir !</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mer 18 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Montre-moi autant de doigts que je dis. »</div>
-  <ol class="steps"><li><b class="tk">altı</b> <span class="ph">« al-teu »</span> = 6 · <b class="tk">yedi</b> <span class="ph">« yè-di »</span> = 7 · <b class="tk">sekiz</b> <span class="ph">« sè-kiz »</span> = 8 · <b class="tk">dokuz</b> <span class="ph">« do-kouz »</span> = 9 · <b class="tk">on</b> <span class="ph">« onn »</span> = 10</li><li>Compter les doigts ensemble jusqu'à on, puis faire autant de sauts.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Après on, on continue : on bir, on iki ! »</div>
+  <ol class="steps"><li>Compter les 10 doigts jusqu'à on, puis taper du pied : <b class="tk">on bir</b> <span class="ph">« onn bir »</span> = 11, <b class="tk">on iki</b> <span class="ph">« onn i-ki »</span> = 12, on üç, on dört, on beş.</li><li>En turc, 11 = « dix-un » : on + bir. Puis faire 15 petits sauts en comptant.</li></ol>
   
-  <div class="more"><b>Tour 2</b> papa montre des doigts, Nevra dit le nombre. &nbsp;<b>Tour 3</b> Nevra saute autant de fois que papa montre de doigts.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer « on » (10 doigts) et sauter une fois.</div>
+  <div class="more"><b>Tour 2</b> compter de on à on beş en tapant dans les mains. &nbsp;<b>Tour 3</b> Nevra compte, papa saute (et s'arrête au mauvais nombre).</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Compter jusqu'à on bir et sauter.</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">3·4</span><span class="ctitle">Bleu ou jaune ?</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">3·4</span><span class="ctitle">Trois couleurs</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Jeu 19 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 6 objets bleus et jaunes (cubes, Lego…) </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Mets les mavi ici et les sarı là. »</div>
-  <ol class="steps"><li><b class="tk">mavi</b> <span class="ph">« ma-vi »</span> = bleu · <b class="tk">sarı</b> <span class="ph">« sa-reu »</span> = jaune</li><li>Nevra trie les objets en 2 tas en disant la couleur.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> 9 objets rouges, bleus et jaunes </div>
+  <div class="cons"><span class="lbl">Consigne</span> « Range chaque objet avec sa couleur. »</div>
+  <ol class="steps"><li>Nevra trie les objets en 3 tas : kırmızı, mavi, sarı, en disant la couleur.</li><li>Puis compter chaque tas : Kaç ? Lequel en a le plus ?</li></ol>
   
-  <div class="more"><b>Tour 2</b> trier dans 2 boîtes, en courant de l'une à l'autre. &nbsp;<b>Tour 3</b> papa met un objet dans le mauvais tas, Nevra le corrige.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Trier 4 objets seulement.</div>
+  <div class="more"><b>Tour 2</b> papa met un objet dans le mauvais tas, Nevra le corrige. &nbsp;<b>Tour 3</b> ajouter 2 objets à un tas et recompter : Kaç ?</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Trier 4 objets en 2 couleurs.</div>
 </div>
 <div class="card">
   <div class="chead"><span class="code">3·5</span><span class="ctitle">Les animaux</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Ven 20 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Quand je dis kedi, fais le chat ! »</div>
-  <ol class="steps"><li><b class="tk">kedi</b> <span class="ph">« kè-di »</span> = chat (miaou) · <b class="tk">köpek</b> <span class="ph">« keu-pèk »</span> = chien (ouaf) · <b class="tk">kuş</b> <span class="ph">« kouch »</span> = oiseau (bras qui volent)</li><li>Papa dit un animal, Nevra l'imite. Puis elle donne l'animal, papa l'imite.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Quand je dis un animal, imite-le ! »</div>
+  <ol class="steps"><li><b class="tk">kedi</b> <span class="ph">« kè-di »</span> = chat · <b class="tk">köpek</b> <span class="ph">« keu-pèk »</span> = chien · <b class="tk">kuş</b> <span class="ph">« kouch »</span> = oiseau · <b class="tk">inek</b> <span class="ph">« i-nèk »</span> = vache · <b class="tk">at</b> <span class="ph">« at »</span> = cheval</li><li>Papa dit un animal, Nevra l'imite (le cheval galope !). Puis elle donne l'animal, papa l'imite.</li></ol>
   
-  <div class="more"><b>Tour 2</b> marcher comme l'animal (chat à quatre pattes, oiseau qui vole). &nbsp;<b>Tour 3</b> papa fait le bruit, Nevra dit le nom de l'animal.</div>
+  <div class="more"><b>Tour 2</b> marcher comme l'animal (chat à quatre pattes, cheval au galop). &nbsp;<b>Tour 3</b> papa fait le bruit, Nevra dit le nom de l'animal en turc.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 2 animaux : kedi et kuş.</div>
 </div></div>
   <footer class="ph-foot">10</footer>
 </section>
 <section class="page seqpage">
   <header class="ph-head"><span><b>Nevra</b> · Mois 1 · Kasım / Novembre 2026</span><span>Séquences · semaine 3</span></header>
-  <div class="body"><div class="shead"><span class="wnum">Semaine 3</span> <b>Renkler</b> · Les couleurs</div><div class="tag">Le <span class="nw">week-end</span> · 2 séquences de 10 min le samedi et 2 séquences de 10 min le dimanche (2 min de mouvement entre les deux)</div>
+  <div class="body"><div class="shead"><span class="wnum">Semaine 3</span> <b>Renkler</b> · Les couleurs et les animaux</div><div class="tag">Le <span class="nw">week-end</span> · 2 séquences de 10 min le samedi et 2 séquences de 10 min le dimanche (2 min de mouvement entre les deux)</div>
 <div class="card">
   <div class="chead"><span class="code">3·6</span><span class="ctitle">Rond ou carré ?</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Sam 21 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> crayon </div>
   <div class="cons"><span class="lbl">Consigne</span> « Dessine un grand rond dans l'air avec ton bras. »</div>
-  <ol class="steps"><li><b class="tk">daire</b> <span class="ph">« da-i-rè »</span> = rond : grand cercle avec le bras. <b class="tk">kare</b> <span class="ph">« ka-rè »</span> = carré : carré avec le doigt.</li><li>Puis suivre les deux formes au crayon dans le livret.</li></ol>
+  <ol class="steps"><li><b class="tk">daire</b> <span class="ph">« da-i-rè »</span> = rond : grand cercle avec le bras. <b class="tk">kare</b> <span class="ph">« ka-rè »</span> = carré : carré avec le doigt.</li><li>Compter les coins du carré : Kaç ? → dört. Puis suivre les formes au crayon.</li></ol>
   <div class="ws"><div class="shapes"><div><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3 2"/></svg><span>daire</span></div><div><svg viewBox="0 0 40 40"><rect x="4" y="4" width="32" height="32" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3 2"/></svg><span>kare</span></div></div></div>
-  <div class="more"><b>Tour 2</b> chercher dans la maison un objet rond (une assiette, une horloge). &nbsp;<b>Tour 3</b> faire un rond et un carré au sol avec une ficelle, et marcher dessus.</div>
+  <div class="more"><b>Tour 2</b> chercher dans la maison un objet rond et un objet carré. &nbsp;<b>Tour 3</b> faire un rond et un carré au sol avec une ficelle, et marcher dessus.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un rond dans l'air en disant « daire ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">3·7</span><span class="ctitle">Feu rouge, feu vert</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">3·7</span><span class="ctitle">Les trois feux</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Sam 21 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 1 feuille rouge, 1 feuille verte <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Kırmızı, tu t'arrêtes ; yeşil, tu marches. »</div>
-  <ol class="steps"><li>Papa lève la feuille rouge (<b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span>) ou verte (<b class="tk">yeşil</b> <span class="ph">« yè-chil »</span> = vert).</li><li>Nevra marche ou s'arrête. Puis c'est elle qui tient les feuilles.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> 1 feuille rouge, 1 verte, 1 jaune <span class="duo">★ possible avec Neyla</span></div>
+  <div class="cons"><span class="lbl">Consigne</span> « Regarde la couleur et fais le bon geste. »</div>
+  <ol class="steps"><li>Papa lève une feuille : <b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span> = dur (stop), <b class="tk">yeşil</b> <span class="ph">« yè-chil »</span> = vert = on marche, sarı = otur (assise).</li><li>Commencer avec 2 feuilles, puis ajouter la jaune. Ensuite c'est Nevra qui tient les feuilles.</li></ol>
   
   <div class="more"><b>Tour 2</b> même jeu en courant, puis en sautant. &nbsp;<b>Tour 3</b> papa change de feuille très vite : Nevra reste attentive.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 changements de couleur, puis fin.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Rouge et vert seulement.</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">3·8</span><span class="ctitle">Jusqu'à on</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">3·8</span><span class="ctitle">Jusqu'à on beş</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Dim 22 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 10 petits objets, un bol </div>
+  <div class="cline"><span class="lbl">Matériel</span> 15 petits objets, un bol </div>
   <div class="cons"><span class="lbl">Consigne</span> « Mets les objets dans le bol en comptant. »</div>
-  <ol class="steps"><li>Nevra met un objet à la fois dans le bol ; papa et elle comptent de bir à on.</li><li>On vide le bol et on recommence si elle en a envie.</li></ol>
+  <ol class="steps"><li>Nevra met un objet à la fois dans le bol ; papa et elle comptent de bir à <b class="tk">on beş</b> <span class="ph">« onn bèch »</span> = 15.</li><li>Puis papa en retire un : Kaç ?</li></ol>
   
   <div class="more"><b>Tour 2</b> vider le bol en recomptant chaque objet. &nbsp;<b>Tour 3</b> 2 bols : papa met 3 objets dans l'un, Nevra en met autant dans l'autre.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Compter jusqu'à beş seulement.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Compter jusqu'à on seulement.</div>
 </div>
 <div class="card">
   <div class="chead"><span class="code">3·9</span><span class="ctitle">Korkma ! L'hymne</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Dim 22 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> page de l'hymne </div>
   <div class="cons"><span class="lbl">Consigne</span> « Debout, répète deux mots après moi. »</div>
-  <ol class="steps"><li>Expliquer : c'est l'hymne national ; on se tient debout, en silence.</li><li>Papa dit le vers en 4 petits morceaux (page de l'hymne) ; Nevra répète chaque morceau.</li><li>Version très courte : <b class="tk">Korkma !</b> <span class="ph">« kork-ma »</span> = n'aie pas peur.</li></ol>
+  <ol class="steps"><li>Expliquer : c'est l'hymne national ; on se tient debout, en silence.</li><li>Papa dit le vers en 4 petits morceaux (page de l'hymne) ; Nevra répète chaque morceau.</li><li>Défi : dire 2 morceaux d'affilée. Version très courte : <b class="tk">Korkma !</b> <span class="ph">« kork-ma »</span> = n'aie pas peur.</li></ol>
   
   <div class="more"><b>Tour 2</b> redire les morceaux en chuchotant, puis à voix normale. &nbsp;<b>Tour 3</b> papa dit un morceau, Nevra dit le suivant si elle s'en souvient (sinon elle répète).</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Dire seulement « Korkma ! », debout.</div>
@@ -582,51 +586,51 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="chead"><span class="code">4·1</span><span class="ctitle">Top !</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Lun 23 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> une balle <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Lance la balle et dis top ! »</div>
-  <ol class="steps"><li>À chaque lancer, Nevra dit <b class="tk">top</b> <span class="ph">« top »</span> = balle.</li><li>Compter les passes en turc jusqu'à on.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Lance la balle et compte les passes en turc. »</div>
+  <ol class="steps"><li>À chaque lancer, Nevra dit <b class="tk">top</b> <span class="ph">« top »</span> = balle, puis le nombre de la passe.</li><li>Objectif : aller jusqu'à on beş sans faire tomber la balle.</li></ol>
   
-  <div class="more"><b>Tour 2</b> rouler la balle au sol, puis la lancer en l'air. &nbsp;<b>Tour 3</b> compter les passes réussies sans faire tomber la balle.</div>
+  <div class="more"><b>Tour 2</b> rouler la balle au sol en comptant à l'envers depuis beş. &nbsp;<b>Tour 3</b> battre son record de passes.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 passes, 3 « top ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">4·2</span><span class="ctitle">O comme okul</span><span class="kind calm">Calme</span>
+  <div class="chead"><span class="code">4·2</span><span class="ctitle">U comme uçak, L comme lale</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mar 24 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> crayon </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Fais une bouche toute ronde : ooo ! »</div>
-  <div class="side"><div class="bigl"><span>O</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>Papa fait [o] avec une bouche ronde. Nevra imite, puis dit <b class="tk">okul</b> <span class="ph">« o-koul »</span> = école.</li><li>Suivre le grand O avec le doigt : il est rond comme une daire !</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Attention au piège : en turc, U se dit [ou]. »</div>
+  <div class="side"><div class="bigl"><span>U L</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>U se dit [ou] : <b class="tk">uçak</b> <span class="ph">« ou-tchak »</span> = avion (bras en avion). L se dit [l] : <b class="tk">lale</b> <span class="ph">« la-lè »</span> = tulipe.</li><li>Syllabes : L + A = « la », L + U = « lu » (pas « lu » français : « lou » !).</li><li>Suivre le U et le L avec le doigt.</li></ol>
   
-  <div class="more"><b>Tour 2</b> chercher dans la maison des objets ronds comme le O. &nbsp;<b>Tour 3</b> faire un O avec les bras en disant [o] fort, puis doucement.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Faire la bouche ronde [o] 3 fois.</div>
+  <div class="more"><b>Tour 2</b> papa dit « la » ou « lu » : Nevra montre la bonne voyelle (piège : lu = « lou »). &nbsp;<b>Tour 3</b> papa dit uçak ou lale : Nevra montre U ou L.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Faire l'avion en disant « ou-tchak ».</div>
 </div>
 <div class="card">
   <div class="chead"><span class="code">4·3</span><span class="ctitle">Va chercher !</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mer 25 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> une balle, une petite voiture </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Va chercher le top ! »</div>
-  <ol class="steps"><li>Poser la balle et la voiture dans une autre pièce.</li><li>Papa dit <b class="tk">top</b> <span class="ph">« top »</span> ou <b class="tk">araba</b> <span class="ph">« a-ra-ba »</span> : Nevra court chercher le bon objet.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> une balle, une petite voiture, une pomme, un crayon </div>
+  <div class="cons"><span class="lbl">Consigne</span> « Va chercher l'objet que je dis ! »</div>
+  <ol class="steps"><li>Poser les 4 objets dans une autre pièce : top, araba, elma, <b class="tk">kalem</b> <span class="ph">« ka-lèmm »</span> = crayon.</li><li>Papa dit un mot : Nevra court chercher le bon objet et le rapporte en disant « Bu top ! ».</li></ol>
   
-  <div class="more"><b>Tour 2</b> cacher les objets à des endroits différents. &nbsp;<b>Tour 3</b> Nevra cache les objets, papa les cherche et dit le mot.</div>
+  <div class="more"><b>Tour 2</b> cacher les objets à des endroits différents. &nbsp;<b>Tour 3</b> Nevra cache les objets, papa les cherche et dit « Bu ne ? ».</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul aller-retour.</div>
 </div>
 <div class="card">
   <div class="chead"><span class="code">4·4</span><span class="ctitle">Le sac mystère</span><span class="kind calm">Calme</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Jeu 26 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> sac opaque, une pomme, une balle, une petite voiture </div>
-  <div class="cons"><span class="lbl">Consigne</span> « Touche sans regarder et dis ce que c'est. »</div>
-  <ol class="steps"><li>Papa demande <b class="tk">Bu ne ?</b> <span class="ph">« bou nè »</span> = qu'est-ce que c'est ?</li><li>Nevra touche et répond elma, top ou araba. On sort l'objet pour vérifier.</li></ol>
+  <div class="cline"><span class="lbl">Matériel</span> sac opaque, une pomme, une balle, une petite voiture, un crayon </div>
+  <div class="cons"><span class="lbl">Consigne</span> « Touche sans regarder et réponds avec une petite phrase. »</div>
+  <ol class="steps"><li>Papa demande <b class="tk">Bu ne ?</b> <span class="ph">« bou nè »</span> = qu'est-ce que c'est ?</li><li>Nevra répond avec « Bu » : « Bu elma. », « Bu top. », « Bu kalem. ». On sort l'objet pour vérifier.</li></ol>
   
-  <div class="more"><b>Tour 2</b> mettre 2 objets dans le sac. &nbsp;<b>Tour 3</b> Nevra remplit le sac pour papa et lui demande Bu ne ?</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul objet dans le sac.</div>
+  <div class="more"><b>Tour 2</b> mettre 2 objets dans le sac. &nbsp;<b>Tour 3</b> Nevra remplit le sac pour papa et lui demande « Bu ne ? ».</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul objet ; répondre juste « elma ».</div>
 </div>
 <div class="card">
-  <div class="chead"><span class="code">4·5</span><span class="ctitle">Zıpla, dur, otur, kalk !</span><span class="kind mov">Mouvement</span>
+  <div class="chead"><span class="code">4·5</span><span class="ctitle">Écoute et saute</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Ven 27 · 5 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun <span class="duo">★ possible avec Neyla</span></div>
-  <div class="cons"><span class="lbl">Consigne</span> « Fais ce que je dis : zıpla, dur, otur ou kalk. »</div>
-  <ol class="steps"><li>Revoir zıpla, dur, otur. Nouveau : <b class="tk">kalk</b> <span class="ph">« kalk »</span> = lève-toi.</li><li>Enchaîner « otur » puis « kalk » en riant. Nevra devient la cheffe.</li></ol>
+  <div class="cons"><span class="lbl">Consigne</span> « Écoute le nombre, puis saute autant de fois. »</div>
+  <ol class="steps"><li>Papa dit un nombre de 1 à 10, puis « zıpla ! » : Nevra saute ce nombre de fois en comptant.</li><li>Puis enchaîner dur, otur, kalk. Nevra devient la cheffe.</li></ol>
   
-  <div class="more"><b>Tour 2</b> avec de la musique : quand elle s'arrête, papa dit otur ; quand elle reprend, kalk. &nbsp;<b>Tour 3</b> Nevra est la cheffe et donne les ordres.</div>
-  <div class="v3"><b>Version 3 min</b> (si elle sature) : otur, kalk, et fin.</div>
+  <div class="more"><b>Tour 2</b> Nevra dit le nombre, papa saute (et se trompe exprès). &nbsp;<b>Tour 3</b> sauter autant de fois que papa montre de doigts.</div>
+  <div class="v3"><b>Version 3 min</b> (si elle sature) : Dire « üç », puis 3 sauts.</div>
 </div></div>
   <footer class="ph-foot">12</footer>
 </section>
@@ -638,7 +642,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Sam 28 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> jetons, bocal </div>
   <div class="cons"><span class="lbl">Consigne</span> « Tu choisis : une petite surprise maintenant, ou une plus grande demain ? »</div>
-  <ol class="steps"><li>Compter les jetons du bocal ensemble : bir, iki, üç…</li><li>Nevra choisit entre les 2 propositions. Papa respecte son choix, sans commentaire.</li><li>Si elle attend, papa tient sa promesse.</li></ol>
+  <ol class="steps"><li>Compter les jetons du bocal ensemble : bir, iki, üç… jusqu'à on beş si possible.</li><li>Nevra choisit entre les 2 propositions. Papa respecte son choix, sans commentaire.</li><li>Si elle attend, papa tient sa promesse.</li></ol>
   <div class="ws"><div class="choice"><div><i class="cb"></i> Maintenant</div><div><i class="cb"></i> Demain, plus grand</div></div></div>
   <div class="more"><b>Tour 2</b> dessiner la surprise choisie. &nbsp;<b>Tour 3</b> ranger les jetons dans le bocal en comptant.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Seulement compter les jetons du bocal.</div>
@@ -646,11 +650,11 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
 <div class="card">
   <div class="chead"><span class="code">4·7</span><span class="ctitle">Saute sur la lettre</span><span class="kind mov">Mouvement</span>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Sam 28 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
-  <div class="cline"><span class="lbl">Matériel</span> 4 feuilles, gros feutre </div>
+  <div class="cline"><span class="lbl">Matériel</span> 8 feuilles, gros feutre </div>
   <div class="cons"><span class="lbl">Consigne</span> « Saute sur la lettre que je dis. »</div>
-  <ol class="steps"><li>Écrire A, E, M, O sur 4 feuilles au sol ; n'en utiliser que 2 à la fois.</li><li>Papa dit le son ([a], [è], [mmm], [o]) : Nevra saute sur la bonne lettre.</li></ol>
+  <ol class="steps"><li>Écrire A, E, M, O, İ, N, U, L sur 8 feuilles au sol ; en utiliser 4 à la fois.</li><li>Papa dit un son ; piège : [ou] = U. Défi : papa dit « na » ou « la », Nevra saute sur les 2 lettres.</li></ol>
   
-  <div class="more"><b>Tour 2</b> utiliser E et M à la place de A et O. &nbsp;<b>Tour 3</b> Nevra dit le son, papa saute.</div>
+  <div class="more"><b>Tour 2</b> sauter à cloche-pied sur les voyelles, à pieds joints sur les autres. &nbsp;<b>Tour 3</b> Nevra dit le son, papa saute.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 2 lettres seulement : A et O.</div>
 </div>
 <div class="card">
@@ -658,7 +662,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Dim 29 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> 20 cubes ou Lego </div>
   <div class="cons"><span class="lbl">Consigne</span> « Ajoute un cube et dis le nombre avec moi. »</div>
-  <ol class="steps"><li>Monter une tour de 10 cubes en comptant jusqu'à <b class="tk">on</b> <span class="ph">« onn »</span> = 10.</li><li>Ajouter un cube : <b class="tk">on bir</b> <span class="ph">« onn bir »</span> = 11, <b class="tk">on iki</b> <span class="ph">« onn i-ki »</span> = 12… jusqu'à <b class="tk">yirmi</b> <span class="ph">« yir-mi »</span> = 20 (optionnel, si elle est à l'aise).</li></ol>
+  <ol class="steps"><li>Monter une tour de 15 cubes en comptant jusqu'à <b class="tk">on beş</b> <span class="ph">« onn bèch »</span> = 15.</li><li>Continuer : on altı, on yedi, on sekiz, on dokuz, <b class="tk">yirmi</b> <span class="ph">« yir-mi »</span> = 20 (optionnel, si elle est à l'aise).</li></ol>
   
   <div class="more"><b>Tour 2</b> faire tomber la tour et recompter les cubes en les ramassant. &nbsp;<b>Tour 3</b> construire 2 tours de 5 cubes et compter les deux ensemble jusqu'à on.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Une tour jusqu'à on, puis on la fait tomber.</div>
@@ -668,8 +672,8 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Dim 29 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> aucun (téléphone en option) <span class="duo">★ possible avec Neyla</span></div>
   <div class="cons"><span class="lbl">Consigne</span> « Montre-nous ce que tu sais faire en turc ! »</div>
-  <ol class="steps"><li>Nevra dit Merhaba, son prénom, compte jusqu'à on et joue à zıpla / dur.</li><li>Tout le monde applaudit. Papa coche ce qu'elle a fait, sans note ni comparaison.</li></ol>
-  <div class="ws"><div class="bilan"><div><i class="cb"></i>Je dis Merhaba</div><div><i class="cb"></i>Je dis mon prénom en turc</div><div><i class="cb"></i>Je compte jusqu'à on</div><div><i class="cb"></i>Je reconnais A, E, M, O</div></div></div>
+  <ol class="steps"><li>Nevra dit bonjour, se présente (prénom, âge), présente sa famille, compte et joue à zıpla / dur.</li><li>Tout le monde applaudit. Papa coche ce qu'elle a fait, sans note ni comparaison.</li></ol>
+  <div class="ws"><div class="bilan"><div><i class="cb"></i>Je dis Merhaba et Güle güle</div><div><i class="cb"></i>Je dis mon prénom et mon âge</div><div><i class="cb"></i>Je dis « Bu annem », « Bu babam »</div><div><i class="cb"></i>Je compte jusqu'à on beş</div><div><i class="cb"></i>Je reconnais mes 8 lettres</div><div><i class="cb"></i>Je dis ma, mo, na, la</div></div></div>
   <div class="more"><b>Tour 2</b> refaire le spectacle pour quelqu'un d'autre (maman, les peluches). &nbsp;<b>Tour 3</b> Nevra choisit son jeu préféré du mois et on y joue.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Seulement « Merhaba ! » et un « zıpla ».</div>
 </div></div>
@@ -762,8 +766,8 @@ un bol, un sac opaque, 4 feuilles A4 + 1 rouge + 1 verte, 3 rubans, scotch, 3 ph
 <b>ğ</b> muet · <b>an, en, on, in</b> jamais nasaux (d'où « onn », « ann »). Ces transcriptions sont approximatives et identiques
 à celles du livret de Neyla.</p>
 <h3>Lettres : l'oral avant l'écrit</h3>
-<p class="mini">Une seule lettre par semaine (A, E, M, O). On joue d'abord avec le son (imiter, sauter sur la lettre), puis on suit la
-lettre avec le doigt. Le crayon est facultatif. Nevra ne lit pas encore : on ne lui demande pas de lire des mots.</p>
+<p class="mini">Deux lettres par semaine (A-E, M-O, İ-N, U-L), car Nevra connaît déjà les lettres latines. Piège principal : le U turc se dit [ou]. On joue d'abord avec le son (imiter, sauter sur la lettre), puis on suit la
+lettre avec le doigt. Le crayon est facultatif. Les syllabes (ma, mo, na, ni, la, lu) se disent à l'oral : on ne lui demande pas de lire des mots.</p>
 </div>
 <div>
 <h3>Conseils</h3>
