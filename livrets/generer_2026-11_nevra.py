@@ -325,8 +325,8 @@ pages.append(f'''
     <li>Dire bonjour, merci et mon prénom en turc.</li>
     <li>Reconnaître 4 lettres (A, E, M, O) et leur son.</li>
     <li>Compter jusqu'à 10 en turc.</li></ol></div>
-  <div class="cv-time"><b>Durée :</b> 5 soirs de 5 à 10 min + 4 séquences de 10 min le week-end,
-  soit <b>1 h à 1 h 30 par semaine</b> au maximum.</div>
+  <div class="cv-time"><b>Durée :</b> 5 soirs de 5 à 10 min + 4 séquences de 10 min le week-end (2 le samedi, 2 le dimanche),
+  soit <b>environ 1 h 15 à 1 h 30 par semaine</b>.</div>
   <div class="cv-foot">Ce livret appartient à : <b>Nevra</b> &nbsp;·&nbsp; 4 semaines · 36 séquences courtes</div>
 </section>''')
 PAGE_NO[0] += 1
@@ -438,7 +438,8 @@ Ce mois-ci, pour Nevra : <b>un seul vers</b>, en semaine 3 (séquence 3·9).</p>
 Si Nevra ne dit que ce mot, c'est déjà très bien.</div>
 <div class="sens"><h3>Ce que ça veut dire (version simplifiée pour Nevra)</h3>
 <p>« N'aie pas peur ! Le drapeau rouge qui flotte dans le ciel du matin ne s'éteindra pas. »
-<span class="mini">(traduction libre, non officielle)</span></p></div>
+<span class="mini">(traduction libre, non officielle)</span></p>
+<p class="mini">Le vers 1 se termine par « sancak » : le drapeau.</p></div>
 <div class="tip2"><b>Comment l'apprendre :</b> debout, en silence, papa dit un morceau, Nevra répète. Une seule fois par séance.
 Aucune exigence de perfection : on félicite l'effort (« Aferin ! »).</div>
 <div class="warn"><b>À vérifier par le papa :</b> texte et traduction à faire vérifier par un locuteur natif. Pour la mélodie,
@@ -484,7 +485,7 @@ Idées de types : cartes à collectionner, petits cadeaux, sorties.</p>
   <div><h3>Moyennes</h3><p class="mini">= 2 × mon seuil</p>{slot * 2}</div>
   <div><h3>Grande</h3><p class="mini">réserve de fin d'année</p>{slot * 2}</div>
 </div>
-<div class="tipbox"><b>Pour papa — l'argent à 4 ans :</b> une seule idée par mois. Ce mois-ci : « je choisis » (séquence 1·9, choisir librement son seuil) et « attendre pour avoir plus » (séquence 4·6). Toujours <b>2 choix maximum</b>, jamais de reproche sur le choix fait,
+<div class="tipbox"><b>Pour papa — éducation au choix :</b> une seule idée par mois. Ce mois-ci : « je choisis » (séquence 1·9, choisir librement son seuil) et « attendre pour avoir plus » (séquence 4·6). Toujours <b>2 choix maximum</b>, jamais de reproche sur le choix fait,
 et la promesse est tenue.</div>''', "Récompenses"))
 
 # 17. Page du papa
@@ -493,7 +494,7 @@ pages.append(page('''<h1>Pour le papa</h1>
 <div>
 <h3>Durée conseillée</h3>
 <p>Soir : 1 séquence de 5 à 10 min. Week-end : 2 séquences de 10 min le samedi et 2 séquences de 10 min le dimanche, avec 2 min de
-mouvement entre les deux. Soit 1 h à 1 h 30 par semaine au maximum. <b>Toujours un sablier ou un minuteur visible.</b>
+mouvement entre les deux. Soit environ 1 h 15 à 1 h 30 par semaine. <b>Toujours un sablier ou un minuteur visible.</b>
 S'arrêter sur une réussite, avant la lassitude.</p>
 <h3>Matériel du mois</h3>
 <p>Sablier ou minuteur visuel, 1 peluche, crayons (dont rouge), une pomme, une balle, une petite voiture, 20 cubes ou Lego,
