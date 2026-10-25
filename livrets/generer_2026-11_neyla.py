@@ -4,6 +4,7 @@
 Usage : python3 generer_2026-11_neyla.py  -> écrit 2026-11_Neyla_mois1.html
 Le PDF est ensuite produit par rendre_pdf.cjs (Chromium / Playwright).
 """
+import re
 from pathlib import Path
 
 ACCENT = "#1B6E86"      # couleur d'accent de Neyla (bleu pétrole)
@@ -190,7 +191,7 @@ W[3] = dict(
         ("3·3", "Mer 18", "Les problèmes de ballons", "15 min", "petits objets",
          "« Écoute l'histoire en turc et trouve combien. »",
          ["<span class=\"oneline\">Papa lit : <i>« Neyla'nın üç balonu var. Babası ona iki balon daha veriyor. Neyla'nın kaç balonu var ? »</i></span>",
-          "(Neyla a 3 ballons. Papa lui en donne 2 de plus. Combien en a-t-elle ?) Neyla répond en turc, puis fait la grille."],
+          "(Neyla a 3 ballons. Papa lui en donne 2 de plus. Combien en a-t-elle ?) Neyla répond en turc. Elle fait ensuite la grille."],
          calc([("3 + 2 = ___", "üç artı iki"), ("4 + 2 = ___", "dört artı iki"),
                ("6 + 3 = ___", "altı artı üç"), ("1 + 7 = ___", "bir artı yedi")]), False),
         ("3·4", "Jeu 19", "Lettre L comme lale", "15 min", "crayon",
@@ -302,7 +303,7 @@ FLAG = (
     '<path d="M56.9,29.3 A20,20 0 1,0 56.9,50.7 A16,16 0 1,1 56.9,29.3 Z" fill="none" stroke="#333" stroke-width="1"/>'
     '<polygon points="57.5,40.0 63.9,37.8 64.1,31.0 68.2,36.4 74.7,34.4 70.8,40.0 74.7,45.6 68.2,43.6 64.1,49.0 63.9,42.2" '
     'fill="none" stroke="#333" stroke-width="1"/></svg>'
-    '<p class="mini" style="align-self:end">Dessin simplifié, proportions approximatives.</p></div>'
+    '</div>'
 )
 
 
@@ -373,8 +374,7 @@ def week_table(n):
 
 
 intro = '''<div class="note">
-<b>Rythme :</b> 1 séquence les soirs de semaine (10–15 min) ; 2 séquences le samedi et 2 le dimanche
-(2 × 15 min = 30 min, avec une pause mouvement entre les deux). <b>Mot de passe :</b> pendant la semaine,
+<b>Rythme :</b> 1 séquence les soirs de semaine (10–15 min) ; 2 séquences de 15 min le samedi et 2 séquences de 15 min le dimanche (30 min par jour, soit 1&nbsp;h pour le week-end), avec une pause mouvement entre les deux. <b>Mot de passe :</b> pendant la semaine,
 papa demande le mot de passe en turc avant le dessert ou une histoire. Jours libres : dim. 1<sup>er</sup> et
 lun. 30 novembre (rattrapage ou repos). ★ = séquence possible à deux avec Nevra.</div>'''
 pages.append(page("<h1>Programme du mois</h1>" + intro + week_table(1) + week_table(2), "Programme hebdomadaire"))
@@ -447,7 +447,7 @@ for n in range(1, 5):
     head = f'<div class="shead"><span class="wnum">Semaine {n}</span> <b>{W[n]["titre"]}</b> · {W[n]["sous"]}</div>'
     pages.append(page(head + '<div class="tag">Les soirs · 10 à 15 min</div>' + "".join(card(s) for s in seqs[:5]),
                       f"Séquences · semaine {n}", "seqpage"))
-    pages.append(page(head + '<div class="tag">Le week-end · 2 × 15 min par jour</div>' + "".join(card(s) for s in seqs[5:]),
+    pages.append(page(head + '<div class="tag">Le week-end · 2 séquences de 15 min le samedi et 2 séquences de 15 min le dimanche (30 min par jour, soit 1&nbsp;h pour le week-end)</div>' + "".join(card(s) for s in seqs[5:]),
                       f"Séquences · semaine {n}", "seqpage"))
 
 # 14. Hymne
@@ -493,7 +493,7 @@ grid = "".join(
 counter = "".join(f'<div class="cnt"><small>{i}</small></div>' for i in range(1, 16))
 pages.append(page(f'''<h1>Mon tableau de jetons · <span class="tk">jetonlarım</span></h1>
 <p class="lead"><b>1 jeton</b> par séance réalisée : 9 séances par semaine (5 soirs + 2 le samedi + 2 le dimanche) · <b>+1 jeton bonus</b>
-si les 9 séances de la semaine sont faites. Maximum : 9 + 1 = 10 jetons par semaine, 40 ce mois-ci. On colorie une case par jeton gagné.</p>
+si les 9 séances de la semaine sont faites. Maximum : 9 jetons + 1 bonus = 10 par semaine, soit 40 pour le mois. On colorie une case par jeton gagné.</p>
 <table class="tokens"><thead><tr><th></th>{"".join(f"<th>{d}</th>" for d in DAYS)}<th>Bonus</th></tr></thead><tbody>{grid}</tbody></table>
 <div class="tokrow">
   <div class="box"><h3>Mon seuil d'échange : comment ça marche</h3>
@@ -525,8 +525,7 @@ pages.append(page(f'''<h1>Mon catalogue de récompenses</h1>
 <div class="pcols">
 <div>
 <h3>Durée conseillée</h3>
-<p>Soir : 1 séquence de 10 à 15 min, minuteur visible. Week-end : 2 séquences de 15 min le samedi et 2 le dimanche
-(2 × 15 min = 30 min par jour), avec 2 min de mouvement entre les deux. Soit environ 2 h par semaine. <b>Mieux vaut s'arrêter tôt sur une réussite</b> que finir dans la lassitude.</p>
+<p>Soir : 1 séquence de 10 à 15 min, minuteur visible. Week-end : 2 séquences de 15 min le samedi et 2 séquences de 15 min le dimanche (30 min par jour, soit 1&nbsp;h pour le week-end), avec 2 min de mouvement entre les deux. Soit environ 2 h par semaine. <b>Mieux vaut s'arrêter tôt sur une réussite</b> que finir dans la lassitude.</p>
 <h3>Matériel du mois</h3>
 <p>Crayons (dont un rouge), 2 peluches, 20 petits objets, un sac opaque, une balle, une petite voiture, une pomme,
 un citron, 12 petits cartons, 6 feuilles A4, un bocal pour les jetons, un minuteur ou sablier, un téléphone (option).</p>
@@ -716,6 +715,7 @@ table {{ border-collapse: collapse; width: 100%; }}
 .box {{ flex: 1; border: 0.3mm solid #bbb; border-radius: 2mm; padding: 3mm 4mm; }}
 .box h3 {{ margin-top: 0; }}
 .big-fill {{ font-size: 14pt; font-weight: 700; margin: 2mm 0 3mm; }}
+.nw {{ white-space: nowrap; }}
 .oneline {{ white-space: nowrap; font-size: 8.3pt; }}
 .verif {{ margin-top: 3mm; font-size: 8.8pt; font-weight: 600; border-top: 0.3mm solid #ccc; padding-top: 2mm; }}
 .counter {{ display: flex; gap: 1.8mm; margin-bottom: 2mm; }}
@@ -738,5 +738,7 @@ HTML = f'''<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><title>Neyla · Mois 1 · Novembre 2026</title>
 <style>{CSS}</style></head><body>{"".join(pages)}</body></html>'''
 
+# « week-end » ne doit jamais être coupé au trait d'union en fin de ligne
+HTML = re.sub(r"([Ww]eek-end)", r'<span class="nw">\1</span>', HTML)
 OUT.write_text(HTML, encoding="utf-8")
 print(f"{OUT} · {PAGE_NO[0]} pages")
