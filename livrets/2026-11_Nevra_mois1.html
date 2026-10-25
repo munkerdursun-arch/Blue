@@ -96,7 +96,7 @@ table { border-collapse: collapse; width: 100%; }
 .shead { font-size: 11pt; margin-bottom: 1mm; }
 .tag { font-size: 8pt; color: #777; text-transform: uppercase; letter-spacing: 0.8pt; margin-bottom: 2.5mm; }
 .card { border: 0.3mm solid #bdbdbd; border-left: 1.2mm solid #A8502E; border-radius: 2mm; padding: 2.2mm 3.5mm 2mm;
-  margin-bottom: 2.4mm; break-inside: avoid; }
+  margin-bottom: 2mm; break-inside: avoid; }
 .chead { display: flex; align-items: center; gap: 2.2mm; margin-bottom: 0.8mm; }
 .code { font-weight: 800; color: #A8502E; font-size: 10pt; }
 .ctitle { font-weight: 800; font-size: 11pt; flex: 1; }
@@ -112,21 +112,28 @@ table { border-collapse: collapse; width: 100%; }
 .cons { font-weight: 600; margin: 0.6mm 0; font-size: 10pt; }
 .steps { margin: 0.5mm 0 0; padding-left: 4.5mm; font-size: 9pt; }
 .steps li { margin-bottom: 0.3mm; }
-.ws { margin-top: 1.5mm; }
+.ws { margin-top: 1mm; }
 .wsrow { display: flex; gap: 3mm; align-items: stretch; }
 .wsrow > * { flex: 1; }
 .done { font-size: 8.2pt; color: #444; white-space: nowrap; margin-left: 1mm; }
-.v3 { margin-top: 1.2mm; font-size: 8.4pt; color: #444; background: #f3f3f3; border-radius: 1mm; padding: 0.8mm 2mm; }
+.more { margin-top: 1mm; font-size: 8.4pt; color: #333; border-left: 0.6mm solid #ccc; padding-left: 2mm; }
+.more b { color: #555; }
+.v3 { margin-top: 1mm; font-size: 8.4pt; color: #444; background: #f3f3f3; border-radius: 1mm; padding: 0.8mm 2mm; }
 .v3 b { color: #A8502E; }
+.side { float: right; margin: 0 0 1mm 4mm; }
+.side .wsrow > div:empty { display: none; }
+.side .bigl { display: flex; align-items: center; gap: 2mm; }
+.side .bigl p { width: 28mm; margin: 0; }
 .bigl { display: flex; align-items: center; gap: 4mm; }
-.bigl span { font-size: 50pt; line-height: 1; font-weight: 800; color: #fff; -webkit-text-stroke: 0.35mm #999;
+.more, .v3 { clear: both; }
+.bigl span { font-size: 34pt; line-height: 1; font-weight: 800; color: #fff; -webkit-text-stroke: 0.35mm #999;
   border: 0.3mm dashed #ccc; border-radius: 2mm; padding: 0 4mm; }
 .drawbox { border: 0.3mm dashed #aaa; border-radius: 1.5mm; position: relative; }
 .drawbox span { position: absolute; top: 1mm; left: 2mm; font-size: 7.8pt; color: #888; }
 .shapes { display: flex; gap: 10mm; }
 .shapes div { text-align: center; } .shapes svg { width: 22mm; height: 22mm; display: block; }
 .shapes span { font-size: 9pt; font-weight: 700; }
-.flag { width: 39mm; height: 26mm; flex: 0 0 39mm !important; }
+.flag { width: 30mm; height: 20mm; flex: 0 0 30mm !important; }
 .choice { display: flex; gap: 8mm; font-size: 10pt; }
 .bilan { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8mm 5mm; font-size: 9pt; }
 
@@ -201,6 +208,8 @@ table { border-collapse: collapse; width: 100%; }
   <div class="body"><h1>Programme du mois</h1><div class="note">
 <b>Rythme :</b> 1 séquence de 5 à 10 min les soirs de semaine ; 2 séquences de 10 min le samedi et 2 séquences de 10 min
 le dimanche, avec 2 min de mouvement entre les deux. Un sablier ou un minuteur visible à chaque fois.
+<b>Un tour de jeu dure environ 2 min :</b> quand il est fini, on enchaîne le « tour 2 », puis le « tour 3 » indiqués sur la carte,
+jusqu'à la fin du sablier.
 <b>Mot de passe :</b> pendant la semaine, papa demande le mot de passe avant le dessert ou une histoire.
 Jours libres : dim. 1<sup>er</sup> et lun. 30 novembre. ★ = séquence possible avec Neyla.</div>
 <div class="week">
@@ -276,6 +285,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Dis Merhaba à la peluche ! »</div>
   <ol class="steps"><li>La peluche sort de derrière le dos de papa : <b class="tk">Merhaba !</b> <span class="ph">« mèr-ha-ba »</span> = bonjour.</li><li>Nevra répond « Merhaba ! » en faisant coucou de la main.</li><li>La peluche repart : <b class="tk">Hoşça kal !</b> <span class="ph">« hoch-tcha kal »</span> = au revoir.</li></ol>
   
+  <div class="more"><b>Tour 2</b> la peluche se cache ailleurs (sous la table, derrière le canapé) ; Nevra la trouve et dit Merhaba. &nbsp;<b>Tour 3</b> Nevra cache la peluche, papa la cherche et dit Merhaba en la trouvant.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 coucous-Merhaba avec la peluche, c'est tout.</div>
 </div>
 <div class="card">
@@ -283,8 +293,9 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mar 3 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> petite voiture, crayon </div>
   <div class="cons"><span class="lbl">Consigne</span> « Fais rouler la voiture sur le grand A. »</div>
-  <ol class="steps"><li>Papa ouvre grand la bouche : [a]. Nevra imite.</li><li>Elle fait rouler la voiture sur le A en disant <b class="tk">araba</b> <span class="ph">« a-ra-ba »</span> = voiture.</li><li>Puis elle suit le A avec le doigt, et avec un crayon si elle en a envie.</li></ol>
-  <div class="ws"><div class="bigl"><span>A</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div>
+  <div class="side"><div class="bigl"><span>A</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>Papa ouvre grand la bouche : [a]. Nevra imite.</li><li>Elle fait rouler la voiture sur le A en disant <b class="tk">araba</b> <span class="ph">« a-ra-ba »</span> = voiture.</li><li>Puis elle suit le A avec le doigt, et avec un crayon si elle en a envie.</li></ol>
+  
+  <div class="more"><b>Tour 2</b> rouler sur le A en disant [a] très fort, puis en chuchotant. &nbsp;<b>Tour 3</b> chercher des A dans un livre ou sur une boîte et les montrer du doigt.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Rouler 3 fois sur le A en disant « a-ra-ba ».</div>
 </div>
 <div class="card">
@@ -294,6 +305,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Saute quand je dis üç ! »</div>
   <ol class="steps"><li>Papa compte <b class="tk">bir</b> <span class="ph">« bir »</span> = 1, <b class="tk">iki</b> <span class="ph">« i-ki »</span> = 2, <b class="tk">üç</b> <span class="ph">« utch »</span> = 3 : à üç, Nevra saute.</li><li>On inverse : Nevra compte, papa saute.</li></ol>
   
+  <div class="more"><b>Tour 2</b> papa piège : il saute à iki au lieu de üç, Nevra dit « non ! ». &nbsp;<b>Tour 3</b> sauts de grenouille, puis de lapin, toujours sur bir, iki, üç.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 sauts en comptant bir, iki, üç.</div>
 </div>
 <div class="card">
@@ -303,6 +315,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Réponds à la peluche : Benim adım Nevra. »</div>
   <ol class="steps"><li>La peluche demande <b class="tk">Adın ne ?</b> <span class="ph">« a-deunn nè »</span> = comment tu t'appelles ?</li><li>Nevra répond <b class="tk">Benim adım Nevra.</b> <span class="ph">« bè-nim a-deum Nevra »</span> = je m'appelle Nevra. Papa souffle le début si besoin.</li></ol>
   
+  <div class="more"><b>Tour 2</b> 3 peluches demandent chacune Adın ne ? avec une voix différente. &nbsp;<b>Tour 3</b> Nevra pose la question Adın ne ? à une peluche, papa répond avec une voix drôle.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Nevra répond seulement « Nevra ! » : ça compte.</div>
 </div>
 <div class="card">
@@ -312,6 +325,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Quand je dis zıpla, tu sautes ; quand je dis dur, tu t'arrêtes. »</div>
   <ol class="steps"><li><b class="tk">zıpla</b> <span class="ph">« zeup-la »</span> = saute · <b class="tk">dur</b> <span class="ph">« dour »</span> = stop</li><li>Papa alterne lentement, puis plus vite. Nevra devient ensuite la cheffe.</li></ol>
   
+  <div class="more"><b>Tour 2</b> zıpla tout doucement, puis très vite. &nbsp;<b>Tour 3</b> papa chuchote ou crie « zıpla » : petit saut ou grand saut.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 « zıpla », 1 « dur », et on s'arrête.</div>
 </div></div>
   <footer class="ph-foot">6</footer>
@@ -326,6 +340,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Quand je te donne un fruit, dis teşekkür ederim. »</div>
   <ol class="steps"><li>Papa donne un fruit. Nevra dit <b class="tk">Teşekkür ederim !</b> <span class="ph">« tè-chèk-kur è-dè-rim »</span> = merci. Papa souffle le début si besoin.</li><li>On inverse : Nevra donne, papa remercie.</li></ol>
   
+  <div class="more"><b>Tour 2</b> papa « oublie » de dire merci : Nevra le lui rappelle. &nbsp;<b>Tour 3</b> dînette : Nevra sert les peluches, qui disent teşekkür ederim.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul échange, un seul « teşekkür ederim ».</div>
 </div>
 <div class="card">
@@ -335,6 +350,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Marche sur le grand A en disant [a]. »</div>
   <ol class="steps"><li>Papa forme un grand A au sol avec 3 rubans.</li><li>Nevra marche dessus en disant [aaa], puis saute à pieds joints au milieu.</li></ol>
   
+  <div class="more"><b>Tour 2</b> traverser le A à quatre pattes, puis en sautant. &nbsp;<b>Tour 3</b> Nevra forme le A avec les rubans, papa marche dessus en disant [a].</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Une seule traversée du A.</div>
 </div>
 <div class="card">
@@ -344,6 +360,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Monte une marche à chaque nombre. »</div>
   <ol class="steps"><li>Monter en comptant : bir, iki, üç, <b class="tk">dört</b> <span class="ph">« deurt »</span> = 4, <b class="tk">beş</b> <span class="ph">« bèch »</span> = 5.</li><li>Redescendre en recomptant. Papa dit <b class="tk">Aferin !</b> <span class="ph">« a-fè-rinn »</span> = bravo.</li></ol>
   
+  <div class="more"><b>Tour 2</b> monter en chuchotant les nombres, redescendre en les disant fort. &nbsp;<b>Tour 3</b> sauter de coussin en coussin en comptant jusqu'à beş.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Monter 3 marches en comptant jusqu'à üç.</div>
 </div>
 <div class="card">
@@ -353,6 +370,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Choisis ton seuil : combien de jetons veux-tu pour une surprise ? »</div>
   <ol class="steps"><li>Montrer le bocal : chaque séquence faite = 1 jeton dedans.</li><li>Nevra choisit librement son seuil ; papa l'écrit dans « Mon seuil du mois ».</li><li>Compter ensemble les jetons de la semaine : bir, iki, üç…</li></ol>
   
+  <div class="more"><b>Tour 2</b> mettre les jetons de la semaine dans le bocal, un par un, en comptant. &nbsp;<b>Tour 3</b> dessiner une première récompense dans le catalogue (page 16).</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Nevra dit combien de jetons elle veut ; papa l'écrit.</div>
 </div></div>
   <footer class="ph-foot">7</footer>
@@ -367,6 +385,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Cours toucher la photo de anne ! »</div>
   <ol class="steps"><li>Scotcher les photos au mur, un peu loin l'une de l'autre.</li><li>Papa dit <b class="tk">anne</b> <span class="ph">« ann-nè »</span> = maman ou <b class="tk">baba</b> <span class="ph">« ba-ba »</span> = papa : Nevra court toucher la bonne photo.</li></ol>
   
+  <div class="more"><b>Tour 2</b> papa chuchote le mot au lieu de le dire. &nbsp;<b>Tour 3</b> Nevra dit le mot, papa court (et se trompe exprès).</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 2 photos, 2 courses.</div>
 </div>
 <div class="card">
@@ -374,8 +393,9 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mar 10 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> crayon rouge </div>
   <div class="cons"><span class="lbl">Consigne</span> « Colorie le drapeau en rouge. »</div>
-  <ol class="steps"><li><b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span> = rouge · <b class="tk">beyaz</b> <span class="ph">« bè-yaz »</span> = blanc · <b class="tk">bayrak</b> <span class="ph">« baï-rak »</span> = drapeau</li><li>Pour papa : chaque 10 novembre, la Turquie observe une minute de silence en souvenir d'Atatürk. Vérifie l'heure exacte sur une source officielle.</li></ol>
-  <div class="ws"><div class="wsrow"><svg class="flag" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="78" fill="none" stroke="#333" stroke-width="1"/><path d="M56.9,29.3 A20,20 0 1,0 56.9,50.7 A16,16 0 1,1 56.9,29.3 Z" fill="none" stroke="#333" stroke-width="1"/><polygon points="57.5,40.0 63.9,37.8 64.1,31.0 68.2,36.4 74.7,34.4 70.8,40.0 74.7,45.6 68.2,43.6 64.1,49.0 63.9,42.2" fill="none" stroke="#333" stroke-width="1"/></svg><div></div></div></div>
+  <div class="side"><div class="wsrow"><svg class="flag" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="78" fill="none" stroke="#333" stroke-width="1"/><path d="M56.9,29.3 A20,20 0 1,0 56.9,50.7 A16,16 0 1,1 56.9,29.3 Z" fill="none" stroke="#333" stroke-width="1"/><polygon points="57.5,40.0 63.9,37.8 64.1,31.0 68.2,36.4 74.7,34.4 70.8,40.0 74.7,45.6 68.2,43.6 64.1,49.0 63.9,42.2" fill="none" stroke="#333" stroke-width="1"/></svg><div></div></div></div><ol class="steps"><li><b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span> = rouge · <b class="tk">beyaz</b> <span class="ph">« bè-yaz »</span> = blanc · <b class="tk">bayrak</b> <span class="ph">« baï-rak »</span> = drapeau</li><li>Pour papa : chaque 10 novembre, la Turquie observe une minute de silence en souvenir d'Atatürk. Vérifie l'heure exacte sur une source officielle.</li></ol>
+  
+  <div class="more"><b>Tour 2</b> chercher 3 choses kırmızı dans la pièce. &nbsp;<b>Tour 3</b> chercher 2 choses beyaz.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer 3 choses rouges en disant « kırmızı ».</div>
 </div>
 <div class="card">
@@ -383,8 +403,9 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mer 11 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> une pomme, crayon </div>
   <div class="cons"><span class="lbl">Consigne</span> « Fais le mouton : èèè ! »</div>
-  <ol class="steps"><li>Papa fait le mouton [èèè], Nevra imite.</li><li>Dire <b class="tk">elma</b> <span class="ph">« èl-ma »</span> = pomme, puis croquer la pomme.</li><li>Suivre le grand E avec le doigt.</li></ol>
-  <div class="ws"><div class="bigl"><span>E</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div>
+  <div class="side"><div class="bigl"><span>E</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>Papa fait le mouton [èèè], Nevra imite.</li><li>Dire <b class="tk">elma</b> <span class="ph">« èl-ma »</span> = pomme, puis croquer la pomme.</li><li>Suivre le grand E avec le doigt.</li></ol>
+  
+  <div class="more"><b>Tour 2</b> papa dit elma ou araba : Nevra fait le mouton seulement quand elle entend [è]. &nbsp;<b>Tour 3</b> tracer un grand E dans l'air avec le bras.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Dire « elma » et croquer la pomme.</div>
 </div>
 <div class="card">
@@ -394,6 +415,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Tape dans tes mains autant de fois que je dis. »</div>
   <ol class="steps"><li>Papa dit un nombre de 1 à 5 (bir… beş) ; Nevra tape dans ses mains.</li><li>On inverse : Nevra dit le nombre, papa tape.</li></ol>
   
+  <div class="more"><b>Tour 2</b> taper sur les genoux, puis sur la table. &nbsp;<b>Tour 3</b> Nevra tape, papa compte et devine combien.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Taper jusqu'à üç, une seule fois.</div>
 </div>
 <div class="card">
@@ -403,6 +425,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Quand la peluche demande Nasılsın, lève le pouce et dis İyiyim ! »</div>
   <ol class="steps"><li>La peluche : <b class="tk">Nasılsın ?</b> <span class="ph">« na-seul-seunn »</span> = comment vas-tu ?</li><li>Nevra lève le pouce et saute : <b class="tk">İyiyim !</b> <span class="ph">« i-yi-yimm »</span> = je vais bien.</li></ol>
   
+  <div class="more"><b>Tour 2</b> la peluche est triste : Nevra lui demande Nasılsın ? &nbsp;<b>Tour 3</b> Nevra demande Nasılsın ? à chaque personne de la maison.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul « İyiyim ! » avec le pouce levé.</div>
 </div></div>
   <footer class="ph-foot">8</footer>
@@ -417,6 +440,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Dessine anne et baba. »</div>
   <ol class="steps"><li>Nevra dessine dans le cadre, papa écrit « anne » et « baba » à côté.</li><li>Nevra montre chaque dessin et dit le mot.</li></ol>
   <div class="ws"><div class="drawbox" style="height:30mm"><span>Dessine : <b>anne et baba</b></span></div></div>
+  <div class="more"><b>Tour 2</b> colorier les dessins. &nbsp;<b>Tour 3</b> montrer les photos de famille en disant anne ou baba.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer 2 photos en disant « anne », « baba ».</div>
 </div>
 <div class="card">
@@ -426,6 +450,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Saute sur la lettre que je dis. »</div>
   <ol class="steps"><li>Écrire A et E en grand sur 2 feuilles posées au sol.</li><li>Papa dit [a] ou [è] : Nevra saute sur la bonne feuille. Puis elle donne le son, papa saute.</li></ol>
   
+  <div class="more"><b>Tour 2</b> sauter à cloche-pied, puis comme une grenouille. &nbsp;<b>Tour 3</b> éloigner les feuilles : Nevra court jusqu'à la bonne lettre.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 sauts, puis on range.</div>
 </div>
 <div class="card">
@@ -435,6 +460,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Compte les objets en turc. »</div>
   <ol class="steps"><li>Papa pose 1 à 5 objets et demande <b class="tk">Kaç ?</b> <span class="ph">« katch »</span> = combien ?</li><li>Nevra touche chaque objet en comptant : bir, iki, üç…</li></ol>
   
+  <div class="more"><b>Tour 2</b> papa cache un objet sous sa main : Kaç ? à nouveau. &nbsp;<b>Tour 3</b> Nevra pose les objets, papa compte (et se trompe exprès).</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Compter 3 objets.</div>
 </div>
 <div class="card">
@@ -444,6 +470,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Fais ce que je dis : zıpla, dur ou otur. »</div>
   <ol class="steps"><li>Revoir <b class="tk">zıpla</b> <span class="ph">« zeup-la »</span> = saute et <b class="tk">dur</b> <span class="ph">« dour »</span> = stop.</li><li>Nouveau : <b class="tk">otur</b> <span class="ph">« o-tour »</span> = assieds-toi. Nevra devient la cheffe à la fin.</li></ol>
   
+  <div class="more"><b>Tour 2</b> avec de la musique : quand elle s'arrête, papa dit otur. &nbsp;<b>Tour 3</b> Nevra est la cheffe et donne les ordres.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : zıpla, otur, puis fin.</div>
 </div></div>
   <footer class="ph-foot">9</footer>
@@ -458,6 +485,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Trouve quelque chose de kırmızı ! »</div>
   <ol class="steps"><li>Nevra court chercher un objet <b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span> = rouge et le rapporte.</li><li>Même jeu avec <b class="tk">mavi</b> <span class="ph">« ma-vi »</span> = bleu.</li></ol>
   
+  <div class="more"><b>Tour 2</b> rapporter 2 objets rouges. &nbsp;<b>Tour 3</b> trouver un objet mavi caché par papa.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul objet rouge.</div>
 </div>
 <div class="card">
@@ -465,8 +493,9 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mar 17 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> crayon </div>
   <div class="cons"><span class="lbl">Consigne</span> « Tape sur la table et dis mmm… masa ! »</div>
-  <ol class="steps"><li>Papa fait [mmm] comme « miam ». Nevra tape sur la table : <b class="tk">masa</b> <span class="ph">« ma-ssa »</span> = table.</li><li>Dire la syllabe « ma », puis suivre le grand M avec le doigt.</li></ol>
-  <div class="ws"><div class="bigl"><span>M</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div>
+  <div class="side"><div class="bigl"><span>M</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>Papa fait [mmm] comme « miam ». Nevra tape sur la table : <b class="tk">masa</b> <span class="ph">« ma-ssa »</span> = table.</li><li>Dire la syllabe « ma », puis suivre le grand M avec le doigt.</li></ol>
+  
+  <div class="more"><b>Tour 2</b> taper sur la table en rythme : ma-ma-ma. &nbsp;<b>Tour 3</b> tracer un M dans l'air, puis sur le dos de papa.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Taper 3 fois sur la table en disant « masa ».</div>
 </div>
 <div class="card">
@@ -476,6 +505,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Montre-moi autant de doigts que je dis. »</div>
   <ol class="steps"><li><b class="tk">altı</b> <span class="ph">« al-teu »</span> = 6 · <b class="tk">yedi</b> <span class="ph">« yè-di »</span> = 7 · <b class="tk">sekiz</b> <span class="ph">« sè-kiz »</span> = 8 · <b class="tk">dokuz</b> <span class="ph">« do-kouz »</span> = 9 · <b class="tk">on</b> <span class="ph">« onn »</span> = 10</li><li>Compter les doigts ensemble jusqu'à on, puis faire autant de sauts.</li></ol>
   
+  <div class="more"><b>Tour 2</b> papa montre des doigts, Nevra dit le nombre. &nbsp;<b>Tour 3</b> Nevra saute autant de fois que papa montre de doigts.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Montrer « on » (10 doigts) et sauter une fois.</div>
 </div>
 <div class="card">
@@ -485,6 +515,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Mets les mavi ici et les sarı là. »</div>
   <ol class="steps"><li><b class="tk">mavi</b> <span class="ph">« ma-vi »</span> = bleu · <b class="tk">sarı</b> <span class="ph">« sa-reu »</span> = jaune</li><li>Nevra trie les objets en 2 tas en disant la couleur.</li></ol>
   
+  <div class="more"><b>Tour 2</b> trier dans 2 boîtes, en courant de l'une à l'autre. &nbsp;<b>Tour 3</b> papa met un objet dans le mauvais tas, Nevra le corrige.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Trier 4 objets seulement.</div>
 </div>
 <div class="card">
@@ -494,6 +525,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Quand je dis kedi, fais le chat ! »</div>
   <ol class="steps"><li><b class="tk">kedi</b> <span class="ph">« kè-di »</span> = chat (miaou) · <b class="tk">köpek</b> <span class="ph">« keu-pèk »</span> = chien (ouaf) · <b class="tk">kuş</b> <span class="ph">« kouch »</span> = oiseau (bras qui volent)</li><li>Papa dit un animal, Nevra l'imite. Puis elle donne l'animal, papa l'imite.</li></ol>
   
+  <div class="more"><b>Tour 2</b> marcher comme l'animal (chat à quatre pattes, oiseau qui vole). &nbsp;<b>Tour 3</b> papa fait le bruit, Nevra dit le nom de l'animal.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 2 animaux : kedi et kuş.</div>
 </div></div>
   <footer class="ph-foot">10</footer>
@@ -508,6 +540,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Dessine un grand rond dans l'air avec ton bras. »</div>
   <ol class="steps"><li><b class="tk">daire</b> <span class="ph">« da-i-rè »</span> = rond : grand cercle avec le bras. <b class="tk">kare</b> <span class="ph">« ka-rè »</span> = carré : carré avec le doigt.</li><li>Puis suivre les deux formes au crayon dans le livret.</li></ol>
   <div class="ws"><div class="shapes"><div><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3 2"/></svg><span>daire</span></div><div><svg viewBox="0 0 40 40"><rect x="4" y="4" width="32" height="32" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3 2"/></svg><span>kare</span></div></div></div>
+  <div class="more"><b>Tour 2</b> chercher dans la maison un objet rond (une assiette, une horloge). &nbsp;<b>Tour 3</b> faire un rond et un carré au sol avec une ficelle, et marcher dessus.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un rond dans l'air en disant « daire ».</div>
 </div>
 <div class="card">
@@ -517,6 +550,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Kırmızı, tu t'arrêtes ; yeşil, tu marches. »</div>
   <ol class="steps"><li>Papa lève la feuille rouge (<b class="tk">kırmızı</b> <span class="ph">« keur-meu-zeu »</span>) ou verte (<b class="tk">yeşil</b> <span class="ph">« yè-chil »</span> = vert).</li><li>Nevra marche ou s'arrête. Puis c'est elle qui tient les feuilles.</li></ol>
   
+  <div class="more"><b>Tour 2</b> même jeu en courant, puis en sautant. &nbsp;<b>Tour 3</b> papa change de feuille très vite : Nevra reste attentive.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 changements de couleur, puis fin.</div>
 </div>
 <div class="card">
@@ -526,6 +560,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Mets les objets dans le bol en comptant. »</div>
   <ol class="steps"><li>Nevra met un objet à la fois dans le bol ; papa et elle comptent de bir à on.</li><li>On vide le bol et on recommence si elle en a envie.</li></ol>
   
+  <div class="more"><b>Tour 2</b> vider le bol en recomptant chaque objet. &nbsp;<b>Tour 3</b> 2 bols : papa met 3 objets dans l'un, Nevra en met autant dans l'autre.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Compter jusqu'à beş seulement.</div>
 </div>
 <div class="card">
@@ -535,6 +570,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Debout, répète deux mots après moi. »</div>
   <ol class="steps"><li>Expliquer : c'est l'hymne national ; on se tient debout, en silence.</li><li>Papa dit le vers en 4 petits morceaux (page de l'hymne) ; Nevra répète chaque morceau.</li><li>Version très courte : <b class="tk">Korkma !</b> <span class="ph">« kork-ma »</span> = n'aie pas peur.</li></ol>
   
+  <div class="more"><b>Tour 2</b> redire les morceaux en chuchotant, puis à voix normale. &nbsp;<b>Tour 3</b> papa dit un morceau, Nevra dit le suivant si elle s'en souvient (sinon elle répète).</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Dire seulement « Korkma ! », debout.</div>
 </div></div>
   <footer class="ph-foot">11</footer>
@@ -549,6 +585,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Lance la balle et dis top ! »</div>
   <ol class="steps"><li>À chaque lancer, Nevra dit <b class="tk">top</b> <span class="ph">« top »</span> = balle.</li><li>Compter les passes en turc jusqu'à on.</li></ol>
   
+  <div class="more"><b>Tour 2</b> rouler la balle au sol, puis la lancer en l'air. &nbsp;<b>Tour 3</b> compter les passes réussies sans faire tomber la balle.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 3 passes, 3 « top ».</div>
 </div>
 <div class="card">
@@ -556,8 +593,9 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
     <span class="cmeta"><svg class="hg" viewBox="0 0 12 16"><path d="M1 1h10M1 15h10M2 1c0 5 8 5 8 7s-8 2-8 7M10 1c0 5-8 5-8 7s8 2 8 7" fill="none" stroke="#A8502E" stroke-width="1.3"/></svg> Mar 24 · 10 min</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> crayon </div>
   <div class="cons"><span class="lbl">Consigne</span> « Fais une bouche toute ronde : ooo ! »</div>
-  <ol class="steps"><li>Papa fait [o] avec une bouche ronde. Nevra imite, puis dit <b class="tk">okul</b> <span class="ph">« o-koul »</span> = école.</li><li>Suivre le grand O avec le doigt : il est rond comme une daire !</li></ol>
-  <div class="ws"><div class="bigl"><span>O</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div>
+  <div class="side"><div class="bigl"><span>O</span><p class="mini">Suis la lettre avec le doigt, puis avec un crayon.</p></div></div><ol class="steps"><li>Papa fait [o] avec une bouche ronde. Nevra imite, puis dit <b class="tk">okul</b> <span class="ph">« o-koul »</span> = école.</li><li>Suivre le grand O avec le doigt : il est rond comme une daire !</li></ol>
+  
+  <div class="more"><b>Tour 2</b> chercher dans la maison des objets ronds comme le O. &nbsp;<b>Tour 3</b> faire un O avec les bras en disant [o] fort, puis doucement.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Faire la bouche ronde [o] 3 fois.</div>
 </div>
 <div class="card">
@@ -567,6 +605,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Va chercher le top ! »</div>
   <ol class="steps"><li>Poser la balle et la voiture dans une autre pièce.</li><li>Papa dit <b class="tk">top</b> <span class="ph">« top »</span> ou <b class="tk">araba</b> <span class="ph">« a-ra-ba »</span> : Nevra court chercher le bon objet.</li></ol>
   
+  <div class="more"><b>Tour 2</b> cacher les objets à des endroits différents. &nbsp;<b>Tour 3</b> Nevra cache les objets, papa les cherche et dit le mot.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul aller-retour.</div>
 </div>
 <div class="card">
@@ -576,6 +615,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Touche sans regarder et dis ce que c'est. »</div>
   <ol class="steps"><li>Papa demande <b class="tk">Bu ne ?</b> <span class="ph">« bou nè »</span> = qu'est-ce que c'est ?</li><li>Nevra touche et répond elma, top ou araba. On sort l'objet pour vérifier.</li></ol>
   
+  <div class="more"><b>Tour 2</b> mettre 2 objets dans le sac. &nbsp;<b>Tour 3</b> Nevra remplit le sac pour papa et lui demande Bu ne ?</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Un seul objet dans le sac.</div>
 </div>
 <div class="card">
@@ -585,6 +625,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Fais ce que je dis : zıpla, dur, otur ou kalk. »</div>
   <ol class="steps"><li>Revoir zıpla, dur, otur. Nouveau : <b class="tk">kalk</b> <span class="ph">« kalk »</span> = lève-toi.</li><li>Enchaîner « otur » puis « kalk » en riant. Nevra devient la cheffe.</li></ol>
   
+  <div class="more"><b>Tour 2</b> avec de la musique : quand elle s'arrête, papa dit otur ; quand elle reprend, kalk. &nbsp;<b>Tour 3</b> Nevra est la cheffe et donne les ordres.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : otur, kalk, et fin.</div>
 </div></div>
   <footer class="ph-foot">12</footer>
@@ -599,6 +640,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Tu choisis : une petite surprise maintenant, ou une plus grande demain ? »</div>
   <ol class="steps"><li>Compter les jetons du bocal ensemble : bir, iki, üç…</li><li>Nevra choisit entre les 2 propositions. Papa respecte son choix, sans commentaire.</li><li>Si elle attend, papa tient sa promesse.</li></ol>
   <div class="ws"><div class="choice"><div><i class="cb"></i> Maintenant</div><div><i class="cb"></i> Demain, plus grand</div></div></div>
+  <div class="more"><b>Tour 2</b> dessiner la surprise choisie. &nbsp;<b>Tour 3</b> ranger les jetons dans le bocal en comptant.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Seulement compter les jetons du bocal.</div>
 </div>
 <div class="card">
@@ -608,6 +650,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Saute sur la lettre que je dis. »</div>
   <ol class="steps"><li>Écrire A, E, M, O sur 4 feuilles au sol ; n'en utiliser que 2 à la fois.</li><li>Papa dit le son ([a], [è], [mmm], [o]) : Nevra saute sur la bonne lettre.</li></ol>
   
+  <div class="more"><b>Tour 2</b> utiliser E et M à la place de A et O. &nbsp;<b>Tour 3</b> Nevra dit le son, papa saute.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : 2 lettres seulement : A et O.</div>
 </div>
 <div class="card">
@@ -617,6 +660,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Ajoute un cube et dis le nombre avec moi. »</div>
   <ol class="steps"><li>Monter une tour de 10 cubes en comptant jusqu'à <b class="tk">on</b> <span class="ph">« onn »</span> = 10.</li><li>Ajouter un cube : <b class="tk">on bir</b> <span class="ph">« onn bir »</span> = 11, <b class="tk">on iki</b> <span class="ph">« onn i-ki »</span> = 12… jusqu'à <b class="tk">yirmi</b> <span class="ph">« yir-mi »</span> = 20 (optionnel, si elle est à l'aise).</li></ol>
   
+  <div class="more"><b>Tour 2</b> faire tomber la tour et recompter les cubes en les ramassant. &nbsp;<b>Tour 3</b> construire 2 tours de 5 cubes et compter les deux ensemble jusqu'à on.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Une tour jusqu'à on, puis on la fait tomber.</div>
 </div>
 <div class="card">
@@ -626,6 +670,7 @@ un mot répété avec plaisir vaut mieux que dix mots appris de force.</p>
   <div class="cons"><span class="lbl">Consigne</span> « Montre-nous ce que tu sais faire en turc ! »</div>
   <ol class="steps"><li>Nevra dit Merhaba, son prénom, compte jusqu'à on et joue à zıpla / dur.</li><li>Tout le monde applaudit. Papa coche ce qu'elle a fait, sans note ni comparaison.</li></ol>
   <div class="ws"><div class="bilan"><div><i class="cb"></i>Je dis Merhaba</div><div><i class="cb"></i>Je dis mon prénom en turc</div><div><i class="cb"></i>Je compte jusqu'à on</div><div><i class="cb"></i>Je reconnais A, E, M, O</div></div></div>
+  <div class="more"><b>Tour 2</b> refaire le spectacle pour quelqu'un d'autre (maman, les peluches). &nbsp;<b>Tour 3</b> Nevra choisit son jeu préféré du mois et on y joue.</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : Seulement « Merhaba ! » et un « zıpla ».</div>
 </div></div>
   <footer class="ph-foot">13</footer>
@@ -703,6 +748,11 @@ et la promesse est tenue.</div></div>
 <p>Soir : 1 séquence de 5 à 10 min. <span class="nw">Week-end</span> : 2 séquences de 10 min le samedi et 2 séquences de 10 min le dimanche, avec 2 min de
 mouvement entre les deux. Soit environ 1 h 15 à 1 h 30 par semaine. <b>Toujours un sablier ou un minuteur visible.</b>
 S'arrêter sur une réussite, avant la lassitude.</p>
+<h3>Déroulé d'une séquence</h3>
+<p>1. Ouverture (30 s) : « Merhaba ! », on retourne le sablier. 2. Tour 1 : le jeu de la carte (environ 2 min).
+3. Tours 2 et 3 : les variantes de la carte, jusqu'à la fin du sablier. 4. Clôture (30 s) : « Aferin ! » et le jeton.
+Une séquence de 5 min = tours 1 et 2 ; une séquence de 10 min = tours 1, 2 et 3, puis on rejoue le tour préféré.
+Si elle sature avant la fin : on arrête, la séquence compte.</p>
 <h3>Matériel du mois</h3>
 <p>Sablier ou minuteur visuel, 1 peluche, crayons (dont rouge), une pomme, une balle, une petite voiture, 20 cubes ou Lego,
 un bol, un sac opaque, 4 feuilles A4 + 1 rouge + 1 verte, 3 rubans, scotch, 3 photos de famille, un bocal pour les jetons.</p>

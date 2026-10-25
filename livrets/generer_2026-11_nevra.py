@@ -281,19 +281,107 @@ W[4] = dict(
     ])
 
 
+# ---------------------------------------------------------------- tours suivants
+# Un tour de jeu dure environ 2 min : ces variantes remplissent le sablier (tour 2, puis tour 3).
+MORE = {
+    "1·1": ("la peluche se cache ailleurs (sous la table, derrière le canapé) ; Nevra la trouve et dit Merhaba",
+            "Nevra cache la peluche, papa la cherche et dit Merhaba en la trouvant"),
+    "1·2": ("rouler sur le A en disant [a] très fort, puis en chuchotant",
+            "chercher des A dans un livre ou sur une boîte et les montrer du doigt"),
+    "1·3": ("papa piège : il saute à iki au lieu de üç, Nevra dit « non ! »",
+            "sauts de grenouille, puis de lapin, toujours sur bir, iki, üç"),
+    "1·4": ("3 peluches demandent chacune Adın ne ? avec une voix différente",
+            "Nevra pose la question Adın ne ? à une peluche, papa répond avec une voix drôle"),
+    "1·5": ("zıpla tout doucement, puis très vite",
+            "papa chuchote ou crie « zıpla » : petit saut ou grand saut"),
+    "1·6": ("papa « oublie » de dire merci : Nevra le lui rappelle",
+            "dînette : Nevra sert les peluches, qui disent teşekkür ederim"),
+    "1·7": ("traverser le A à quatre pattes, puis en sautant",
+            "Nevra forme le A avec les rubans, papa marche dessus en disant [a]"),
+    "1·8": ("monter en chuchotant les nombres, redescendre en les disant fort",
+            "sauter de coussin en coussin en comptant jusqu'à beş"),
+    "1·9": ("mettre les jetons de la semaine dans le bocal, un par un, en comptant",
+            "dessiner une première récompense dans le catalogue (page 16)"),
+    "2·1": ("papa chuchote le mot au lieu de le dire",
+            "Nevra dit le mot, papa court (et se trompe exprès)"),
+    "2·2": ("chercher 3 choses kırmızı dans la pièce",
+            "chercher 2 choses beyaz"),
+    "2·3": ("papa dit elma ou araba : Nevra fait le mouton seulement quand elle entend [è]",
+            "tracer un grand E dans l'air avec le bras"),
+    "2·4": ("taper sur les genoux, puis sur la table",
+            "Nevra tape, papa compte et devine combien"),
+    "2·5": ("la peluche est triste : Nevra lui demande Nasılsın ?",
+            "Nevra demande Nasılsın ? à chaque personne de la maison"),
+    "2·6": ("colorier les dessins",
+            "montrer les photos de famille en disant anne ou baba"),
+    "2·7": ("sauter à cloche-pied, puis comme une grenouille",
+            "éloigner les feuilles : Nevra court jusqu'à la bonne lettre"),
+    "2·8": ("papa cache un objet sous sa main : Kaç ? à nouveau",
+            "Nevra pose les objets, papa compte (et se trompe exprès)"),
+    "2·9": ("avec de la musique : quand elle s'arrête, papa dit otur",
+            "Nevra est la cheffe et donne les ordres"),
+    "3·1": ("rapporter 2 objets rouges",
+            "trouver un objet mavi caché par papa"),
+    "3·2": ("taper sur la table en rythme : ma-ma-ma",
+            "tracer un M dans l'air, puis sur le dos de papa"),
+    "3·3": ("papa montre des doigts, Nevra dit le nombre",
+            "Nevra saute autant de fois que papa montre de doigts"),
+    "3·4": ("trier dans 2 boîtes, en courant de l'une à l'autre",
+            "papa met un objet dans le mauvais tas, Nevra le corrige"),
+    "3·5": ("marcher comme l'animal (chat à quatre pattes, oiseau qui vole)",
+            "papa fait le bruit, Nevra dit le nom de l'animal"),
+    "3·6": ("chercher dans la maison un objet rond (une assiette, une horloge)",
+            "faire un rond et un carré au sol avec une ficelle, et marcher dessus"),
+    "3·7": ("même jeu en courant, puis en sautant",
+            "papa change de feuille très vite : Nevra reste attentive"),
+    "3·8": ("vider le bol en recomptant chaque objet",
+            "2 bols : papa met 3 objets dans l'un, Nevra en met autant dans l'autre"),
+    "3·9": ("redire les morceaux en chuchotant, puis à voix normale",
+            "papa dit un morceau, Nevra dit le suivant si elle s'en souvient (sinon elle répète)"),
+    "4·1": ("rouler la balle au sol, puis la lancer en l'air",
+            "compter les passes réussies sans faire tomber la balle"),
+    "4·2": ("chercher dans la maison des objets ronds comme le O",
+            "faire un O avec les bras en disant [o] fort, puis doucement"),
+    "4·3": ("cacher les objets à des endroits différents",
+            "Nevra cache les objets, papa les cherche et dit le mot"),
+    "4·4": ("mettre 2 objets dans le sac",
+            "Nevra remplit le sac pour papa et lui demande Bu ne ?"),
+    "4·5": ("avec de la musique : quand elle s'arrête, papa dit otur ; quand elle reprend, kalk",
+            "Nevra est la cheffe et donne les ordres"),
+    "4·6": ("dessiner la surprise choisie",
+            "ranger les jetons dans le bocal en comptant"),
+    "4·7": ("utiliser E et M à la place de A et O",
+            "Nevra dit le son, papa saute"),
+    "4·8": ("faire tomber la tour et recompter les cubes en les ramassant",
+            "construire 2 tours de 5 cubes et compter les deux ensemble jusqu'à on"),
+    "4·9": ("refaire le spectacle pour quelqu'un d'autre (maman, les peluches)",
+            "Nevra choisit son jeu préféré du mois et on y joue"),
+}
+
+
 # ---------------------------------------------------------------- rendu des cartes
+def dot(t):
+    """Termine une phrase par un point, sauf si elle finit déjà par ? ou !."""
+    return t if t.endswith(("?", "!")) else t + "."
+
+
 def card(s):
     code, day, title, dur, mat, cons, steps, ws, v3, mov, duo = s
     kind = '<span class="kind mov">Mouvement</span>' if mov else '<span class="kind calm">Calme</span>'
     duo_tag = '<span class="duo">★ possible avec Neyla</span>' if duo else ""
+    # Lettre creuse et drapeau : placés à droite des étapes pour gagner de la hauteur
+    side = ws.startswith('<div class="bigl"') or ws == FLAG
+    side_html = f'<div class="side">{ws}</div>' if side else ""
+    ws = "" if side else ws
     return f'''
 <div class="card">
   <div class="chead"><span class="code">{code}</span><span class="ctitle">{title}</span>{kind}
     <span class="cmeta">{HOURGLASS} {day} · {dur}</span><span class="done"><i class="cb"></i>Réalisée <i class="cb"></i>Jeton</span></div>
   <div class="cline"><span class="lbl">Matériel</span> {mat} {duo_tag}</div>
   <div class="cons"><span class="lbl">Consigne</span> {cons}</div>
-  <ol class="steps">{"".join(f"<li>{x}</li>" for x in steps)}</ol>
+  {side_html}<ol class="steps">{"".join(f"<li>{x}</li>" for x in steps)}</ol>
   {f'<div class="ws">{ws}</div>' if ws else ""}
+  <div class="more"><b>Tour 2</b> {dot(MORE[code][0])} &nbsp;<b>Tour 3</b> {dot(MORE[code][1])}</div>
   <div class="v3"><b>Version 3 min</b> (si elle sature) : {v3}</div>
 </div>'''
 
@@ -353,6 +441,8 @@ def week_table(n):
 intro = '''<div class="note">
 <b>Rythme :</b> 1 séquence de 5 à 10 min les soirs de semaine ; 2 séquences de 10 min le samedi et 2 séquences de 10 min
 le dimanche, avec 2 min de mouvement entre les deux. Un sablier ou un minuteur visible à chaque fois.
+<b>Un tour de jeu dure environ 2 min :</b> quand il est fini, on enchaîne le « tour 2 », puis le « tour 3 » indiqués sur la carte,
+jusqu'à la fin du sablier.
 <b>Mot de passe :</b> pendant la semaine, papa demande le mot de passe avant le dessert ou une histoire.
 Jours libres : dim. 1<sup>er</sup> et lun. 30 novembre. ★ = séquence possible avec Neyla.</div>'''
 pages.append(page("<h1>Programme du mois</h1>" + intro + week_table(1) + week_table(2), "Programme hebdomadaire"))
@@ -496,6 +586,11 @@ pages.append(page('''<h1>Pour le papa</h1>
 <p>Soir : 1 séquence de 5 à 10 min. Week-end : 2 séquences de 10 min le samedi et 2 séquences de 10 min le dimanche, avec 2 min de
 mouvement entre les deux. Soit environ 1 h 15 à 1 h 30 par semaine. <b>Toujours un sablier ou un minuteur visible.</b>
 S'arrêter sur une réussite, avant la lassitude.</p>
+<h3>Déroulé d'une séquence</h3>
+<p>1. Ouverture (30 s) : « Merhaba ! », on retourne le sablier. 2. Tour 1 : le jeu de la carte (environ 2 min).
+3. Tours 2 et 3 : les variantes de la carte, jusqu'à la fin du sablier. 4. Clôture (30 s) : « Aferin ! » et le jeton.
+Une séquence de 5 min = tours 1 et 2 ; une séquence de 10 min = tours 1, 2 et 3, puis on rejoue le tour préféré.
+Si elle sature avant la fin : on arrête, la séquence compte.</p>
 <h3>Matériel du mois</h3>
 <p>Sablier ou minuteur visuel, 1 peluche, crayons (dont rouge), une pomme, une balle, une petite voiture, 20 cubes ou Lego,
 un bol, un sac opaque, 4 feuilles A4 + 1 rouge + 1 verte, 3 rubans, scotch, 3 photos de famille, un bocal pour les jetons.</p>
@@ -658,7 +753,7 @@ table {{ border-collapse: collapse; width: 100%; }}
 .shead {{ font-size: 11pt; margin-bottom: 1mm; }}
 .tag {{ font-size: 8pt; color: #777; text-transform: uppercase; letter-spacing: 0.8pt; margin-bottom: 2.5mm; }}
 .card {{ border: 0.3mm solid #bdbdbd; border-left: 1.2mm solid {ACCENT}; border-radius: 2mm; padding: 2.2mm 3.5mm 2mm;
-  margin-bottom: 2.4mm; break-inside: avoid; }}
+  margin-bottom: 2mm; break-inside: avoid; }}
 .chead {{ display: flex; align-items: center; gap: 2.2mm; margin-bottom: 0.8mm; }}
 .code {{ font-weight: 800; color: {ACCENT}; font-size: 10pt; }}
 .ctitle {{ font-weight: 800; font-size: 11pt; flex: 1; }}
@@ -674,21 +769,28 @@ table {{ border-collapse: collapse; width: 100%; }}
 .cons {{ font-weight: 600; margin: 0.6mm 0; font-size: 10pt; }}
 .steps {{ margin: 0.5mm 0 0; padding-left: 4.5mm; font-size: 9pt; }}
 .steps li {{ margin-bottom: 0.3mm; }}
-.ws {{ margin-top: 1.5mm; }}
+.ws {{ margin-top: 1mm; }}
 .wsrow {{ display: flex; gap: 3mm; align-items: stretch; }}
 .wsrow > * {{ flex: 1; }}
 .done {{ font-size: 8.2pt; color: #444; white-space: nowrap; margin-left: 1mm; }}
-.v3 {{ margin-top: 1.2mm; font-size: 8.4pt; color: #444; background: #f3f3f3; border-radius: 1mm; padding: 0.8mm 2mm; }}
+.more {{ margin-top: 1mm; font-size: 8.4pt; color: #333; border-left: 0.6mm solid #ccc; padding-left: 2mm; }}
+.more b {{ color: #555; }}
+.v3 {{ margin-top: 1mm; font-size: 8.4pt; color: #444; background: #f3f3f3; border-radius: 1mm; padding: 0.8mm 2mm; }}
 .v3 b {{ color: {ACCENT}; }}
+.side {{ float: right; margin: 0 0 1mm 4mm; }}
+.side .wsrow > div:empty {{ display: none; }}
+.side .bigl {{ display: flex; align-items: center; gap: 2mm; }}
+.side .bigl p {{ width: 28mm; margin: 0; }}
 .bigl {{ display: flex; align-items: center; gap: 4mm; }}
-.bigl span {{ font-size: 50pt; line-height: 1; font-weight: 800; color: #fff; -webkit-text-stroke: 0.35mm #999;
+.more, .v3 {{ clear: both; }}
+.bigl span {{ font-size: 34pt; line-height: 1; font-weight: 800; color: #fff; -webkit-text-stroke: 0.35mm #999;
   border: 0.3mm dashed #ccc; border-radius: 2mm; padding: 0 4mm; }}
 .drawbox {{ border: 0.3mm dashed #aaa; border-radius: 1.5mm; position: relative; }}
 .drawbox span {{ position: absolute; top: 1mm; left: 2mm; font-size: 7.8pt; color: #888; }}
 .shapes {{ display: flex; gap: 10mm; }}
 .shapes div {{ text-align: center; }} .shapes svg {{ width: 22mm; height: 22mm; display: block; }}
 .shapes span {{ font-size: 9pt; font-weight: 700; }}
-.flag {{ width: 39mm; height: 26mm; flex: 0 0 39mm !important; }}
+.flag {{ width: 30mm; height: 20mm; flex: 0 0 30mm !important; }}
 .choice {{ display: flex; gap: 8mm; font-size: 10pt; }}
 .bilan {{ display: grid; grid-template-columns: 1fr 1fr; gap: 0.8mm 5mm; font-size: 9pt; }}
 
