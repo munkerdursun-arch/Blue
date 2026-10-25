@@ -100,9 +100,9 @@ W[1] = dict(
           "Neyla : " + tr("Benim adım Neyla.", "bè-nim a-deum Neyla", "je m'appelle Neyla"),
           "Neyla pose la question à papa, puis remplit sa carte."],
          '<div class="idcard"><div class="idphoto">photo<br>ou dessin</div><div class="idtxt">'
-         '<div>Adım <span class="ph">(mon nom)</span> : <span class="fill"></span></div>'
-         '<div>Yaşım <span class="ph">(mon âge)</span> : <span class="fill short"></span></div>'
-         '<div>Ülkelerim <span class="ph">(mes pays)</span> : <span class="fill"></span></div></div></div>', False),
+         '<div>Adım <span class="ph">« a-deum » (mon nom)</span> : <span class="fill"></span></div>'
+         '<div>Yaşım <span class="ph">« ya-cheum » (mon âge)</span> : <span class="fill short"></span></div>'
+         '<div>Ülkelerim <span class="ph">« ul-kè-lè-rim » (mes pays)</span> : <span class="fill"></span></div></div></div>', False),
         ("1·9", "Dim 8", "Mes jetons, mon seuil", "15 min", "jetons, bocal, page « Tableau de jetons »",
          "« Chaque séance te rapporte un jeton. À combien de jetons veux-tu échanger ? »",
          ["Compter les jetons de la semaine en turc : bir, iki, üç…",
@@ -474,7 +474,7 @@ et adopté par la Grande Assemblée nationale de Turquie le 12 mars 1921 (date g
 <p>« N'aie pas peur ! Notre drapeau rouge flotte dans le ciel du matin. Il ne s'éteindra jamais,
 tant que le dernier foyer de notre pays restera allumé. » <span class="mini">(traduction libre, non officielle)</span></p>
 <p class="mini">Mot à mot : <b>korkma</b> n'aie pas peur · <b>sönmez</b> ne s'éteint pas · <b>şafak</b> aube ·
-<b>yüzen</b> qui flotte (litt. « qui nage ») · <b>al sancak</b> le drapeau rouge · <b>yurt</b> le pays, la patrie ·
+<b>yüzen</b> qui flotte · <b>al sancak</b> le drapeau rouge · <b>yurt</b> le pays, la patrie ·
 <b>tüten</b> qui fume · <b>en son ocak</b> le tout dernier foyer.
 Traduction libre et non officielle.</p></div>
 <div class="warn"><b>À vérifier par le papa :</b> texte et traduction à faire vérifier par un locuteur natif ; comparez aussi le texte avec le texte officiel
