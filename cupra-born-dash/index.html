@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#0b0c0e" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Born Dash</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- three.js est embarqué localement (vendor/) : l'appli fonctionne sans réseau -->
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
+  </script>
+</head>
+<body>
+  <div id="app">
+
+    <!-- ===== Dock gauche ===== -->
+    <aside class="dock">
+      <div class="dock-time" data-bind="timeShort">--:--</div>
+      <nav class="dock-apps" id="dockApps"><!-- rempli par apps.js --></nav>
+      <div class="dock-bottom">
+        <button class="dock-btn" id="btnTheme" title="Thème jour / nuit" aria-label="Thème"></button>
+        <button class="dock-btn" id="btnSettings" title="Réglages" aria-label="Réglages"></button>
+      </div>
+    </aside>
+
+    <!-- ===== Carte centrale ===== -->
+    <main class="hero card">
+      <header class="hero-head">
+        <div class="hero-title">
+          <h1 data-bind="carName">Cupra Born</h1>
+          <div class="source"><span class="dot" data-bind-class="sourceDot"></span><span data-bind="sourceLabel">Mode démo</span></div>
+        </div>
+        <div class="tabs" role="tablist">
+          <button role="tab" class="tab active" data-tab="vehicle">Véhicule</button>
+          <button role="tab" class="tab" data-tab="energy">Énergie</button>
+          <button role="tab" class="tab" data-tab="charge">Charge</button>
+          <button role="tab" class="tab" data-tab="trip">Trajet</button>
+        </div>
+      </header>
+
+      <!-- Véhicule -->
+      <section class="page active" data-page="vehicle">
+        <div class="stage3d" id="stage3d">
+          <div class="loading3d" id="loading3d">Préparation du rendu 3D…</div>
+          <button class="nav-arrow left" id="camPrev" aria-label="Vue précédente"></button>
+          <button class="nav-arrow right" id="camNext" aria-label="Vue suivante"></button>
+          <div class="swatches" id="swatches"></div>
+          <div class="gear" data-bind="gear">P</div>
+        </div>
+        <div class="chips">
+          <button class="chip" data-goto="energy">
+            <span class="chip-ico ico-battery"></span>
+            <span><b>Batterie</b><small data-bind="chipEnergy">—</small></span>
+          </button>
+          <button class="chip" data-goto="charge">
+            <span class="chip-ico ico-plug"></span>
+            <span><b>Charge</b><small data-bind="chipCharge">—</small></span>
+          </button>
+          <button class="chip" data-goto="trip">
+            <span class="chip-ico ico-route"></span>
+            <span><b>Trajet</b><small data-bind="chipTrip">—</small></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Énergie -->
+      <section class="page" data-page="energy">
+        <div class="energy-grid">
+          <div class="soc-wrap">
+            <svg viewBox="0 0 200 200" class="soc-ring" aria-hidden="true">
+              <circle cx="100" cy="100" r="84" class="ring-bg" />
+              <circle cx="100" cy="100" r="84" class="ring-fg" id="socArc" />
+            </svg>
+            <div class="soc-center">
+              <div class="soc-val"><span data-bind="soc">--</span><small>%</small></div>
+              <div class="soc-sub"><span data-bind="range">--</span> km</div>
+              <div class="soc-est" data-bind="socNote"></div>
+            </div>
+          </div>
+          <div class="energy-side">
+            <div class="power-block">
+              <div class="label-row"><span>Puissance instantanée</span><b><span data-bind="power">0</span> kW</b></div>
+              <div class="power-bar">
+                <div class="power-zero"></div>
+                <div class="power-fill" id="powerFill"></div>
+              </div>
+              <div class="power-scale"><span>Régén.</span><span>0</span><span>Traction</span></div>
+            </div>
+            <div class="spark-block">
+              <div class="label-row"><span>Historique 5 min</span><small>kW</small></div>
+              <canvas id="spark" class="spark"></canvas>
+            </div>
+            <div class="mini-stats">
+              <div><small>Conso. moyenne</small><b><span data-bind="avgCons">--</span><i>kWh/100</i></b></div>
+              <div><small>Énergie dispo.</small><b><span data-bind="energyLeft">--</span><i>kWh</i></b></div>
+              <div><small>Récupérée</small><b><span data-bind="regen">--</span><i>kWh</i></b></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Charge -->
+      <section class="page" data-page="charge">
+        <div class="charge-grid">
+          <div class="charge-form">
+            <div class="label-row"><span>Type de borne</span></div>
+            <div class="seg" id="chargerSeg">
+              <button data-kw="7.4">AC 7,4</button>
+              <button data-kw="11" class="active">AC 11</button>
+              <button data-kw="50">DC 50</button>
+              <button data-kw="max">DC max</button>
+            </div>
+            <div class="label-row"><span>Objectif</span><b><span data-bind="targetSoc">90</span> %</b></div>
+            <input type="range" id="targetSoc" min="20" max="100" step="5" value="90" />
+            <div class="charge-results">
+              <div><small>Énergie à ajouter</small><b><span data-bind="chEnergy">--</span><i>kWh</i></b></div>
+              <div><small>Durée estimée</small><b data-bind="chTime">--</b></div>
+              <div><small>Fin estimée</small><b data-bind="chEnd">--</b></div>
+              <div><small>Coût estimé</small><b><span data-bind="chCost">--</span><i>€</i></b></div>
+            </div>
+            <button class="btn-primary" id="btnCharge">Simuler une charge</button>
+            <p class="hint">Estimation basée sur une courbe de charge type, pas sur les données de la borne.</p>
+          </div>
+          <div class="charge-chart">
+            <div class="label-row"><span>Courbe de charge estimée</span><small>kW / %</small></div>
+            <canvas id="chargeCurve"></canvas>
+            <div class="charge-live" id="chargeLive" hidden>
+              <span class="pulse"></span><span>En charge · <b data-bind="chLivePower">0</b> kW · <b data-bind="soc">--</b> %</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trajet -->
+      <section class="page" data-page="trip">
+        <div class="trip-grid">
+          <div class="trip-card big"><small>Distance</small><b><span data-bind="tripDist">0</span><i>km</i></b></div>
+          <div class="trip-card"><small>Durée</small><b data-bind="tripTime">0 min</b></div>
+          <div class="trip-card"><small>Vitesse moyenne</small><b><span data-bind="tripAvgSpeed">0</span><i>km/h</i></b></div>
+          <div class="trip-card"><small>Vitesse max</small><b><span data-bind="tripMaxSpeed">0</span><i>km/h</i></b></div>
+          <div class="trip-card"><small>Consommation</small><b><span data-bind="tripCons">--</span><i>kWh/100</i></b></div>
+          <div class="trip-card"><small>Énergie utilisée</small><b><span data-bind="tripEnergy">0</span><i>kWh</i></b></div>
+          <div class="trip-card"><small>Énergie récupérée</small><b><span data-bind="regen">0</span><i>kWh</i></b></div>
+          <div class="trip-card"><small>Compteur total</small><b><span data-bind="odometer">0</span><i>km</i></b></div>
+          <button class="trip-card action" id="btnTripReset"><small>Remettre à zéro</small><b>Nouveau trajet</b></button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== Colonne droite ===== -->
+    <section class="side">
+      <button class="launch card" id="btnBridge">
+        <span class="launch-ico"></span>
+        <span class="launch-txt"><b>CarPlay / Android Auto</b><small data-bind="bridgeLabel">Ouvrir l'appli passerelle</small></span>
+        <span class="launch-chev"></span>
+      </button>
+      <div class="quick" id="quickApps"><!-- rempli par apps.js --></div>
+
+      <div class="clock card">
+        <div class="clock-time" data-bind="time">--:--</div>
+        <div class="clock-meta">
+          <span data-bind="weekday">—</span>
+          <span data-bind="date">—</span>
+        </div>
+        <div class="weather" data-bind="weather"></div>
+      </div>
+
+      <div class="tiles">
+        <div class="tile card">
+          <div class="tile-head"><small>Vitesse</small><span class="tile-ico" data-icon="speed"></span></div>
+          <b><span data-bind="speed">0</span><i>km/h</i></b>
+          <div class="meter"><span data-bind-width="speedPct"></span></div>
+        </div>
+        <div class="tile card">
+          <div class="tile-head"><small>Batterie</small><span class="tile-ico" data-icon="battery"></span></div>
+          <b><span data-bind="soc">--</span><i>%</i></b>
+          <div class="meter soc"><span data-bind-width="socPct"></span></div>
+        </div>
+        <div class="tile card">
+          <div class="tile-head"><small>Autonomie</small><span class="tile-ico" data-icon="route"></span></div>
+          <b><span data-bind="range">--</span><i>km</i></b>
+          <div class="tile-note" data-bind="rangeNote">estimée</div>
+        </div>
+        <div class="tile card">
+          <div class="tile-head"><small>Puissance</small><span class="tile-ico" data-icon="bolt"></span></div>
+          <b><span data-bind="power">0</span><i>kW</i></b>
+          <div class="meter power"><span data-bind-width="powerPct" data-bind-class="powerMeterClass"></span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== Réglages ===== -->
+  <dialog id="settings" class="settings">
+    <form method="dialog" class="settings-inner" id="settingsForm">
+      <header><h2>Réglages</h2><button class="x" value="close" aria-label="Fermer">✕</button></header>
+      <div class="settings-body">
+        <fieldset>
+          <legend>Source des données</legend>
+          <label class="radio"><input type="radio" name="source" value="demo" /> Démo (simulation de conduite)</label>
+          <label class="radio"><input type="radio" name="source" value="gps" /> GPS du téléphone / de la tablette (vitesse et distance réelles, énergie estimée)</label>
+          <label>Batterie au départ en mode GPS (%)<input type="number" name="socManual" min="1" max="100" step="1" /></label>
+        </fieldset>
+        <fieldset>
+          <legend>Véhicule</legend>
+          <label>Nom affiché<input type="text" name="carName" maxlength="24" /></label>
+          <label>Capacité utile batterie (kWh)<input type="number" name="capacityKwh" min="20" max="120" step="0.5" /></label>
+          <label>Puissance DC max (kW)<input type="number" name="maxDcKw" min="20" max="350" step="1" /></label>
+          <label>Prix de l'électricité (€/kWh)<input type="number" name="pricePerKwh" min="0" max="2" step="0.01" /></label>
+        </fieldset>
+        <fieldset>
+          <legend>Applications (liens ou intents Android)</legend>
+          <label>CarPlay / Android Auto (appli passerelle)<input type="text" name="url_bridge" placeholder="intent://#Intent;package=…;end" /></label>
+          <label>Navigation<input type="text" name="url_nav" /></label>
+          <label>Itinéraire communautaire<input type="text" name="url_route" /></label>
+          <label>Musique<input type="text" name="url_music" /></label>
+          <label>Téléphone<input type="text" name="url_phone" /></label>
+          <label>Vidéo<input type="text" name="url_video" /></label>
+        </fieldset>
+        <fieldset>
+          <legend>Rendu 3D</legend>
+          <label class="radio"><input type="radio" name="quality" value="high" /> Haute qualité (ombres, plein écran net)</label>
+          <label class="radio"><input type="radio" name="quality" value="eco" /> Économie (autoradios Android peu puissants)</label>
+          <label>Images par seconde max<select name="fps"><option value="60">60</option><option value="30">30</option></select></label>
+          <label>Rotation du modèle importé<select name="modelRot"><option value="0">0°</option><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select></label>
+          <div class="row">
+            <label class="file-btn">Importer un modèle .glb<input type="file" id="glbInput" accept=".glb,.gltf,model/gltf-binary" /></label>
+            <button type="button" class="btn-ghost" id="btnResetModel">Modèle intégré</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Affichage</legend>
+          <label>Thème<select name="theme"><option value="auto">Automatique (jour / nuit)</option><option value="dark">Sombre</option><option value="light">Clair</option></select></label>
+          <div class="row">
+            <button type="button" class="btn-ghost" id="btnFullscreen">Plein écran</button>
+            <button type="button" class="btn-ghost" id="btnWake">Garder l'écran allumé</button>
+          </div>
+        </fieldset>
+        <p class="hint">Cette interface n'envoie aucune commande au véhicule. Elle ne remplace ni l'écran d'origine ni Apple CarPlay.</p>
+      </div>
+      <footer><button class="btn-primary" value="save" id="btnSave">Enregistrer</button></footer>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

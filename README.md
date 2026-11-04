@@ -34,3 +34,7 @@ npm run preview   # prévisualiser le build
 
 Tout le contenu turc (vocabulaire, phrases, dialogues, histoires, comptines)
 est original et écrit à la main dans `src/data/`.
+
+## Autre projet du dépôt
+
+- [`cupra-born-dash/`](cupra-born-dash/README.md) : tableau de bord embarqué (3D, énergie, charge, trajet) pour tablette ou autoradio Android dans une Cupra Born.
