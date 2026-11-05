@@ -1,0 +1,9 @@
+# Généré par XcodeGen sur le Mac
+*.xcodeproj
+App/Info.plist
+App/BornWidgets.entitlements
+Widget/Info.plist
+Widget/BornWidgetsExtension.entitlements
+xcuserdata/
+DerivedData/
+build/

@@ -38,3 +38,4 @@ est original et écrit à la main dans `src/data/`.
 ## Autre projet du dépôt
 
 - [`cupra-born-dash/`](cupra-born-dash/README.md) : tableau de bord embarqué (3D, énergie, charge, trajet) pour tablette ou autoradio Android dans une Cupra Born.
+- [`born-carplay-widgets/`](born-carplay-widgets/README.md) : appli iPhone et widgets CarPlay (iOS 26+) pour afficher autonomie, charge, météo et budget sur l'écran de la Cupra Born.
