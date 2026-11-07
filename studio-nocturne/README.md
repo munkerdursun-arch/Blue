@@ -13,6 +13,13 @@ Site vitrine d'un studio créatif **fictif**, pour montrer le niveau de finition
 - Projets avec aperçu flottant animé qui teinte la scène ; curseur personnalisé, boutons magnétiques, menu plein écran orange.
 - Mobile, clavier et `prefers-reduced-motion` pris en charge ; repli si WebGL indisponible.
 
+## Version « + » (`plus.html`)
+
+Même site avec une couche d'animations en plus (`js/plus.js`, activée par `<html data-mode="plus">`) :
+traînée de couleurs derrière le curseur et gerbe au clic, lettres du titre qui ondulent puis s'envolent
+au défilement, textes qui se « décodent », liens dont le texte roule, entrées en cascade, lettres du contact
+qui sautent au survol, sculpture et panneaux qui réagissent à la vitesse de défilement.
+
 ## Lancer
 
 Aucune installation : les bibliothèques et polices sont dans `vendor/` et `fonts/`.

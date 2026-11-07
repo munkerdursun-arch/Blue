@@ -264,7 +264,7 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
   });
   if (!reducedMotion) addEventListener('pointerdown', () => { uniforms.uPulse.value = 1; });
 
-  let running = true, started = false, scrollY = 0, velocity = 0;
+  let running = true, started = false, scrollY = 0, velocity = 0, boost = false, spin = 0;
   document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) { clock.getDelta(); loop(); } });
 
   const clock = new THREE.Clock();
@@ -292,7 +292,8 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
     const t = uniforms.uTime.value;
     pivot.position.set(cur.x + mouseSm.x * 0.12, cur.y + mouseSm.y * 0.08 + Math.sin(t * 0.6) * 0.06, 0);
     pivot.scale.setScalar(cur.s);
-    sculpt.rotation.y = cur.r + t * 0.06 + mouseSm.x * 0.3;
+    if (boost) spin += Math.max(-60, Math.min(60, velocity)) * dt * 0.035; // version « + » : tourne avec le défilement
+    sculpt.rotation.y = cur.r + t * 0.06 + mouseSm.x * 0.3 + spin;
     sculpt.rotation.x = -mouseSm.y * 0.25 + Math.sin(t * 0.2) * 0.08;
     camera.position.x = mouseSm.x * 0.15;
     camera.position.y = mouseSm.y * 0.1;
@@ -313,5 +314,6 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
     setHue(h) { target.shift = h; },
     resetHue(i) { target.shift = states[i][5]; },
     setScroll(y, v) { scrollY = y; velocity = v; },
+    setBoost(on) { boost = on; },
   };
 }

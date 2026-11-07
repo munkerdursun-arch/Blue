@@ -114,7 +114,7 @@ const manifestoWords = splitWords($('[data-words]'));
 function intro() {
   const tl = gsap.timeline({
     defaults: { ease: EASE_OUT },
-    onComplete: () => { lenis?.start(); document.body.classList.remove('is-loading'); },
+    onComplete: () => { lenis?.start(); document.body.classList.remove('is-loading'); document.dispatchEvent(new Event('intro:done')); },
   });
   tl.to('.loader > *', { y: -30, opacity: 0, duration: 0.6, stagger: 0.05, ease: 'power3.in' })
     .to('.loader', { clipPath: 'inset(0 0 100% 0)', duration: 1.0, ease: EASE_IO }, '-=0.15')
@@ -373,5 +373,13 @@ const clock = $('[data-clock]');
 const fmt = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' });
 const tick = () => { clock.textContent = fmt.format(new Date()); };
 tick(); setInterval(tick, 10_000);
+
+// ---------- Version « + » : couche d'animations supplémentaires ----------
+if (document.documentElement.dataset.mode === 'plus' && !reduced) {
+  import('./plus.js').then(({ initPlus }) => {
+    initPlus({ gsap, ScrollTrigger, onScroll, scene, heroChars, contactChars, manifestoWords, finePointer });
+    ScrollTrigger.refresh();
+  });
+}
 
 document.fonts.ready.then(() => ScrollTrigger.refresh());
