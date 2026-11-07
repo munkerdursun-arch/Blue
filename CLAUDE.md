@@ -20,11 +20,15 @@ et Emil Kowalski plutôt que les règles de style de taste ; garder de taste ses
 
 ## Signature visuelle « studio premium »
 
-- **Fond sombre profond** (pas de noir pur), texte blanc cassé (pas de `#fff`), **un seul accent**.
-- **Typographie contrastée** : un serif display très grand (gras + italique fin) avec un sans fin. Polices **auto-hébergées** (`woff2`, pas de Google Fonts : RGPD).
-- **Une pièce maîtresse WebGL** (Three.js, shaders) qui réagit à la souris et **change de place selon la section**.
+Préférence du propriétaire : **lumineux, pas trop sombre**, et une identité propre (ne pas reproduire la référence).
+
+- **Fond clair nacré** (crème, sable, lilas) avec **un chapitre sombre** pour le contraste et **un final en couleur vive** (orange). Texte quasi noir, jamais `#000` ; un seul accent vif.
+- **L'ambiance change à chaque chapitre** : variables CSS (`--bg`, `--ink`…) animées par GSAP, et fond WebGL teinté en même temps.
+- **Typographie contrastée** : un serif display **variable** très grand (gras + italique fin) avec un sans fin. Polices **auto-hébergées** (`woff2`, pas de Google Fonts : RGPD).
+- **Une pièce maîtresse WebGL** (Three.js, shaders) qui réagit à la souris, **change de place et de forme** selon le chapitre et réagit au clic.
+- **Au moins un « moment WOW » original par page** (ex. : graisse de police qui suit le curseur, métamorphose, inclinaison selon la vitesse de défilement).
 - **Beaucoup d'air**, grilles asymétriques, numérotation éditoriale (« 01 — Le studio »), petites capitales espacées.
-- Détails : grain léger, traits fins, horloge locale, curseur personnalisé, boutons magnétiques.
+- Détails : grain léger, barre de progression, badge au texte circulaire, curseur personnalisé, boutons magnétiques.
 
 ## Mouvement
 
@@ -32,7 +36,8 @@ et Emil Kowalski plutôt que les règles de style de taste ; garder de taste ses
 - Titres révélés lettre par lettre derrière un masque ; préchargeur ; menu plein écran en `clip-path`.
 - Règles d'Emil : jamais `scale(0)` (partir de `.9` + opacité), jamais `ease-in` sur l'interface, `:active { scale(.97) }`, sortie plus rapide que l'entrée, survols sous `@media (hover: hover) and (pointer: fine)`, n'animer que `transform` / `opacity`.
 - **Ne jamais mettre une transition CSS sur une propriété que GSAP anime** (bug déjà rencontré dans le menu).
-- `prefers-reduced-motion` : pas de Lenis, mouvements coupés, contenu jamais caché.
+- `prefers-reduced-motion` : pas de Lenis, intro sautée, mouvements coupés, contenu jamais caché.
+- Créer les ScrollTrigger **dans l'ordre de la page** ; une section épinglée se suit via son `.pin-spacer`.
 
 ## Qualité (obligatoire avant de dire « fini »)
 

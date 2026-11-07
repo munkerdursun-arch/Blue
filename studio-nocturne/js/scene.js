@@ -1,12 +1,13 @@
 // =====================================================================
-// Scène WebGL : une sculpture organique irisée, une aurore en fond
-// et des particules qui flottent. La sculpture change de place selon
-// la section visible (comme l'animal 3D de Dogstudio).
+// Scène WebGL (v2) : une sculpture nacrée qui se METAMORPHOSE à chaque
+// chapitre (goutte → fleur → anneaux → cristal), un halo coloré, un fond
+// en dégradé vivant qui suit la couleur du chapitre, et de la poussière
+// lumineuse. Un clic envoie une onde dans la matière.
 // Tout est procédural : aucun modèle 3D ni texture à télécharger.
 // =====================================================================
 import * as THREE from 'three';
 
-// Bruit simplex 3D (Ashima Arts / Stefan Gustavson, licence MIT), partagé par les shaders.
+// Bruit simplex 3D (Ashima Arts / Stefan Gustavson, licence MIT).
 const NOISE = /* glsl */ `
 vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
 vec4 mod289(vec4 x){return x-floor(x*(1./289.))*289.;}
@@ -32,18 +33,30 @@ float snoise(vec3 v){
   return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
 }`;
 
-// Positions de la sculpture pour chaque section : [x, y, échelle, rotation Y]
+// Palette nacrée partagée : corail → or → menthe → ciel → lilas (boucle)
+const PALETTE = /* glsl */ `
+vec3 pal(float t){
+  t = fract(t) * 5.;
+  vec3 c0=vec3(1.,.42,.32), c1=vec3(1.,.78,.32), c2=vec3(.36,.9,.74), c3=vec3(.38,.62,1.), c4=vec3(.74,.52,1.);
+  if(t<1.) return mix(c0,c1,smoothstep(0.,1.,t));
+  if(t<2.) return mix(c1,c2,smoothstep(1.,2.,t));
+  if(t<3.) return mix(c2,c3,smoothstep(2.,3.,t));
+  if(t<4.) return mix(c3,c4,smoothstep(3.,4.,t));
+  return mix(c4,c0,smoothstep(4.,5.,t));
+}`;
+
+// Par chapitre : [x, y, échelle, rotation Y, forme (0 goutte, 1 fleur, 2 anneaux, 3 cristal), teinte]
 const STATES_DESKTOP = [
-  [1.6, -0.05, 1.05, 0.0],   // hero : à droite du titre
-  [2.3, 0.2, 0.75, 1.2],     // manifeste : à droite, le texte occupe la gauche
-  [1.4, 0.0, 1.1, 2.4],      // projets : en retrait et assombri, le texte prime
-  [-2.2, 0.9, 0.55, 3.4],    // expertises : petit, en haut à gauche
-  [0.0, -1.3, 0.7, 4.4],     // chiffres : sous les nombres
-  [2.1, 0.0, 0.95, 5.6],     // contact : à droite du grand titre
+  [1.8, 0.2, 1.05, 0.0, 0, 0.00],   // hero
+  [2.65, 0.25, 0.75, 1.4, 1, 0.18], // manifeste : fleur, à droite du texte
+  [1.6, 0.0, 1.0, 2.6, 2, 0.55],    // projets (nuit) : anneaux
+  [-2.3, 0.95, 0.55, 3.6, 3, 0.70], // expertises : cristal
+  [0.0, -1.45, 0.7, 4.6, 1, 0.35],  // chiffres
+  [2.1, 0.05, 1.0, 5.8, 0, 0.92],   // contact (orange)
 ];
 const STATES_MOBILE = [
-  [0.5, 1.3, 0.8, 0], [0.6, 2.0, 0.55, 1.2], [0.3, 0.0, 0.85, 2.4],
-  [0.5, 2.2, 0.5, 3.4], [0.0, -1.9, 0.6, 4.4], [0.4, 1.9, 0.7, 5.6],
+  [0.45, 1.35, 0.85, 0, 0, 0], [0.6, -2.35, 0.55, 1.4, 1, 0.18], [0.3, 0.1, 0.8, 2.6, 2, 0.55],
+  [0.5, 2.25, 0.5, 3.6, 3, 0.7], [0.0, -2.0, 0.6, 4.6, 1, 0.35], [0.4, 1.95, 0.75, 5.8, 0, 0.92],
 ];
 
 export function initScene(canvas, { reducedMotion = false } = {}) {
@@ -54,8 +67,7 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
     return null; // le CSS affiche un dégradé de repli (.no-webgl)
   }
   const isMobile = matchMedia('(max-width: 820px)').matches;
-  renderer.setPixelRatio(Math.min(devicePixelRatio, isMobile ? 1.5 : 2));
-  renderer.setClearColor(0x0e0f14, 1);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, isMobile ? 1.5 : 1.75));
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
@@ -63,69 +75,76 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
 
   const uniforms = {
     uTime: { value: 0 },
-    uHue: { value: 0 },          // décalage de teinte (survol des projets)
     uMouse: { value: new THREE.Vector2() },
-    uDim: { value: 0 },          // assombrit la sculpture quand le texte doit dominer
-    uVelocity: { value: 0 },     // vitesse de défilement : agite la surface
+    uBg: { value: new THREE.Color('#f3efe7') },  // couleur du chapitre
+    uDark: { value: 0 },                          // 1 sur un fond sombre
+    uForm: { value: 0 },                          // forme interpolée (0..3)
+    uShift: { value: 0 },                         // décalage de teinte
+    uPulse: { value: 0 },                         // onde au clic
+    uVelocity: { value: 0 },                      // vitesse de défilement
   };
 
-  // ---------- 1. Aurore de fond (plan plein écran) ----------
-  const aurora = new THREE.Mesh(
+  // ---------- 1. Fond : dégradé vivant teinté par le chapitre ----------
+  const bgMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(2, 2),
     new THREE.ShaderMaterial({
       uniforms, depthWrite: false, depthTest: false,
       vertexShader: /* glsl */ `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,.999,1.); }`,
       fragmentShader: /* glsl */ `
-        precision highp float; varying vec2 vUv; uniform float uTime, uHue; uniform vec2 uMouse;
-        ${NOISE}
+        precision highp float; varying vec2 vUv;
+        uniform float uTime, uDark, uShift; uniform vec2 uMouse; uniform vec3 uBg;
+        ${NOISE} ${PALETTE}
         void main(){
-          vec2 p = vUv; float t = uTime*.04;
-          float n1 = snoise(vec3(p*1.4 + uMouse*.05, t));
-          float n2 = snoise(vec3(p*2.2 - 3., t*1.3));
-          vec3 base = vec3(.055,.058,.078);
-          vec3 c1 = vec3(.16,.13,.42);   // indigo
-          vec3 c2 = vec3(.05,.30,.36);   // bleu canard
-          vec3 c3 = vec3(.42,.10,.30);   // prune
-          float m1 = smoothstep(.15,.9,n1) * smoothstep(1.1,.2,length(p-vec2(.25,.75)));
-          float m2 = smoothstep(.2,.9,n2) * smoothstep(1.,.1,length(p-vec2(.55,.85)));
-          float m3 = smoothstep(.3,1.,n1*n2+.3) * smoothstep(.9,.0,length(p-vec2(.15,.35)));
-          vec3 col = base + c1*m1*.55 + c2*m2*.45 + c3*m3*.25;
-          // rotation de teinte simple pilotée par uHue
-          float a = uHue; mat3 rot = mat3(
-            .299+.701*cos(a)+.168*sin(a), .587-.587*cos(a)+.330*sin(a), .114-.114*cos(a)-.497*sin(a),
-            .299-.299*cos(a)-.328*sin(a), .587+.413*cos(a)+.035*sin(a), .114-.114*cos(a)+.292*sin(a),
-            .299-.300*cos(a)+1.25*sin(a), .587-.588*cos(a)-1.05*sin(a), .114+.886*cos(a)-.203*sin(a));
-          col = mix(col, rot*col, step(.001, abs(a)));
-          float vig = smoothstep(1.25,.25,length(p-.5));
-          gl_FragColor = vec4(col*vig + base*(1.-vig)*.6, 1.);
+          vec2 p = vUv; float t = uTime*.035;
+          float n1 = snoise(vec3(p*1.2 + uMouse*.04, t));
+          float n2 = snoise(vec3(p*1.7 - 2.3, t*1.2));
+          // taches de couleur douces qui dérivent (plus discrètes sur fond clair)
+          float m1 = smoothstep(.0,.9,n1) * smoothstep(.95,.1,length(p-vec2(.78,.62)));
+          float m2 = smoothstep(.1,.9,n2) * smoothstep(.9,.1,length(p-vec2(.2,.25)));
+          vec3 a = pal(.05 + uShift + t*.3), b = pal(.55 + uShift - t*.2);
+          float k = mix(.22, .26, uDark);
+          vec3 col = uBg;
+          col = mix(col, a, m1*k);
+          col = mix(col, b, m2*k*.8);
+          col *= mix(1., smoothstep(1.3,.2,length(p-.5))*.6+.4, uDark); // vignette la nuit seulement
+          gl_FragColor = vec4(col, 1.);
         }`,
     })
   );
-  aurora.renderOrder = -1;
-  aurora.frustumCulled = false;
-  scene.add(aurora);
+  bgMesh.renderOrder = -2;
+  bgMesh.frustumCulled = false;
+  scene.add(bgMesh);
 
-  // ---------- 2. Sculpture irisée ----------
+  // ---------- 2. Sculpture nacrée métamorphe ----------
   const sculptMat = new THREE.ShaderMaterial({
     uniforms,
     vertexShader: /* glsl */ `
-      uniform float uTime, uVelocity; uniform vec2 uMouse;
+      uniform float uTime, uForm, uPulse, uVelocity; uniform vec2 uMouse;
       varying vec3 vNormal, vView; varying float vNoise;
       ${NOISE}
+      float w(float i){ return max(0., 1. - abs(uForm - i)); } // poids de chaque forme
       float field(vec3 p){
-        float t = uTime*.18;
-        return snoise(p*.8 + t)*.34 + snoise(p*1.9 - t*1.4)*.09 + snoise(p*4.2 + t)*.02*(1.+uVelocity*4.);
+        float t = uTime*.16;
+        vec3 q = p + vec3(uMouse*.22, 0.);
+        float d = snoise(q*.8 + t)*.26 + snoise(q*1.9 - t*1.3)*.07;
+        float th = atan(p.z, p.x), ph = acos(clamp(p.y / length(p), -1., 1.));
+        d += w(1.) * .32 * pow(abs(sin(th*5. + t*2.) * sin(ph*3.)), 1.6);       // fleur à pétales
+        d += w(2.) * .13 * sin(ph*16. - t*6.) * (.6 + .4*sin(th*3. + t));        // anneaux plissés
+        d += w(3.) * .38 * pow(abs(snoise(q*2.4 + t*.5)), 2.2);                   // cristal à pointes
+        d += uPulse * .16 * sin(p.y*7. - uTime*9.);                               // onde du clic
+        d += snoise(q*4.2 + t)*.02*(1. + uVelocity*4.);                           // frisson au défilement
+        return d;
       }
       void main(){
         vec3 p = position; vec3 n = normalize(normal);
-        float d = field(p + vec3(uMouse*.25, 0.));
+        float d = field(p);
         vec3 displaced = p + n*d;
-        // normale recalculée par différences finies (éclairage correct sur la surface déformée)
+        // normale recalculée par différences finies : éclairage juste sur la forme déformée
         vec3 up = abs(n.y) > .99 ? vec3(1.,0.,0.) : vec3(0.,1.,0.);
-        vec3 tA = normalize(cross(n, up)); vec3 tB = normalize(cross(n, tA));
-        float e = .01;
-        vec3 pA = p + tA*e; pA += normalize(pA)*field(pA + vec3(uMouse*.25,0.));
-        vec3 pB = p + tB*e; pB += normalize(pB)*field(pB + vec3(uMouse*.25,0.));
+        vec3 tA = normalize(cross(n, up)), tB = normalize(cross(n, tA));
+        float e = .012;
+        vec3 pA = p + tA*e; pA += normalize(pA)*field(pA);
+        vec3 pB = p + tB*e; pB += normalize(pB)*field(pB);
         vec3 nn = normalize(cross(pA - displaced, pB - displaced));
         if (dot(nn, n) < 0.) nn = -nn;
         vNoise = d;
@@ -136,56 +155,72 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
       }`,
     fragmentShader: /* glsl */ `
       precision highp float;
-      uniform float uTime, uHue, uDim;
+      uniform float uTime, uShift, uDark;
       varying vec3 vNormal, vView; varying float vNoise;
-      // dégradé irisé en boucle : indigo → violet → bleu canard → rose → indigo
-      vec3 pal(float t){
-        t = fract(t + uHue/6.28318) * 4.;
-        vec3 c0 = vec3(.22,.28,.95), c1 = vec3(.58,.32,.98), c2 = vec3(.16,.78,.86), c3 = vec3(.95,.42,.72);
-        if (t < 1.) return mix(c0, c1, smoothstep(0.,1.,t));
-        if (t < 2.) return mix(c1, c2, smoothstep(1.,2.,t));
-        if (t < 3.) return mix(c2, c3, smoothstep(2.,3.,t));
-        return mix(c3, c0, smoothstep(3.,4.,t));
-      }
+      ${PALETTE}
       void main(){
-        vec3 n = normalize(vNormal); vec3 v = normalize(vView);
+        vec3 n = normalize(vNormal), v = normalize(vView);
         float ndv = clamp(dot(n, v), 0., 1.);
-        float fres = pow(1. - ndv, 2.6);
-        vec3 L1 = normalize(vec3(-.6,.8,.6)), L2 = normalize(vec3(.8,-.3,.4));
-        float dif = max(dot(n, L1), 0.)*.55 + max(dot(n, L2), 0.)*.25;
-        float spec = pow(max(dot(reflect(-L1, n), v), 0.), 48.);
-        vec3 irid = pal(ndv*.9 + vNoise*1.4 + uTime*.015);
-        vec3 body = vec3(.07,.075,.11) + irid*dif*.55;
-        vec3 col = body + irid*fres*1.15 + vec3(spec)*.6;
-        col += vec3(.9,.25,.22)*pow(fres, 7.)*.25;  // liseré chaud, rappel de l'accent rouge
-        col = mix(col, col*.25, uDim);
+        float fres = pow(1. - ndv, 2.2);
+        vec3 L1 = normalize(vec3(-.5,.9,.7)), L2 = normalize(vec3(.9,-.2,.5));
+        float dif = max(dot(n, L1), 0.)*.7 + max(dot(n, L2), 0.)*.3;
+        float spec = pow(max(dot(reflect(-L1, n), v), 0.), 60.) + pow(max(dot(reflect(-L2, n), v), 0.), 24.)*.3;
+        vec3 irid = pal(ndv*1.1 + vNoise*1.6 + uTime*.02 + uShift);
+        vec3 irid2 = pal(ndv*.6 - vNoise + uShift + .4);
+        // corps nacré clair + reflets irisés + liseré saturé (lisible sur fond clair comme sombre)
+        vec3 pearl = mix(vec3(.97,.95,.93), irid, .5);
+        vec3 col = pearl * (.42 + .7*dif);
+        col += irid2 * fres * .55;
+        col = mix(col, irid * .62, pow(1. - ndv, 4.) * .7);
+        col += vec3(1.) * spec * .85;
+        col *= mix(1., 1.08, uDark);
         gl_FragColor = vec4(col, 1.);
       }`,
   });
-  const detail = isMobile ? 40 : 72;
+  const detail = isMobile ? 48 : 80;
   const sculpt = new THREE.Mesh(new THREE.IcosahedronGeometry(1.0, detail), sculptMat);
+
+  // Halo coloré derrière la sculpture
+  const halo = new THREE.Mesh(
+    new THREE.PlaneGeometry(6, 6),
+    new THREE.ShaderMaterial({
+      uniforms, transparent: true, depthWrite: false,
+      vertexShader: /* glsl */ `varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
+      fragmentShader: /* glsl */ `
+        precision highp float; varying vec2 vUv; uniform float uTime, uShift, uDark; ${PALETTE}
+        void main(){
+          float d = length(vUv-.5)*2.;
+          float a = smoothstep(1., 0., d); a *= a;
+          vec3 c = pal(uShift + .1 + uTime*.01 + atan(vUv.y-.5, vUv.x-.5)*.08);
+          gl_FragColor = vec4(c, a * mix(.32, .45, uDark));
+        }`,
+    })
+  );
+  halo.position.z = -1.6;
+
   const pivot = new THREE.Group();
-  pivot.add(sculpt);
+  pivot.add(halo, sculpt);
   scene.add(pivot);
 
-  // ---------- 3. Particules (« pollen » lumineux) ----------
-  const COUNT = isMobile ? 260 : 700;
+  // ---------- 3. Poussière lumineuse ----------
+  const COUNT = isMobile ? 220 : 600;
   const pos = new Float32Array(COUNT * 3);
   const seed = new Float32Array(COUNT);
   for (let i = 0; i < COUNT; i++) {
     pos[i * 3] = (Math.random() - 0.5) * 14;
     pos[i * 3 + 1] = (Math.random() - 0.5) * 9;
-    pos[i * 3 + 2] = (Math.random() - 0.5) * 6 - 1;
+    pos[i * 3 + 2] = (Math.random() - 0.5) * 5 - 0.5;
     seed[i] = Math.random();
   }
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   pGeo.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
-  const particles = new THREE.Points(pGeo, new THREE.ShaderMaterial({
-    uniforms: { ...uniforms, uPR: { value: renderer.getPixelRatio() }, uScroll: { value: 0 } },
-    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  const dustUniforms = { uPR: { value: renderer.getPixelRatio() }, uScroll: { value: 0 } };
+  const dust = new THREE.Points(pGeo, new THREE.ShaderMaterial({
+    uniforms: { ...uniforms, ...dustUniforms },
+    transparent: true, depthWrite: false,
     vertexShader: /* glsl */ `
-      uniform float uTime, uPR, uScroll; attribute float aSeed; varying float vA;
+      uniform float uTime, uPR, uScroll; attribute float aSeed; varying float vA, vS;
       void main(){
         vec3 p = position;
         // montée lente + entraînement par le défilement, en boucle sur 9 unités
@@ -193,21 +228,24 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
         p.x += sin(uTime*.3 + aSeed*20.)*.25;
         vec4 mv = modelViewMatrix * vec4(p, 1.);
         gl_Position = projectionMatrix * mv;
-        gl_PointSize = (1.5 + aSeed*3.5) * uPR * (6. / -mv.z);
-        vA = .25 + .55*aSeed;
+        gl_PointSize = (1.5 + aSeed*3.) * uPR * (6. / -mv.z);
+        vA = .25 + .5*aSeed; vS = aSeed;
       }`,
     fragmentShader: /* glsl */ `
-      precision highp float; varying float vA;
-      void main(){ float d = length(gl_PointCoord-.5); float a = smoothstep(.5,.0,d)*vA; gl_FragColor = vec4(vec3(.75,.78,1.)*a, a); }`,
+      precision highp float; varying float vA, vS; uniform float uDark, uShift; ${PALETTE}
+      void main(){
+        float d = length(gl_PointCoord-.5); float a = smoothstep(.5,.0,d)*vA;
+        vec3 c = mix(pal(vS + uShift)*.85, vec3(1.), uDark*.5);
+        gl_FragColor = vec4(c, a * mix(.7, 1., uDark));
+      }`,
   }));
-  scene.add(particles);
+  scene.add(dust);
 
   // ---------- Redimensionnement ----------
   function resize() {
     const w = innerWidth, h = innerHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    // garde la sculpture lisible quel que soit le format d'écran
     camera.position.z = w / h < 1 ? 9.5 : 7;
     camera.updateProjectionMatrix();
   }
@@ -216,15 +254,18 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
 
   // ---------- État animé (interpolé à chaque image) ----------
   const states = isMobile ? STATES_MOBILE : STATES_DESKTOP;
-  const target = { x: states[0][0], y: states[0][1], s: states[0][2], r: 0, dim: 0, hue: 0 };
-  const cur = { ...target, s: 0.001 }; // départ minuscule : la sculpture « éclot » après le chargement
+  const s0 = states[0];
+  const target = { x: s0[0], y: s0[1], s: s0[2], r: s0[3], form: s0[4], shift: s0[5], dark: 0 };
+  const cur = { ...target, s: 0.001 }; // la sculpture « éclot » après le chargement
+  const bgTarget = new THREE.Color('#f3efe7');
   const mouse = new THREE.Vector2(), mouseSm = new THREE.Vector2();
   addEventListener('pointermove', (e) => {
     mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
   });
+  if (!reducedMotion) addEventListener('pointerdown', () => { uniforms.uPulse.value = 1; });
 
   let running = true, started = false, scrollY = 0, velocity = 0;
-  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) loop(); });
+  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) { clock.getDelta(); loop(); } });
 
   const clock = new THREE.Clock();
   const speed = reducedMotion ? 0.25 : 1;
@@ -232,26 +273,31 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
     if (!running) return;
     requestAnimationFrame(loop);
     const dt = Math.min(clock.getDelta(), 0.05);
-    const k = 1 - Math.exp(-dt * 3);     // lissage indépendant du taux de rafraîchissement
+    const k = 1 - Math.exp(-dt * 2.6);   // lissage indépendant du taux de rafraîchissement
     uniforms.uTime.value += dt * speed;
 
     mouseSm.lerp(mouse, 1 - Math.exp(-dt * 2.5));
     uniforms.uMouse.value.copy(mouseSm);
 
-    for (const key of ['x', 'y', 'r', 'dim', 'hue']) cur[key] += (target[key] - cur[key]) * k;
-    if (started) cur.s += (target.s - cur.s) * (1 - Math.exp(-dt * 2));
-    uniforms.uDim.value = cur.dim;
-    uniforms.uHue.value = cur.hue;
+    for (const key of ['x', 'y', 'r', 'form', 'shift', 'dark']) cur[key] += (target[key] - cur[key]) * k;
+    if (started) cur.s += (target.s - cur.s) * (1 - Math.exp(-dt * 2.2));
+    uniforms.uForm.value = cur.form;
+    uniforms.uShift.value = cur.shift;
+    uniforms.uDark.value = cur.dark;
+    uniforms.uBg.value.lerp(bgTarget, k);
+    uniforms.uPulse.value *= Math.exp(-dt * 1.6);
     uniforms.uVelocity.value += (Math.min(Math.abs(velocity) / 40, 1) - uniforms.uVelocity.value) * k;
-    particles.material.uniforms.uScroll.value = scrollY / innerHeight;
+    dustUniforms.uScroll.value = scrollY / innerHeight;
 
-    pivot.position.set(cur.x + mouseSm.x * 0.12, cur.y + mouseSm.y * 0.08, 0);
+    const t = uniforms.uTime.value;
+    pivot.position.set(cur.x + mouseSm.x * 0.12, cur.y + mouseSm.y * 0.08 + Math.sin(t * 0.6) * 0.06, 0);
     pivot.scale.setScalar(cur.s);
-    sculpt.rotation.y = cur.r + uniforms.uTime.value * 0.05 + mouseSm.x * 0.25;
-    sculpt.rotation.x = -mouseSm.y * 0.2 + Math.sin(uniforms.uTime.value * 0.2) * 0.08;
+    sculpt.rotation.y = cur.r + t * 0.06 + mouseSm.x * 0.3;
+    sculpt.rotation.x = -mouseSm.y * 0.25 + Math.sin(t * 0.2) * 0.08;
     camera.position.x = mouseSm.x * 0.15;
     camera.position.y = mouseSm.y * 0.1;
     camera.lookAt(0, 0, 0);
+    halo.lookAt(camera.position);
 
     renderer.render(scene, camera);
   }
@@ -261,10 +307,11 @@ export function initScene(canvas, { reducedMotion = false } = {}) {
     reveal() { started = true; },
     setSection(i) {
       const s = states[Math.max(0, Math.min(states.length - 1, i))];
-      target.x = s[0]; target.y = s[1]; target.s = s[2]; target.r = s[3];
-      target.dim = i === 2 ? 0.7 : 0; // section projets : le texte prime
+      [target.x, target.y, target.s, target.r, target.form, target.shift] = s;
     },
-    setHue(h) { target.hue = h; },
+    setTheme(bg, dark) { bgTarget.set(bg); target.dark = dark ? 1 : 0; },
+    setHue(h) { target.shift = h; },
+    resetHue(i) { target.shift = states[i][5]; },
     setScroll(y, v) { scrollY = y; velocity = v; },
   };
 }

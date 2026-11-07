@@ -5,11 +5,12 @@ Site vitrine d'un studio créatif **fictif**, pour montrer le niveau de finition
 
 ## Ce qu'il contient
 
-- Préchargeur avec compteur, puis intro animée (titre lettre par lettre, traits rouges).
-- Sculpture WebGL irisée (Three.js, shaders maison) qui suit la souris et change de place à chaque section ; aurore en fond et particules.
-- Défilement fluide (Lenis) et animations liées au défilement (GSAP ScrollTrigger) : manifeste mot à mot, section horizontale épinglée, bandeau accéléré par la vitesse, compteurs.
-- Liste de projets avec aperçu flottant qui suit la souris et teinte la scène.
-- Curseur personnalisé, boutons magnétiques, menu plein écran, horloge de Lyon.
+- Préchargeur avec compteur puis double rideau (crème, puis orange).
+- **Une ambiance par chapitre** : crème → sable → nuit (projets) → lilas → crème → orange (contact), en fondu.
+- Sculpture nacrée WebGL (Three.js, shaders maison) qui **se métamorphose** à chaque chapitre (goutte, fleur, anneaux, cristal), suit la souris, réagit au clic par une onde, avec halo coloré et poussière lumineuse.
+- Titre d'accueil dont **la graisse de la police suit le curseur** (police variable Fraunces).
+- Défilement fluide (Lenis), inclinaison des blocs selon la vitesse, manifeste mot à mot, section horizontale épinglée avec panneaux révélés, bandeau accéléré, compteurs, barre de progression.
+- Projets avec aperçu flottant animé qui teinte la scène ; curseur personnalisé, boutons magnétiques, menu plein écran orange.
 - Mobile, clavier et `prefers-reduced-motion` pris en charge ; repli si WebGL indisponible.
 
 ## Lancer
