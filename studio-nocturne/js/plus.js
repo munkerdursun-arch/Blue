@@ -51,15 +51,17 @@ export function initPlus({ gsap, ScrollTrigger, onScroll, scene, heroChars, cont
       const dt = Math.min((now - last) / 16.67, 3); // 1 = une image à 60 i/s
       last = now;
       ctx.clearRect(0, 0, innerWidth, innerHeight);
-      // ruban : chaque point rétrécit et s'efface
-      for (let i = 0; i < pts.length; i++) {
-        const p = pts[i];
-        p.life -= 0.022 * dt;
+      // ruban continu : segments de plus en plus fins et transparents vers la queue
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      for (const p of pts) p.life -= 0.02 * dt;
+      for (let i = 1; i < pts.length; i++) {
+        const a = pts[i - 1], p = pts[i];
         if (p.life <= 0) continue;
-        const r = 16 * p.life * (i / pts.length);
-        ctx.globalAlpha = p.life * 0.7;
-        ctx.fillStyle = p.c;
-        ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fill();
+        const k = i / pts.length;
+        ctx.globalAlpha = Math.max(0, p.life) * 0.9;
+        ctx.strokeStyle = p.c;
+        ctx.lineWidth = 2 + 20 * p.life * k;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(p.x, p.y); ctx.stroke();
       }
       while (pts.length && pts[0].life <= 0) pts.shift();
       // étincelles : vitesse, gravité, frottement
@@ -79,22 +81,29 @@ export function initPlus({ gsap, ScrollTrigger, onScroll, scene, heroChars, cont
   }
 
   // ---------- 2. Titre d'accueil : ondulation au repos, envol au défilement ----------
+  // (créé après l'intro, qui anime déjà x / y / rotation sur ces lettres)
   document.addEventListener('intro:done', () => {
     gsap.to(heroChars, {
-      yPercent: -5, duration: 1.8, ease: 'sine.inOut', repeat: -1, yoyo: true,
+      yPercent: -6, duration: 1.6, ease: 'sine.inOut', repeat: -1, yoyo: true,
       stagger: { each: 0.09, from: 'start' },
     });
-  }, { once: true });
-  // chaque lettre part dans sa propre direction (valeurs fixées au hasard une fois)
-  heroChars.forEach((c) => {
-    gsap.to(c, {
-      y: () => -120 - Math.random() * 260,
-      x: () => (Math.random() - 0.5) * 160,
-      rotation: (Math.random() - 0.5) * 70,
-      opacity: 0, ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 20%', scrub: 0.8 },
+    // chaque lettre part dans sa propre direction au défilement (valeurs tirées au hasard une fois)
+    heroChars.forEach((c) => {
+      gsap.to(c, {
+        y: -140 - Math.random() * 300,
+        x: (Math.random() - 0.5) * 220,
+        rotation: (Math.random() - 0.5) * 90,
+        opacity: 0, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 20%', scrub: 0.8 },
+      });
     });
-  });
+  }, { once: true });
+
+  // pastille pour savoir sur quelle version on se trouve
+  const pill = document.createElement('span');
+  pill.className = 'plus-pill';
+  pill.textContent = 'Version +';
+  $('.header')?.insertBefore(pill, $('.burger'));
   gsap.to('.hero__aside', {
     y: -80, opacity: 0, ease: 'none',
     scrollTrigger: { trigger: '.hero', start: '20% top', end: 'bottom 30%', scrub: 0.8 },

@@ -5,11 +5,32 @@
 // boutons magnétiques, menu. gsap / ScrollTrigger / Lenis = globals.
 // =====================================================================
 import { initScene } from './scene.js';
+import { initPlus } from './plus.js'; // import statique : pas de chargement différé qui pourrait échouer
 
 const { gsap, ScrollTrigger, Lenis } = window;
 gsap.registerPlugin(ScrollTrigger);
 
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Version « + » : déclarée par la page (window.NOCTURNE_MODE) ou par <html data-mode>
+const PLUS = window.NOCTURNE_MODE === 'plus' || document.documentElement.dataset.mode === 'plus';
+
+// Mouvement réduit : on respecte le réglage du système, mais le visiteur peut choisir d'activer
+// les animations quand même (choix mémorisé dans ce navigateur).
+const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let forcedMotion = false;
+try { forcedMotion = localStorage.getItem('nocturne-motion') === 'on'; } catch { /* stockage indisponible */ }
+const reduced = prefersReduced && !forcedMotion;
+document.documentElement.classList.toggle('reduced', reduced);
+if (reduced) {
+  const note = document.createElement('div');
+  note.className = 'motion-note';
+  note.setAttribute('role', 'status');
+  note.innerHTML = `<p>Votre appareil demande de <b>réduire les animations</b> : la plupart sont désactivées.</p><button type="button">Activer les animations</button>`;
+  note.querySelector('button').addEventListener('click', () => {
+    try { localStorage.setItem('nocturne-motion', 'on'); } catch { /* ignoré */ }
+    location.reload();
+  });
+  document.body.appendChild(note);
+}
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -120,7 +141,10 @@ function intro() {
     .to('.loader', { clipPath: 'inset(0 0 100% 0)', duration: 1.0, ease: EASE_IO }, '-=0.15')
     .to('.curtain', { clipPath: 'inset(0 0 100% 0)', duration: 1.0, ease: EASE_IO }, '-=0.82')
     .add(() => scene?.reveal(), '-=0.7')
-    .from(heroChars, { yPercent: 120, rotate: 8, duration: 1.5, stagger: 0.028 }, '-=0.55')
+    .from(heroChars, PLUS
+      // version « + » : les lettres arrivent de partout et s'assemblent
+      ? { x: () => gsap.utils.random(-500, 500), y: () => gsap.utils.random(-350, 350), rotation: () => gsap.utils.random(-120, 120), scale: () => gsap.utils.random(0.3, 1.8), opacity: 0, duration: 1.9, stagger: { each: 0.035, from: 'random' } }
+      : { yPercent: 120, rotate: 8, duration: 1.5, stagger: 0.028 }, '-=0.55')
     .from('.header > *', { y: -16, opacity: 0, duration: 1, stagger: 0.08 }, '-=1.3')
     .from('[data-reveal]', { y: 28, opacity: 0, duration: 1.2, stagger: 0.12 }, '-=1.1')
     .from(['.scroll-hint', '.hero__badge'], { opacity: 0, scale: 0.9, duration: 1, stagger: 0.1 }, '-=0.9')
@@ -375,11 +399,8 @@ const tick = () => { clock.textContent = fmt.format(new Date()); };
 tick(); setInterval(tick, 10_000);
 
 // ---------- Version « + » : couche d'animations supplémentaires ----------
-if (document.documentElement.dataset.mode === 'plus' && !reduced) {
-  import('./plus.js').then(({ initPlus }) => {
-    initPlus({ gsap, ScrollTrigger, onScroll, scene, heroChars, contactChars, manifestoWords, finePointer });
-    ScrollTrigger.refresh();
-  });
+if (PLUS && !reduced) {
+  initPlus({ gsap, ScrollTrigger, onScroll, scene, heroChars, contactChars, manifestoWords, finePointer });
 }
 
 document.fonts.ready.then(() => ScrollTrigger.refresh());
