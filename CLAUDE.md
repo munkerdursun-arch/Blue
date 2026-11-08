@@ -7,6 +7,7 @@ Ces règles s'appliquent à tout site ou page web créé ici. Démo de référen
 
 | Skill | Quand l'utiliser |
 |---|---|
+| **`studio-premium-web`** | **Toujours en premier pour tout site** : standard complet (gabarit de code, palettes par domaine, recettes, pièges). |
 | `emil-design-eng` | Toujours, pour toute interface : courbes, durées, retour au clic, accessibilité du mouvement. |
 | `animate`, `choreograph`, `animation-performance` | Écrire ou enchaîner des animations, vérifier qu'elles restent à 60 i/s. |
 | `review-animations`, `improve-animations` | Relire ou auditer les animations existantes. |
