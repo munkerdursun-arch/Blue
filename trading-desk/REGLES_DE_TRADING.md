@@ -51,3 +51,16 @@ Simulation 2 semaines → cohérence avec le backtest → **validation du propri
 
 ## 8. Journal
 Chaque idée, refus et transaction : **titre · idée · preuves · étape suivante** dans `JOURNAL.md`.
+
+## 9. Barème de notation pré-enregistré (figé le 2026-11-08 AVANT tout backtest)
+Mesures calculées uniquement sur les données hors échantillon (walk-forward), nettes de frais.
+
+| Critère | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| Sharpe annualisé (excès sur T-bill 3 mois) | < 0,3 | 0,3–0,5 | 0,5–0,8 | 0,8–1,1 | ≥ 1,1 |
+| Sortino annualisé (excès sur T-bill) | < 0,4 | 0,4–0,7 | 0,7–1,1 | 1,1–1,5 | ≥ 1,5 |
+| Drawdown max | > 35 % | 25–35 % | 18–25 % | 12–18 % | < 12 % |
+| Nombre de transactions | < 30 (éliminatoire) | 30–60 | 60–120 | 120–250 | ≥ 250 |
+| Impact des frais (part du rendement brut absorbée) | > 50 % | 35–50 % | 20–35 % | 10–20 % | < 10 % |
+
+Hypothèses de coûts (estimations) : 10 pb par côté (écart + glissement) en scénario de base, 25 pb en scénario de stress. Commission Alpaca supposée nulle (à vérifier). Exécution : signal à la clôture J, ordre à l'ouverture J+1 (aucune donnée future).
