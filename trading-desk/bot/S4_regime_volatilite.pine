@@ -1,0 +1,31 @@
+//@version=5
+// S4 — Régime de volatilité (VIX / VIX3M) — indicateur + alertes.
+// Statut : candidate NON admise (17/25). Usage : observation uniquement.
+// À appliquer sur un graphique JOURNALIER de SPY.
+// Anti-repaint : les valeurs ne sont lues que sur bougies clôturées (barstate.isconfirmed)
+// et request.security utilise lookahead = barmerge.lookahead_off.
+indicator("S4 Régime de volatilité (VIX/VIX3M)", overlay = false)
+
+ratioThr  = input.float(0.95, "Seuil VIX/VIX3M", step = 0.01)
+needTrend = input.bool(false, "Exiger clôture > MM200")
+atrK      = input.float(3.0, "Stop = k × ATR14")
+
+vix   = request.security("CBOE:VIX",   "D", close, lookahead = barmerge.lookahead_off)
+vix3m = request.security("CBOE:VIX3M", "D", close, lookahead = barmerge.lookahead_off)
+ratio = vix / vix3m
+sma200 = ta.sma(close, 200)
+longOk = ratio < ratioThr and (not needTrend or close > sma200)
+stopLvl = close - atrK * ta.atr(14)
+
+plot(ratio, "VIX/VIX3M", color = longOk ? color.teal : color.red, linewidth = 2)
+hline(1.0, "Inversion (backwardation)", color = color.gray, linestyle = hline.style_dashed)
+plot(ratioThr, "Seuil", color = color.orange)
+bgcolor(longOk ? color.new(color.teal, 88) : na)
+
+entrySig = barstate.isconfirmed and longOk and not longOk[1]
+exitSig  = barstate.isconfirmed and not longOk and longOk[1]
+plot(stopLvl, "Stop indicatif (prix)", display = display.data_window)
+alertcondition(entrySig, "S4 ENTRÉE", "S4 : contango confirmé -> plan d'achat SPY {{ticker}} clôture {{close}} — à valider par le risk manager")
+alertcondition(exitSig,  "S4 SORTIE", "S4 : ratio au-dessus du seuil -> plan de sortie SPY")
+plotchar(entrySig, "Entrée", "▲", location.bottom, color.teal, size = size.tiny)
+plotchar(exitSig,  "Sortie", "▼", location.top,    color.red,  size = size.tiny)
