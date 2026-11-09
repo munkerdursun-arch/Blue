@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f2f0eb" />
+  <title>Conducteur de travaux augmenté</title>
+  <meta name="description" content="Formation de 8 h ou 16 h pour construire, installer, automatiser et piloter des agents IA au service du conducteur de travaux BTP : prompts, n8n, Paperclip." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2315181c'/%3E%3Cpath d='M7 23 16 8l9 15z' fill='%23ffb000'/%3E%3C/svg%3E" />
+  <!-- Polices auto-hébergées (pas de Google Fonts : RGPD) -->
+  <link rel="preload" href="fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="vendor/lenis/lenis.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>window.CDT_MODE = 'plus';</script>
+  <script type="importmap">{ "imports": { "three": "./vendor/three/three.module.min.js" } }</script>
+</head>
+<body class="is-loading">
+  <a class="skip" href="#main">Aller au contenu</a>
+
+  <!-- Préchargeur : compteur puis double rideau (béton puis jaune chantier) -->
+  <div class="curtain" aria-hidden="true"></div>
+  <div class="loader" aria-hidden="true">
+    <div class="loader__count"><span data-count>0</span><sup>%</sup></div>
+    <div class="loader__bar"><span></span></div>
+    <p class="loader__tag">Conducteur de travaux augmenté · préparation du chantier</p>
+  </div>
+
+  <canvas class="webgl" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><em class="cursor__label">Voir</em></span></div>
+
+  <header class="header">
+    <a class="logo" href="#accueil" data-magnetic aria-label="Conducteur de travaux augmenté, retour à l'accueil"><span>CONDUCTEUR DE TRAVAUX</span><span>/ AUGMENTÉ<i>.</i></span></a>
+    <nav class="header__links" aria-label="Accès rapide">
+      <a href="#programme" data-magnetic>Programme</a>
+      <a href="#agents" data-magnetic>Les 15 agents</a>
+      <a href="#installer" data-magnetic>Installer un agent</a>
+    </nav>
+    <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le sommaire"><span></span><span></span><span></span></button>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="Sommaire de la formation" aria-hidden="true">
+    <div class="menu__grid"><div class="menu__col"><p class="menu__grp">Commencer</p><ul><li><a href="#accueil" data-target="accueil"><small>·</small><span>Accueil</span></a></li><li><a href="#programme" data-target="programme"><small>00</small><span>Programme 8 h / 16 h</span></a></li></ul></div><div class="menu__col"><p class="menu__grp">Jour 1 · Agents manuels</p><ul><li><a href="#fondations" data-target="fondations"><small>01</small><span>Fondations de l'IA</span></a></li><li><a href="#prompts" data-target="prompts"><small>02</small><span>Écrire une instruction</span></a></li><li><a href="#outils" data-target="outils"><small>03</small><span>Choisir ses outils</span></a></li><li><a href="#base" data-target="base"><small>04</small><span>Base documentaire</span></a></li><li><a href="#installer" data-target="installer"><small>05</small><span>Où coller vos prompts</span></a></li><li><a href="#agents" data-target="agents"><small>06</small><span>Les 15 agents</span></a></li><li><a href="#chaines" data-target="chaines"><small>07</small><span>Chaînes d'agents</span></a></li><li><a href="#tests" data-target="tests"><small>08</small><span>Tester un agent</span></a></li></ul></div><div class="menu__col"><p class="menu__grp">Jour 2 · Automatiser</p><ul><li><a href="#n8n" data-target="n8n"><small>09</small><span>n8n pas à pas</span></a></li><li><a href="#paperclip" data-target="paperclip"><small>10</small><span>Paperclip pas à pas</span></a></li><li><a href="#niveau" data-target="niveau"><small>11</small><span>Quel niveau choisir</span></a></li><li><a href="#securite" data-target="securite"><small>12</small><span>Sécurité, RGPD, AI Act</span></a></li><li><a href="#gains" data-target="gains"><small>13</small><span>Calculer vos gains</span></a></li><li><a href="#qcm" data-target="qcm"><small>14</small><span>Auto-évaluation</span></a></li></ul></div><div class="menu__col"><p class="menu__grp">Référence</p><ul><li><a href="#faq" data-target="faq"><small>15</small><span>FAQ et dépannage</span></a></li><li><a href="#glossaire" data-target="glossaire"><small>16</small><span>Glossaire</span></a></li><li><a href="#sources" data-target="sources"><small>17</small><span>Sources</span></a></li></ul></div></div>
+    <div class="menu__foot"><span>Programme suivi : <b id="navpct">0 %</b></span><span class="menu__bar"><i id="navbar"></i></span><span>Formation IA · 1 ou 2 jours</span></div>
+  </nav>
+
+  <!-- Repère du module en cours -->
+  <a class="modchip" href="#menu" aria-hidden="true" tabindex="-1"><b data-chip-no>00</b><span data-chip-title>Programme</span></a>
+
+  <main id="main">
+
+    <!-- ===== ACCUEIL ===== -->
+    <section class="hero" id="accueil" data-scene="0" data-theme="beton">
+      <p class="eyebrow hero__eyebrow" data-reveal>Formation IA pour le BTP · 1 ou 2 jours</p>
+      <h1 class="hero__title" data-split>
+        <span class="line">Le conducteur</span>
+        <span class="line">de travaux</span>
+        <span class="line"><em>augmenté</em> par l'IA</span>
+      </h1>
+      <div class="hero__aside">
+        <p class="lead" data-reveal>En 1 ou 2 jours, apprenez à créer vos agents IA, à savoir exactement où coller chaque prompt, puis à les automatiser avec n8n et Paperclip. Vous repartez avec des agents qui marchent sur vos propres dossiers.</p>
+        <div class="btns" data-reveal>
+          <a class="btn pri" href="#programme">Voir le programme</a>
+          <a class="btn" href="#installer">Installer mon premier agent</a>
+          <a class="btn" href="#agents">Les 15 agents</a>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true"><span>Défiler</span><i></i></div>
+      <a class="hero__badge" href="#programme" data-magnetic data-cursor="Voir" aria-label="Voir le programme">
+        <svg viewBox="0 0 112 112" aria-hidden="true"><defs><path id="circ" d="M56,56 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text><textPath href="#circ">Formation IA · BTP · 8 h ou 16 h · </textPath></text></svg>
+        <i></i>
+      </a>
+    </section>
+
+    <!-- ===== CHIFFRES ===== -->
+    <section class="facts" data-scene="1" data-theme="beton" aria-label="La formation en chiffres">
+      <div class="fact"><span class="fact__num"><span data-to="16">0</span><small>h</small></span><span class="fact__label">ou 8 h · 1 jour ou 2 jours</span></div>
+      <div class="fact"><span class="fact__num"><span data-to="15">0</span></span><span class="fact__label">agents · prompts prêts à copier</span></div>
+      <div class="fact"><span class="fact__num"><span data-to="3">0</span></span><span class="fact__label">niveaux · manuel, n8n, Paperclip</span></div>
+      <div class="fact"><span class="fact__num"><span data-to="0">0</span></span><span class="fact__label">code · requis pour le jour 1</span></div>
+    </section>
+
+    <!-- ===== RÈGLE D'OR ===== -->
+    <section class="golden" data-scene="1" data-theme="beton">
+      <p class="eyebrow">Règle d'or</p>
+      <p class="golden__text" data-words>L'IA prépare. Le conducteur de travaux <em>vérifie,</em> <em>décide</em> et <em>signe.</em></p>
+    </section>
+
+    <!-- ===== NIVEAUX : défilement horizontal ===== -->
+    <section class="levels" id="niveaux" data-scene="2" data-theme="sable">
+      <div class="levels__track">
+        <div class="lvl lvl--intro">
+          <p class="eyebrow">Trois niveaux</p>
+          <h2 class="display">Du manuel<br /><em>à l'équipe d'agents</em></h2>
+        </div>
+        <article class="lvl">
+          <span class="lvl__n">Niveau 1 · Jour 1</span>
+          <div class="meter" aria-label="Difficulté 1 sur 3"><i class="f"></i><i></i><i></i></div>
+          <h3>Agents manuels</h3>
+          <p>Un agent = un projet dans Claude, ChatGPT, Gemini, Copilot ou Le Chat. Vous collez le prompt, ajoutez vos fichiers, vous lui parlez. C'est 80 % de la valeur.</p>
+          <a class="lvl__link" href="#installer">Commencer ici →</a>
+        </article>
+        <article class="lvl">
+          <span class="lvl__n">Niveau 2 · Jour 2</span>
+          <div class="meter" aria-label="Difficulté 2 sur 3"><i class="f"></i><i class="f"></i><i></i></div>
+          <h3>Workflows n8n</h3>
+          <p>Un mail reçu, un fichier déposé ou une heure fixe déclenche l'agent. Il prépare un brouillon, remplit un tableau. Vous validez avant l'envoi.</p>
+          <a class="lvl__link" href="#n8n">Automatiser →</a>
+        </article>
+        <article class="lvl">
+          <span class="lvl__n">Niveau 3 · Jour 2</span>
+          <div class="meter" aria-label="Difficulté 3 sur 3"><i class="f"></i><i class="f"></i><i class="f"></i></div>
+          <h3>Équipe Paperclip</h3>
+          <p>Vos agents travaillent en équipe : organigramme, tickets, budgets, validations. Un directeur de travaux IA répartit le travail.</p>
+          <a class="lvl__link" href="#paperclip">Découvrir →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== BANDEAU ===== -->
+    <section class="marquee" aria-label="Thèmes de la formation">
+      <div class="marquee__row" data-marquee="1"><span>Prompts <i>◆</i> Agents <i>◆</i> n8n <i>◆</i> Paperclip <i>◆</i>&nbsp;</span></div>
+      <div class="marquee__row marquee__row--outline" data-marquee="-1"><span>DCE <i>◆</i> Mémoire <i>◆</i> PPSPS <i>◆</i> Planning <i>◆</i> CR <i>◆</i>&nbsp;</span></div>
+    </section>
+
+    <div class="read">
+<!-- ================= PROGRAMME ================= -->
+<section class="mod" id="programme" data-scene="3" data-theme="sable">
+  <header><div class="no">00</div><div class="tt"><h2>Programme de la formation</h2>
+  <div class="meta"><span class="day"><b>Choisissez votre formule</b></span><span>Horaires <b>8 h 30 → 18 h 00</b></span><span>Suivi <b id="pct">0 %</b></span></div></div></header>
+  <div class="body">
+    <div class="seg" role="group" aria-label="Formule">
+      <button type="button" data-f="8" aria-pressed="false">1 jour · 8 h</button>
+      <button type="button" data-f="16" aria-pressed="true">2 jours · 16 h</button>
+    </div>
+    <p id="fdesc" class="prose"></p>
+    <div id="sched"></div>
+    <div class="g2">
+      <div class="box"><h4>À préparer avant la formation</h4><ul>
+        <li>Un ordinateur portable et un compte Claude ou ChatGPT payant (ou l'outil validé par votre DSI)</li>
+        <li>3 dossiers passés : un DCE, des notes ou un enregistrement de réunion, quelques mails de sous-traitants</li>
+        <li>Vos modèles : CR, PPSPS type, mails types, fiche références</li>
+        <li>Formule 2 jours : un compte n8n Cloud (essai) et, si possible, une clé API Anthropic ou OpenAI</li>
+      </ul></div>
+      <div class="box"><h4>Ce que vous aurez à la fin</h4><ul>
+        <li>3 agents installés et testés sur vos dossiers (CR, mails ST, DCE)</li>
+        <li>La méthode pour installer les 12 autres en 15 minutes chacun</li>
+        <li>Formule 2 jours : un workflow n8n qui prépare vos brouillons de réponse</li>
+        <li>Formule 2 jours : une démonstration de Cellule IA sous Paperclip</li>
+        <li>Votre plan d'action sur 30, 60 et 90 jours</li>
+      </ul></div>
+    </div>
+    <h3>Après la formation : plan 30 / 60 / 90 jours</h3>
+    <div class="tw"><table>
+      <tr><th>Horizon</th><th>Objectif</th></tr>
+      <tr><td class="k">30 jours</td><td>Charte signée, dossier IA-Référentiel complet, agents CR (10), Mails ST (08) et Clients/MOE (09) utilisés chaque jour. Mesures « avant » faites.</td></tr>
+      <tr><td class="k">60 jours</td><td>Agents DCE (04), Planning (02/03), PPSPS (06) testés sur 3 dossiers. Workflow n8n « mails chantier » en service, en brouillons.</td></tr>
+      <tr><td class="k">90 jours</td><td>Mémoire technique (05) utilisé sur un vrai AO, veille AO automatisée, pilote Paperclip. Bilan chiffré présenté à la direction (module 13).</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section class="chapter" id="chap-1" data-scene="8" data-theme="beton" aria-label="Chapitre 01 · Jour 1 : Agents manuels">
+  <p class="eyebrow">Chapitre 01 · Jour 1</p>
+  <h2 class="chapter__title" data-split><span class="line">Agents</span><span class="line"><em>manuels</em></span></h2>
+  <nav class="chapter__mods" aria-label="Modules du chapitre"><a class="chip-link" href="#fondations"><small>01</small>Fondations de l'IA</a><a class="chip-link" href="#prompts"><small>02</small>Écrire une instruction</a><a class="chip-link" href="#outils"><small>03</small>Choisir ses outils</a><a class="chip-link" href="#base"><small>04</small>Base documentaire</a><a class="chip-link" href="#installer"><small>05</small>Où coller vos prompts</a><a class="chip-link" href="#agents"><small>06</small>Les 15 agents</a><a class="chip-link" href="#chaines"><small>07</small>Chaînes d'agents</a><a class="chip-link" href="#tests"><small>08</small>Tester un agent</a></nav>
+</section>
+
+<!-- ================= 01 FONDATIONS ================= -->
+<section class="mod" id="fondations" data-scene="3" data-theme="beton">
+  <header><div class="no"><small>MOD.</small>01</div><div class="tt"><h2>Fondations : ce que l'IA fait bien, et où elle se trompe</h2>
+  <div class="meta"><span class="day"><b>Jour 1</b></span><span>Formule 16 h : <b>1 h</b></span><span>Formule 8 h : <b>45 min</b></span><span>Livrable : <b>5 sorties piégées corrigées</b></span><span>Réussite : <b>5 erreurs repérées sur 5</b></span></div></div></header>
+  <div class="body">
+    <div class="prose">
+      <p>Un modèle de langage (Claude, GPT, Gemini, Mistral…) prédit le texte le plus probable à partir de ce que vous lui donnez. Il écrit de façon plausible, pas forcément juste. Il ne connaît ni vos cadences, ni vos prix, ni votre chantier : sans vos documents, il généralise.</p>
+    </div>
+    <div class="tw"><table>
+      <tr><th>Niveau</th><th>Principe</th><th>Exemple conducteur de travaux</th><th>Où ça vit</th></tr>
+      <tr><td class="k">Assistant</td><td>Vous posez une question, il répond</td><td>« Résume ce CCTP en 10 points »</td><td>Une conversation</td></tr>
+      <tr><td class="k">Agent</td><td>Instructions permanentes + vos documents + questions structurées</td><td>Agent PPSPS qui connaît votre modèle et votre charte</td><td>Un projet / GPT / Gem (module 05)</td></tr>
+      <tr><td class="k">Workflow</td><td>Un déclencheur lance une séquence fixe qui appelle un agent</td><td>Mail d'un ST → classement → brouillon de réponse</td><td>n8n (module 09)</td></tr>
+      <tr><td class="k">Équipe d'agents</td><td>Un orchestrateur répartit le travail entre agents, avec tickets et budgets</td><td>DCE → go/no-go → mémoire → planning</td><td>Paperclip (module 10)</td></tr>
+    </table></div>
+    <div class="g2">
+      <div class="box"><h4>Ce que l'IA fait bien</h4><ul>
+        <li>Lire et résumer 300 pages de DCE en citant les pièces</li>
+        <li>Rédiger un premier jet structuré (mail, CR, mémoire)</li>
+        <li>Mettre au propre des notes dictées ou une transcription</li>
+        <li>Comparer des offres ligne à ligne et repérer les oublis</li>
+        <li>Poser les bonnes questions avant de rédiger</li>
+      </ul></div>
+      <div class="box"><h4>Où elle se trompe</h4><ul>
+        <li>Elle invente une cote, un article de loi, un délai (« hallucination »)</li>
+        <li>Elle se trompe dans les calculs longs et les additions de colonnes</li>
+        <li>Elle lit mal les plans scannés, les hachures, les tableaux complexes</li>
+        <li>Elle oublie le milieu d'un très long document</li>
+        <li>Elle dit oui trop vite : elle valide vos erreurs si vous insistez</li>
+      </ul></div>
+    </div>
+    <h3>Les 6 réflexes de vérification</h3>
+    <ol class="steps">
+      <li><div><b>Tout chiffre est recalculé dans un tableur.</b> Surfaces, totaux, durées, pourcentages.</div></li>
+      <li><div><b>Toute référence réglementaire est vérifiée</b> sur Légifrance ou chez l'éditeur de la norme (AFNOR, CSTB pour les DTU).</div></li>
+      <li><div><b>Toute information de DCE cite sa pièce et son article.</b> Sans source : « NON TROUVÉ ».</div></li>
+      <li><div><b>Tout CR est confronté à la source</b> (notes, transcription).</div></li>
+      <li><div><b>Aucun envoi externe sans relecture complète.</b> Ni par vous, ni par un automatisme.</div></li>
+      <li><div><b>Nouvelle conversation pour chaque dossier.</b> Une conversation trop longue mélange les chantiers.</div></li>
+    </ol>
+    <h3>Exercice : 5 sorties piégées</h3>
+    <p>Trouvez l'erreur dans chaque sortie, puis ouvrez la correction.</p>
+    <div class="tw"><table>
+      <tr><th>#</th><th>Sortie de l'IA</th></tr>
+      <tr><td class="num">1</td><td>« 12 m² × 45 € = 640 € HT »</td></tr>
+      <tr><td class="num">2</td><td>« Conformément à l'article Z-999 du DTU 20.1… »</td></tr>
+      <tr><td class="num">3</td><td>« Prochaine réunion de chantier le 31 avril à 9 h »</td></tr>
+      <tr><td class="num">4</td><td>CR : « L'entreprise acceptera une pénalité de 500 €/jour » (absent de la transcription)</td></tr>
+      <tr><td class="num">5</td><td>« 1 200 + 850 + 400 = 2 540 € »</td></tr>
+    </table></div>
+    <details class="fq"><summary>Correction</summary><div><p>1 : 540 €. 2 : article inventé, introuvable. 3 : le 31 avril n'existe pas. 4 : engagement inventé, dangereux contractuellement. 5 : 2 450 €. Notez chaque type d'erreur dans votre journal (modèle au module 08).</p></div></details>
+  </div>
+</section>
+
+<!-- ================= 02 PROMPTS ================= -->
+<section class="mod" id="prompts" data-scene="3" data-theme="beton">
+  <header><div class="no"><small>MOD.</small>02</div><div class="tt"><h2>Écrire une instruction d'agent fiable</h2>
+  <div class="meta"><span class="day"><b>Jour 1</b></span><span>Formule 16 h : <b>1 h</b></span><span>Formule 8 h : <b>45 min</b></span><span>Livrable : <b>1 instruction R-C-E-P-S-V rédigée</b></span><span>Réussite : <b>sortie conforme au test</b></span></div></div></header>
+  <div class="body">
+    <div class="prose"><p>Un « prompt » d'agent n'est pas une question : c'est une <b>fiche de poste</b> permanente. Elle est lue avant chaque message. Plus elle est précise, moins l'agent improvise. Utilisez toujours les mêmes six blocs.</p></div>
+    <div class="tw"><table>
+      <tr><th>Bloc</th><th>Contenu</th><th>Exemple</th></tr>
+      <tr><td class="k">R · Rôle</td><td>Qui est l'agent, son niveau d'expérience</td><td>Tu es conducteur de travaux senior en gros œuvre, 15 ans d'expérience.</td></tr>
+      <tr><td class="k">C · Contexte</td><td>Entreprise, type de chantiers, qui va lire</td><td>Entreprise générale de 80 salariés, marchés publics et privés, Auvergne-Rhône-Alpes.</td></tr>
+      <tr><td class="k">E · Entrées</td><td>Documents fournis et ordre de lecture</td><td>Lis d'abord le RC, puis le CCAP, puis le CCTP du lot 02.</td></tr>
+      <tr><td class="k">P · Procédure</td><td>Étapes numérotées, y compris « pose-moi des questions et attends »</td><td>1. Pose-moi 5 questions max. 2. Attends. 3. Rédige…</td></tr>
+      <tr><td class="k">S · Sortie</td><td>Format exact : tableau, mail, CSV, plan de document</td><td>Tableau : action | responsable | échéance.</td></tr>
+      <tr><td class="k">V · Vérification</td><td>Interdits, marquages, auto-contrôle final</td><td>N'invente rien. Marque [À VÉRIFIER]. Termine par la liste de ce que je dois contrôler.</td></tr>
+    </table></div>
+    <h3>Modèle vierge à copier</h3>
+    <div class="code"><div class="ch"><span>gabarit-instruction.md</span><button class="cp" type="button" data-copy="tpl">Copier</button></div><pre id="tpl"># RÔLE
+Tu es [métier] dans une entreprise de BTP ([GO / second œuvre / TCE / VRD]).
+
+# CONTEXTE
+Entreprise : [nom ou "mon entreprise"], [effectif], [zone], [type de marchés].
+Lecteur final : [client / MOE / sous-traitant / direction].
+
+# ENTRÉES
+Je te fournis : [liste]. Ordre de lecture : [1, 2, 3].
+Documents de référence permanents (connaissances du projet) : [liste des fichiers].
+
+# PROCÉDURE
+1. Reformule ma demande en 2 lignes.
+2. Pose-moi au maximum [5] questions sur ce qui manque. ATTENDS mes réponses.
+3. [Étape de travail]
+4. [Étape de travail]
+
+# SORTIE
+Format : [tableau / mail / CSV / plan]. Longueur : [x]. Ton : [factuel, professionnel].
+
+# VÉRIFICATION
+- N'invente aucun chiffre, date, référence, nom ou engagement. Si l'info manque : [À COMPLÉTER].
+- Toute référence réglementaire est suivie de [À VÉRIFIER].
+- Termine toujours par : "Points à contrôler par vous" (liste).</pre></div>
+    <h3>Cinq techniques qui changent tout</h3>
+    <div class="g2">
+      <div class="box"><h4>Donner un exemple réussi</h4><p>Joignez un CR, un mail ou un mémoire que vous jugez parfait et écrivez : « Imite la structure et le ton du fichier EXEMPLE_CR.pdf ». C'est plus efficace que dix lignes de consignes.</p></div>
+      <div class="box"><h4>Forcer l'entretien</h4><p>« Ne rédige rien avant d'avoir posé tes questions et reçu mes réponses. » Sans cette phrase, l'agent remplit les trous en inventant.</p></div>
+      <div class="box"><h4>Découper</h4><p>Un mémoire de 30 pages se rédige section par section. Validez le plan, puis demandez la section 1, puis la 2. Le résultat est meilleur et vérifiable.</p></div>
+      <div class="box"><h4>Faire relire par l'IA elle-même</h4><p>Après la sortie : « Relis ta réponse comme un contrôleur. Liste tout ce qui n'est pas prouvé par mes documents. » Vous trouvez vite les inventions.</p></div>
+      <div class="box"><h4>Versionner</h4><p>Chaque correction d'instruction = nouvelle version (v1, v2…) notée dans le journal. Vous savez toujours quelle version a produit quel document.</p></div>
+      <div class="box"><h4>Corriger l'instruction, pas la réponse</h4><p>Si l'agent fait une erreur, ne la corrigez pas seulement dans la conversation : ajoutez la règle dans l'instruction. Sinon l'erreur revient au prochain dossier.</p></div>
+    </div>
+    <h3>Prompts flash du quotidien</h3>
+    <p>À utiliser dans n'importe quel assistant, sans agent. Cliquez pour copier.</p>
+    <div id="flash" class="g2"></div>
+  </div>
+</section>
+
+<!-- ================= 03 OUTILS ================= -->
+<section class="mod" id="outils" data-scene="3" data-theme="beton">
+  <header><div class="no"><small>MOD.</small>03</div><div class="tt"><h2>Choisir ses outils</h2>
+  <div class="meta"><span class="day"><b>Jour 1</b></span><span>Formule 16 h : <b>30 min</b></span><span>Formule 8 h : <b>15 min</b></span><span>Livrable : <b>outil principal choisi</b></span><span>Réussite : <b>confidentialité vérifiée</b></span></div></div></header>
+  <div class="body">
+    <div class="prose"><p>Choisissez <b>un outil principal</b> pour héberger vos agents et <b>un outil de secours</b>. Les instructions de ce site sont transposables d'un outil à l'autre : seul l'endroit où on les colle change (module 05). Si votre entreprise a déjà Microsoft 365 ou Google Workspace, commencez par ce que la DSI autorise.</p></div>
+    <div class="tw"><table>
+      <tr><th>Outil</th><th>Où vivent les agents</th><th>Points forts BTP</th><th>À vérifier chez l'éditeur</th></tr>
+      <tr><td class="k">Claude (Anthropic)</td><td>Projets</td><td>Longs documents (DCE, CCTP), rédaction soignée, lecture de PDF et d'images, connecteurs Google Drive / Microsoft 365 selon l'offre</td><td>Offre Team/Enterprise pour la confidentialité, réglage d'usage des données</td></tr>
+      <tr><td class="k">ChatGPT (OpenAI)</td><td>GPT personnalisés, Projets</td><td>Génération de fichiers Excel/Word, analyse de données, très répandu</td><td>Offre Business/Enterprise, option « améliorer le modèle »</td></tr>
+      <tr><td class="k">Gemini (Google)</td><td>Gems</td><td>Intégré à Gmail, Drive, Docs si vous êtes sur Google Workspace</td><td>Licence Workspace avec Gemini, règles de la DSI</td></tr>
+      <tr><td class="k">Microsoft 365 Copilot</td><td>Agents Copilot</td><td>Accès direct à Outlook, Teams, SharePoint de l'entreprise</td><td>Licence Copilot, accès aux sites SharePoint</td></tr>
+      <tr><td class="k">Le Chat (Mistral AI)</td><td>Agents, Bibliothèques</td><td>Éditeur français, hébergement européen</td><td>Offre Pro/Team/Enterprise et conditions de données</td></tr>
+      <tr><td class="k">NotebookLM (Google)</td><td>Carnets</td><td>Réponses strictement sourcées dans vos PDF : idéal pour interroger un DCE</td><td>Nombre de sources, offre Workspace</td></tr>
+      <tr><td class="k">Perplexity</td><td>Espaces</td><td>Veille technique et recherche sourcée sur le web</td><td>Fiabilité des sources citées</td></tr>
+      <tr><td class="k">n8n</td><td>Workflows</td><td>Automatisations open source, auto-hébergeables en France</td><td>Module 09</td></tr>
+      <tr><td class="k">Paperclip</td><td>Organisation d'agents</td><td>Équipe d'agents autonome, open source</td><td>Module 10</td></tr>
+    </table></div>
+    <div class="g3">
+      <div class="box"><h4>Vous êtes seul, sans DSI</h4><p>Claude ou ChatGPT en offre payante individuelle, réglage « ne pas utiliser mes données pour l'entraînement » activé, NotebookLM pour les DCE. Anonymisez les données personnelles.</p></div>
+      <div class="box"><h4>Entreprise sous Microsoft 365</h4><p>Copilot si la licence existe (agents branchés sur SharePoint). Sinon Claude ou ChatGPT en offre Team, validés par la DSI. n8n ou Power Automate pour l'automatisation.</p></div>
+      <div class="box"><h4>Entreprise sous Google Workspace</h4><p>Gemini et ses Gems, NotebookLM pour les DCE, n8n branché sur Gmail, Drive et Sheets.</p></div>
+    </div>
+    <div class="call warn"><b class="h">Avant de déposer un document client</b><p>Lisez la page « confidentialité / utilisation des données » de l'offre exacte que vous payez. Notez dans votre charte : l'offre, la date de vérification, le réglage choisi. Un DCE, des prix et des données clients ne vous appartiennent pas toujours.</p></div>
+  </div>
+</section>
+
+<!-- ================= 04 BASE ================= -->
+<section class="mod" id="base" data-scene="3" data-theme="beton">
+  <header><div class="no"><small>MOD.</small>04</div><div class="tt"><h2>Constituer la base documentaire de l'entreprise</h2>
+  <div class="meta"><span class="day"><b>Jour 1</b></span><span>Formule 16 h : <b>1 h</b></span><span>Formule 8 h : <b>30 min</b></span><span>Livrable : <b>dossier IA-Référentiel créé</b></span><span>Réussite : <b>5 premiers fichiers réunis</b></span></div></div></header>
+  <div class="body">
+    <div class="prose"><p>C'est ce qui rend vos agents meilleurs qu'un ChatGPT générique. Un agent sans vos documents écrit comme tout le monde. Un agent avec vos références, vos cadences et vos modèles écrit comme votre entreprise. Vous le faites <b>une fois</b>, puis vous le tenez à jour.</p></div>
+    <h3>Arborescence à créer (Drive, SharePoint ou disque)</h3>
+<div class="tree">IA-Referentiel/
+├── 00_Charte-usage-IA.docx            ← règles internes (module 12)
+├── 01_Entreprise/
+│   ├── Presentation_entreprise.pdf    ← historique, organigramme, chiffres
+│   ├── Moyens_humains.xlsx            ← nom, fonction, qualifications, CACES
+│   ├── Moyens_materiels.xlsx          ← engins, banches, grues, échafaudages
+│   └── Certifications_assurances.pdf  ← Qualibat, ISO, RC/décennale + dates
+├── 02_References/
+│   └── REF_2025_College-Lyon_GO_2.4M.pdf  ← une fiche par chantier
+├── 03_Cadences/
+│   └── Cadences_reelles.csv           ← ouvrage ; unité ; cadence/équipe/jour ; source
+├── 04_Modeles/
+│   ├── Modele_CR.docx   Modele_PV_reception.docx   Modele_situation.xlsx
+│   ├── Mails_types.docx               ← vos meilleurs mails, anonymisés
+│   └── PPSPS_type.docx  + Charte_graphique.pdf (logo, couleurs, polices)
+├── 05_Methodes/
+│   └── Modes_operatoires/ Fiches_securite/ Fiches_environnement/
+├── 06_Commercial/
+│   ├── Grille_go-no-go.xlsx
+│   ├── Memoires_gagnants/             ← 2 ou 3 mémoires notés par l'acheteur
+│   └── ST_fournisseurs_qualifies.xlsx
+└── 07_Agents/                         ← un sous-dossier par agent (module 05)
+    └── 05_Memoire-technique/
+        ├── INSTRUCTIONS_v3.md   JOURNAL_ERREURS.md   TESTS/</div>
+    <div class="g2">
+      <div class="box"><h4>Fiche cadences (CSV)</h4>
+        <div class="code"><div class="ch"><span>Cadences_reelles.csv</span><button class="cp" type="button" data-copy="csvcad">Copier</button></div><pre id="csvcad">ouvrage;unite;cadence_par_equipe_par_jour;taille_equipe;chantier_source;date;remarque
+Voile BA banché h=2,70;m2;45;4;Collège Lyon;2025-03;banches métalliques
+Dalle BA ép. 20 coulée en place;m2;60;5;Résidence Villeurbanne;2024-10;pompe
+Cloison plaque 72/48;m2;35;2;Bureaux Grenoble;2025-01;hors bandes
+Enduit façade monocouche;m2;40;3;Maison Bron;2024-06;échafaudage en place</pre></div>
+        <p>Les valeurs ci-dessus sont des exemples. Remplacez-les par vos chiffres constatés. L'agent planning refusera toute cadence absente de ce fichier sans la marquer « HYPOTHÈSE ».</p>
+      </div>
+      <div class="box"><h4>Fiche référence chantier</h4>
+        <div class="code"><div class="ch"><span>REF_modele.md</span><button class="cp" type="button" data-copy="refmod">Copier</button></div><pre id="refmod">Opération :
+Maître d'ouvrage :          Maître d'œuvre :
+Lot(s) réalisé(s) :         Montant HT :
+Dates : début / fin         Délai tenu : oui / non (écart)
+Contraintes : site occupé, accès, phasage, nuisances…
+Solutions mises en œuvre :
+Équipe : conducteur, chef de chantier, effectif moyen
+Résultat : réserves à la réception (nb), satisfaction client
+Contact référent (avec accord) :
+Photos : 3 à 5 (avant / pendant / après)</pre></div>
+      </div>
+    </div>
+    <h3>Règles de préparation des fichiers</h3>
+    <ul class="prose" style="padding-left:22px">
+      <li>Un fichier par thème, nom explicite : <code>REF_2025_College-Lyon_GO_2.4M.pdf</code>.</li>
+      <li>PDF avec texte sélectionnable (pas de scan) ou fichiers Word/Excel. Un scan se passe à l'OCR avant.</li>
+      <li>Les dates de validité figurent dans le fichier (assurances, certifications, CACES).</li>
+      <li>CSV ou Excel simples pour les tableaux : une ligne d'en-tête, pas de cellules fusionnées.</li>
+      <li>Données personnelles : gardez uniquement ce qui sert (nom, fonction). Pas de numéros personnels.</li>
+      <li>Mettez à jour les cadences et les références à la fin de chaque chantier.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 05 INSTALLER ================= -->
+<section class="mod" id="installer" data-scene="3" data-theme="beton">
+  <header><div class="no"><small>MOD.</small>05</div><div class="tt"><h2>Où coller vos prompts : installer un agent pas à pas</h2>
+  <div class="meta"><span class="day"><b>Jour 1</b></span><span>Formule 16 h : <b>1 h 30</b></span><span>Formule 8 h : <b>1 h 15</b></span><span>Livrable : <b>1er agent installé</b></span><span>Réussite : <b>il pose ses questions avant de rédiger</b></span></div></div></header>
+  <div class="body">
+    <div class="prose">
+      <p>Un agent installé, c'est toujours <b>quatre éléments</b>, quel que soit l'outil. Les fiches du module 06 vous donnent les quatre pour chaque agent.</p>
+    </div>
+    <div class="g2">
+      <div class="box"><h4>1 · Les instructions</h4><p>Le prompt de la fiche agent. Il va dans le champ <b>Instructions</b> (jamais dans la conversation). Il est relu à chaque message.</p></div>
+      <div class="box"><h4>2 · Les connaissances</h4><p>Les fichiers permanents de l'IA-Référentiel (modèles, références, cadences). Ils vont dans <b>Connaissances</b> ou <b>Fichiers du projet</b>.</p></div>
+      <div class="box"><h4>3 · Le message de démarrage</h4><p>Ce que vous écrivez dans une <b>nouvelle conversation</b>, avec les pièces du dossier du jour (DCE, plan, transcription).</p></div>
+      <div class="box"><h4>4 · Le nom et la version</h4><p>Nommez toujours <code>CDT-05 Mémoire technique v3</code>. Le numéro suit le catalogue, la version suit le journal d'erreurs.</p></div>
+    </div>
+    <div class="call sig"><b class="h">La règle qui évite 90 % des problèmes</b><p>Instructions et fichiers permanents = dans l'agent. Documents du chantier en cours = dans la conversation. Une conversation = un dossier. Ne mélangez jamais deux chantiers dans la même conversation.</p></div>
+
+    <h3>Choisissez votre outil</h3>
+    <div class="tabs" role="tablist" id="tooltabs">
+      <button role="tab" aria-selected="true" aria-controls="t-claude" id="tb-claude" type="button">Claude</button>
+      <button role="tab" aria-selected="false" aria-controls="t-gpt" id="tb-gpt" type="button">ChatGPT</button>
+      <button role="tab" aria-selected="false" aria-controls="t-gem" id="tb-gem" type="button">Gemini</button>
+      <button role="tab" aria-selected="false" aria-controls="t-cop" id="tb-cop" type="button">Copilot M365</button>
+      <button role="tab" aria-selected="false" aria-controls="t-mis" id="tb-mis" type="button">Le Chat</button>
+      <button role="tab" aria-selected="false" aria-controls="t-nlm" id="tb-nlm" type="button">NotebookLM</button>
+      <button role="tab" aria-selected="false" aria-controls="t-n8n" id="tb-n8n" type="button">n8n</button>
+      <button role="tab" aria-selected="false" aria-controls="t-pc" id="tb-pc" type="button">Paperclip</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="t-claude" aria-labelledby="tb-claude">
+      <p><b>Claude · Projets.</b> Un projet = un agent. Recommandé pour les agents rédactionnels longs : DCE, mémoire, PPSPS, plans.</p>
+      <ol class="steps">
+        <li><div>Ouvrez <b>claude.ai</b>, menu de gauche <span class="ui">Projets</span> → <span class="ui">Nouveau projet</span>. Nom : <code>CDT-04 Lecture DCE v1</code>. Description : une ligne de mission.</div></li>
+        <li><div>Dans le projet, panneau de droite, <span class="ui">Instructions</span> → <span class="ui">Modifier</span>. <b>Collez ici le prompt de la fiche agent.</b> Enregistrez.</div></li>
+        <li><div>Toujours à droite, <span class="ui">Fichiers</span> (connaissances du projet) → <span class="ui">+</span> : ajoutez les fichiers listés dans la fiche (grille go/no-go, modèles…). Ou branchez Google Drive / SharePoint si l'offre le permet.</div></li>
+        <li><div>Revenez au projet et démarrez une <b>nouvelle conversation</b> dans le projet. Glissez les pièces du dossier du jour, collez le message de démarrage de la fiche.</div></li>
+        <li><div>Vérifiez que l'agent pose ses questions avant de rédiger. Sinon, renforcez la phrase « ATTENDS mes réponses » dans les instructions.</div></li>
+      </ol>
+      <div class="call info"><b class="h">Partager à l'équipe</b><p>Avec une offre Team ou Enterprise, le projet se partage aux collègues : tout le monde utilise la même version de l'agent.</p></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="t-gpt" aria-labelledby="tb-gpt" hidden>
+      <p><b>ChatGPT · GPT personnalisé.</b> Idéal pour un agent réutilisé tous les jours (mails, CR, consultation). Les <b>Projets</b> ChatGPT fonctionnent aussi : <span class="ui">Nouveau projet</span> → icône réglages → <span class="ui">Instructions</span> + <span class="ui">Fichiers</span>.</p>
+      <ol class="steps">
+        <li><div>Menu de gauche <span class="ui">GPT</span> → <span class="ui">Créer</span>. Passez directement sur l'onglet <span class="ui">Configurer</span> (ignorez l'onglet « Créer » conversationnel).</div></li>
+        <li><div><span class="ui">Nom</span> : <code>CDT-08 Mails sous-traitants v1</code>. <span class="ui">Description</span> : la mission.</div></li>
+        <li><div><span class="ui">Instructions</span> : <b>collez le prompt de la fiche agent.</b></div></li>
+        <li><div><span class="ui">Amorces de conversation</span> : collez le message de démarrage (et 2 ou 3 variantes, ex. « Relance niveau 2 »).</div></li>
+        <li><div><span class="ui">Connaissances</span> → <span class="ui">Charger des fichiers</span> : modèles et exemples de la fiche. Cochez <span class="ui">Interpréteur de code</span> si l'agent doit produire Excel/CSV.</div></li>
+        <li><div><span class="ui">Créer</span> → partage <span class="ui">Uniquement moi</span> ou <span class="ui">Votre espace de travail</span>. Jamais « Toute personne disposant du lien » pour un agent qui contient vos documents.</div></li>
+      </ol>
+      <div class="call warn"><b class="h">Limite de taille</b><p>Le champ Instructions d'un GPT est limité (environ 8 000 caractères). Si votre prompt est plus long, mettez la procédure détaillée dans un fichier <code>PROCEDURE.md</code> en connaissance et écrivez dans les instructions : « Applique strictement la procédure du fichier PROCEDURE.md ».</p></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="t-gem" aria-labelledby="tb-gem" hidden>
+      <p><b>Gemini · Gems.</b> Pertinent si l'entreprise est sur Google Workspace.</p>
+      <ol class="steps">
+        <li><div>Sur <b>gemini.google.com</b>, menu <span class="ui">Gems</span> (ou « Explorer les Gems ») → <span class="ui">Nouveau Gem</span>.</div></li>
+        <li><div><span class="ui">Nom</span> : <code>CDT-10 Comptes rendus v1</code>.</div></li>
+        <li><div><span class="ui">Instructions</span> : <b>collez le prompt de la fiche agent.</b></div></li>
+        <li><div><span class="ui">Connaissances</span> : ajoutez les fichiers depuis l'ordinateur ou Google Drive (un Doc Drive reste à jour automatiquement).</div></li>
+        <li><div><span class="ui">Enregistrer</span>, puis ouvrez le Gem et testez avec le message de démarrage.</div></li>
+      </ol>
+    </div>
+
+    <div class="panel" role="tabpanel" id="t-cop" aria-labelledby="tb-cop" hidden>
+      <p><b>Microsoft 365 Copilot · Agents.</b> L'avantage : l'agent lit directement vos sites SharePoint et OneDrive.</p>
+      <ol class="steps">
+        <li><div>Dans Copilot Chat (<b>m365.cloud.microsoft</b> ou Teams), volet de gauche <span class="ui">Agents</span> → <span class="ui">Créer un agent</span>.</div></li>
+        <li><div>Onglet <span class="ui">Configurer</span> : <span class="ui">Nom</span>, <span class="ui">Description</span>, puis <span class="ui">Instructions</span> : <b>collez le prompt de la fiche agent.</b></div></li>
+        <li><div><span class="ui">Connaissances</span> : ajoutez le site SharePoint ou le dossier <code>IA-Referentiel</code>. Les droits d'accès SharePoint s'appliquent : l'agent ne voit que ce que l'utilisateur peut voir.</div></li>
+        <li><div><span class="ui">Invites de démarrage</span> : collez le message de démarrage.</div></li>
+        <li><div><span class="ui">Créer</span>, puis partagez-le aux collègues concernés. Pour des agents avancés (actions, workflows), la DSI passe par Copilot Studio.</div></li>
+      </ol>
+    </div>
+
+    <div class="panel" role="tabpanel" id="t-mis" aria-labelledby="tb-mis" hidden>
+      <p><b>Le Chat (Mistral AI) · Agents et Bibliothèques.</b> Option européenne.</p>
+      <ol class="steps">
+        <li><div>Sur <b>chat.mistral.ai</b>, créez d'abord une <span class="ui">Bibliothèque</span> et chargez-y les fichiers de l'IA-Référentiel utiles à l'agent.</div></li>
+        <li><div>Menu <span class="ui">Agents</span> → <span class="ui">Créer un agent</span>. Nom, description, puis champ d'<span class="ui">Instructions</span> : <b>collez le prompt de la fiche agent.</b></div></li>
+        <li><div>Associez la bibliothèque à l'agent (ou ajoutez-la dans la conversation), puis testez avec le message de démarrage.</div></li>
+      </ol>
+      <div class="call info"><b class="h">Menus en évolution</b><p>L'interface de Le Chat évolue souvent. Si un intitulé diffère, cherchez « agent » et « instructions » : le principe reste le même.</p></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="t-nlm" aria-labelledby="tb-nlm" hidden>
+      <p><b>NotebookLM · Carnets.</b> Réservé à la lecture de documents : il répond uniquement à partir de vos sources, avec citations cliquables. Parfait pour l'agent 04 (DCE).</p>
+      <ol class="steps">
+        <li><div>Sur <b>notebooklm.google.com</b>, <span class="ui">Créer</span> un carnet par affaire : <code>AO 2026-031 Collège Vienne</code>.</div></li>
+        <li><div><span class="ui">Ajouter des sources</span> : toutes les pièces du DCE (PDF), plus votre grille go/no-go.</div></li>
+        <li><div>Dans le panneau de discussion, icône de réglages <span class="ui">Configurer la discussion</span> → style personnalisé : <b>collez une version courte du prompt</b> (rôle + règles de citation + format).</div></li>
+        <li><div>Posez les questions de la fiche DCE une par une. Cliquez les numéros de citation pour vérifier la pièce.</div></li>
+      </ol>
+    </div>
+
+    <div class="panel" role="tabpanel" id="t-n8n" aria-labelledby="tb-n8n" hidden>
+      <p><b>n8n · nœud AI Agent.</b> Ici l'agent ne discute pas avec vous : il est appelé par un workflow. Le prompt se colle dans le nœud.</p>
+      <ol class="steps">
+        <li><div>Ouvrez le nœud <span class="ui">AI Agent</span> du workflow.</div></li>
+        <li><div><span class="ui">Source for Prompt (User Message)</span> → <span class="ui">Define below</span>. Dans <span class="ui">Prompt (User Message)</span>, mettez les données du jour par expression, par exemple <code>{{ $json.text }}</code>.</div></li>
+        <li><div>En bas, <span class="ui">Add Option</span> → <span class="ui">System Message</span> : <b>collez le prompt de la fiche agent</b>, en retirant les étapes « pose-moi des questions » (personne ne répondra) et en ajoutant « si une information manque, écris [À COMPLÉTER] ».</div></li>
+        <li><div>Branchez le sous-nœud <span class="ui">Chat Model</span> (Anthropic, OpenAI, Mistral Cloud…) et ses identifiants.</div></li>
+      </ol>
+      <p>Détails complets et workflows prêts à construire : <a href="#n8n">module 09</a>.</p>
+    </div>
+
+    <div class="panel" role="tabpanel" id="t-pc" aria-labelledby="tb-pc" hidden>
+      <p><b>Paperclip · page Instructions de l'agent.</b> Chaque agent a un fichier d'entrée <code>AGENTS.md</code>, rechargé à chaque exécution.</p>
+      <ol class="steps">
+        <li><div>Dans Paperclip, ouvrez l'agent → menu latéral <span class="ui">Instructions</span>.</div></li>
+        <li><div>Ouvrez le fichier <code>AGENTS.md</code> : <b>collez la version Paperclip du prompt</b> (gabarit au module 10 : rôle, équipe, comment lire un ticket, quand demander une validation).</div></li>
+        <li><div>Ajoutez à côté les fichiers de référence de l'agent (ou pointez un dossier externe avec un <code>rootPath</code>).</div></li>
+        <li><div>Les modifications s'appliquent à la prochaine exécution : cliquez <span class="ui">Run now</span> pour tester.</div></li>
+      </ol>
+      <p>Détails complets : <a href="#paperclip">module 10</a>.</p>
+    </div>
+
+    <h3>Tableau de correspondance des champs</h3>
+    <div class="tw"><table>
+      <tr><th>Élément de la fiche</th><th>Claude</th><th>ChatGPT (GPT)</th><th>Gemini</th><th>Copilot</th><th>n8n</th><th>Paperclip</th></tr>
+      <tr><td class="k">Instructions</td><td>Instructions du projet</td><td>Instructions</td><td>Instructions</td><td>Instructions</td><td>System Message</td><td>AGENTS.md</td></tr>
+      <tr><td class="k">Fichiers permanents</td><td>Fichiers du projet</td><td>Connaissances</td><td>Connaissances</td><td>Connaissances (SharePoint)</td><td>Outil / nœud de lecture</td><td>Fichiers du bundle</td></tr>
+      <tr><td class="k">Message de démarrage</td><td>1er message</td><td>Amorces</td><td>1er message</td><td>Invites de démarrage</td><td>Prompt (User Message)</td><td>Description du ticket</td></tr>
+      <tr><td class="k">Pièces du dossier</td><td>Jointes à la conversation</td><td>Jointes</td><td>Jointes</td><td>Jointes ou SharePoint</td><td>Données du déclencheur</td><td>Pièces jointes du ticket</td></tr>
+    </table></div>
+
+    <h3>Quel outil pour quel agent</h3>
+    <div class="tw"><table id="maptable"><tr><th>Agent</th><th>Outil conseillé</th><th>Niveau d'automatisation possible</th></tr></table></div>
+  </div>
+</section>
+
+<!-- ================= 06 AGENTS ================= -->
+<section class="mod" id="agents" data-scene="4" data-theme="nuit">
+  <header><div class="no"><small>MOD.</small>06</div><div class="tt"><h2>Catalogue des 15 agents</h2>
+  <div class="meta"><span class="day"><b>Jour 1</b></span><span>Formule 16 h : <b>2 h</b></span><span>Formule 8 h : <b>1 h 30</b></span><span>Livrable : <b>3 agents installés (CR, Mails ST, DCE)</b></span><span>Réussite : <b>testés sur 1 cas réel chacun</b></span></div></div></header>
+  <div class="body">
+    <div class="prose"><p>Chaque fiche donne : la mission, <b>où l'installer</b>, les <b>fichiers à joindre</b>, les questions que l'agent doit vous poser, la sortie attendue, <b>le prompt à copier</b>, le <b>message de démarrage</b>, les garde-fous et ce qui est automatisable. Ouvrez une fiche, copiez, collez dans l'outil (module 05).</p></div>
+    <div class="agbar">
+      <input type="search" id="agsearch" placeholder="Rechercher un agent, un document, un mot-clé…" aria-label="Rechercher un agent">
+      <div class="agbar" id="agfilters" role="group" aria-label="Filtrer par phase"></div>
+    </div>
+    <div id="aglist" style="display:flex;flex-direction:column;gap:10px"></div>
+    <p id="agempty" hidden>Aucun agent ne correspond. Effacez la recherche ou changez de phase.</p>
+  </div>
+</section>
+
+<!-- ================= 07 CHAINES ================= -->
+<section class="mod" id="chaines" data-scene="4" data-theme="nuit">
+  <header><div class="no"><small>MOD.</small>07</div><div class="tt"><h2>Chaînes d'agents : passer le relais</h2>
+  <div class="meta"><span class="day"><b>Jour 1</b></span><span>Formule 16 h : <b>20 min</b></span><span>Formule 8 h : <b>15 min</b></span><span>Livrable : <b>1 relais DCE → mémoire joué</b></span></div></div></header>
+  <div class="body">
+    <div class="prose"><p>Au niveau 1, c'est <b>vous</b> qui faites passer la sortie d'un agent à l'agent suivant. La règle : on transmet un <b>livrable validé</b>, jamais une conversation entière. Copiez la sortie relue, ouvrez l'agent suivant, joignez-la avec le message de relais.</p></div>
+    <h3>Répondre à un appel d'offres</h3>
+    <div class="flow"><div class="nd ai"><small>13</small>Veille AO</div><span class="ar">→</span><div class="nd ai"><small>04</small>Lecture DCE</div><span class="ar">→</span><div class="nd h"><small>Vous</small>Go / no-go</div><span class="ar">→</span><div class="nd ai"><small>01</small>Plans · quantités</div><span class="ar">→</span><div class="nd ai"><small>07</small>Consultation ST</div><span class="ar">→</span><div class="nd ai"><small>02</small>Planning</div><span class="ar">→</span><div class="nd ai"><small>05</small>Mémoire</div><span class="ar">→</span><div class="nd h"><small>Vous</small>Relecture, dépôt</div></div>
+    <h3>Démarrer un chantier</h3>
+    <div class="flow"><div class="nd"><small>Entrée</small>Pièces du marché</div><span class="ar">→</span><div class="nd ai"><small>02</small>Planning EXE</div><span class="ar">→</span><div class="nd ai"><small>06</small>PPSPS du lot</div><span class="ar">→</span><div class="nd ai"><small>07</small>Négociation ST</div><span class="ar">→</span><div class="nd ai"><small>08</small>Mails démarrage ST</div><span class="ar">→</span><div class="nd h"><small>Vous</small>Envoi</div></div>
+    <h3>Semaine type</h3>
+    <div class="flow"><div class="nd"><small>Lundi</small>Réunion enregistrée</div><span class="ar">→</span><div class="nd ai"><small>10</small>CR</div><span class="ar">→</span><div class="nd ai"><small>03</small>MAJ planning</div><span class="ar">→</span><div class="nd ai"><small>08</small>Relances ST</div><span class="ar">→</span><div class="nd ai"><small>09</small>Point MOE</div><span class="ar">→</span><div class="nd ai"><small>14</small>Journal photo</div><span class="ar">→</span><div class="nd ai"><small>12</small>Suivi financier</div></div>
+    <h3>Clôturer</h3>
+    <div class="flow"><div class="nd"><small>Visite</small>OPR</div><span class="ar">→</span><div class="nd ai"><small>11</small>Liste réserves</div><span class="ar">→</span><div class="nd ai"><small>08</small>Mails de levée</div><span class="ar">→</span><div class="nd ai"><small>11</small>Trame PV + DOE</div><span class="ar">→</span><div class="nd h"><small>Vous</small>Signature</div></div>
+    <h3>Message de relais type</h3>
+    <div class="code"><div class="ch"><span>relais-entre-agents.txt</span><button class="cp" type="button" data-copy="relais">Copier</button></div><pre id="relais">Voici la sortie VALIDÉE de l'agent [CDT-04 Lecture DCE], version du [date].
+Elle sert d'entrée à ta mission. Considère-la comme exacte, sauf les points marqués [À VÉRIFIER].
+Pièces jointes : [synthese_DCE_v2.md], [quantites_lot02.xlsx].
+Objectif : [rédiger le mémoire technique du lot 02].
+Commence par ta procédure habituelle (questions d'abord).</pre></div>
+    <div class="call info"><b class="h">Aller plus loin</b><p>L'agent 15 (chef d'orchestre) vous dit quel agent utiliser et dans quel ordre. Au niveau 2, n8n enchaîne des agents simples automatiquement. Au niveau 3, Paperclip crée et assigne les tickets à chaque agent.</p></div>
+  </div>
+</section>
+
+<!-- ================= 11 TESTS ================= -->
+<section class="mod" id="tests" data-scene="4" data-theme="nuit">
+  <header><div class="no"><small>MOD.</small>08</div><div class="tt"><h2>Tester et fiabiliser un agent</h2>
+  <div class="meta"><span class="day"><b>Jour 1</b></span><span>Formule 16 h : <b>25 min</b></span><span>Formule 8 h : <b>15 min</b></span><span>Livrable : <b>3 cas tests + journal d'erreurs</b></span><span>Réussite : <b>5 sorties correctes d'affilée (après la formation)</b></span></div></div></header>
+  <div class="body">
+    <ol class="steps">
+      <li><div><b>Constituez 3 cas tests</b> : des dossiers passés dont vous connaissez la bonne réponse (un DCE déjà chiffré, un CR déjà diffusé, un planning déjà réalisé). Rangez-les dans <code>07_Agents/0X/TESTS/</code>.</div></li>
+      <li><div><b>Faites passer les 3 cas</b> à chaque nouvelle version de l'instruction.</div></li>
+      <li><div><b>Notez avec la grille</b> ci-dessous. Une seule erreur critique = version refusée.</div></li>
+      <li><div><b>Corrigez l'instruction</b>, pas la réponse. Nouvelle version, nouveau passage des 3 cas.</div></li>
+    </ol>
+    <div class="tw"><table>
+      <tr><th>Critère</th><th>Méthode</th><th>Seuil conseillé</th></tr>
+      <tr><td class="k">Exactitude</td><td>Comparer chiffres, dates, noms au cas connu</td><td>0 erreur sur chiffres et dates</td></tr>
+      <tr><td class="k">Complétude</td><td>Check-list des éléments attendus</td><td>100 % des points critiques</td></tr>
+      <tr><td class="k">Invention</td><td>Chercher tout fait absent de la source</td><td>0</td></tr>
+      <tr><td class="k">Questions</td><td>L'agent a-t-il posé ses questions avant de rédiger ?</td><td>Oui, systématiquement</td></tr>
+      <tr><td class="k">Temps</td><td>Chronométrer préparation + relecture</td><td>Inférieur au temps manuel</td></tr>
+      <tr><td class="k">Retouches</td><td>Part du texte modifiée avant envoi</td><td>Moins de 20 %</td></tr>
+    </table></div>
+    <h3>Journal d'erreurs (modèle)</h3>
+    <div class="code"><div class="ch"><span>JOURNAL_ERREURS.md</span><button class="cp" type="button" data-copy="journal">Copier</button></div><pre id="journal">| Date       | Agent  | Version | Cas test         | Erreur constatée                       | Gravité  | Correction apportée à l'instruction                 | Nouvelle version |
+|------------|--------|---------|------------------|----------------------------------------|----------|-----------------------------------------------------|------------------|
+| 2026-10-06 | CDT-04 | v1      | AO Collège Vienne| Pénalités de retard non relevées (CCAP)| Critique | Ajout : "Lis le CCAP article par article pour..."   | v2               |
+| 2026-10-07 | CDT-10 | v2      | Réunion n°12     | Date de livraison inventée             | Critique | Ajout : "Aucune date absente de la transcription"   | v3               |</pre></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="chap-2" data-scene="8" data-theme="acier" aria-label="Chapitre 02 · Jour 2 : Automatiser et piloter">
+  <p class="eyebrow">Chapitre 02 · Jour 2</p>
+  <h2 class="chapter__title" data-split><span class="line">Automatiser</span><span class="line"><em>et piloter</em></span></h2>
+  <nav class="chapter__mods" aria-label="Modules du chapitre"><a class="chip-link" href="#n8n"><small>09</small>n8n pas à pas</a><a class="chip-link" href="#paperclip"><small>10</small>Paperclip pas à pas</a><a class="chip-link" href="#niveau"><small>11</small>Quel niveau choisir</a><a class="chip-link" href="#securite"><small>12</small>Sécurité, RGPD, AI Act</a><a class="chip-link" href="#gains"><small>13</small>Calculer vos gains</a><a class="chip-link" href="#qcm"><small>14</small>Auto-évaluation</a></nav>
+</section>
+<!-- ================= 08 N8N ================= -->
+<section class="mod" id="n8n" data-scene="5" data-theme="acier">
+  <header><div class="no"><small>MOD.</small>09</div><div class="tt"><h2>n8n : automatiser vos agents pas à pas</h2>
+  <div class="meta"><span class="day"><b>Jour 2</b></span><span>Formule 16 h : <b>4 h 30</b></span><span>Formule 8 h : <b>1 h (démo)</b></span><span>Livrable : <b>workflow mails chantier construit</b></span><span>Réussite : <b>3 mails passés → 3 brouillons corrects, 0 envoi</b></span></div></div></header>
+  <div class="body">
+    <div class="prose">
+      <p><b>n8n</b> (prononcer « n-eight-n ») est un outil d'automatisation open source. Vous dessinez un <b>workflow</b> : une suite de blocs (« nœuds ») reliés par des flèches. Le premier nœud est un <b>déclencheur</b> (un mail arrive, un fichier est déposé, il est 7 h). Les suivants lisent, transforment, appellent une IA, écrivent dans un tableau ou préparent un brouillon.</p>
+      <p>Pour vous, n8n sert à une chose : <b>faire travailler vos agents sans que vous ayez à ouvrir l'outil IA</b>, tout en gardant la décision finale.</p>
+    </div>
+
+    <h3>1. Le vocabulaire en 8 mots</h3>
+    <div class="tw"><table>
+      <tr><th>Terme</th><th>Ce que c'est</th><th>Exemple</th></tr>
+      <tr><td class="k">Workflow</td><td>Le schéma complet, enregistré et activable</td><td>« Tri des mails chantier Collège Vienne »</td></tr>
+      <tr><td class="k">Nœud (node)</td><td>Un bloc qui fait une action</td><td>Gmail, Google Sheets, AI Agent</td></tr>
+      <tr><td class="k">Déclencheur (trigger)</td><td>Le nœud qui démarre le workflow</td><td>Gmail Trigger, Schedule Trigger, Google Drive Trigger</td></tr>
+      <tr><td class="k">Identifiants (credentials)</td><td>La connexion sécurisée à un service</td><td>Votre compte Gmail, votre clé API Anthropic</td></tr>
+      <tr><td class="k">Item / JSON</td><td>Les données qui circulent entre nœuds</td><td>Un mail = un item avec <code>subject</code>, <code>from</code>, <code>text</code></td></tr>
+      <tr><td class="k">Expression</td><td>Une formule entre doubles accolades pour réutiliser une donnée</td><td><code>{{ $json.subject }}</code></td></tr>
+      <tr><td class="k">Exécution</td><td>Un passage du workflow, consultable dans l'historique</td><td>Onglet <span class="ui">Executions</span></td></tr>
+      <tr><td class="k">Sous-nœud</td><td>Ce qu'on branche sous un nœud IA</td><td>Chat Model, Memory, Tool</td></tr>
+    </table></div>
+
+    <h3>2. Installer n8n : trois options</h3>
+    <div class="g3">
+      <div class="box"><h4>n8n Cloud</h4><p>Le plus simple : compte sur <b>n8n.io</b>, rien à installer, connexion Google/Microsoft en un clic. Payant après l'essai, facturé au nombre d'exécutions. Vérifiez le lieu d'hébergement des données dans l'offre.</p><span class="pill p1">Recommandé pour débuter</span></div>
+      <div class="box"><h4>Sur votre PC (test)</h4><p>Gratuit (édition communautaire). Nécessite Node.js. Le workflow ne tourne que quand le PC est allumé : parfait pour apprendre, pas pour la production.</p><span class="pill p2">Apprentissage</span></div>
+      <div class="box"><h4>Serveur de l'entreprise</h4><p>Gratuit hors serveur. Docker sur un serveur interne ou un VPS français (OVHcloud, Scaleway…). Données maîtrisées. Demande un informaticien pour la mise en place et les sauvegardes.</p><span class="pill p3">Production maîtrisée</span></div>
+    </div>
+    <div class="g2">
+      <div class="code"><div class="ch"><span>Test sur PC (Node.js installé)</span><button class="cp" type="button" data-copy="npxn8n">Copier</button></div><pre id="npxn8n">npx n8n
+# puis ouvrir http://localhost:5678</pre></div>
+      <div class="code"><div class="ch"><span>Serveur avec Docker</span><button class="cp" type="button" data-copy="dockn8n">Copier</button></div><pre id="dockn8n">docker volume create n8n_data
+docker run -it --rm --name n8n -p 5678:5678 \
+  -v n8n_data:/home/node/.n8n \
+  docker.n8n.io/n8nio/n8n
+# puis ouvrir http://localhost:5678</pre></div>
+    </div>
+    <div class="call warn"><b class="h">En production</b><p>Pour un usage réel sur serveur : nom de domaine en HTTPS, mot de passe fort, sauvegarde du volume <code>n8n_data</code>, mises à jour régulières. Suivez la documentation officielle « Hosting » de n8n ou confiez-le à votre prestataire informatique.</p></div>
+
+    <h3>3. Brancher l'IA : les identifiants</h3>
+    <ol class="steps">
+      <li><div>Créez une <b>clé API</b> chez le fournisseur du modèle : <b>console.anthropic.com</b> (Claude), <b>platform.openai.com</b> (GPT) ou <b>console.mistral.ai</b> (Mistral). L'API est facturée à l'usage, séparément de votre abonnement de chat. Fixez une limite de dépense mensuelle dans la console.</div></li>
+      <li><div>Dans n8n : menu <span class="ui">Credentials</span> (ou <span class="ui">Overview → Credentials</span>) → <span class="ui">Create credential</span> → choisissez <span class="ui">Anthropic</span>, <span class="ui">OpenAI</span> ou <span class="ui">Mistral Cloud</span> → collez la clé. Elle est chiffrée dans n8n et n'apparaît jamais dans le workflow.</div></li>
+      <li><div>Même chose pour <span class="ui">Gmail OAuth2</span> / <span class="ui">Microsoft Outlook OAuth2</span> et <span class="ui">Google Sheets</span>. Sur n8n Cloud, un bouton « Sign in with Google/Microsoft » suffit. En auto-hébergé, il faut créer une application OAuth (doc n8n « Google credentials »).</div></li>
+    </ol>
+    <div class="call info"><b class="h">Boîte dédiée conseillée</b><p>Branchez n8n sur une boîte dédiée au chantier (<code>chantier.vienne@entreprise.fr</code>) ou filtrez par libellé. Ne donnez pas à un workflow l'accès à toute votre messagerie personnelle.</p></div>
+
+    <h3>4. Le nœud AI Agent : où va quoi</h3>
+    <div class="flow"><div class="nd"><small>Entrée</small>Données du nœud précédent</div><span class="ar">→</span><div class="nd ai"><small>Nœud</small>AI Agent</div><span class="ar">→</span><div class="nd"><small>Sortie</small><code>{{ $json.output }}</code></div></div>
+    <div class="kv">
+      <div class="k">Source for Prompt</div><div><span class="ui">Define below</span> (ou <span class="ui">Connected Chat Trigger Node</span> si vous discutez avec l'agent dans la fenêtre de chat n8n)</div>
+      <div class="k">Prompt (User Message)</div><div>Les données du jour, par expression. Ex. : <code>Objet : {{ $json.subject }} — Message : {{ $json.text }}</code></div>
+      <div class="k">Option System Message</div><div><b>Le prompt de la fiche agent</b>, adapté au mode automatique (pas de questions, [À COMPLÉTER] à la place)</div>
+      <div class="k">Sous-nœud Chat Model</div><div>Obligatoire : Anthropic Chat Model, OpenAI Chat Model, Mistral Cloud Chat Model… avec le modèle choisi</div>
+      <div class="k">Sous-nœud Memory</div><div>Facultatif. Utile seulement pour une discussion en plusieurs messages (chat). Inutile pour traiter un mail.</div>
+      <div class="k">Sous-nœuds Tool</div><div>Ce que l'agent peut consulter ou faire : lire une feuille Google Sheets (suivi ST), chercher dans un Drive, appeler une API. L'agent décide quand s'en servir.</div>
+      <div class="k">Require Specific Output Format</div><div>À activer avec un <span class="ui">Structured Output Parser</span> si vous voulez une sortie JSON exploitable (ex. liste d'actions pour un tableau).</div>
+    </div>
+    <div class="call sig"><b class="h">Adapter un prompt de fiche au mode automatique</b><p>Retirez « pose-moi des questions et attends ». Ajoutez : « Tu travailles sans interlocuteur. Si une information manque, écris [À COMPLÉTER : …] et liste-la en fin de réponse. Tu produis un BROUILLON qui sera relu par un humain. Réponds uniquement avec le contenu demandé, sans commentaire. »</p></div>
+
+    <h3>5. Workflow n°1 pas à pas : tri des mails chantier et brouillons de réponse</h3>
+    <div class="flow">
+      <div class="nd"><small>Déclencheur</small>Gmail Trigger</div><span class="ar">→</span>
+      <div class="nd ai"><small>IA</small>Text Classifier</div><span class="ar">→</span>
+      <div class="nd ai"><small>IA · agent 08 / 09</small>AI Agent</div><span class="ar">→</span>
+      <div class="nd"><small>Gmail</small>Créer un brouillon</div><span class="ar">→</span>
+      <div class="nd"><small>Sheets</small>Ajouter une ligne</div><span class="ar">→</span>
+      <div class="nd h"><small>Vous</small>Relire et envoyer</div>
+    </div>
+    <ol class="steps">
+      <li><div><h4>Créer le workflow</h4><p><span class="ui">Create Workflow</span>, nommez-le <code>CDT · Mails chantier Vienne · v1</code>. Créez aussi une feuille Google Sheets <code>Suivi_mails</code> avec les colonnes : <code>date | expediteur | categorie | objet | statut</code>.</p></div></li>
+      <li><div><h4>Nœud 1 · Gmail Trigger</h4><p>Cliquez <span class="ui">+</span> → cherchez <b>Gmail Trigger</b> (ou <b>Microsoft Outlook Trigger</b>). Credential : votre boîte chantier. <span class="ui">Poll Times</span> : toutes les 5 minutes. <span class="ui">Filters</span> → <span class="ui">Label Names or IDs</span> : le libellé du chantier, ou <span class="ui">Search</span> : <code>to:chantier.vienne@entreprise.fr</code>. Désactivez <span class="ui">Simplify</span> pour récupérer le texte complet. Cliquez <span class="ui">Fetch Test Event</span> : un vrai mail apparaît à droite.</p></div></li>
+      <li><div><h4>Nœud 2 · Text Classifier</h4><p>Ajoutez <b>Text Classifier</b>. <span class="ui">Text to Classify</span> : <code>{{ $json.subject }} {{ $json.text }}</code>. Catégories (nom + description) : <code>SOUS_TRAITANT</code> « mail d'une entreprise sous-traitante », <code>CLIENT_MOE</code> « maître d'ouvrage, maître d'œuvre, architecte, BET », <code>FOURNISSEUR</code> « devis, livraison, commande », <code>AUTRE</code> « tout le reste ». Branchez un <span class="ui">Chat Model</span> (un petit modèle rapide suffit). Le nœud crée une sortie par catégorie.</p></div></li>
+      <li><div><h4>Nœud 3 · AI Agent (branche SOUS_TRAITANT)</h4><p>Ajoutez <b>AI Agent</b> sur la sortie SOUS_TRAITANT. <span class="ui">Source for Prompt</span> : <span class="ui">Define below</span>. Prompt :</p>
+        <div class="code"><div class="ch"><span>Prompt (User Message)</span><button class="cp" type="button" data-copy="n8nup">Copier</button></div><pre id="n8nup">Mail reçu d'un sous-traitant. Prépare la réponse du conducteur de travaux.
+Expéditeur : {{ $('Gmail Trigger').item.json.from.text }}
+Objet : {{ $('Gmail Trigger').item.json.subject }}
+Date : {{ $('Gmail Trigger').item.json.date }}
+Message :
+{{ $('Gmail Trigger').item.json.text }}</pre></div>
+        <p><span class="ui">Add Option</span> → <span class="ui">System Message</span> : collez le prompt de l'agent 08 adapté au mode automatique (bouton « Version n8n » dans sa fiche). Sous-nœud <span class="ui">Chat Model</span> : Anthropic ou OpenAI. Sous-nœud <span class="ui">Tool</span> conseillé : <b>Google Sheets Tool</b> en lecture sur votre feuille <code>Suivi_ST</code> (lot, contact, date de démarrage, pièces manquantes) : l'agent y trouve le contexte. Faites de même sur la branche CLIENT_MOE avec l'agent 09.</p></div></li>
+      <li><div><h4>Nœud 4 · Gmail : créer un brouillon</h4><p>Ajoutez <b>Gmail</b> → <span class="ui">Resource</span> : <span class="ui">Draft</span> → <span class="ui">Operation</span> : <span class="ui">Create</span>. Subject : <code>RE: {{ $('Gmail Trigger').item.json.subject }}</code>. Message : <code>{{ $json.output }}</code>. Dans les options, renseignez le destinataire et, si l'option est proposée, le <span class="ui">Thread ID</span> <code>{{ $('Gmail Trigger').item.json.threadId }}</code> pour rester dans la conversation. Pour Outlook : nœud <b>Microsoft Outlook</b> → <span class="ui">Draft</span> → <span class="ui">Create</span>.</p></div></li>
+      <li><div><h4>Nœud 5 · Google Sheets : tracer</h4><p><b>Google Sheets</b> → <span class="ui">Append Row</span> dans <code>Suivi_mails</code>. Mappez : date, expéditeur, catégorie, objet, statut = <code>Brouillon à relire</code>.</p></div></li>
+      <li><div><h4>Tester, puis activer</h4><p>Cliquez <span class="ui">Execute Workflow</span> avec l'événement de test. Vérifiez le brouillon dans Gmail. Testez 10 mails réels passés. Quand tout est bon, activez le workflow (interrupteur <span class="ui">Active</span>, ou <span class="ui">Publish</span> selon la version). Surveillez l'onglet <span class="ui">Executions</span> la première semaine.</p></div></li>
+    </ol>
+    <div class="call ok"><b class="h">Pourquoi un brouillon et pas un envoi</b><p>Le workflow ne touche jamais au bouton Envoyer. Vous ouvrez vos brouillons deux fois par jour, vous relisez, vous envoyez. Vous gagnez le temps de rédaction, vous gardez la responsabilité.</p></div>
+
+    <h3>6. Valider avant d'envoyer (humain dans la boucle)</h3>
+    <p>Si vous voulez qu'un message parte automatiquement <b>après votre accord</b> (ex. relance standard niveau 1) :</p>
+    <div class="flow"><div class="nd ai"><small>IA</small>AI Agent</div><span class="ar">→</span><div class="nd h"><small>Gmail · Send and Wait for Response</small>Mail d'approbation à vous</div><span class="ar">→</span><div class="nd"><small>If</small>Approuvé ?</div><span class="ar">→</span><div class="nd"><small>Gmail</small>Envoyer la réponse</div></div>
+    <p>Le nœud Gmail (ou Slack, Microsoft Teams) propose l'opération <span class="ui">Send and Wait for Response</span> : vous recevez le texte avec des boutons Approuver / Refuser. Le workflow attend votre clic. Réservez-le aux messages sans portée contractuelle.</p>
+
+    <h3>7. Deux autres workflows prêts à construire</h3>
+    <div class="g2">
+      <div class="box">
+        <h4>Workflow n°2 · CR de réunion depuis un enregistrement</h4>
+        <div class="flow"><div class="nd"><small>Drive Trigger</small>Fichier audio déposé</div><span class="ar">→</span><div class="nd"><small>Drive</small>Download</div><span class="ar">→</span><div class="nd ai"><small>OpenAI</small>Transcribe</div><span class="ar">→</span><div class="nd ai"><small>Agent 10</small>CR</div><span class="ar">→</span><div class="nd ai"><small>IA</small>Information Extractor</div><span class="ar">→</span><div class="nd"><small>Docs + Sheets</small>CR + actions</div></div>
+        <ul>
+          <li><b>Google Drive Trigger</b> : événement « fichier créé » dans le dossier <code>Enregistrements_reunions</code>.</li>
+          <li><b>Google Drive</b> → Download le fichier.</li>
+          <li><b>OpenAI</b> → Resource <span class="ui">Audio</span> → <span class="ui">Transcribe a Recording</span>. Vérifiez la taille maximale de fichier acceptée.</li>
+          <li><b>AI Agent</b> avec le prompt de l'agent 10 en System Message, la transcription en Prompt.</li>
+          <li><b>Information Extractor</b> : extraire un tableau d'actions <code>qui / quoi / pour quand</code>, puis <b>Split Out</b> et <b>Google Sheets</b> Append Row dans <code>Actions_chantier</code>.</li>
+          <li><b>Google Docs</b> (Create + Update) ou <b>Gmail</b> brouillon à vous-même avec le CR.</li>
+        </ul>
+        <p><b>Préalable :</b> informer les participants de l'enregistrement (RGPD, module 12).</p>
+      </div>
+      <div class="box">
+        <h4>Workflow n°3 · Veille appels d'offres quotidienne</h4>
+        <div class="flow"><div class="nd"><small>Schedule</small>Chaque jour 7 h</div><span class="ar">→</span><div class="nd"><small>HTTP Request</small>Annonces</div><span class="ar">→</span><div class="nd"><small>Filter</small>Départements, mots-clés</div><span class="ar">→</span><div class="nd"><small>Remove Duplicates</small>Déjà vus</div><span class="ar">→</span><div class="nd ai"><small>Agent 13</small>Score go/no-go</div><span class="ar">→</span><div class="nd"><small>Gmail / Teams</small>Synthèse</div></div>
+        <ul>
+          <li><b>Schedule Trigger</b> : tous les jours ouvrés à 7 h.</li>
+          <li><b>HTTP Request</b> : l'API open data du BOAMP (portail data.gouv / opendatasoft) ou le flux de votre plateforme de veille (export RSS ou API selon l'abonnement).</li>
+          <li><b>Filter</b> : vos départements, codes CPV ou mots-clés (« gros œuvre », « réhabilitation »…), montant estimé.</li>
+          <li><b>Remove Duplicates</b> : option « éléments déjà traités lors des exécutions précédentes ».</li>
+          <li><b>AI Agent</b> avec le prompt de l'agent 13 et votre grille go/no-go collée dans le System Message.</li>
+          <li><b>Filter</b> score ≥ seuil, puis <b>Gmail</b> ou <b>Microsoft Teams</b> : une synthèse unique du jour.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>8. Coûts, erreurs fréquentes, bonnes pratiques</h3>
+    <div class="tw"><table>
+      <tr><th>Problème</th><th>Cause probable</th><th>Solution</th></tr>
+      <tr><td class="k">Rien ne se déclenche</td><td>Workflow non activé, ou filtre trop strict</td><td>Activer ; tester le filtre avec <span class="ui">Fetch Test Event</span></td></tr>
+      <tr><td class="k">Expression en rouge</td><td>Nom de nœud modifié ou champ absent</td><td>Glisser-déposer le champ depuis le panneau de gauche au lieu de le taper</td></tr>
+      <tr><td class="k">Erreur 401 / 403</td><td>Identifiant expiré ou droits insuffisants</td><td>Reconnecter le credential</td></tr>
+      <tr><td class="k">Erreur 429</td><td>Trop d'appels à l'API IA</td><td>Espacer le déclencheur ; option <span class="ui">Retry On Fail</span> dans les réglages du nœud</td></tr>
+      <tr><td class="k">Réponses génériques</td><td>System Message trop court, pas de contexte</td><td>Coller la fiche complète, ajouter un outil de lecture du suivi chantier</td></tr>
+      <tr><td class="k">Facture API qui grimpe</td><td>Déclencheur sur toute la boîte, newsletters incluses</td><td>Filtrer par libellé ; branche AUTRE sans IA ; plafond de dépense dans la console API</td></tr>
+    </table></div>
+    <ul class="prose" style="padding-left:22px">
+      <li>Activez un <b>Error Workflow</b> (réglages du workflow) qui vous envoie un mail si une exécution échoue.</li>
+      <li>Exportez chaque workflow validé (menu <span class="ui">⋯ → Download</span>) dans <code>IA-Referentiel/07_Agents/</code> : c'est votre sauvegarde et votre version.</li>
+      <li>Les modèles de workflows de la communauté (n8n.io/workflows) sont une bonne source d'inspiration ; relisez chaque nœud avant de les importer.</li>
+      <li>Alternatives si votre DSI les impose : Power Automate (Microsoft), Make, Zapier. La logique déclencheur → IA → brouillon reste la même.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 09 PAPERCLIP ================= -->
+<section class="mod" id="paperclip" data-scene="5" data-theme="acier">
+  <header><div class="no"><small>MOD.</small>10</div><div class="tt"><h2>Paperclip : piloter une équipe d'agents autonomes</h2>
+  <div class="meta"><span class="day"><b>Jour 2</b></span><span>Formule 16 h : <b>1 h 30</b></span><span>Formule 8 h : <b>20 min (démo)</b></span><span>Livrable : <b>Cellule IA avec 2 agents</b></span><span>Réussite : <b>1 ticket traité et validé par vous</b></span></div></div></header>
+  <div class="body">
+    <div class="prose">
+      <p><b>Paperclip</b> est un logiciel open source (licence MIT) qui organise des agents IA comme une entreprise : un <b>organigramme</b>, des <b>tickets</b> (issues) assignés, des <b>budgets</b> par agent, des <b>validations</b> par vous, et un historique de tout ce qui a été fait. Il ne remplace pas vos agents : il les <b>embauche</b> et les fait travailler ensemble.</p>
+      <p>Concrètement, votre agent 15 « chef d'orchestre » devient un vrai <b>directeur de travaux IA</b> : il lit l'objectif, découpe le travail en tickets, les confie à l'agent DCE, à l'agent mémoire, à l'agent planning, et vous soumet les livrables pour validation.</p>
+    </div>
+    <div class="call warn"><b class="h">Niveau 3 : à aborder en dernier</b><p>Paperclip est un outil récent qui évolue vite, pensé d'abord pour des profils techniques. Ses agents tournent sur des outils de type Claude Code ou Codex, qui lisent et écrivent des fichiers sur la machine. Utilisez-le seulement avec des agents déjà fiables au niveau 1, sur une machine ou un dossier dédié, avec des budgets plafonnés. Les menus ci-dessous ont été relus sur la documentation officielle en octobre 2026.</p></div>
+
+    <h3>1. Les concepts</h3>
+    <div class="tw"><table>
+      <tr><th>Concept Paperclip</th><th>Ce que c'est</th><th>Traduction chantier</th></tr>
+      <tr><td class="k">Company</td><td>Une organisation avec son objectif. Une installation peut en héberger plusieurs, séparées.</td><td>« Cellule IA · Conduite de travaux »</td></tr>
+      <tr><td class="k">Goal</td><td>L'objectif auquel chaque tâche se rattache</td><td>« Répondre aux AO de réhabilitation &lt; 3 M€ avec un dossier complet 3 jours avant la date limite »</td></tr>
+      <tr><td class="k">Agent</td><td>Un membre de l'organigramme : rôle, titre, supérieur, modèle, budget</td><td>Agent DCE, agent mémoire…</td></tr>
+      <tr><td class="k">Adapter</td><td>Le moteur qui fait tourner l'agent</td><td><code>claude_local</code> (Claude Code), <code>codex_local</code> (Codex), autres CLI ou HTTP</td></tr>
+      <tr><td class="k">Issue (ticket)</td><td>Une tâche avec un seul responsable, des commentaires, pièces jointes et dépendances</td><td>« Synthèse DCE AO-2026-031 »</td></tr>
+      <tr><td class="k">Heartbeat</td><td>Le réveil de l'agent : quand on lui donne du travail, ou à intervalle régulier</td><td>Le point du matin</td></tr>
+      <tr><td class="k">Routine</td><td>Tâche récurrente (cron, webhook, API) qui crée un ticket à chaque passage</td><td>MAJ planning chaque vendredi</td></tr>
+      <tr><td class="k">Approvals / board</td><td>File des décisions qui vous reviennent : stratégie, embauches, livrables</td><td>Votre visa</td></tr>
+      <tr><td class="k">Budget</td><td>Plafond de dépense par agent, projet ou organisation, avec arrêt automatique à 100 %</td><td>Le budget de la cellule</td></tr>
+      <tr><td class="k">Skills</td><td>Compétences partagées que les agents chargent à la demande</td><td>« Règles de citation DCE », « Charte graphique »</td></tr>
+    </table></div>
+
+    <h3>2. Installer</h3>
+    <ol class="steps">
+      <li><div><b>Prérequis</b> : un ordinateur ou serveur dédié avec <b>Node.js 24</b> ou plus récent, et l'agent de code choisi installé (Claude Code pour <code>claude_local</code>, ou Codex) avec un abonnement ou une clé API (Anthropic ou OpenAI).</div></li>
+      <li><div><b>Installation en une commande</b> (terminal) :
+        <div class="code"><div class="ch"><span>Terminal</span><button class="cp" type="button" data-copy="pcinst">Copier</button></div><pre id="pcinst">npx paperclipai@latest onboard --yes
+# interface et API : http://localhost:3100</pre></div>
+        La base de données est créée automatiquement. Par défaut, Paperclip n'est accessible que depuis la machine elle-même.</div></li>
+      <li><div><b>Essai sans risque</b> : une instance isolée de démonstration avec un agent CEO.
+        <div class="code"><div class="ch"><span>Terminal</span><button class="cp" type="button" data-copy="pctest">Copier</button></div><pre id="pctest">ANTHROPIC_API_KEY=votre_cle npx paperclipai test-drive</pre></div></div></li>
+      <li><div><b>Budgets d'abord</b> : avant d'activer le moindre réveil automatique, fixez un budget pour l'organisation et chaque agent (menu <span class="ui">Audit → Budgets</span> → <span class="ui">Set budget</span>). Paperclip met les agents en pause à 100 %.</div></li>
+    </ol>
+
+    <h3>3. Construire votre « Cellule IA conduite de travaux »</h3>
+    <div class="flow">
+      <div class="nd h"><small>Board</small>Vous</div><span class="ar">→</span>
+      <div class="nd ai"><small>CEO</small>Directeur de travaux IA</div><span class="ar">→</span>
+      <div class="nd ai"><small>Rapporte au CEO</small>Agent DCE (04)</div>
+      <div class="nd ai"><small>Rapporte au CEO</small>Agent mémoire (05)</div>
+      <div class="nd ai"><small>Rapporte au CEO</small>Agent planning (02/03)</div>
+    </div>
+    <ol class="steps">
+      <li><div><h4>Créer l'organisation</h4><p>Créez la company <code>Cellule IA · Conduite de travaux</code>, puis ajoutez le goal (objectif mesurable, voir tableau ci-dessus).</p></div></li>
+      <li><div><h4>Embaucher le CEO</h4><p><span class="ui">New Agent</span> → <span class="ui">Agent name</span> : <code>Directeur de travaux IA</code> → <span class="ui">Choose adapter</span> → carte Claude Code (ou Codex) → <span class="ui">Configure agent</span> → <span class="ui">Runtime</span> : choisissez le modèle → <span class="ui">Run test</span> → <span class="ui">Finish setup</span>. Le premier agent reçoit automatiquement le rôle CEO et vous rapporte.</p></div></li>
+      <li><div><h4>Coller ses instructions</h4><p>Agent → menu <span class="ui">Instructions</span> → fichier <code>AGENTS.md</code> → collez le gabarit CEO ci-dessous. Ajoutez dans le même dossier le fichier <code>EQUIPE.md</code> (liste des agents et de leurs missions).</p></div></li>
+      <li><div><h4>Embaucher les spécialistes</h4><p>Répétez <span class="ui">New Agent</span> pour l'agent DCE, l'agent mémoire, l'agent planning. Pour chacun : <span class="ui">Reports to</span> = Directeur de travaux IA, <span class="ui">Title</span> = le nom de la fiche, et dans <code>AGENTS.md</code> le gabarit spécialiste ci-dessous suivi du prompt de sa fiche (module 06). Joignez ses fichiers de référence (grille go/no-go, mémoires gagnants, cadences).</p></div></li>
+      <li><div><h4>Régler les réveils</h4><p>Page <span class="ui">Harness / Runtime</span> → <span class="ui">Run Policy</span>. Laissez <span class="ui">Heartbeat on interval</span> <b>désactivé</b> pour les spécialistes : ils travaillent quand un ticket leur est assigné. Pour le CEO, un réveil toutes les quelques heures suffit (<span class="ui">Run heartbeat every … sec</span>). Enregistrez avec <span class="ui">Save changes</span>.</p></div></li>
+      <li><div><h4>Lancer un dossier</h4><p>Créez un ticket pour le CEO : « Préparer la réponse à l'AO 2026-031, date limite le … » et joignez les pièces du DCE. Au réveil suivant, le CEO propose une stratégie dans <span class="ui">Approvals</span> : vous l'approuvez ou la commentez. Il crée ensuite les tickets dans <span class="ui">Issues</span> et les assigne.</p></div></li>
+      <li><div><h4>Valider les livrables</h4><p>Chaque spécialiste dépose son livrable sur son ticket et demande validation. Vous lisez, commentez, approuvez. Les transcriptions de chaque exécution sont consultables dans <span class="ui">Agents → [agent] → Runs</span>.</p></div></li>
+      <li><div><h4>Automatiser le récurrent</h4><p>Créez des <b>routines</b> : « MAJ planning chantier Vienne » chaque vendredi 14 h (assignée à l'agent planning), « Veille AO » chaque matin (agent 13). Chaque passage crée un ticket tracé.</p></div></li>
+    </ol>
+
+    <h3>4. Gabarits AGENTS.md</h3>
+    <div class="code"><div class="ch"><span>AGENTS.md · Directeur de travaux IA (CEO)</span><button class="cp" type="button" data-copy="pcceo">Copier</button></div><pre id="pcceo"># RÔLE
+Tu es le Directeur de travaux IA de la "Cellule IA · Conduite de travaux" de l'entreprise [NOM].
+Tu ne produis pas toi-même les documents techniques : tu organises, tu délègues, tu contrôles.
+Ton supérieur est le board (un conducteur de travaux humain). Il décide et signe.
+
+# TON ÉQUIPE (voir EQUIPE.md)
+- Agent DCE (CDT-04) : synthèse de DCE sourcée, score go/no-go.
+- Agent Mémoire technique (CDT-05) : mémoire sur mesure, matrice de conformité.
+- Agent Planning (CDT-02/03) : planning prévisionnel CSV, chemin critique, mises à jour.
+N'embauche aucun nouvel agent sans approbation du board.
+
+# QUAND TU REÇOIS UN OBJECTIF OU UN TICKET
+1. Reformule l'objectif, la date limite et le livrable final.
+2. Propose une stratégie courte (étapes, agents, dépendances, dates internes) et soumets-la à l'approbation du board. N'avance pas sans approbation.
+3. Une fois approuvée : crée un ticket par étape, avec un seul responsable, les pièces jointes nécessaires, le livrable attendu et la date. Indique les dépendances (ex. Mémoire bloqué par DCE).
+4. Suis l'avancement à chaque réveil. Si un ticket est bloqué faute d'information, pose UNE question claire au board en commentaire.
+
+# CONTRÔLE QUALITÉ AVANT DE PRÉSENTER UN LIVRABLE
+- Toute information de DCE cite [pièce, article/page].
+- Aucun moyen, chiffre, référence ou certification inventé : les manques sont marqués [À COMPLÉTER].
+- Toute référence réglementaire est marquée [À VÉRIFIER].
+- Les calculs sont présentés avec leurs formules.
+
+# INTERDITS
+- Aucun envoi externe (mail, dépôt sur plateforme, signature) : seul le board le fait.
+- Aucune dépense ni engagement au nom de l'entreprise.
+- Ne modifie jamais un document marqué "VALIDÉ" par le board : crée une nouvelle version.
+
+# COMPTE RENDU À CHAQUE RÉVEIL (5 lignes max)
+Fait / En cours / Bloqué (et pourquoi) / Décision attendue du board / Prochaine étape.</pre></div>
+    <div class="code"><div class="ch"><span>AGENTS.md · gabarit agent spécialiste (à placer avant le prompt de la fiche)</span><button class="cp" type="button" data-copy="pcspe">Copier</button></div><pre id="pcspe"># FONCTIONNEMENT DANS LA CELLULE IA
+Tu es [CDT-0X Nom de l'agent]. Tu rapportes au Directeur de travaux IA.
+- Tu travailles uniquement sur les tickets qui te sont assignés.
+- Tes entrées : la description du ticket et ses pièces jointes, plus tes fichiers de référence.
+- Tu ne peux pas poser de questions en direct : si une information manque, écris-la en commentaire du ticket, marque [À COMPLÉTER] dans le livrable et continue sur le reste.
+- Ton livrable est déposé sur le ticket (fichier Markdown ou tableur), nommé : [AFFAIRE]_[LIVRABLE]_v[n].
+- Termine chaque livrable par "Points à contrôler par le board".
+- Quand ton livrable est prêt, demande la revue et passe le ticket en attente de validation.
+- Aucun envoi externe, jamais.
+
+# TA FICHE MÉTIER
+[Collez ici le prompt de la fiche agent du module 06, sans les étapes "attends mes réponses".]</pre></div>
+
+    <h3>5. Garde-fous spécifiques</h3>
+    <div class="g2">
+      <div class="box"><h4>Sécurité de la machine</h4><ul>
+        <li>Machine ou compte utilisateur dédié, sans accès aux dossiers RH ou compta.</li>
+        <li>Ne copiez dans l'espace des agents que les pièces nécessaires au dossier.</li>
+        <li>Accès réseau local uniquement par défaut ; l'accès distant passe par le mode authentifié (option <code>--bind</code>) et votre informaticien.</li>
+      </ul></div>
+      <div class="box"><h4>Gouvernance</h4><ul>
+        <li>Validation obligatoire de la stratégie et des embauches.</li>
+        <li>Budgets plafonnés : commencez petit, augmentez après mesure.</li>
+        <li>Possibilité de mettre en pause, réassigner ou arrêter un agent à tout moment.</li>
+        <li>Journal d'activité conservé : il sert de traçabilité (module 12).</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 NIVEAU ================= -->
+<section class="mod" id="niveau" data-scene="5" data-theme="acier">
+  <header><div class="no"><small>MOD.</small>11</div><div class="tt"><h2>Quel niveau pour quelle tâche</h2>
+  <div class="meta"><span class="day"><b>Jour 2</b></span><span>Formule 16 h : <b>15 min</b></span><span>Formule 8 h : <b>10 min</b></span><span>Livrable : <b>carte de vos tâches par niveau</b></span></div></div></header>
+  <div class="body">
+    <div class="tw"><table>
+      <tr><th>Critère</th><th>Niveau 1 · Agent manuel</th><th>Niveau 2 · n8n</th><th>Niveau 3 · Paperclip</th></tr>
+      <tr><td class="k">Déclenchement</td><td>Vous ouvrez l'agent</td><td>Un événement ou une heure</td><td>Un objectif, des tickets, des réveils</td></tr>
+      <tr><td class="k">Type de tâche</td><td>Rédaction avec échanges (mémoire, PPSPS)</td><td>Répétitive et prévisible (mails, CR, veille)</td><td>Dossier en plusieurs étapes et plusieurs agents (AO complet)</td></tr>
+      <tr><td class="k">Compétence requise</td><td>Aucune</td><td>Logique, aisance informatique</td><td>Technique (terminal, Node.js) ou appui informatique</td></tr>
+      <tr><td class="k">Coût</td><td>Abonnement chat</td><td>n8n + API à l'usage</td><td>API ou abonnements des agents de code, serveur</td></tr>
+      <tr><td class="k">Contrôle humain</td><td>À chaque message</td><td>Brouillon ou bouton d'approbation</td><td>Approbations du board</td></tr>
+      <tr><td class="k">Quand y passer</td><td>Tout de suite</td><td>Agent fiable 5 fois de suite</td><td>Plusieurs agents fiables + besoin de coordination</td></tr>
+    </table></div>
+    <div class="call ok"><b class="h">Règle de passage</b><p>On n'automatise qu'un agent qui a produit <b>5 sorties correctes d'affilée</b> sur vos cas tests (module 08). On ne passe à Paperclip qu'avec au moins 3 agents dans ce cas.</p></div>
+  </div>
+</section>
+
+<!-- ================= 12 SECURITE ================= -->
+<section class="mod" id="securite" data-scene="5" data-theme="acier">
+  <header><div class="no"><small>MOD.</small>12</div><div class="tt"><h2>Sécurité, RGPD, AI Act et responsabilité</h2>
+  <div class="meta"><span class="day"><b>Jour 2</b></span><span>Formule 16 h : <b>30 min</b></span><span>Formule 8 h : <b>15 min</b></span><span>Livrable : <b>charte d'usage IA adaptée</b></span></div></div></header>
+  <div class="body">
+    <div class="g2">
+      <div class="box"><h4>Confidentialité</h4><p>DCE, prix, données clients appartiennent à des tiers ou à l'entreprise. Utilisez une offre dont les conditions excluent l'entraînement sur vos données, ou anonymisez. Clés API : jamais dans un mail ni un document partagé.</p></div>
+      <div class="box"><h4>RGPD</h4><p>Enregistrement de réunions, fichiers de contacts, mails : informer les personnes, limiter la conservation, ne traiter que le nécessaire. Référence : cnil.fr.</p></div>
+      <div class="box"><h4>AI Act européen</h4><p>Depuis février 2025, l'entreprise qui utilise de l'IA doit assurer un niveau suffisant de <b>maîtrise de l'IA</b> de ses utilisateurs (article 4 du règlement). Cette formation et votre charte en sont la preuve : conservez les attestations.</p></div>
+      <div class="box"><h4>Responsabilité</h4><p>Le signataire reste responsable du PPSPS, du planning contractuel, du mémoire, des courriers. L'IA n'est jamais une excuse devant un client, un coordonnateur SPS ou un juge.</p></div>
+      <div class="box"><h4>Traçabilité</h4><p>Conservez la version de l'instruction et le document produit. Avec n8n, l'historique des exécutions ; avec Paperclip, le journal d'activité.</p></div>
+      <div class="box"><h4>Limites techniques</h4><p>L'IA ne remplace ni la CAO/BIM, ni le logiciel de planning, ni la note de calcul, ni le coordonnateur SPS, ni le juriste.</p></div>
+    </div>
+    <h3>Charte d'usage : trame à adapter</h3>
+    <div class="code"><div class="ch"><span>00_Charte-usage-IA.md</span><button class="cp" type="button" data-copy="charte">Copier</button></div><pre id="charte">CHARTE D'USAGE DE L'IA – [ENTREPRISE] – version [x] du [date]
+1. Outils autorisés : [liste + offre exacte + date de vérification des conditions de données].
+2. Données interdites dans un outil non validé : données personnelles sensibles, données RH, prix d'un concurrent, documents marqués confidentiels.
+3. Anonymisation : noms de particuliers et coordonnées personnelles remplacés avant dépôt.
+4. Calculs : toujours recalculés dans un tableur avant usage.
+5. Réglementation : toute référence vérifiée sur Légifrance ou chez l'éditeur de la norme.
+6. Envois : aucun envoi externe sans relecture humaine complète. Aucun automatisme n'envoie seul un courrier à portée contractuelle.
+7. Enregistrements de réunion : participants informés au préalable.
+8. Traçabilité : version des instructions et documents produits conservés [durée].
+9. Automatisations (n8n, Paperclip) : déclarées à [responsable], budgets plafonnés, accès limités.
+10. Formation : chaque utilisateur suit le module Fondations avant tout usage (AI Act, art. 4).
+Signature direction :                 Date :</pre></div>
+  </div>
+</section>
+
+<!-- ================= 13 GAINS ================= -->
+<section class="mod" id="gains" data-scene="5" data-theme="acier">
+  <header><div class="no"><small>MOD.</small>13</div><div class="tt"><h2>Calculer vos gains (avant / après)</h2>
+  <div class="meta"><span class="day"><b>Jour 2</b></span><span>Formule 16 h : <b>20 min</b></span><span>Formule 8 h : <b>10 min</b></span><span>Livrable : <b>estimation des gains</b></span><span>Réussite : <b>à confirmer par 3 mesures avant / après</b></span></div></div></header>
+  <div class="body">
+    <p>Remplacez les valeurs d'exemple par vos mesures. Comptez le temps de relecture dans « après ». Les valeurs sont gardées dans ce navigateur.</p>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><label for="rate">Coût horaire chargé du conducteur de travaux (€/h)</label><input class="fld" type="number" id="rate" min="0" step="1" value="55" style="width:110px"><button class="btn" type="button" id="gainreset">Revenir aux exemples</button></div>
+    <div class="tw"><table id="gaintable">
+      <tr><th>Tâche</th><th>Fois / mois</th><th>Avant (h)</th><th>Après (h)</th><th>Gain h / mois</th><th>Gain € / mois</th></tr>
+    </table></div>
+    <div class="tot">
+      <div><span>Heures gagnées / mois</span><b id="tH">0</b></div>
+      <div><span>Valeur / mois</span><b id="tE">0 €</b></div>
+      <div><span>Valeur / an (11 mois)</span><b id="tY">0 €</b></div>
+    </div>
+    <p style="font-size:14px;color:var(--muted)">Le taux de réussite aux appels d'offres se mesure sur 12 mois et un échantillon suffisant : ne le présentez pas avant.</p>
+  </div>
+</section>
+
+<!-- ================= 15 QCM ================= -->
+<section class="mod" id="qcm" data-scene="5" data-theme="acier">
+  <header><div class="no"><small>MOD.</small>14</div><div class="tt"><h2>Auto-évaluation</h2>
+  <div class="meta"><span class="day"><b>Jour 2</b></span><span>Formule 16 h : <b>20 min</b></span><span>Formule 8 h : <b>10 min</b></span><span>Livrable : <b>15 questions</b></span><span>Réussite : <b>13 / 15</b></span></div></div></header>
+  <div class="body">
+    <div id="quiz"></div>
+    <div class="btns"><button class="btn pri" type="button" id="qcheck">Corriger</button><button class="btn" type="button" id="qreset">Recommencer</button><span id="score" style="align-self:center;font-family:var(--f-display);font-weight:800;font-size:22px"></span></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="chap-3" data-scene="8" data-theme="sable" aria-label="Chapitre 03 · Référence : Tout retrouver">
+  <p class="eyebrow">Chapitre 03 · Référence</p>
+  <h2 class="chapter__title" data-split><span class="line">Tout</span><span class="line"><em>retrouver</em></span></h2>
+  <nav class="chapter__mods" aria-label="Modules du chapitre"><a class="chip-link" href="#faq"><small>15</small>FAQ et dépannage</a><a class="chip-link" href="#glossaire"><small>16</small>Glossaire</a><a class="chip-link" href="#sources"><small>17</small>Sources</a></nav>
+</section>
+<!-- ================= 16 FAQ ================= -->
+<section class="mod" id="faq" data-scene="6" data-theme="sable">
+  <header><div class="no"><small>MOD.</small>15</div><div class="tt"><h2>FAQ et dépannage</h2></div></header>
+  <div class="body"><div id="faqlist"></div></div>
+</section>
+
+<!-- ================= 17 GLOSSAIRE ================= -->
+<section class="mod" id="glossaire" data-scene="6" data-theme="sable">
+  <header><div class="no"><small>MOD.</small>16</div><div class="tt"><h2>Glossaire</h2></div></header>
+  <div class="body"><div class="gl" id="gl"></div></div>
+</section>
+
+<!-- ================= 18 SOURCES ================= -->
+<section class="mod" id="sources" data-scene="6" data-theme="sable">
+  <header><div class="no"><small>MOD.</small>17</div><div class="tt"><h2>Sources officielles et documentation</h2></div></header>
+  <div class="body">
+    <div class="g2">
+      <div class="box"><h4>Réglementation BTP</h4><ul>
+        <li><a href="https://www.legifrance.gouv.fr" target="_blank" rel="noopener">Légifrance</a> : Code du travail (PPSPS, art. R4532-56 et s.), Code civil (réception, art. 1792-6), Code de la commande publique</li>
+        <li><a href="https://www.preventionbtp.fr" target="_blank" rel="noopener">OPPBTP · Prévention BTP</a> : modèles, fiches risques</li>
+        <li><a href="https://www.inrs.fr" target="_blank" rel="noopener">INRS</a> : prévention</li>
+        <li><a href="https://www.boamp.fr" target="_blank" rel="noopener">BOAMP</a> : annonces de marchés publics</li>
+      </ul></div>
+      <div class="box"><h4>Données, IA, conformité</h4><ul>
+        <li><a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a> : RGPD, enregistrements</li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener">Règlement européen sur l'IA (AI Act)</a></li>
+        <li>Pages « confidentialité » de chaque outil IA utilisé</li>
+      </ul></div>
+      <div class="box"><h4>n8n</h4><ul>
+        <li><a href="https://docs.n8n.io" target="_blank" rel="noopener">Documentation officielle n8n</a></li>
+        <li><a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.agent/" target="_blank" rel="noopener">Nœud AI Agent</a></li>
+        <li><a href="https://n8n.io/workflows" target="_blank" rel="noopener">Modèles de workflows</a></li>
+      </ul></div>
+      <div class="box"><h4>Paperclip</h4><ul>
+        <li><a href="https://docs.paperclip.ing" target="_blank" rel="noopener">Documentation officielle Paperclip</a></li>
+        <li><a href="https://docs.paperclip.ing/guides/org/agents/" target="_blank" rel="noopener">Créer et configurer un agent</a></li>
+        <li><a href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener">Dépôt GitHub (licence MIT)</a></li>
+      </ul></div>
+    </div>
+    <div class="call info"><b class="h">Outils interactifs de la première version</b><p>Les assistants guidés restent disponibles : <a href="https://formation-cdt.pplx.app/memoire.html" target="_blank" rel="noopener">Assistant mémoire technique</a> (entretien en 8 blocs) et <a href="https://formation-cdt.pplx.app/planning.html" target="_blank" rel="noopener">Assistant planning</a> (9 étapes, chemin critique, export CSV).</p></div>
+    <footer class="end">Les références d'articles citées sur ce site sont à vérifier dans leur version en vigueur. Les menus des logiciels ont été relus en octobre 2026 et peuvent évoluer. Les gains annoncés sont des estimations.</footer>
+  </div>
+</section>
+    </div>
+
+    <!-- ===== FINAL ===== -->
+    <section class="final" id="final" data-scene="7" data-theme="jaune">
+      <p class="eyebrow">À vous de jouer</p>
+      <h2 class="final__title" data-split><span class="line">L'IA prépare.</span><span class="line"><em>Vous signez.</em></span></h2>
+      <div class="btns">
+        <a class="btn pri" href="#programme">Voir le programme</a>
+        <a class="btn" href="#installer">Installer mon premier agent</a>
+        <a class="btn" href="#agents">Les 15 agents</a>
+      </div>
+      <p class="final__foot">Conducteur de travaux augmenté · Formation IA pour le BTP · 1 ou 2 jours</p>
+    </section>
+  </main>
+
+  <script src="vendor/gsap/gsap.min.js"></script>
+  <script src="vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="vendor/lenis/lenis.min.js"></script>
+  <script src="js/app.js"></script>
+  <script type="module" src="js/studio.js"></script>
+</body>
+</html>
