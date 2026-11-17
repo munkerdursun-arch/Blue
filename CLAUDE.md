@@ -52,3 +52,10 @@ Préférence du propriétaire : **lumineux, pas trop sombre**, et une identité 
 - Copier le code, les textes, les images ou le modèle 3D d'un site de référence : on reprend les **techniques**, pas l'œuvre.
 - Inventer de faux clients, faux avis ou faux chiffres présentés comme réels (une démo doit être marquée « fictif »).
 - Bibliothèques chargées sans version fixe ; préférer les copier dans `vendor/`.
+
+## Sites publiés sur GitHub Pages (branche `gh-pages`)
+
+- Racine : l'application de turc (build Vite).
+- **`cdt/` : site de formation CDT** (source : `cdt-app/`, données sur Supabase, projet `formation-cdt`).
+  **Ne jamais supprimer ce dossier** lors d'un déploiement de l'application de turc (ne pas vider la branche).
+- Le contenu de la formation et le corrigé du quiz vivent uniquement dans Supabase (accès protégé) : ne pas les recopier dans le dépôt, qui est public.
