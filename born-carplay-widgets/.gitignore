@@ -7,3 +7,5 @@ Widget/BornWidgetsExtension.entitlements
 xcuserdata/
 DerivedData/
 build/
+Born.ipa
+Payload/

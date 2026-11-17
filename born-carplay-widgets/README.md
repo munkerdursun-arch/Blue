@@ -114,3 +114,18 @@ born-carplay-widgets/
 Les calculs sont des **approximations** (effet du froid ≈ −1,2 %/°C sous 15 °C,
 courbe de charge type). Ajuste la consommation moyenne dans l'appli avec la valeur
 affichée par ta voiture pour de meilleures estimations.
+
+## Réinstallation automatique (sans Xcode chaque semaine)
+
+Avec un compte Apple gratuit, l'appli expire au bout de 7 jours (« Born n'est plus
+disponible »). Un outil tiers comme **AltStore Classic** peut la renouveler tout seul :
+
+1. Installe une première fois avec Xcode (`setup-mac.sh` puis ▶︎), puis lance
+   `bash make-ipa.sh` : il crée `Born.ipa`.
+2. Installe **AltServer** sur le Mac et **AltStore** sur l'iPhone (site officiel : altstore.io).
+3. Envoie `Born.ipa` sur l'iPhone (AirDrop → Fichiers), puis AltStore › Mes apps › **+**.
+4. Le renouvellement se fait en arrière-plan quand l'iPhone et le Mac (allumé, AltServer
+   ouvert) sont sur le même Wi-Fi.
+
+L'appli retrouve d'elle-même l'identifiant de partage appli ↔ widgets si l'outil le
+renomme lors de la re-signature. Outil non affilié à Apple : à utiliser en connaissance de cause.
