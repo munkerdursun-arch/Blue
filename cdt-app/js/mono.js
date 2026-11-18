@@ -35,16 +35,22 @@ export function initMono(D, root) {
     const t = MONO[cur];
     root.querySelectorAll('#monopick [data-mono]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mono === cur)));
     // onglets d'installation : seulement l'outil autorisé (+ NotebookLM avec Gemini), n8n et Paperclip restent
+    // n8n et Paperclip sont remplacés par les outils de l'IA choisie (bannières des modules 10 et 11)
     const tabs = [...root.querySelectorAll('#tooltabs [role=tab]')];
-    tabs.forEach((tb) => { tb.hidden = !!t && CHAT_TABS.includes(tb.id) && tb.id !== t.tab && !(cur === 'gemini' && tb.id === 'tb-nlm'); });
-    if (t) {
+    tabs.forEach((tb) => { tb.hidden = !!t && tb.id !== t.tab && !(cur === 'gemini' && tb.id === 'tb-nlm'); });
+    const panels = [...root.querySelectorAll('#installer [role=tabpanel]')];
+    const visible = tabs.filter((x) => !x.hidden);
+    if (!visible.length) panels.forEach((p) => { p.hidden = true; });          // IA interne : pas d'onglet dédié
+    else {
       const sel = tabs.find((x) => x.getAttribute('aria-selected') === 'true');
-      if (!sel || sel.hidden) root.querySelector('#' + t.tab)?.click();
+      if (!sel || sel.hidden || panels.every((p) => p.hidden)) visible[0].click();
     }
     const note = root.querySelector('#mononote');
     if (note) {
       note.hidden = !t;
-      if (t) note.innerHTML = `Réglé sur <b>${esc(t.label)}</b> (module 04). n8n et Paperclip ne sont pas des IA : ils appellent un modèle par API et ne s'utilisent qu'avec le fournisseur autorisé et l'accord de la DSI.`;
+      if (t) note.innerHTML = t.tab
+        ? `Réglé sur <b>${esc(t.label)}</b> (module 04). Automatisation et équipe d'agents : l'équivalent dans votre IA est donné aux modules 10 et 11.`
+        : `Réglé sur <b>${esc(t.label)}</b> (module 04). Installez chaque agent selon les réponses de la DSI : assistant avec instructions permanentes, ou kit de démarrage collé en premier message.`;
     }
     // fiches des agents
     root.querySelectorAll('[data-mono-row]').forEach((e) => { e.hidden = !t; });
@@ -55,6 +61,18 @@ export function initMono(D, root) {
       if (tr.dataset.orig === undefined) tr.dataset.orig = c.textContent;
       c.textContent = t ? (i === 0 ? 'Dans votre IA' : t.label) : tr.dataset.orig;
     });
+    // équivalents de n8n (niveau 2) et de Paperclip (niveau 3)
+    const lvl = (k, title, other) => root.querySelectorAll(`[data-mono-${k}]`).forEach((e) => {
+      e.hidden = !t;
+      if (t) e.innerHTML = `<div class="call info"><b class="h">Votre IA : ${esc(t.label)}</b><p><b>${title}</b> ${esc(t[k])}</p><p class="muted">${other}</p></div>`;
+    });
+    lvl('l2', 'Automatiser sans n8n :', 'La suite de ce module (n8n) ne sert que si votre DSI autorise n8n et l\'API de votre fournisseur. Le principe reste le même : déclencheur, étape IA, brouillon ou approbation, trace.');
+    lvl('l3', 'Équipe d\'agents sans Paperclip :', 'La suite de ce module (Paperclip) ne sert que si votre DSI l\'autorise. Le principe reste le même : chef d\'orchestre, tâches, validations par vous, historique.');
+    const lv = root.querySelector('#monolevels');
+    if (lv) {
+      const list = t ? [t] : Object.values(MONO);
+      lv.innerHTML = `<div class="tw"><table><tr><th>IA</th><th>Niveau 2 · Automatiser (à la place de n8n)</th><th>Niveau 3 · Équipe d'agents (à la place de Paperclip)</th></tr>${list.map((x) => `<tr><td class="k">${esc(x.label)}</td><td>${esc(x.l2 || '')}</td><td>${esc(x.l3 || '')}</td></tr>`).join('')}</table></div>`;
+    }
     const box = root.querySelector('#monoinfo');
     if (box) box.innerHTML = t ? fiche(t) : `<p class="muted" style="margin-bottom:12px">Comparatif des cinq IA les plus autorisées en entreprise. Choisissez la vôtre pour régler toute la formation.</p>${comparatif()}`;
     document.querySelectorAll('[data-mono-badge]').forEach((e) => { e.textContent = t ? t.label : 'toutes les IA'; });
