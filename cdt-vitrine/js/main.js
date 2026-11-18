@@ -1,12 +1,13 @@
 // =====================================================================
 // Vitrine « Conducteur de travaux augmenté » — orchestration.
 // Préchargeur (plan qui se trace) → rideau jaune → lettres qui s'assemblent.
+// Pièce maîtresse : un immeuble 3D qui sort de terre au fil de la page, avec sa grue.
 // Moments forts : le lundi qui se range (épinglé), compteur mécanique « 18 »,
 // panneau à palettes (une seule IA), parcours horizontal qui s'allume,
 // comparatif barré au défilement, largeur de police qui suit le curseur.
 // gsap / ScrollTrigger / Lenis sont des globales (vendor/).
 // =====================================================================
-import { initScene } from './scene.js';
+import { initBuilding } from './building.js';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 gsap.registerPlugin(ScrollTrigger);
@@ -18,23 +19,9 @@ const EASE_IO = 'power4.inOut';
 const isMobile = matchMedia('(max-width: 600px)').matches;
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-// ---------- Mouvement réduit : on respecte le système, avec un bouton pour réactiver ----------
-const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let forcedMotion = false;
-try { forcedMotion = localStorage.getItem('cdt-vitrine-motion') === 'on'; } catch { /* stockage indisponible */ }
-const reduced = prefersReduced && !forcedMotion;
-document.documentElement.classList.toggle('reduced', reduced);
-if (reduced) {
-  const note = document.createElement('div');
-  note.className = 'motion-note';
-  note.setAttribute('role', 'status');
-  note.innerHTML = '<p>Votre appareil demande de <b>réduire les animations</b> : la plupart sont coupées.</p><button type="button">Activer les animations</button>';
-  note.querySelector('button').addEventListener('click', () => {
-    try { localStorage.setItem('cdt-vitrine-motion', 'on'); } catch { /* ignoré */ }
-    location.reload();
-  });
-  document.body.appendChild(note);
-}
+// ---------- Animations toujours actives (choix du propriétaire) ----------
+// Le réglage système « réduire les animations » n'est volontairement pas appliqué.
+const reduced = false;
 
 // ---------- Ambiances des chapitres ----------
 const THEMES = {
@@ -42,12 +29,26 @@ const THEMES = {
   sable: { '--bg': '#efe6d6', '--ink': '#1b1610', '--ink-dim': 'rgba(27,22,16,0.68)', '--ink-faint': 'rgba(27,22,16,0.3)', '--line': 'rgba(27,22,16,0.14)', '--mark': '#ffb000', '--em': '#1b1610', '--card': 'rgba(255,252,246,0.6)', dark: false },
   bleu:  { '--bg': '#e3e8ec', '--ink': '#121a22', '--ink-dim': 'rgba(18,26,34,0.68)', '--ink-faint': 'rgba(18,26,34,0.3)', '--line': 'rgba(18,26,34,0.14)', '--mark': '#ffb000', '--em': '#121a22', '--card': 'rgba(255,255,255,0.6)', dark: false },
   nuit:  { '--bg': '#14181d', '--ink': '#f2f0eb', '--ink-dim': 'rgba(242,240,235,0.66)', '--ink-faint': 'rgba(242,240,235,0.28)', '--line': 'rgba(242,240,235,0.16)', '--mark': 'rgba(255,176,0,0)', '--em': '#ffb000', '--card': 'rgba(255,255,255,0.05)', dark: true },
-  jaune: { '--bg': '#ffb000', '--ink': '#14181d', '--ink-dim': 'rgba(20,24,29,0.72)', '--ink-faint': 'rgba(20,24,29,0.3)', '--line': 'rgba(20,24,29,0.22)', '--mark': 'rgba(255,255,255,0)', '--em': '#14181d', '--card': 'rgba(255,255,255,0.3)', dark: false },
+  orange: { '--bg': '#ff8a1f', '--ink': '#14181d', '--ink-dim': 'rgba(20,24,29,0.74)', '--ink-faint': 'rgba(20,24,29,0.32)', '--line': 'rgba(20,24,29,0.2)', '--mark': 'rgba(255,255,255,0)', '--em': '#14181d', '--card': 'rgba(255,255,255,0.3)', dark: false },
 };
 const metaTheme = $('meta[name="theme-color"]');
-let scene = null;
-try { scene = initScene($('.webgl'), { reducedMotion: reduced }); } catch { scene = null; }
-if (!scene) document.documentElement.classList.add('no-webgl');
+let building = null;
+try { building = initBuilding($('.webgl')); } catch { building = null; }
+if (!building) document.documentElement.classList.add('no-webgl');
+
+// Cadrage du chantier par chapitre : [décalage à droite, orbite, atténuation, fenêtres allumées, distance]
+// (poussé à droite et atténué quand le texte prend la largeur, allumé la nuit et à la livraison)
+const SHOTS_DESKTOP = [
+  [0.36, 0, 0, 0, 29], [0.36, 0.15, 0, 0, 30], [0.38, 0.25, 0.86, 0, 34], [0.38, 0.35, 0.86, 0, 34], [0.39, 0.45, 0.3, 1, 35],
+  [0.3, 0.55, 0.86, 0, 32], [0.39, 0.65, 0.8, 0, 37], [0.38, 0.75, 0.15, 0, 34], [0.41, 0.9, 0, 1, 36],
+];
+const SHOTS_MOBILE = [[0, 0, 0, 0], [0, 0.15, 0.82, 0], [0, 0.25, 0.86, 0], [0, 0.35, 0.86, 0], [0, 0.45, 0.4, 1], [0, 0.55, 0.86, 0], [0, 0.65, 0.84, 0], [0, 0.75, 0.84, 0], [0, 0.9, 0.5, 1]];
+const SHOTS = isMobile ? SHOTS_MOBILE : SHOTS_DESKTOP;
+function frame(i) {
+  const [shift, orbit, dim, lights, dist] = SHOTS[Math.max(0, Math.min(SHOTS.length - 1, i))];
+  building?.setShift(shift); building?.setOrbit(orbit); building?.setDim(dim); building?.setLights(lights);
+  if (dist) building?.setZoom(dist);
+}
 
 let currentTheme = '';
 function applyTheme(name) {
@@ -56,7 +57,6 @@ function applyTheme(name) {
   currentTheme = name;
   const vars = Object.fromEntries(Object.entries(t).filter(([k]) => k.startsWith('--')));
   gsap.to(document.documentElement, { ...vars, duration: reduced ? 0 : 0.9, ease: 'power2.inOut', overwrite: true });
-  scene?.setTheme(t['--bg'], t.dark);
   metaTheme?.setAttribute('content', t['--bg']);
 }
 
@@ -133,7 +133,6 @@ function intro() {
   tl.to('.loader > *', { y: -24, opacity: 0, duration: 0.5, stagger: 0.05, ease: 'power3.out' })
     .to('.loader', { clipPath: 'inset(0 0 100% 0)', duration: 0.95, ease: EASE_IO }, '-=0.1')
     .to('.curtain', { clipPath: 'inset(0 0 100% 0)', duration: 0.95, ease: EASE_IO }, '-=0.78')
-    .add(() => scene?.reveal(), '-=0.7')
     // les lettres arrivent de partout et s'assemblent en un titre
     .from(heroChars, {
       x: () => gsap.utils.random(-420, 420), y: () => gsap.utils.random(-300, 300),
@@ -142,7 +141,7 @@ function intro() {
     }, '-=0.55')
     .from('.header > *', { y: -16, opacity: 0, duration: 1, stagger: 0.08 }, '-=1.3')
     .from('.hero [data-reveal]', { y: 28, opacity: 0, duration: 1.1, stagger: 0.1 }, '-=1.1')
-    .from('.badge', { opacity: 0, scale: 0.9, duration: 1 }, '-=0.9')
+    .from('.panneau', { opacity: 0, y: 30, rotation: -3, duration: 1.1 }, '-=0.9')
     .set(['.loader', '.curtain'], { display: 'none' });
   if (reduced) tl.progress(1);
 }
@@ -244,20 +243,21 @@ $$('[data-theme]').forEach((sec) => {
   ScrollTrigger.create({
     trigger: sec.closest('.pin-spacer') || sec,
     start: 'top 55%', end: 'bottom 55%',
-    onToggle: (self) => { if (self.isActive) { applyTheme(sec.dataset.theme); scene?.setSection(i); } },
+    onToggle: (self) => { if (self.isActive) { applyTheme(sec.dataset.theme); frame(i); } },
   });
 });
 applyTheme('beton');
+frame(0);
 
-// Barre de progression + vitesse transmise à la scène
+// Barre de progression + avancement du chantier (livré à l'arrivée sur le final)
+building?.setProgress(0.12);
 ScrollTrigger.create({
   start: 0, end: 'max',
   onUpdate: (self) => {
     $('.progress span').style.transform = `scaleX(${self.progress})`;
-    scene?.setScroll(self.scroll(), self.getVelocity() / 60);
+    building?.setProgress(0.12 + Math.min(1, self.progress / 0.86) * 0.88);
   },
 });
-scene?.setBoost(!reduced);
 
 // =====================================================================
 // Révélations au défilement

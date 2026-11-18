@@ -32,7 +32,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
 html, body { margin: 0; }
 body {
   background: var(--bg); color: var(--ink);
@@ -135,13 +135,8 @@ em { font-family: var(--serif); font-style: italic; font-weight: 300; font-stret
 .hero__title em { font-weight: 300; letter-spacing: -.035em; }
 .wrd { display: inline-block; white-space: nowrap; }
 .char { display: inline-block; will-change: transform; }
-.hero__foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px 60px; align-items: end; max-width: 1100px; }
-.badge { position: absolute; right: var(--pad); bottom: 70px; width: 128px; height: 128px; display: grid; place-items: center; }
-.badge svg { position: absolute; inset: 0; animation: spin 18s linear infinite; }
-.badge text { font: 600 9.6px var(--mono); letter-spacing: .2em; fill: var(--ink); }
-.badge > span { font: 850 34px/1 var(--display); font-stretch: 125%; text-align: center; display: grid; }
-.badge small { font: 500 9px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
-@keyframes spin { to { transform: rotate(360deg); } }
+.hero__foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px 60px; align-items: end; max-width: min(1100px, calc(100% - 360px)); }
+@media (max-width: 1100px) { .hero__foot { max-width: none; } .panneau { display: none; } }
 
 .marquee { position: relative; z-index: 2; overflow: hidden; border-block: 1px solid var(--line); padding: 18px 0; background: color-mix(in srgb, var(--bg) 55%, transparent); }
 .marquee__track { display: flex; width: max-content; will-change: transform; }
@@ -239,10 +234,6 @@ em { font-family: var(--serif); font-style: italic; font-weight: 300; font-stret
 .row p { font: 700 clamp(19px, 1.8vw, 26px)/1.25 var(--display); font-stretch: 104%; letter-spacing: -.015em; display: flex; gap: 12px; }
 .row p::before { content: "✓"; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--steel); color: #ffb000; font: 700 13px/26px var(--sans); text-align: center; margin-top: 2px; }
 .trainer { display: grid; grid-template-columns: auto minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px 60px; align-items: center; max-width: 1250px; padding-top: 30px; }
-.trainer__mono { width: 150px; height: 150px; border-radius: 50%; background: var(--steel); color: #ffb000; display: grid; place-items: center; position: relative; }
-.trainer__mono > span { font: 850 44px/1 var(--display); font-stretch: 125%; letter-spacing: -.02em; }
-.trainer__mono svg { position: absolute; inset: -16px; width: calc(100% + 32px); height: calc(100% + 32px); animation: spin 24s linear infinite reverse; }
-.trainer__mono text { font: 600 8px var(--mono); letter-spacing: .26em; fill: var(--ink); }
 .trainer__quote p { font: 700 clamp(26px, 2.8vw, 42px)/1.12 var(--display); font-stretch: 104%; letter-spacing: -.025em; }
 .trainer__quote footer { margin-top: 16px; font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-dim); }
 .trainer__how { display: grid; gap: 12px; color: var(--ink-dim); }
@@ -264,19 +255,10 @@ em { font-family: var(--serif); font-style: italic; font-weight: 300; font-stret
 
 /* ---------- 08 Final ---------- */
 .final { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-bottom: 40px; }
-.final__title { font: 850 clamp(42px, 8vw, 136px)/.94 var(--display); font-weight: 850; letter-spacing: -.04em; margin-bottom: clamp(36px, 6vh, 60px); }
+.final__title { font: 850 clamp(42px, 7vw, 120px)/.94 var(--display); font-weight: 850; letter-spacing: -.04em; margin-bottom: clamp(36px, 6vh, 60px); }
 .final__title em { background: none; font-weight: 300; }
 .final .btn--line { border-color: var(--steel); }
 .foot { margin-top: auto; padding-top: 80px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 30px; font: 500 12px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); }
-
-/* ---------- Mouvement réduit ---------- */
-.motion-note { position: fixed; z-index: 80; left: 16px; right: 16px; bottom: 16px; margin: 0 auto; max-width: 560px; display: flex; gap: 16px; align-items: center; justify-content: space-between; background: var(--steel); color: #f2f0eb; border-radius: 16px; padding: 14px 16px 14px 20px; font-size: 14px; box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .5); }
-.motion-note button { flex: none; border: 0; border-radius: 999px; background: #ffb000; color: var(--steel); font: 600 14px/1 var(--sans); padding: 12px 16px; cursor: pointer; }
-.reduced .path { height: auto; overflow: visible; padding: clamp(110px, 16vh, 180px) var(--pad); }
-.reduced .path__track { width: auto; flex-wrap: wrap; height: auto; padding: 0; align-items: stretch; }
-.reduced .path__rail { display: none; }
-.reduced .step__dot { background: var(--yellow); }
-.reduced .badge svg, .reduced .trainer__mono svg, .reduced .btn.is-soon > span::before { animation: none; }
 
 /* ---------- Tablette / mobile ---------- */
 @media (max-width: 1100px) {
@@ -288,7 +270,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 300; font-stret
   .nav { display: none; }
   .menu-btn { display: inline-flex; }
   .hero__foot { grid-template-columns: 1fr; }
-  .badge { display: none; }
+  .panneau { display: none; }
   .monday__stage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .mono__cols { grid-template-columns: 1fr; }
   .compare__head { display: none; }
@@ -316,6 +298,59 @@ em { font-family: var(--serif); font-style: italic; font-weight: 300; font-stret
   .step { min-height: 330px; padding: 28px 22px 22px; }
   .path__rail { top: calc(50% - 174px); }
   .trainer { grid-template-columns: 1fr; }
-  .trainer__mono { width: 120px; height: 120px; margin-left: 16px; }
   .faq details p { padding-right: 0; }
 }
+
+/* =====================================================================
+   Langage chantier : trame de plan, lignes de cote, rubalise,
+   panneau de chantier, badge d'accès, notes punaisées à la base vie
+   ===================================================================== */
+.plan-grid { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px),
+    linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  opacity: .55; -webkit-mask-image: radial-gradient(120% 90% at 30% 40%, #000 30%, transparent 85%); mask-image: radial-gradient(120% 90% at 30% 40%, #000 30%, transparent 85%); }
+.plan-grid { background-blend-mode: normal; }
+/* ligne de cote après la numérotation : |←——→| */
+.cote::after { content: ""; flex: 0 1 180px; height: 9px; min-width: 40px;
+  background: linear-gradient(var(--ink-faint), var(--ink-faint)) center / 100% 1px no-repeat,
+    linear-gradient(var(--ink-faint), var(--ink-faint)) left / 1px 100% no-repeat,
+    linear-gradient(var(--ink-faint), var(--ink-faint)) right / 1px 100% no-repeat; }
+
+/* rubalise : ruban de chantier rayé, légèrement de biais */
+.rubalise { background: #ffb000; color: #14181d; border: 0; transform: rotate(-1.6deg) scale(1.03); margin: 10px 0; padding: 0; box-shadow: 0 18px 40px -26px rgba(20, 24, 29, .6); }
+.rubalise::before, .rubalise::after { content: ""; display: block; height: 12px; background: repeating-linear-gradient(-45deg, #14181d 0 14px, #ffb000 14px 28px); }
+.rubalise .marquee__track { padding: 14px 0; }
+.rubalise span { font-stretch: 125%; text-transform: uppercase; letter-spacing: .01em; }
+.rubalise span::after { background: #14181d; }
+
+/* panneau de chantier (en bas à droite de l'accroche, au pied de l'immeuble) */
+.panneau { position: absolute; right: var(--pad); bottom: 56px; width: 300px; background: #fbfaf6; color: #14181d; border: 2px solid #14181d; border-radius: 4px; box-shadow: 6px 6px 0 #14181d; font-size: 12px; }
+.panneau::before, .panneau::after { content: ""; position: absolute; bottom: -38px; width: 6px; height: 36px; background: #6b6f75; }
+.panneau::before { left: 36px; } .panneau::after { right: 36px; }
+.panneau__head { padding: 14px 8px; background: linear-gradient(#ffb000, #ffb000) center / 100% 58% no-repeat, repeating-linear-gradient(-45deg, #14181d 0 10px, #ffb000 10px 20px);
+  font: 800 13px/1 var(--display); font-stretch: 125%; text-transform: uppercase; letter-spacing: .04em; color: #14181d; text-align: center; }
+.panneau dl { margin: 0; padding: 10px 12px 12px; display: grid; gap: 6px; }
+.panneau dl div { display: grid; grid-template-columns: 1fr auto; gap: 10px; border-bottom: 1px dashed rgba(20, 24, 29, .25); padding-bottom: 5px; }
+.panneau dl div:last-child { border: 0; padding-bottom: 0; }
+.panneau dt { white-space: nowrap; font: 500 9px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: rgba(20, 24, 29, .62); }
+.panneau dd { margin: 0; font-weight: 700; text-align: right; }
+
+/* badge d'accès chantier du formateur */
+.pass { width: 210px; border-radius: 14px; background: #fbfaf6; color: #14181d; border: 1px solid rgba(20, 24, 29, .18); box-shadow: 0 24px 50px -28px rgba(20, 24, 29, .55); overflow: hidden; position: relative; transform: rotate(-4deg); }
+.pass::before { content: ""; position: absolute; left: 50%; top: 8px; width: 34px; height: 7px; margin-left: -17px; border-radius: 4px; background: rgba(20, 24, 29, .18); }
+.pass__head { background: #ffb000; padding: 22px 14px 8px; font: 800 12px/1 var(--display); font-stretch: 125%; text-transform: uppercase; letter-spacing: .08em; }
+.pass__body { display: flex; gap: 12px; align-items: center; padding: 14px; }
+.pass__photo { width: 54px; height: 64px; border-radius: 8px; background: #14181d; color: #ffb000; display: grid; place-items: center; font: 850 20px/1 var(--display); font-stretch: 125%; flex: none; }
+.pass__body b { display: block; font: 750 15px/1.15 var(--display); }
+.pass__body small { font: 500 10px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: rgba(20, 24, 29, .62); }
+.pass__foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 14px 12px; border-top: 1px dashed rgba(20, 24, 29, .25); font: 500 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.pass__bars { width: 70px; height: 20px; background: repeating-linear-gradient(90deg, #14181d 0 2px, transparent 2px 4px, #14181d 4px 5px, transparent 5px 8px); }
+
+/* notes punaisées au tableau de la base vie : un morceau de scotch */
+.task::before { content: ""; position: absolute; top: -9px; left: 50%; width: 58px; height: 18px; margin-left: -29px; background: rgba(255, 214, 120, .72); transform: rotate(-3deg); box-shadow: 0 1px 2px rgba(20, 24, 29, .12); }
+.task:nth-child(even)::before { transform: rotate(4deg); }
+.step--cert { border-top: 0; }
+.step--cert::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px; border-radius: 22px 22px 0 0; background: repeating-linear-gradient(-45deg, #14181d 0 10px, #ffb000 10px 20px); }
+@media (max-width: 600px) { .pass { margin-left: 8px; } }

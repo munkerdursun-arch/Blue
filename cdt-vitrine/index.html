@@ -28,6 +28,7 @@
   </div>
 
   <canvas class="webgl" aria-hidden="true"></canvas>
+  <div class="plan-grid" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
   <div class="progress" aria-hidden="true"><span></span></div>
 
@@ -71,14 +72,20 @@
           <a class="btn" href="#formateur" data-scroll data-magnetic><span>Pourquoi avec moi</span></a>
         </div>
       </div>
-      <div class="badge" aria-hidden="true">
-        <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" /></defs>
-          <text><textPath href="#circ">FORMATION IA · BTP · AVEC CERTIFICAT · </textPath></text></svg>
-        <span>18<small>agents</small></span>
-      </div>
+      <aside class="panneau" aria-label="Panneau de chantier">
+        <p class="panneau__head">Chantier en cours</p>
+        <dl>
+          <div><dt>Nature des travaux</dt><dd>Formation IA appliquée au BTP</dd></div>
+          <div><dt>Maître d'ouvrage</dt><dd>Vous</dd></div>
+          <div><dt>Conducteur de travaux</dt><dd>Augmenté</dd></div>
+          <div><dt>Formateur</dt><dd>Munker Dursun</dd></div>
+          <div><dt>Durée des travaux</dt><dd>1 ou 2 jours</dd></div>
+          <div><dt>Livraison</dt><dd>Certificat vérifiable</dd></div>
+        </dl>
+      </aside>
     </section>
 
-    <div class="marquee" aria-hidden="true"><div class="marquee__track">
+    <div class="marquee rubalise" aria-hidden="true"><div class="marquee__track">
       <span>Comptes rendus de chantier</span><span>Planning</span><span>Mails aux sous-traitants</span><span>OPR et réserves</span><span>Situations de travaux</span><span>PPSPS</span><span>Lecture DCE</span><span>Mémoire technique</span><span>Journal de chantier</span><span>PIC et logistique</span>
     </div></div>
 
@@ -92,7 +99,7 @@
     <!-- 02 — Le lundi matin : le désordre qui se range -->
     <section class="monday" data-theme="beton" data-scene="2" aria-labelledby="monday-t">
       <div class="monday__head">
-        <p class="cote"><span>02</span> Le lundi matin</p>
+        <p class="cote"><span>02</span> Lundi, 7 h, base vie</p>
         <h2 class="h2" id="monday-t">Le même lundi. <em>Une autre semaine.</em></h2>
         <p class="monday__state" aria-live="off"><b data-state>Avant</b> <span data-state-txt>8 urgences sur votre bureau</span></p>
       </div>
@@ -181,8 +188,10 @@
         <div class="row" role="row"><s role="cell">Un support PDF à la fin</s><p role="cell">Un espace stagiaire, une fiche réflexe et un certificat vérifiable</p></div>
       </div>
       <div class="trainer">
-        <div class="trainer__mono" aria-hidden="true"><span>MD</span>
-          <svg viewBox="0 0 120 120"><text><textPath href="#circ">MUNKER DURSUN · FORMATEUR · MUNKER DURSUN · FORMATEUR · </textPath></text></svg>
+        <div class="pass" aria-hidden="true">
+          <p class="pass__head">Accès chantier</p>
+          <div class="pass__body"><span class="pass__photo">MD</span><div><b>Munker Dursun</b><small>Formateur IA · BTP</small></div></div>
+          <p class="pass__foot"><span>Zone : toutes</span><i class="pass__bars"></i></p>
         </div>
         <blockquote class="trainer__quote">
           <p>« Je ne vous apprends pas l'IA. Je vous apprends à faire <em>votre métier</em> avec. »</p>
@@ -211,7 +220,7 @@
     </section>
 
     <!-- 08 — Final -->
-    <section class="final" data-theme="jaune" data-scene="8" aria-labelledby="final-t">
+    <section class="final" data-theme="orange" data-scene="8" aria-labelledby="final-t">
       <p class="cote"><span>08</span> À vous</p>
       <h2 class="final__title" id="final-t" data-split><span class="line">Votre prochain</span><span class="line">chantier mérite</span><span class="line"><em>un conducteur augmenté.</em></span></h2>
       <div class="btns">
