@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f2f0eb" />
+  <title>Conducteur de travaux augmenté · Formation IA BTP avec Munker Dursun</title>
+  <meta name="description" content="La formation IA pensée pour les conducteurs de travaux : 18 agents IA pour le chantier, compatible avec la seule IA autorisée par votre entreprise (Copilot, IA interne…), certificat vérifiable. Avec Munker Dursun." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314181d'/%3E%3Cpath d='M8 24V13l8-5 8 5v11h-5v-6h-6v6z' fill='%23ffb000'/%3E%3C/svg%3E" />
+  <link rel="preload" href="fonts/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/fraunces-latin-wght-italic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="vendor/lenis/lenis.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">{ "imports": { "three": "./vendor/three/three.module.min.js" } }</script>
+</head>
+<body class="is-loading">
+  <a class="skip" href="#contenu">Aller au contenu</a>
+
+  <!-- Préchargeur : un plan qui se trace, puis le rideau jaune -->
+  <div class="curtain" aria-hidden="true"></div>
+  <div class="loader" aria-hidden="true">
+    <svg class="loader__plan" viewBox="0 0 200 120">
+      <path d="M20 110 H180" /><path d="M40 110 V52 L100 22 L160 52 V110" /><path d="M70 110 V74 H100 V110" />
+      <path d="M118 66 H144 V88 H118 Z" /><path d="M150 22 V6 H190 M150 6 L120 6" /><path d="M186 6 V30" />
+    </svg>
+    <div class="loader__count"><span data-count>0</span><small>%</small></div>
+    <p class="loader__tag">Implantation du chantier</p>
+  </div>
+
+  <canvas class="webgl" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="header">
+    <a class="logo" href="#contenu" data-scroll aria-label="Haut de page">
+      <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 24V13l8-5 8 5v11h-5v-6h-6v6z" /></svg></span>
+      <span class="logo__txt"><b>CDT</b> augmenté</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#emporter" data-scroll class="roll"><span data-t="Ce que vous emportez">Ce que vous emportez</span></a>
+      <a href="#parcours" data-scroll class="roll"><span data-t="Le parcours">Le parcours</span></a>
+      <a href="#formateur" data-scroll class="roll"><span data-t="Pourquoi avec moi">Pourquoi avec moi</span></a>
+      <a href="#questions" data-scroll class="roll"><span data-t="Questions">Questions</span></a>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span>Menu</span><i aria-hidden="true"></i></button>
+  </header>
+
+  <div class="menu" id="menu" hidden>
+    <nav aria-label="Menu">
+      <a href="#emporter" data-scroll><small>03</small>Ce que vous emportez</a>
+      <a href="#parcours" data-scroll><small>05</small>Le parcours</a>
+      <a href="#formateur" data-scroll><small>06</small>Pourquoi avec moi</a>
+      <a href="#questions" data-scroll><small>07</small>Questions</a>
+    </nav>
+    <p class="menu__foot">Formation IA · BTP · Munker Dursun</p>
+  </div>
+
+  <main>
+    <!-- 00 — Accroche -->
+    <section class="hero" id="contenu" data-theme="beton" data-scene="0">
+      <p class="cote" data-reveal><span>Formation IA · BTP</span> avec Munker Dursun</p>
+      <h1 class="hero__title" data-split>
+        <span class="line">Soyez le conducteur</span>
+        <span class="line">de travaux <em>que l'IA</em></span>
+        <span class="line"><em>ne remplacera pas.</em></span>
+      </h1>
+      <div class="hero__foot">
+        <p class="lead" data-reveal>Un ou deux jours pour installer vos propres agents IA, dans l'outil que votre entreprise autorise, et redonner du temps au terrain. L'IA prépare. Vous vérifiez, décidez et signez.</p>
+        <div class="btns" data-reveal>
+          <a class="btn btn--pri" href="#parcours" data-scroll data-magnetic><span>Voir le parcours</span></a>
+          <a class="btn" href="#formateur" data-scroll data-magnetic><span>Pourquoi avec moi</span></a>
+        </div>
+      </div>
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" /></defs>
+          <text><textPath href="#circ">FORMATION IA · BTP · AVEC CERTIFICAT · </textPath></text></svg>
+        <span>18<small>agents</small></span>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee__track">
+      <span>Comptes rendus de chantier</span><span>Planning</span><span>Mails aux sous-traitants</span><span>OPR et réserves</span><span>Situations de travaux</span><span>PPSPS</span><span>Lecture DCE</span><span>Mémoire technique</span><span>Journal de chantier</span><span>PIC et logistique</span>
+    </div></div>
+
+    <!-- 01 — Le constat -->
+    <section class="manifest" data-theme="sable" data-scene="1">
+      <p class="cote"><span>01</span> Le constat</p>
+      <p class="manifest__text" data-words>Vous n'avez pas choisi ce métier pour taper des comptes rendus à 21 h. Le chantier a besoin de <em>vous sur le terrain,</em> pas derrière un écran.</p>
+      <p class="manifest__sign" data-reveal-s>L'IA prépare. Vous vérifiez, décidez et <b>signez.</b></p>
+    </section>
+
+    <!-- 02 — Le lundi matin : le désordre qui se range -->
+    <section class="monday" data-theme="beton" data-scene="2" aria-labelledby="monday-t">
+      <div class="monday__head">
+        <p class="cote"><span>02</span> Le lundi matin</p>
+        <h2 class="h2" id="monday-t">Le même lundi. <em>Une autre semaine.</em></h2>
+        <p class="monday__state" aria-live="off"><b data-state>Avant</b> <span data-state-txt>8 urgences sur votre bureau</span></p>
+      </div>
+      <ul class="monday__stage">
+        <li class="task"><span class="task__k">Réunion de chantier</span><b>Compte rendu à rédiger</b><i class="task__s"><span class="s-before">À faire ce soir</span><span class="s-after">Brouillon prêt</span></i></li>
+        <li class="task"><span class="task__k">Sous-traitant</span><b>Relance du plombier</b><i class="task__s"><span class="s-before">En retard</span><span class="s-after">Mail préparé</span></i></li>
+        <li class="task"><span class="task__k">Financier</span><b>Situation n° 4 à vérifier</b><i class="task__s"><span class="s-before">Urgent</span><span class="s-after">Écarts relevés</span></i></li>
+        <li class="task"><span class="task__k">Réception</span><b>Réserves OPR à trier</b><i class="task__s"><span class="s-before">47 photos</span><span class="s-after">Liste classée</span></i></li>
+        <li class="task"><span class="task__k">Maître d'ouvrage</span><b>Mail à répondre</b><i class="task__s"><span class="s-before">Depuis vendredi</span><span class="s-after">Réponse proposée</span></i></li>
+        <li class="task"><span class="task__k">Planning</span><b>Recaler le lot plâtrerie</b><i class="task__s"><span class="s-before">À refaire</span><span class="s-after">Version à jour</span></i></li>
+        <li class="task"><span class="task__k">Sécurité</span><b>PPSPS à compléter</b><i class="task__s"><span class="s-before">Bloquant</span><span class="s-after">Trame remplie</span></i></li>
+        <li class="task"><span class="task__k">Appel d'offres</span><b>DCE de 300 pages</b><i class="task__s"><span class="s-before">Pas lu</span><span class="s-after">Synthèse en 1 page</span></i></li>
+      </ul>
+      <p class="monday__foot">Exemple de semaine type. Chaque tâche arrive avec un brouillon préparé par votre agent : vous relisez, corrigez, validez.</p>
+    </section>
+
+    <!-- 03 — Ce que vous emportez -->
+    <section class="takeaway" id="emporter" data-theme="bleu" data-scene="3">
+      <p class="cote"><span>03</span> Ce que vous emportez</p>
+      <h2 class="h2"><span class="counter" aria-label="18"><span class="counter__col" data-roll="1"></span><span class="counter__col" data-roll="8"></span></span> agents IA <em>taillés pour le chantier.</em></h2>
+      <ul class="agents" aria-label="Les 18 agents">
+        <li><small>Préparation</small>Lecture de plans</li><li><small>Préparation</small>Rédaction de planning</li><li><small>Exécution</small>Mise à jour du planning</li>
+        <li><small>Appel d'offres</small>Lecture DCE et synthèse</li><li><small>Appel d'offres</small>Mémoire technique</li><li><small>Sécurité</small>PPSPS</li>
+        <li><small>Achats</small>Consultation sous-traitants</li><li><small>Exécution</small>Mails aux sous-traitants</li><li><small>Exécution</small>Réponses clients et MOE</li>
+        <li><small>Exécution</small>Comptes rendus de chantier</li><li><small>Clôture</small>OPR, réserves, réception</li><li><small>Pilotage</small>Situations et suivi financier</li>
+        <li><small>Appel d'offres</small>Veille et go / no-go</li><li><small>Exécution</small>Journal de chantier et photos</li><li class="is-boss"><small>Pilotage</small>Chef d'orchestre</li>
+        <li><small>Préparation</small>Plan d'installation (PIC)</li><li><small>Qualité</small>PAQ et autocontrôle</li><li><small>Environnement</small>Déchets du chantier</li>
+      </ul>
+      <ol class="keeps">
+        <li><span>01</span><div><h3>La méthode pour écrire vos propres agents</h3><p>Vous ne repartez pas avec des recettes figées : vous savez en créer de nouveaux pour vos besoins.</p></div></li>
+        <li><span>02</span><div><h3>Des automatisations qui préparent les brouillons</h3><p>Un mail reçu, un fichier déposé, une heure fixe : l'agent prépare, vous validez avant l'envoi.</p></div></li>
+        <li><span>03</span><div><h3>Une équipe d'agents que vous pilotez</h3><p>Un chef d'orchestre répartit le travail, chaque étape passe par votre validation.</p></div></li>
+        <li><span>04</span><div><h3>Une fiche réflexe et une routine</h3><p>À imprimer et à garder dans la voiture : quel agent pour quelle tâche, à quel moment de la journée.</p></div></li>
+        <li><span>05</span><div><h3>Un certificat numéroté</h3><p>Délivré après réussite du quiz final, vérifiable en ligne par votre employeur.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- 04 — Une seule IA (chapitre sombre) -->
+    <section class="mono" data-theme="nuit" data-scene="4" aria-labelledby="mono-t">
+      <p class="cote"><span>04</span> Une seule IA autorisée ?</p>
+      <h2 class="mono__title" id="mono-t">
+        <span class="mono__l1">Votre entreprise n'autorise que</span>
+        <span class="flap" aria-live="off"><span class="flap__word" data-flap>Copilot</span></span>
+        <em class="mono__l3">Parfait.</em>
+      </h2>
+      <div class="mono__cols">
+        <p class="lead">Beaucoup de formations IA partent d'outils que vous n'aurez jamais le droit d'utiliser au bureau. Celle-ci part de <b>l'outil validé par votre DSI</b>, y compris Microsoft 365 Copilot seul ou l'IA interne de votre groupe.</p>
+        <ul class="mono__facts">
+          <li><b>Agents</b> écrits en texte universel : seul l'endroit où on les colle change.</li>
+          <li><b>Automatiser</b> avec Power Automate côté Microsoft, ou l'outil prévu par votre IA.</li>
+          <li><b>Équipe d'agents</b> avec Copilot Studio, ou l'équivalent de votre IA interne.</li>
+        </ul>
+      </div>
+      <p class="mono__list" aria-label="Compatible avec">Microsoft 365 Copilot · IA interne de votre groupe · ChatGPT · Claude · Gemini · Le Chat</p>
+    </section>
+
+    <!-- 05 — Le parcours (horizontal épinglé) -->
+    <section class="path" id="parcours" data-theme="sable" data-scene="5" aria-labelledby="path-t">
+      <div class="path__rail" aria-hidden="true"><span class="path__fill"></span></div>
+      <div class="path__track">
+        <div class="step step--intro">
+          <p class="cote"><span>05</span> Le parcours</p>
+          <h2 class="h2" id="path-t">Du premier prompt <em>au certificat.</em></h2>
+          <p class="lead">1 jour (8 h) ou 2 jours (16 h). 20 modules, du plan à la livraison.</p>
+        </div>
+        <article class="step"><span class="step__dot" aria-hidden="true"></span><p class="step__n">Niveau 1 · Jour 1</p><h3>Agents manuels</h3><p>Un agent = un projet dans votre IA. Vous collez l'instruction, ajoutez vos documents, vous lui parlez. L'essentiel de la valeur est là.</p></article>
+        <article class="step"><span class="step__dot" aria-hidden="true"></span><p class="step__n">Niveau 2 · Jour 2</p><h3>Automatiser</h3><p>Un déclencheur, une étape IA, un brouillon, votre validation, une trace. Rien ne part sans vous.</p></article>
+        <article class="step"><span class="step__dot" aria-hidden="true"></span><p class="step__n">Niveau 3 · Jour 2</p><h3>Équipe d'agents</h3><p>Tâches, validations, historique : vos agents travaillent ensemble, vous gardez la main.</p></article>
+        <article class="step"><span class="step__dot" aria-hidden="true"></span><p class="step__n">Évaluation</p><h3>Quiz final</h3><p>20 questions dans votre espace stagiaire. Réussite à partir de 17 bonnes réponses.</p></article>
+        <article class="step step--cert"><span class="step__dot" aria-hidden="true"></span><p class="step__n">Livraison</p><h3>Certificat</h3><p>Votre certificat PDF, à votre nom, numéroté et vérifiable en ligne.</p>
+          <div class="mini-cert" aria-hidden="true"><small>Certificat de formation</small><b>IA appliquée au métier du BTP</b><i>N° CDT-2026-XXXXXXXX</i></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 — Pourquoi avec moi -->
+    <section class="why" id="formateur" data-theme="bleu" data-scene="6" aria-labelledby="why-t">
+      <p class="cote"><span>06</span> Pourquoi avec moi</p>
+      <h2 class="h2" id="why-t">Pas une formation sur l'IA. <em>Une formation sur votre métier.</em></h2>
+      <div class="compare" role="table" aria-label="Formation IA générique comparée à cette formation">
+        <div class="compare__head" role="row"><span role="columnheader">Une formation IA générique</span><span role="columnheader">Avec moi</span></div>
+        <div class="row" role="row"><s role="cell">Des exemples de marketing et de RH</s><p role="cell">Des comptes rendus, des OPR, des situations, des sous-traitants</p></div>
+        <div class="row" role="row"><s role="cell">Un outil imposé, souvent interdit chez vous</s><p role="cell">L'outil que votre entreprise autorise, Copilot ou IA interne compris</p></div>
+        <div class="row" role="row"><s role="cell">Une démonstration, puis débrouillez-vous</s><p role="cell">Vos agents installés sur vos propres documents</p></div>
+        <div class="row" role="row"><s role="cell">« L'IA fait tout »</s><p role="cell">La règle d'or, la sécurité, le RGPD et l'AI Act</p></div>
+        <div class="row" role="row"><s role="cell">Un support PDF à la fin</s><p role="cell">Un espace stagiaire, une fiche réflexe et un certificat vérifiable</p></div>
+      </div>
+      <div class="trainer">
+        <div class="trainer__mono" aria-hidden="true"><span>MD</span>
+          <svg viewBox="0 0 120 120"><text><textPath href="#circ">MUNKER DURSUN · FORMATEUR · MUNKER DURSUN · FORMATEUR · </textPath></text></svg>
+        </div>
+        <blockquote class="trainer__quote">
+          <p>« Je ne vous apprends pas l'IA. Je vous apprends à faire <em>votre métier</em> avec. »</p>
+          <footer>Munker Dursun, formateur</footer>
+        </blockquote>
+        <ul class="trainer__how">
+          <li>On travaille sur vos documents réels, pas sur des exemples inventés.</li>
+          <li>Chaque agent est testé devant vous avant d'être adopté.</li>
+          <li>Vous repartez autonome, avec la méthode pour aller plus loin.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 07 — Questions -->
+    <section class="faq" id="questions" data-theme="beton" data-scene="7" aria-labelledby="faq-t">
+      <p class="cote"><span>07</span> Questions</p>
+      <h2 class="h2" id="faq-t">Ce qu'on me demande <em>avant de s'inscrire.</em></h2>
+      <div class="faq__list">
+        <details><summary>Je ne suis pas à l'aise avec l'informatique.<i aria-hidden="true"></i></summary><div><p>Aucun code. Si vous savez écrire un mail et joindre un fichier, vous savez installer un agent. Le niveau 1 suffit à couvrir l'essentiel.</p></div></details>
+        <details><summary>Mon entreprise n'autorise que Copilot, ou une IA interne.<i aria-hidden="true"></i></summary><div><p>C'est prévu. Toute la formation se règle sur l'outil autorisé : les agents s'installent dedans, et l'automatisation passe par ses propres outils (Power Automate et Copilot Studio pour Copilot).</p></div></details>
+        <details><summary>Et la confidentialité de mes chantiers ?<i aria-hidden="true"></i></summary><div><p>Un module entier y est consacré : sécurité, RGPD et AI Act. Vous savez quoi confier à l'IA, quoi ne jamais lui donner, et quelles questions poser à votre DSI.</p></div></details>
+        <details><summary>Combien de temps dure la formation ?<i aria-hidden="true"></i></summary><div><p>1 jour (8 h) pour les agents manuels, ou 2 jours (16 h) pour aller jusqu'à l'automatisation et l'équipe d'agents.</p></div></details>
+        <details><summary>Que vaut le certificat ?<i aria-hidden="true"></i></summary><div><p>C'est un certificat de formation délivré après réussite du quiz final (17 sur 20 minimum), numéroté et vérifiable en ligne. Ce n'est pas une certification inscrite au RNCP.</p></div></details>
+        <details><summary>Comment s'inscrire ?<i aria-hidden="true"></i></summary><div><p>Les inscriptions ouvrent bientôt. Les coordonnées seront publiées sur cette page.</p></div></details>
+      </div>
+    </section>
+
+    <!-- 08 — Final -->
+    <section class="final" data-theme="jaune" data-scene="8" aria-labelledby="final-t">
+      <p class="cote"><span>08</span> À vous</p>
+      <h2 class="final__title" id="final-t" data-split><span class="line">Votre prochain</span><span class="line">chantier mérite</span><span class="line"><em>un conducteur augmenté.</em></span></h2>
+      <div class="btns">
+        <span class="btn btn--ink is-soon" aria-disabled="true"><span>Inscriptions bientôt ouvertes</span></span>
+        <a class="btn btn--line" href="https://munkerdursun-arch.github.io/Blue/cdt/#/connexion" data-magnetic><span>Espace stagiaire</span></a>
+        <a class="btn btn--line" href="https://munkerdursun-arch.github.io/Blue/cdt/#/verifier" data-magnetic><span>Vérifier un certificat</span></a>
+      </div>
+      <footer class="foot">
+        <p>Conducteur de travaux augmenté · Formation IA pour le BTP · Formateur : Munker Dursun</p>
+        <p>Coordonnées à venir</p>
+      </footer>
+    </section>
+  </main>
+
+  <script src="vendor/gsap/gsap.min.js"></script>
+  <script src="vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="vendor/lenis/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
