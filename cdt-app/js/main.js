@@ -9,6 +9,7 @@
 // =====================================================================
 import { initBuilding } from './building.js';
 import { initCourse } from './course.js';
+import { initMono } from './mono.js';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 gsap.registerPlugin(ScrollTrigger);
@@ -19,6 +20,7 @@ const SUPABASE_KEY = 'sb_publishable_GbYBQZCToUA4LnczIfIKoQ_9ORDgw-v';
 const FN_URL = SUPABASE_URL + '/functions/v1/admin-api';
 const SITE_URL = 'https://munkerdursun-arch.github.io/Blue/cdt/';
 const TRAINER = 'Munker Dursun';
+const QUIZ_TOTAL = 20, PASS_MARK = 17; // quiz final : 20 questions, réussite à 17 (corrigé côté serveur)
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
 });
@@ -123,32 +125,7 @@ function splitWords(el) {
 }
 
 // ---------- curseur et éléments magnétiques ----------
-(function cursor() {
-  if (!finePointer) return;
-  document.documentElement.classList.add('has-cursor');
-  const root = $('.cursor'), dot = $('.cursor__dot'), ring = $('.cursor__ring'), label = $('.cursor__label');
-  gsap.set([dot, ring], { xPercent: -50, yPercent: -50 });
-  const dx = gsap.quickTo(dot, 'x', { duration: 0.08 }), dy = gsap.quickTo(dot, 'y', { duration: 0.08 });
-  const rx = gsap.quickTo(ring, 'x', { duration: 0.45, ease: 'power3.out' }), ry = gsap.quickTo(ring, 'y', { duration: 0.45, ease: 'power3.out' });
-  let shown = false;
-  addEventListener('pointermove', (e) => {
-    if (!shown) { gsap.set([dot, ring], { x: e.clientX, y: e.clientY }); gsap.to(root, { opacity: 1, duration: 0.3 }); shown = true; }
-    dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY);
-  });
-  addEventListener('pointerdown', () => gsap.to(ring, { scale: 0.82, duration: 0.15 }));
-  addEventListener('pointerup', () => gsap.to(ring, { scale: 1, duration: 0.45, ease: 'elastic.out(1, 0.5)' }));
-  document.addEventListener('pointerover', (e) => {
-    const field = e.target.closest('input, textarea');
-    root.classList.toggle('is-text', !!field);
-    const t = field ? null : e.target.closest('a, button, summary, label, [data-cursor]');
-    root.classList.toggle('is-hover', !!t);
-    const txt = t?.dataset.cursor;
-    root.classList.toggle('is-label', !!txt);
-    if (txt) label.textContent = txt;
-  });
-  document.addEventListener('pointerleave', () => gsap.to(root, { opacity: 0, duration: 0.2 }));
-  document.addEventListener('pointerenter', () => shown && gsap.to(root, { opacity: 1, duration: 0.2 }));
-})();
+// (curseur personnalisé retiré à la demande du propriétaire : flèche normale du système)
 function magnetic(scope = document) {
   if (!finePointer || reduced) return;
   $$('[data-magnetic]', scope).forEach((el) => {
@@ -430,7 +407,7 @@ async function viewActivate() {
 // ---------- quiz final ----------
 async function viewQuiz() {
   showApp(`<section class="view" style="max-width:820px">${subnav()}<div class="view__head"><p class="cote"><span>Évaluation</span> Quiz final</p><h1 class="view__title">Quiz <em>final</em></h1>
-    <p class="view__sub">15 questions sur la formation. Réussite à partir de 13 bonnes réponses : votre certificat est alors délivré immédiatement.</p></div>
+    <p class="view__sub">${QUIZ_TOTAL} questions sur la formation. Réussite à partir de ${PASS_MARK} bonnes réponses : votre certificat est alors délivré immédiatement.</p></div>
     <div class="panel" id="qz"><p class="muted">Chargement…</p></div></section>`);
   const box = $('#qz');
   const [{ data: cert }, { data: qs, error }] = await Promise.all([
@@ -518,7 +495,7 @@ async function viewCertificate() {
   const box = $('#cbox');
   const { data: c } = await sb.from('certificates').select('*').eq('user_id', profile.id).maybeSingle();
   if (!box.isConnected) return;
-  if (!c) { box.innerHTML = `<div class="panel"><h2>Pas encore de certificat</h2><p>Validez le quiz final (13 / 15 minimum) pour obtenir votre certificat.</p><div class="row" style="margin-top:18px"><a class="btn btn--pri" href="#/quiz">Passer le quiz final</a></div></div>`; return; }
+  if (!c) { box.innerHTML = `<div class="panel"><h2>Pas encore de certificat</h2><p>Validez le quiz final (${PASS_MARK} / ${QUIZ_TOTAL} minimum) pour obtenir votre certificat.</p><div class="row" style="margin-top:18px"><a class="btn btn--pri" href="#/quiz">Passer le quiz final</a></div></div>`; return; }
   box.innerHTML = `${certCard(c)}<div class="row" style="justify-content:center;margin-top:30px">
     <button class="btn btn--pri" id="pdf">Télécharger le PDF</button><button class="btn" id="cpv">Copier le lien de vérification</button></div>
     <p class="muted" style="text-align:center;margin-top:14px">Toute personne peut vérifier l'authenticité de ce certificat avec son numéro.</p>`;
@@ -652,7 +629,7 @@ async function viewAdmin() {
     list.innerHTML = `<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Stagiaire</th><th>Statut</th><th>Tentatives</th><th>Meilleur score</th><th>Certificat</th><th>Actions</th></tr></thead><tbody>
       ${rows.map((r, i) => `<tr><td><b>${esc(r.full_name)}</b><br><span class="muted">${esc(r.email)}</span></td>
         <td>${r.certificate ? '<span class="tag tag--y">Certifié</span>' : r.activated ? '<span class="tag tag--ok">Actif</span>' : '<span class="tag">Invité</span>'}</td>
-        <td>${r.attempts || 0}</td><td>${r.best != null ? r.best + ' / 15' : '–'}</td>
+        <td>${r.attempts || 0}</td><td>${r.best != null ? r.best + ' / ' + QUIZ_TOTAL : '–'}</td>
         <td>${r.certificate ? `<span style="font-family:var(--mono);font-size:12px">${esc(r.certificate.code)}</span><br><button class="mini" data-pdf="${i}">PDF</button>` : '–'}</td>
         <td><div class="row" style="gap:6px"><button class="mini" data-relink="${i}">Nouveau lien</button><button class="mini mini--danger" data-revoke="${i}">Retirer</button></div></td></tr>`).join('')}
       </tbody></table></div><div id="rl"></div>`;
@@ -695,7 +672,7 @@ async function viewAdmin() {
 let courseNode = null, courseReady = false;
 async function viewCourse() {
   showApp(`<section class="view" style="max-width:1080px">${subnav()}<div class="view__head"><p class="cote"><span>Admin</span> Contenu complet</p><h1 class="view__title">La <em>formation</em></h1>
-    <p class="view__sub">17 modules, 15 agents, outils interactifs. Visible uniquement par l'administrateur.</p></div><div id="cwrap"><div class="panel"><p class="muted">Chargement du contenu…</p></div></div></section>`);
+    <p class="view__sub">20 modules, 18 agents, outils interactifs. Visible uniquement par l'administrateur.</p><p class="muted" style="margin-top:10px">IA de l'entreprise : <b data-mono-badge>toutes les IA</b> · <a class="link" href="#monoia">changer</a></p></div><div id="cwrap"><div class="panel"><p class="muted">Chargement du contenu…</p></div></div></section>`);
   const wrap = $('#cwrap');
   if (!courseNode) {
     const [{ data: secs, error: e1 }, { data: dat, error: e2 }] = await Promise.all([
@@ -709,10 +686,11 @@ async function viewCourse() {
     courseNode.innerHTML = `<nav class="course-nav" aria-label="Modules">${mods.map((s) => `<a href="#${s.id}">${esc(s.html.match(/<div class="no">(?:<small>MOD\.<\/small>)?([^<]+)<\/div>/)?.[1] || '·')}</a>`).join('')}</nav>` + secs.map((s) => s.html).join('\n');
     // le quiz d'auto-évaluation devient l'accès au quiz final corrigé côté serveur
     const qcm = courseNode.querySelector('#qcm .body');
-    if (qcm) qcm.innerHTML = '<p>L\'évaluation se fait désormais avec le <b>quiz final</b> : correction côté serveur, réussite à 13 / 15, certificat délivré automatiquement.</p><div class="row"><a class="btn btn--pri" href="#/quiz">Ouvrir le quiz final</a></div>';
+    if (qcm) qcm.innerHTML = '<p>L\'évaluation se fait avec le <b>quiz final</b> : 20 questions, correction côté serveur, réussite à 17 / 20, certificat délivré automatiquement.</p><div class="row"><a class="btn btn--pri" href="#/quiz">Ouvrir le quiz final</a></div>';
     wrap.replaceChildren(courseNode);
     const data = Object.fromEntries(dat.map((r) => [r.key, r.value]));
     initCourse(data);
+    initMono(data, courseNode);
     courseReady = true;
   } else wrap.replaceChildren(courseNode);
   // animations des modules (recréées à chaque affichage, défaites en quittant la vue)
