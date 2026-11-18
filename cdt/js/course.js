@@ -120,7 +120,7 @@ export function initCourse(D) {
     });
     prog();
   }
-  function prog(){const n=$$("#sched input:checked").length,tot=$$("#sched input").length,p=tot?Math.round(n/tot*100):0;$("#pct").textContent=p+" %";$("#navpct").textContent=p+" %";$("#navbar").style.width=p+"%"}
+  function prog(){const n=$$("#sched input:checked").length,tot=$$("#sched input").length,p=tot?Math.round(n/tot*100):0;const set=(id,f)=>{const e=document.getElementById(id);if(e)f(e)};set("pct",e=>e.textContent=p+" %");set("navpct",e=>e.textContent=p+" %");set("navbar",e=>e.style.width=p+"%")}
   $$("#programme .seg button").forEach(b=>b.onclick=()=>{FORM=b.dataset.f;store.set("cdt_formula",FORM);renderProg()});
   renderProg();
 }
